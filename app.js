@@ -57,20 +57,12 @@ function AnimatePresence({ children, mode }) {
 /* ══════════════════════════════════════════════════════════
    HOOKS
  ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   HOOKS
+ ══════════════════════════════════════════════════════════ */
 function useTypewriter(text, speed = 38, startDelay = 600) {
-  const [displayed, setDisplayed] = useState('');
-  const [done, setDone]           = useState(false);
-  useEffect(() => {
-    setDisplayed(''); setDone(false);
-    let i = 0, iv;
-    const t = setTimeout(() => {
-      iv = setInterval(() => {
-        i++; setDisplayed(text.slice(0, i));
-        if (i >= text.length) { clearInterval(iv); setDone(true); }
-      }, speed);
-    }, startDelay);
-    return () => { clearTimeout(t); clearInterval(iv); };
-  }, [text, speed, startDelay]);
+  const [displayed, setDisplayed] = useState(text);
+  const [done, setDone]           = useState(true);
   return { displayed, done };
 }
 
@@ -85,38 +77,10 @@ function useInView(threshold = 0.12) {
   return [ref, vis];
 }
 
-function useMagnetic(strength = 0.38) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const move  = e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX-(r.left+r.width/2))*strength}px,${(e.clientY-(r.top+r.height/2))*strength}px)`; };
-    const reset = () => { el.style.transform = ''; };
-    el.addEventListener('mousemove', move);
-    el.addEventListener('mouseleave', reset);
-    return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', reset); };
-  }, []);
-  return ref;
-}
+function useTilt(angle) { return useRef(null); }
+function useMagnetic(force) { return useRef(null); }
 
-function useTilt(max = 12) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current; if (!el) return;
-    const move = e => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      el.style.transition = 'transform .08s linear, box-shadow .2s';
-      el.style.transform  = `perspective(600px) rotateY(${x*max}deg) rotateX(${-y*max}deg) scale(1.02)`;
-      el.style.boxShadow  = `${-x*14}px ${y*14}px 36px rgba(74,222,128,.06)`;
-    };
-    const reset = () => { el.style.transition = 'transform .35s ease, box-shadow .35s ease'; el.style.transform = ''; el.style.boxShadow = ''; };
-    el.addEventListener('mousemove', move);
-    el.addEventListener('mouseleave', reset);
-    return () => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', reset); };
-  }, []);
-  return ref;
-}
+
 
 /* ══════════════════════════════════════════════════════════
    INLINE SVG ICONS
@@ -196,19 +160,18 @@ function BackgroundVideo() {
 function Navbar() {
   const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const magRef = useMagnetic(0.42);
   useEffect(() => { const fn = () => setScrolled(window.scrollY > 20); window.addEventListener('scroll', fn); return () => window.removeEventListener('scroll', fn); }, []);
 
   const links = [
-    {l:'Labs',     h:'#tracks-section'},
-    {l:'Studio',   h:'#timeline-section'},
-    {l:'Openings', h:'#judges-section'},
-    {l:'Shop',     h:'#sponsors-section'},
+    {l:'Tracks',    h:'#tracks-section'},
+    {l:'Timeline',  h:'#timeline-section'},
+    {l:'Judges',    h:'#judges-section'},
+    {l:'Sponsors',  h:'#sponsors-section'},
   ];
 
   return (
     <>
-      <header className={`fixed top-0 inset-x-0 z-10 px-5 sm:px-8 py-4 sm:py-5 flex flex-row justify-between items-center bg-transparent transition-all duration-300${scrolled?' backdrop-blur-md !bg-[#080C0A]/80 border-b border-[#263028]':''}`}>
+      <header className={`fixed top-0 inset-x-0 z-10 px-5 sm:px-8 py-4 sm:py-5 flex flex-row justify-between items-center bg-[#080C0A] transition-all duration-300${scrolled?' border-b border-[#263028]':''}`}>
         {/* Logo */}
         <div className="flex flex-row items-end gap-3">
           <span className="text-[21px] sm:text-[26px] tracking-tight text-[#E0EAE2] font-medium select-none">Mainframe&reg;</span>
@@ -216,19 +179,19 @@ function Navbar() {
         </div>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex flex-row items-center text-[23px] text-[#E0EAE2]">
+        <nav className="hidden md:flex flex-row items-center text-base text-[#E0EAE2] gap-1">
           {links.map((l,i) => (
             <Fragment key={l.l}>
-              <a href={l.h} className="hover:opacity-60 transition-opacity">{l.l}</a>
-              {i < links.length-1 && <span className="opacity-40">,&nbsp;</span>}
+              <a href={l.h} className="px-3 py-2 hover:text-[#A0AAA0] transition-colors">{l.l}</a>
+              {i < links.length-1 && <span className="opacity-40">/</span>}
             </Fragment>
           ))}
         </nav>
 
         {/* Desktop CTA */}
-        <span ref={magRef} className="hidden md:block">
-          <a href="#cta-section" className="text-[23px] text-[#E0EAE2] underline underline-offset-2 hover:opacity-60 transition-opacity">
-            Get in touch
+        <span className="hidden md:block">
+          <a href="#cta-section" className="text-base text-[#E0EAE2] underline underline-offset-2 hover:text-[#A0AAA0] transition-colors">
+            Contact
           </a>
         </span>
 
@@ -245,11 +208,11 @@ function Navbar() {
       <div className={`fixed inset-0 z-[9] bg-[#080C0A]/95 backdrop-blur-sm flex flex-col justify-center items-center gap-8 md:hidden transition-opacity duration-300${open?' opacity-100 pointer-events-auto':' opacity-0 pointer-events-none'}`}>
         {links.map(l => (
           <a key={l.l} href={l.h} onClick={() => setOpen(false)}
-            className="text-3xl font-medium text-[#E0EAE2] hover:opacity-60 transition-opacity">{l.l}</a>
+            className="text-2xl font-medium text-[#E0EAE2] hover:text-[#A0AAA0] transition-colors">{l.l}</a>
         ))}
         <a href="#cta-section" onClick={() => setOpen(false)}
-          className="text-2xl text-[#E0EAE2] underline underline-offset-4 hover:opacity-60 transition-opacity">
-          Get in touch
+          className="text-lg text-[#E0EAE2] underline underline-offset-4 hover:text-[#A0AAA0] transition-colors">
+          Contact
         </a>
       </div>
     </>
@@ -268,8 +231,8 @@ function ServicePills() {
 
   return (
     <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.5,delay:.35}}>
-      <p className="text-2xl font-medium tracking-tight mb-2">What sort of service?</p>
-      <p className="text-base mb-8" style={{opacity:.85,color:'#7A9582'}}>Select all that apply</p>
+      <p className="text-lg font-semibold tracking-tight mb-2">I'm interested in</p>
+      <p className="text-sm mb-8 text-[#A0AAA0]">Select interests (optional)</p>
 
       <div className="flex flex-wrap gap-3 mb-5">
         {SERVICE_OPTIONS.map(s => {
@@ -277,11 +240,11 @@ function ServicePills() {
           return (
             <motion.button key={s} id={'pill-'+s.toLowerCase()}
               onClick={() => toggle(s)}
-              whileHover={{scale:1.04}} whileTap={{scale:.96}}
-              className={'flex items-center gap-2 px-5 py-2.5 rounded-full text-base font-medium outline-none transition-colors duration-150 '+(on
-                ? 'bg-[#4ADE80] text-[#080C0A] shadow-md shadow-emerald-950/20 transform'
+              whileHover={{scale:1.02}} whileTap={{scale:.98}}
+              className={'flex items-center gap-2 px-5 py-2.5 rounded-lg text-base font-medium outline-none transition-colors duration-150 '+(on
+                ? 'bg-[#000000] text-[#E0EAE2] shadow-md'
                 : 'bg-[#141B16] text-[#E0EAE2] border border-[#263028] hover:bg-[#1A2420]')}>
-              {on && <span className="flex items-center" style={{animation:'scaleIn .22s cubic-bezier(.34,1.56,.64,1) both'}}><ICheck s={13}/></span>}
+              {on && <span className="flex items-center"><ICheck s={12}/></span>}
               {s}
             </motion.button>
           );
@@ -293,21 +256,21 @@ function ServicePills() {
         {!active ? (
           <motion.p key="empty"
             initial={{opacity:0}} animate={{opacity:.5}} exit={{opacity:0}} transition={{duration:.2}}
-            className="text-xs italic text-[#4D6557]">
-            Please click to select services above.
+            className="text-xs text-[#7A9582]">
+            Select your interests to continue.
           </motion.p>
         ) : (
           <motion.div key="active"
             initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
             transition={{duration:.3,ease:'easeInOut'}} className="overflow-hidden">
             <div className="flex items-center justify-between gap-4 bg-[#0F1511] border border-[#263028] rounded-2xl px-5 py-4">
-              <p className="text-sm text-[#7A9582] font-medium">
-                Ready to inquire about: <strong className="font-semibold text-[#E0EAE2]">{selected.join(', ')}</strong>
+              <p className="text-sm text-[#A0AAA0] font-medium">
+                You've selected: <strong className="font-semibold text-[#E0EAE2]">{selected.join(', ')}</strong>
               </p>
               <a href="#cta-section"
-                className="flex items-center gap-1.5 font-semibold text-xs uppercase tracking-wider whitespace-nowrap hover:opacity-70 transition-opacity"
-                style={{color:'#4ADE80'}}>
-                Let's Go <IArrow s={13}/>
+                className="flex items-center gap-1.5 font-semibold text-xs tracking-normal whitespace-nowrap hover:text-[#000000] transition-colors"
+                style={{color:'#000000'}}>
+                Proceed <IArrow s={12}/>
               </a>
             </div>
           </motion.div>
@@ -329,23 +292,22 @@ function HeroContent() {
         {/* Hackcurity badge */}
         <motion.div initial={{opacity:0,y:-10}} animate={{opacity:1,y:0}} transition={{duration:.5,delay:.2}}
           className="flex items-center gap-2 mb-8">
-          <span className="w-[7px] h-[7px] rounded-full bg-[#4ADE80]" style={{animation:'pulse 2.5s ease-in-out infinite'}} />
-          <span className="text-[11px] font-bold uppercase tracking-[.13em] text-[#4ADE80]">Hackcurity 2026 &mdash; Hack the Future</span>
+          <span className="w-[7px] h-[7px] rounded-full bg-[#000000]" />
+          <span className="text-[12px] font-semibold tracking-widest text-[#000000]">Hackcurity 2026 — Cybersecurity for the Future</span>
         </motion.div>
 
         {/* Headline with typewriter */}
         <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6}}>
           <h1 className="text-5xl md:text-6xl lg:text-[76px] font-normal tracking-tight text-[#E0EAE2] leading-[1.08] mb-8 select-none w-full whitespace-pre-wrap">
             {displayed}
-            {!done && <span className="inline-block w-[2px] h-[1.1em] bg-[#4ADE80] align-middle ml-[2px] animate-blink" />}
+            {!done && <span className="inline-block w-[2px] h-[1.1em] bg-[#000000] align-middle ml-[2px] animate-blink" />}
           </h1>
         </motion.div>
 
         {/* Description */}
         <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.6,delay:.1}}>
-          <p className="text-lg md:text-xl text-[#7A9582] leading-relaxed font-normal mb-14 max-w-2xl">
-            Whether you have questions, feedback,<br />
-            drop us a message and we'll get back to you as soon as possible.
+          <p className="text-base md:text-lg text-[#A0AAA0] leading-relaxed font-normal mb-14 max-w-2xl">
+            Have questions or need support? Contact us directly and we'll respond within 48 hours.
           </p>
         </motion.div>
 
@@ -378,11 +340,11 @@ function SectionHeader({tag, h2, sub}) {
   return (
     <motion.div ref={ref} initial={{opacity:0,y:20}} animate={vis?{opacity:1,y:0}:{opacity:0,y:20}} transition={{duration:.6}}>
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-5 h-[2px] rounded bg-[#4ADE80]" />
-        <span className="text-[.7rem] font-bold uppercase tracking-[.15em] text-[#4ADE80]">{tag}</span>
+        <div className="w-5 h-[2px] rounded bg-[#000000]" />
+        <span className="text-[12px] font-semibold tracking-wide text-[#000000]">{tag}</span>
       </div>
-      <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-[#E0EAE2] leading-tight mb-4">{h2}</h2>
-      {sub && <p className="text-lg text-[#7A9582] leading-relaxed max-w-xl">{sub}</p>}
+      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#E0EAE2] leading-tight mb-4">{h2}</h2>
+      {sub && <p className="text-base text-[#A0AAA0] leading-relaxed max-w-xl">{sub}</p>}
     </motion.div>
   );
 }
@@ -395,7 +357,7 @@ function StatsBar() {
   const stats = [
     {v:'$25,000', I:ITrophy, l:'Prize Pool'},
     {v:'500+',    I:IUsers,  l:'Participants'},
-    {v:'48h',     I:IClock,  l:'Non-Stop'},
+    {v:'48h',     I:IClock,  l:'Duration'},
     {v:'Global',  I:IGlobe,  l:'Open to All'},
   ];
   return (
@@ -405,9 +367,9 @@ function StatsBar() {
           <motion.div key={l} initial={{opacity:0,y:20}}
             animate={vis?{opacity:1,y:0}:{opacity:0,y:20}} transition={{duration:.5,delay:i*.08}}
             className="flex flex-col items-center gap-2 text-center">
-            <I s={22} className="text-[#4ADE80]"/>
-            <span className="text-[2rem] font-bold tracking-tight text-[#E0EAE2]">{v}</span>
-            <span className="text-[.7rem] uppercase tracking-[.14em] text-[#7A9582] font-medium">{l}</span>
+            <I s={22} className="text-[#000000]"/>
+            <span className="text-2xl font-bold tracking-tight text-[#E0EAE2]">{v}</span>
+            <span className="text-xs font-medium tracking-wide text-[#A0AAA0]">{l}</span>
           </motion.div>
         ))}
       </div>
@@ -419,12 +381,12 @@ function StatsBar() {
    TRACKS
  ══════════════════════════════════════════════════════════ */
 const TRACKS = [
-  {color:'#F87171',tag:'Offensive',    title:'Red Team & Exploitation',     desc:'CTF-style flags, live targets, and zero-day simulation in enterprise environments.',    I:IShield},
-  {color:'#60A5FA',tag:'AI Safety',    title:'Adversarial ML & AI Security', desc:'Prompt injection, model poisoning, and differential privacy challenges on live models.', I:IZap},
-  {color:'#FBBF24',tag:'Cryptography', title:'Crypto & Protocol Attacks',    desc:'Break weak implementations, forge signatures, exploit misconfigurations in protocols.',   I:ILock},
-  {color:'#34D399',tag:'Zero-Trust',   title:'Network & Identity Defense',   desc:'Design and stress-test zero-trust architectures and IAM policies under live attack.',      I:IGlobe},
-  {color:'#C084FC',tag:'Web3',         title:'Smart Contract Auditing',      desc:'Hunt bugs in Solidity, exploit reentrancy and flash-loan vulnerabilities in DeFi.',        I:IDatabase},
-  {color:'#F472B6',tag:'Open',         title:'Open Innovation Track',        desc:'No constraints. Build any security tool or research that makes the world safer.',          I:ICode},
+  {color:'#F87171',tag:'Offensive',    title:'Red Team & Exploitation',     desc:'CTF-style flags, live targets, and zero-day simulation in enterprise environments.',    domain:'Penetration Testing & Exploitation', problemStatement:'To Be Announced', I:IShield},
+  {color:'#60A5FA',tag:'AI Safety',    title:'Adversarial ML & AI Security', desc:'Prompt injection, model poisoning, and differential privacy challenges on live models.', domain:'AI & Machine Learning Security', problemStatement:'To Be Announced', I:IZap},
+  {color:'#FBBF24',tag:'Cryptography', title:'Crypto & Protocol Attacks',    desc:'Break weak implementations, forge signatures, exploit misconfigurations in protocols.',   domain:'Cryptographic Systems', problemStatement:'To Be Announced', I:ILock},
+  {color:'#34D399',tag:'Zero-Trust',   title:'Network & Identity Defense',   desc:'Design and stress-test zero-trust architectures and IAM policies under live attack.',      domain:'Zero-Trust Architecture', problemStatement:'To Be Announced', I:IGlobe},
+  {color:'#C084FC',tag:'Web3',         title:'Smart Contract Auditing',      desc:'Hunt bugs in Solidity, exploit reentrancy and flash-loan vulnerabilities in DeFi.',        domain:'Blockchain & Smart Contracts', problemStatement:'To Be Announced', I:IDatabase},
+  {color:'#F472B6',tag:'Open',         title:'Open Innovation Track',        desc:'No constraints. Build any security tool or research that makes the world safer.',          domain:'Security Research & Innovation', problemStatement:'To Be Announced', I:ICode},
 ];
 
 function TrackCard({track, delay}) {
@@ -433,15 +395,21 @@ function TrackCard({track, delay}) {
   return (
     <motion.div ref={ref} initial={{opacity:0,y:24}}
       animate={vis?{opacity:1,y:0}:{opacity:0,y:24}} transition={{duration:.5,delay}}>
-      <div ref={tiltRef} className="tilt h-full rounded-[20px] border border-[#263028] bg-[#0F1511] p-7">
-        <div className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-5"
-          style={{background:track.color+'18',color:track.color}}>
-          <track.I s={20}/>
+      <div ref={tiltRef} className="tilt h-full rounded-2xl border border-[#263028] bg-[#0F1511] p-6 flex flex-col">
+        <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+          style={{background:'#1A2420',color:track.color}}>
+          <track.I s={18}/>
         </div>
-        <div className="text-[1.05rem] font-semibold text-[#E0EAE2] mb-2">{track.title}</div>
-        <div className="text-[.875rem] text-[#7A9582] leading-[1.65] mb-4">{track.desc}</div>
-        <span className="inline-block text-[.65rem] font-bold uppercase tracking-[.12em] px-2.5 py-1 rounded-[6px]"
-          style={{background:track.color+'14',color:track.color}}>{track.tag}</span>
+        <div className="text-lg font-semibold text-[#E0EAE2] mb-1">{track.title}</div>
+        <div className="text-xs text-[#7A9582] mb-3 font-medium">{track.domain}</div>
+        <div className="text-sm text-[#A0AAA0] leading-relaxed mb-4 flex-1">{track.desc}</div>
+        <div className="flex items-center justify-between gap-3">
+          <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-lg"
+            style={{background:track.color+'12',color:track.color}}>{track.tag}</span>
+          <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#2A1A1A] text-[#C41E3A]">
+            {track.problemStatement}
+          </span>
+        </div>
       </div>
     </motion.div>
   );
@@ -451,8 +419,8 @@ function TracksSection() {
   return (
     <section id="tracks-section" className="py-24 px-6 bg-[#080C0A]">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader tag="Challenge Tracks" h2={<>Five arenas.<br/>One winner.</>}
-          sub="Pick your battlefield. Each track has its own prize pool, dedicated mentors, and real-world impact." />
+        <SectionHeader tag="Challenge Tracks" h2={<>Pick Your Path</>}
+          sub="Choose from six specialized security challenges with dedicated prizes, mentors, and real-world scenarios." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
           {TRACKS.map((t,i) => <TrackCard key={t.title} track={t} delay={i*.07} />)}
         </div>
@@ -465,12 +433,12 @@ function TracksSection() {
    TIMELINE
  ══════════════════════════════════════════════════════════ */
 const TL = [
-  {ph:'01',c:'#4ADE80',l:'Registration Opens',         d:'July 1, 2026',              t:'Sign up solo or as a team of up to 4. Early registrants receive a Hackcurity swag kit.'},
-  {ph:'02',c:'#22C55E',l:'Problem Statements Released', d:'July 15, 2026',             t:'All five challenge tracks go live. Study the briefs and start planning your approach.'},
-  {ph:'03',c:'#16A34A',l:'Mentor Office Hours Begin',   d:'July 22, 2026',             t:'Weekly 1:1 sessions with industry mentors. Get feedback before the hackathon starts.'},
-  {ph:'04',c:'#15803D',l:'48-Hour Hackathon Kicks Off', d:'Aug 2, 2026 — 09:00 IST',  t:'The clock starts. Build, break, defend. Mentors available around the clock.'},
-  {ph:'05',c:'#166534',l:'Final Submissions Locked',    d:'Aug 4, 2026 — 09:00 IST',  t:'All code repositories freeze. Prepare your 5-minute demo pitch for the judges.'},
-  {ph:'06',c:'#14532D',l:'Awards & Closing Ceremony',   d:'August 5, 2026',            t:'Winners announced live. $25,000 distributed across five tracks. See you on stage!'},
+  {ph:'01',c:'#000000',l:'Registration Opens',         d:'July 1, 2026',              t:'Sign up solo or as a team of up to 4. Early registrants receive a Hackcurity swag kit.'},
+  {ph:'02',c:'#C41E3A',l:'Problem Statements Released', d:'July 15, 2026',             t:'All five challenge tracks go live. Study the briefs and start planning your approach.'},
+  {ph:'03',c:'#A31B0C',l:'Mentor Office Hours Begin',   d:'July 22, 2026',             t:'Weekly 1:1 sessions with industry mentors. Get feedback before the hackathon starts.'},
+  {ph:'04',c:'#8B0000',l:'48-Hour Hackathon Kicks Off', d:'Aug 2, 2026 — 09:00 IST',  t:'The clock starts. Build, break, defend. Mentors available around the clock.'},
+  {ph:'05',c:'#7B0000',l:'Final Submissions Locked',    d:'Aug 4, 2026 — 09:00 IST',  t:'All code repositories freeze. Prepare your 5-minute demo pitch for the judges.'},
+  {ph:'06',c:'#6B0000',l:'Awards & Closing Ceremony',   d:'August 5, 2026',            t:'Winners announced live. $25,000 distributed across five tracks. See you on stage!'},
 ];
 
 function TLItem({item, delay}) {
@@ -481,21 +449,21 @@ function TLItem({item, delay}) {
       animate={vis?{opacity:1,x:0}:{opacity:0,x:-24}} transition={{duration:.5,delay}}
       className="flex items-start gap-5 lg:gap-8">
       <div className="hidden lg:flex flex-shrink-0 w-[104px] flex-col items-center">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[.7rem] font-bold shadow-md"
+        <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-semibold shadow-md"
           style={{background:item.c}}>{item.ph}</div>
       </div>
-      <div ref={tiltRef} className="tilt flex-1 bg-[#141B16] border border-[#263028] rounded-[18px] p-6">
+      <div ref={tiltRef} className="tilt flex-1 bg-[#141B16] border border-[#263028] rounded-2xl p-5">
         <div className="flex items-start gap-3">
-          <div className="lg:hidden w-[30px] h-[30px] rounded-full flex items-center justify-center text-white text-[.6rem] font-bold flex-shrink-0"
+          <div className="lg:hidden w-[30px] h-[30px] rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
             style={{background:item.c}}>{item.ph}</div>
           <div>
-            <div className="text-[1.0625rem] font-semibold text-[#E0EAE2]">{item.l}</div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-[.8125rem] text-[#7A9582] font-medium">
+            <div className="text-base font-semibold text-[#E0EAE2]">{item.l}</div>
+            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-[#A0AAA0] font-medium">
               <ICalendar s={12}/>{item.d}
             </div>
           </div>
         </div>
-        <p className="mt-3 text-[.85rem] text-[#7A9582] leading-[1.7]">{item.t}</p>
+        <p className="mt-3 text-sm text-[#A0AAA0] leading-relaxed">{item.t}</p>
       </div>
     </motion.div>
   );
@@ -505,11 +473,11 @@ function TimelineSection() {
   return (
     <section id="timeline-section" className="py-24 px-6 bg-[#0F1511] overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader tag="Schedule" h2="Event Timeline"
-          sub="From registration to the grand finale — every key date for Hackcurity 2026." />
+        <SectionHeader tag="Timeline" h2="Event Schedule"
+          sub="Stay on track with all key dates and important milestones from registration through awards." />
         <div className="relative flex flex-col gap-5 mt-14">
           <div className="hidden lg:block absolute left-[52px] top-6 bottom-6 w-[2px] rounded-full"
-            style={{background:'linear-gradient(to bottom,#263028,#4D6557,#263028)'}} />
+            style={{background:'linear-gradient(to bottom,#263028,#3C2F3F,#263028)'}} />
           {TL.map((item,i) => <TLItem key={item.ph} item={item} delay={i*.08} />)}
         </div>
       </div>
@@ -521,14 +489,14 @@ function TimelineSection() {
    JUDGES
  ══════════════════════════════════════════════════════════ */
 const JUDGES = [
-  {n:'Priya Raman',       r:'Head of Security Research',   o:'CipherCore',    i:'PR',c:'#16A34A'},
-  {n:'Ankit Mehta',       r:'Principal Red Team Engineer',  o:'NullByte Labs', i:'AM',c:'#22C55E'},
-  {n:'Sofia Chen',        r:'AI Safety Researcher',         o:'DeepGuard AI',  i:'SC',c:'#4ADE80'},
-  {n:'Marcus Webb',       r:'CISO',                         o:'VaultSec',      i:'MW',c:'#15803D'},
-  {n:'Dev Kapoor',        r:'Cryptography Engineer',        o:'Enclave.io',    i:'DK',c:'#14532D'},
-  {n:'Sofia Chen',        r:'AI Safety Researcher',         o:'DeepGuard AI',  i:'SC',c:'#4ADE80'},
-  {n:'Dev Kapoor',        r:'Cryptography Engineer',        o:'Enclave.io',    i:'DK',c:'#14532D'},
-  {n:'Yuki Tanaka',       r:'Penetration Tester',           o:'RedThread',     i:'YT',c:'#2E7D32'},
+  {n:'Priya Raman',       r:'Head of Security Research',   o:'CipherCore',    i:'PR',c:'#A31B0C'},
+  {n:'Ankit Mehta',       r:'Principal Red Team Engineer',  o:'NullByte Labs', i:'AM',c:'#C41E3A'},
+  {n:'Sofia Chen',        r:'AI Safety Researcher',         o:'DeepGuard AI',  i:'SC',c:'#000000'},
+  {n:'Marcus Webb',       r:'CISO',                         o:'VaultSec',      i:'MW',c:'#8B0000'},
+  {n:'Dev Kapoor',        r:'Cryptography Engineer',        o:'Enclave.io',    i:'DK',c:'#6B0000'},
+  {n:'Sofia Chen',        r:'AI Safety Researcher',         o:'DeepGuard AI',  i:'SC',c:'#000000'},
+  {n:'Dev Kapoor',        r:'Cryptography Engineer',        o:'Enclave.io',    i:'DK',c:'#6B0000'},
+  {n:'Yuki Tanaka',       r:'Penetration Tester',           o:'RedThread',     i:'YT',c:'#7B3F1F'},
 ];
 
 function JudgeCard({j, delay}) {
@@ -537,14 +505,14 @@ function JudgeCard({j, delay}) {
   return (
     <motion.div ref={ref} initial={{opacity:0,y:20}}
       animate={vis?{opacity:1,y:0}:{opacity:0,y:20}} transition={{duration:.5,delay}}>
-      <div ref={tiltRef} className="tilt flex flex-col items-center gap-3 text-center p-6 rounded-[20px] border border-[#263028] bg-[#0F1511]">
-        <div className="w-[72px] h-[72px] rounded-full flex items-center justify-center text-xl font-bold"
-          style={{background:j.c, color: j.c === '#4ADE80' || j.c === '#22C55E' ? '#080C0A' : '#ffffff'}}>{j.i}</div>
+      <div ref={tiltRef} className="tilt flex flex-col items-center gap-3 text-center p-6 rounded-2xl border border-[#263028] bg-[#0F1511]">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-semibold"
+          style={{background:j.c, color: j.c === '#000000' || j.c === '#C41E3A' ? '#080C0A' : '#ffffff'}}>{j.i}</div>
         <div>
-          <div className="text-[.9375rem] font-semibold text-[#E0EAE2]">{j.n}</div>
-          <div className="text-[.8rem] text-[#7A9582] leading-snug mt-0.5">{j.r}</div>
+          <div className="text-base font-semibold text-[#E0EAE2]">{j.n}</div>
+          <div className="text-sm text-[#A0AAA0] leading-snug mt-0.5">{j.r}</div>
         </div>
-        <div className="text-[.65rem] font-bold uppercase tracking-[.1em] text-[#4ADE80]">{j.o}</div>
+        <div className="text-xs font-medium text-[#000000]">{j.o}</div>
       </div>
     </motion.div>
   );
@@ -554,8 +522,8 @@ function JudgesSection() {
   return (
     <section id="judges-section" className="py-24 px-6 bg-[#080C0A]">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader tag="The Panel" h2="Judges & Mentors"
-          sub="Industry leaders and security researchers who will evaluate, guide, and inspire." />
+        <SectionHeader tag="The Team" h2="Judges & Mentors"
+          sub="Experienced security leaders and researchers guiding and evaluating your work." />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 mt-14">
           {JUDGES.map((j,i) => <JudgeCard key={j.n + '-' + i} j={j} delay={i*.055} />)}
         </div>
@@ -570,24 +538,24 @@ function JudgesSection() {
 function SponsorsSection() {
   const [ref, vis] = useInView();
   const tiers = [
-    {l:'Gold',      sz:'text-xl px-9 py-4',    ns:['CipherCore','NullByte Labs','VaultSec']},
-    {l:'Silver',    sz:'text-base px-6 py-3',   ns:['GridIron','RedThread','Enclave.io','KeyHaven']},
-    {l:'Community', sz:'text-sm px-5 py-2.5',   ns:['HackClub','OWASP','DEF CON','BugBounty.dev','SecureX']},
+    {l:'Gold',      sz:'text-lg px-8 py-3',    ns:['CipherCore','NullByte Labs','VaultSec']},
+    {l:'Silver',    sz:'text-base px-6 py-2.5', ns:['GridIron','RedThread','Enclave.io','KeyHaven']},
+    {l:'Community', sz:'text-sm px-4 py-2',     ns:['HackClub','OWASP','DEF CON','BugBounty.dev','SecureX']},
   ];
   return (
     <section id="sponsors-section" className="bg-[#0F1511] border-y border-[#263028] py-20 px-6">
       <motion.div ref={ref} initial={{opacity:0}} animate={vis?{opacity:1}:{opacity:0}} transition={{duration:.6}}
         className="max-w-7xl mx-auto text-center">
-        <span className="block text-[.7rem] font-bold uppercase tracking-[.16em] mb-10 text-[#7A9582]/70">
-          Our Sponsors & Partners
+        <span className="block text-[12px] font-semibold tracking-wide mb-10 text-[#A0AAA0]">
+          Proud Partners
         </span>
         <div className="flex flex-col gap-9">
           {tiers.map(t => (
             <div key={t.l}>
-              <p className="text-[.65rem] font-bold uppercase tracking-[.15em] mb-4 text-[#7A9582]/50">{t.l}</p>
+              <p className="text-xs font-medium tracking-wide mb-4 text-[#7A9582]">{t.l}</p>
               <div className="flex flex-wrap justify-center gap-4">
                 {t.ns.map(n => (
-                  <div key={n} className={'rounded-xl font-bold tracking-tight border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] text-[#7A9582] hover:text-[#4ADE80] transition-all duration-200 '+t.sz}>
+                  <div key={n} className={'rounded-lg font-medium tracking-tight border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] text-[#7A9582] hover:text-[#E0EAE2] transition-all duration-200 '+t.sz}>
                     {n}
                   </div>
                 ))}
@@ -607,7 +575,7 @@ function ContactForm() {
   const [st, setSt]   = useState({name:'',email:'',org:'',msg:''});
   const [status, setS] = useState(null);
   const magRef         = useMagnetic(0.4);
-  const inp = "w-full border-[1.5px] border-[#263028] rounded-[10px] px-4 py-3 text-[.9375rem] font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#4ADE80] focus:bg-[#1A2420] transition-all duration-200";
+  const inp = "w-full border-[1.5px] border-[#263028] rounded-lg px-4 py-3 text-base font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#000000] focus:bg-[#1A2420] transition-all duration-200";
 
   const submit = e => {
     e.preventDefault();
@@ -619,40 +587,40 @@ function ContactForm() {
   return (
     <form onSubmit={submit} className="flex flex-col gap-4" noValidate>
       <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col gap-1.5">
-          <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Name</label>
-          <input className={inp} type="text" placeholder="Jane Smith"
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-[#E0EAE2]">Name</label>
+          <input className={inp} type="text" placeholder="Your name"
             value={st.name} onChange={e=>setSt(p=>({...p,name:e.target.value}))} />
         </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Email</label>
-          <input className={inp} type="email" placeholder="jane@example.com"
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-[#E0EAE2]">Email</label>
+          <input className={inp} type="email" placeholder="your@email.com"
             value={st.email} onChange={e=>setSt(p=>({...p,email:e.target.value}))} />
         </div>
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">
-          Organisation <span style={{opacity:.5,fontWeight:400,textTransform:'none',letterSpacing:0}}>(optional)</span>
+      <div className="flex flex-col gap-2">
+        <label className="text-sm font-semibold text-[#E0EAE2]">
+          Organization <span style={{opacity:.5,fontWeight:400}}>(optional)</span>
         </label>
-        <input className={inp} type="text" placeholder="Acme Security"
+        <input className={inp} type="text" placeholder="Your organization"
           value={st.org} onChange={e=>setSt(p=>({...p,org:e.target.value}))} />
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Message</label>
+      <div className="flex flex-col gap-2">
+        <label className="text-sm font-semibold text-[#E0EAE2]">Message</label>
         <textarea className={inp+' resize-y min-h-[110px]'}
-          placeholder="Tell us about your team, questions, or sponsorship interest…"
+          placeholder="Tell us how we can help..."
           value={st.msg} onChange={e=>setSt(p=>({...p,msg:e.target.value}))} />
       </div>
       <div className="flex items-center gap-4 flex-wrap">
         <span ref={magRef}>
           <motion.button type="submit" whileHover={{scale:1.03}} whileTap={{scale:.97}}
             disabled={status==='sending'||status==='done'}
-            className="flex items-center gap-2 bg-[#4ADE80] text-[#080C0A] px-7 py-3.5 rounded-[12px] text-[.9375rem] font-bold tracking-tight shadow-lg hover:bg-[#22C55E] transition-colors disabled:opacity-60">
-            {status==='sending'?'Sending…':status==='done'?'✓ Sent!':<><span>Send Message</span><ISend s={15}/></>}
+            className="flex items-center gap-2 bg-[#000000] text-[#E0EAE2] px-6 py-3 rounded-lg text-base font-semibold tracking-tight shadow-lg hover:shadow-xl hover:bg-[#1A1A1A] transition-all disabled:opacity-60">
+            {status==='sending'?'Sending…':status==='done'?'✓ Sent!':<><span>Send</span><ISend s={15}/></>}
           </motion.button>
         </span>
-        {status==='err'  && <p className="text-[.8rem] text-red-500">Please fill in all required fields.</p>}
-        {status==='done' && <p className="text-[.8rem] font-medium" style={{color:'#4ADE80'}}>We'll get back to you within 2 business days.</p>}
+        {status==='err'  && <p className="text-sm text-red-500">Please fill in all required fields.</p>}
+        {status==='done' && <p className="text-sm font-medium text-green-500">Thanks! We'll be in touch soon.</p>}
       </div>
     </form>
   );
@@ -691,7 +659,7 @@ function RegModal({ onClose }) {
 
   // ── Shared input style ────────────────────────────
   const inp = (err) =>
-    `w-full border-[1.5px] ${err?'border-red-500':'border-[#263028]'} rounded-[10px] px-4 py-[10px] text-[.9rem] font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#4ADE80] focus:bg-[#1A2420] transition-all duration-200`;
+    `w-full border-[1.5px] ${err?'border-red-500':'border-[#263028]'} rounded-[10px] px-4 py-[10px] text-[.9rem] font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#000000] focus:bg-[#1A2420] transition-all duration-200`;
 
   // close on Escape
   useEffect(() => {
@@ -777,13 +745,13 @@ function RegModal({ onClose }) {
           <div className="flex items-start justify-between mb-6">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <div className="w-4 h-[2px] rounded bg-[#4ADE80]" />
-                <span className="text-[.65rem] font-bold uppercase tracking-[.15em] text-[#4ADE80]">Hackcurity 2026</span>
+                <div className="w-4 h-[2px] rounded bg-[#000000]" />
+                <span className="text-xs font-semibold tracking-wide text-[#000000]">Hackcurity 2026</span>
               </div>
               <h2 className="text-2xl font-semibold tracking-tight text-[#E0EAE2]">
                 {step === 'done' ? 'You\'re registered! 🎉' : 'Register Your Team'}
               </h2>
-              {step !== 'done' && <p className="text-sm text-[#7A9582] mt-1">Free registration · 500+ participants · $25,000 in prizes</p>}
+              {step !== 'done' && <p className="text-sm text-[#A0AAA0] mt-1">Free registration · 500+ participants · $25,000 in prizes</p>}
             </div>
             <button onClick={onClose} aria-label="Close"
               className="w-9 h-9 rounded-full flex items-center justify-center border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] transition-colors flex-shrink-0 mt-1">
@@ -802,19 +770,19 @@ function RegModal({ onClose }) {
                   <Fragment key={label}>
                     <div className="flex flex-col items-center gap-1.5">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                        done ? 'bg-[#22C55E] text-[#080C0A]' :
-                        curr ? 'bg-[#4ADE80] text-[#080C0A] shadow-md shadow-emerald-950/20' :
+                        done ? 'bg-[#C41E3A] text-[#080C0A]' :
+                        curr ? 'bg-[#000000] text-[#080C0A] shadow-md shadow-emerald-950/20' :
                                'bg-[#141B16] text-[#7A9582] border border-[#263028]'
                       }`}>
                         {done ? <ICheck s={13}/> : num}
                       </div>
                       <span className={`text-[.65rem] font-semibold uppercase tracking-wider ${
-                        curr ? 'text-[#4ADE80]' : done ? 'text-[#22C55E]' : 'text-[#4D6557]'
+                        curr ? 'text-[#000000]' : done ? 'text-[#C41E3A]' : 'text-[#5F3A42]'
                       }`}>{label}</span>
                     </div>
                     {i < STEPS.length - 1 && (
                       <div className={`flex-1 h-[2px] mx-2 mb-5 rounded-full transition-all duration-500 ${
-                        done ? 'bg-[#22C55E]' : 'bg-[#263028]'
+                        done ? 'bg-[#C41E3A]' : 'bg-[#263028]'
                       }`} />
                     )}
                   </Fragment>
@@ -832,13 +800,13 @@ function RegModal({ onClose }) {
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Team Name *</label>
-                  <input className={inp(errors.name)} type="text" placeholder="e.g. ZeroDay Ninjas"
+                  <label className="text-sm font-semibold text-[#E0EAE2]">Team Name *</label>
+                  <input className={inp(errors.name)} type="text" placeholder="e.g. Threat Research Team"
                     value={team.name} onChange={e=>setTeam(p=>({...p,name:e.target.value}))} />
-                  {errors.name && <span className="text-[.72rem] text-red-500">{errors.name}</span>}
+                  {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Team Size *</label>
+                  <label className="text-sm font-semibold text-[#E0EAE2]">Team Size *</label>
                   <select className={inp(errors.size)} value={team.size}
                     onChange={e=>setTeam(p=>({...p,size:e.target.value}))}>
                     <option value="">Select…</option>
@@ -849,30 +817,30 @@ function RegModal({ onClose }) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Institution / Organisation <span className="normal-case font-normal opacity-50 tracking-normal">(optional)</span></label>
-                <input className={inp(false)} type="text" placeholder="University, company, or independent"
+                <label className="text-sm font-semibold text-[#E0EAE2]">Organization <span className="normal-case font-normal opacity-50">(optional)</span></label>
+                <input className={inp(false)} type="text" placeholder="University or company"
                   value={team.institution} onChange={e=>setTeam(p=>({...p,institution:e.target.value}))} />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Challenge Track *</label>
+                <label className="text-sm font-semibold text-[#E0EAE2]">Challenge Track *</label>
                 <select className={inp(errors.track)} value={team.track}
                   onChange={e=>setTeam(p=>({...p,track:e.target.value}))}>
-                  <option value="">Select a track…</option>
+                  <option value="">Choose a track…</option>
                   {TRACKS_LIST.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
                 {errors.track && <span className="text-[.72rem] text-red-500">{errors.track}</span>}
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Team Experience Level *</label>
+                <label className="text-sm font-semibold text-[#E0EAE2]">Experience Level *</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {LEVELS.map(l => (
                     <button key={l} type="button" onClick={() => setTeam(p=>({...p,level:l}))}
                       className={`py-2 px-3 rounded-[10px] text-sm font-medium border transition-all duration-150 text-center ${
                         team.level === l
-                          ? 'bg-[#4ADE80] text-[#080C0A] border-[#4ADE80] shadow-md'
-                          : 'bg-[#141B16] text-[#E0EAE2] border-[#263028] hover:border-[#4ADE80]'
+                          ? 'bg-[#000000] text-[#080C0A] border-[#000000] shadow-md'
+                          : 'bg-[#141B16] text-[#E0EAE2] border-[#263028] hover:border-[#000000]'
                       }`}>{l}</button>
                   ))}
                 </div>
@@ -881,9 +849,9 @@ function RegModal({ onClose }) {
 
               {/* Info pill */}
               <div className="flex items-start gap-3 bg-[#141B16] border border-[#263028] rounded-2xl px-4 py-3 mt-1">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" strokeWidth="2" strokeLinecap="round" style={{marginTop:1,flexShrink:0}}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <p className="text-[.8rem] text-[#7A9582] leading-relaxed">
-                  You can change your track up until <strong className="text-[#E0EAE2]">July 25, 2026</strong>. All tracks are equally eligible for the grand prize.
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" style={{marginTop:1,flexShrink:0}}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <p className="text-sm text-[#A0AAA0] leading-relaxed">
+                  You can change tracks until <strong className="text-[#E0EAE2]">July 25, 2026</strong>. All tracks have equal prize eligibility.
                 </p>
               </div>
             </div>
@@ -896,28 +864,28 @@ function RegModal({ onClose }) {
                 <div key={i} className="rounded-[16px] border border-[#263028] bg-[#141B16] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-7 h-7 rounded-full flex items-center justify-center text-[.7rem] font-bold flex-shrink-0"
-                      style={{background:['#4ADE80','#22C55E','#16A34A','#15803D'][i], color: i < 2 ? '#080C0A' : '#ffffff'}}>{i+1}</div>
+                      style={{background:['#000000','#C41E3A','#A31B0C','#8B0000'][i], color: i < 2 ? '#080C0A' : '#ffffff'}}>{i+1}</div>
                     <span className="text-sm font-semibold text-[#E0EAE2]">
                       {i === 0 ? 'Team Leader (you)' : `Member ${i+1}`}
                     </span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[.72rem] font-bold uppercase tracking-[.04em] text-[#7A9582]">Full Name *</label>
-                      <input className={inp(errors[`m${i}name`])} type="text" placeholder="Jane Smith"
+                      <label className="text-xs font-semibold text-[#E0EAE2]">Full Name *</label>
+                      <input className={inp(errors[`m${i}name`])} type="text" placeholder="Your name"
                         value={members[i]?.name||''}
                         onChange={e=>setMembers(arr=>{ const a=[...arr]; a[i]={...a[i],name:e.target.value}; return a; })} />
-                      {errors[`m${i}name`] && <span className="text-[.7rem] text-red-500">{errors[`m${i}name`]}</span>}
+                      {errors[`m${i}name`] && <span className="text-xs text-red-500">{errors[`m${i}name`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[.72rem] font-bold uppercase tracking-[.04em] text-[#7A9582]">Email *</label>
-                      <input className={inp(errors[`m${i}email`])} type="email" placeholder="jane@example.com"
+                      <label className="text-xs font-semibold text-[#E0EAE2]">Email *</label>
+                      <input className={inp(errors[`m${i}email`])} type="email" placeholder="name@email.com"
                         value={members[i]?.email||''}
                         onChange={e=>setMembers(arr=>{ const a=[...arr]; a[i]={...a[i],email:e.target.value}; return a; })} />
-                      {errors[`m${i}email`] && <span className="text-[.7rem] text-red-500">{errors[`m${i}email`]}</span>}
+                      {errors[`m${i}email`] && <span className="text-xs text-red-500">{errors[`m${i}email`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[.72rem] font-bold uppercase tracking-[.04em] text-[#7A9582]">Role *</label>
+                      <label className="text-xs font-semibold text-[#E0EAE2]">Role *</label>
                       <select className={inp(errors[`m${i}role`])}
                         value={members[i]?.role||''}
                         onChange={e=>setMembers(arr=>{ const a=[...arr]; a[i]={...a[i],role:e.target.value}; return a; })}>
@@ -927,7 +895,7 @@ function RegModal({ onClose }) {
                       {errors[`m${i}role`] && <span className="text-[.7rem] text-red-500">{errors[`m${i}role`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[.72rem] font-bold uppercase tracking-[.04em] text-[#7A9582]">GitHub / Portfolio <span className="normal-case font-normal opacity-50 tracking-normal">(optional)</span></label>
+                      <label className="text-xs font-semibold text-[#E0EAE2]">Portfolio <span className="normal-case font-normal opacity-50">(optional)</span></label>
                       <input className={inp(false)} type="url" placeholder="https://github.com/username"
                         value={members[i]?.github||''}
                         onChange={e=>setMembers(arr=>{ const a=[...arr]; a[i]={...a[i],github:e.target.value}; return a; })} />
@@ -942,16 +910,16 @@ function RegModal({ onClose }) {
           {step === 3 && (
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[.75rem] font-bold uppercase tracking-[.04em] text-[#E0EAE2]">Project Idea / Approach * <span className="normal-case font-normal opacity-50 tracking-normal">(2–3 sentences)</span></label>
+                <label className="text-sm font-semibold text-[#E0EAE2]">Project Idea <span className="normal-case font-normal opacity-50">(brief summary)</span></label>
                 <textarea className={inp(errors.idea)+' resize-y min-h-[110px]'}
-                  placeholder="Briefly describe what you plan to build or explore. What problem does it solve? This helps us match you with relevant mentors."
+                  placeholder="What will you build and why?"
                   value={extra.idea} onChange={e=>setExtra(p=>({...p,idea:e.target.value}))} />
-                {errors.idea && <span className="text-[.72rem] text-red-500">{errors.idea}</span>}
+                {errors.idea && <span className="text-xs text-red-500">{errors.idea}</span>}
               </div>
 
               {/* Summary card */}
               <div className="rounded-2xl border border-[#263028] bg-[#141B16] p-5">
-                <p className="text-[.7rem] font-bold uppercase tracking-[.12em] text-[#4ADE80] mb-3">Registration Summary</p>
+                <p className="text-xs font-semibold tracking-wide text-[#000000] mb-3">Registration Summary</p>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
                   {[
                     ['Team',    team.name],
@@ -960,8 +928,8 @@ function RegModal({ onClose }) {
                     ['Level',   team.level],
                   ].map(([k,v]) => (
                     <div key={k}>
-                      <span className="text-[#7A9582]">{k}: </span>
-                      <span className="font-medium text-[#E0EAE2]">{v}</span>
+                      <span className="text-[#A0AAA0]">{k}: </span>
+                      <span className="font-semibold text-[#E0EAE2]">{v}</span>
                     </div>
                   ))}
                 </div>
@@ -969,17 +937,17 @@ function RegModal({ onClose }) {
 
               {/* Agreements */}
               <div className="flex flex-col gap-3">
-                {[{key:'terms', label:<>I agree to the <a href="#" className="underline text-[#4ADE80]" onClick={e=>e.stopPropagation()}>Terms & Conditions</a> of Hackcurity 2026.</>},
-                  {key:'conduct', label:<>I agree to uphold the <a href="#" className="underline text-[#4ADE80]" onClick={e=>e.stopPropagation()}>Code of Conduct</a> throughout the event.</>}].map(({key,label}) => (
+                {[{key:'terms', label:<>I agree to the <a href="#" className="underline text-[#000000]" onClick={e=>e.stopPropagation()}>Terms & Conditions</a> of Hackcurity 2026.</>},
+                  {key:'conduct', label:<>I agree to uphold the <a href="#" className="underline text-[#000000]" onClick={e=>e.stopPropagation()}>Code of Conduct</a> throughout the event.</>}].map(({key,label}) => (
                   <label key={key} className="flex items-start gap-3 cursor-pointer group">
                     <span className={`mt-[2px] flex-shrink-0 w-5 h-5 rounded-[6px] border-[1.5px] flex items-center justify-center transition-all duration-150 ${
-                      extra[key] ? 'bg-[#4ADE80] border-[#4ADE80] text-[#080C0A]' : 'bg-[#141B16] border-[#263028] text-transparent group-hover:border-[#4ADE80]'
+                      extra[key] ? 'bg-[#000000] border-[#000000] text-[#080C0A]' : 'bg-[#141B16] border-[#263028] text-transparent group-hover:border-[#000000]'
                     }` + (errors[key] ? ' !border-red-500' : '')}>
                       {extra[key] && <ICheck s={11}/>}
                     </span>
                     <input type="checkbox" className="sr-only" checked={extra[key]}
                       onChange={e=>setExtra(p=>({...p,[key]:e.target.checked}))} />
-                    <span className="text-[.85rem] text-[#7A9582] leading-relaxed">{label}</span>
+                    <span className="text-sm text-[#A0AAA0] leading-relaxed">{label}</span>
                   </label>
                 ))}
                 {(errors.terms || errors.conduct) && (
@@ -992,14 +960,14 @@ function RegModal({ onClose }) {
           {/* ── SUCCESS ── */}
           {step === 'done' && (
             <div className="flex flex-col items-center text-center py-8 gap-5">
-              <div className="w-20 h-20 rounded-full bg-[#4ADE80] flex items-center justify-center shadow-2xl shadow-emerald-950/30">
+              <div className="w-20 h-20 rounded-full bg-[#000000] flex items-center justify-center shadow-2xl shadow-emerald-950/30">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#080C0A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div>
                 <h3 className="text-2xl font-semibold tracking-tight text-[#E0EAE2] mb-2">You're in, {members[0]?.name || 'Hacker'}!</h3>
-                <p className="text-[#7A9582] leading-relaxed max-w-sm">
-                  Your team <strong className="text-[#E0EAE2]">{team.name}</strong> is registered for the <strong className="text-[#E0EAE2]">{team.track}</strong> track.
-                  A confirmation email has been sent to all team members.
+                <p className="text-[#A0AAA0] leading-relaxed max-w-sm">
+                  Team <strong className="text-[#E0EAE2]">{team.name}</strong> registered for <strong className="text-[#E0EAE2]">{team.track}</strong>.
+                  Confirmation email sent to all members.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3 w-full max-w-sm mt-2">
@@ -1008,15 +976,15 @@ function RegModal({ onClose }) {
                   {v:'48h',  l:'Duration'},
                   {v:'$'+['5,000','8,000','10,000','6,000','4,000','3,000'][TRACKS_LIST.indexOf(team.track)]||'5,000', l:'Track Prize'},
                 ].map(({v,l}) => (
-                  <div key={l} className="rounded-2xl border border-[#263028] bg-[#141B16] py-3 px-2 text-center">
+                  <div key={l} className="rounded-xl border border-[#263028] bg-[#141B16] py-3 px-2 text-center">
                     <div className="text-lg font-bold text-[#E0EAE2]">{v}</div>
-                    <div className="text-[.65rem] text-[#7A9582] uppercase tracking-wider font-medium">{l}</div>
+                    <div className="text-xs font-medium text-[#A0AAA0] tracking-wide">{l}</div>
                   </div>
                 ))}
               </div>
               <button onClick={onClose}
-                className="mt-2 bg-[#4ADE80] text-[#080C0A] px-8 py-3.5 rounded-[14px] font-semibold text-sm hover:bg-[#22C55E] transition-colors shadow-lg">
-                Back to Site
+                className="mt-2 bg-[#000000] text-[#E0EAE2] px-7 py-3 rounded-lg font-semibold text-sm hover:shadow-lg hover:bg-[#1A1A1A] transition-all shadow-md">
+                Close
               </button>
             </div>
           )}
@@ -1025,18 +993,18 @@ function RegModal({ onClose }) {
         {/* Footer / nav */}
         {step !== 'done' && (
           <div className="px-8 py-5 border-t border-[#263028] flex items-center justify-between flex-shrink-0 bg-[#141B16]">
-            <span className="text-[.75rem] text-[#7A9582]">
+            <span className="text-xs text-[#A0AAA0]">
               Step {step} of {STEPS.length}
             </span>
             <div className="flex items-center gap-3">
               {step > 1 && (
                 <button onClick={back}
-                  className="px-5 py-2.5 rounded-[10px] text-sm font-medium text-[#E0EAE2] border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] transition-colors">
+                  className="px-5 py-2.5 rounded-lg text-sm font-medium text-[#E0EAE2] border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] transition-colors">
                   Back
                 </button>
               )}
-              <motion.button onClick={next} whileHover={{scale:1.03}} whileTap={{scale:.97}}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-[10px] text-sm font-semibold bg-[#4ADE80] text-[#080C0A] hover:bg-[#22C55E] transition-colors shadow-md">
+              <motion.button onClick={next} whileHover={{scale:1.02}} whileTap={{scale:.98}}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#000000] text-[#E0EAE2] hover:shadow-lg hover:bg-[#1A1A1A] transition-all shadow-md">
                 {step === 3 ? 'Submit Registration' : 'Continue'}
                 {step < 3 && <IArrow s={15}/>}
               </motion.button>
@@ -1058,31 +1026,31 @@ function CTASection({ onRegister }) {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
           <div>
-            <SectionHeader tag="Register" h2={<>Ready to<br/>compete?</>}
-              sub="Open to students, professionals, and independent researchers worldwide. Registration is free — spots are limited." />
+            <SectionHeader tag="Registration" h2={<>Join the Event</>}
+              sub="Open to students, professionals, and researchers worldwide. Sign up free while spots are available." />
             <span ref={magRef} className="mt-8 inline-block">
-              <motion.button onClick={onRegister} whileHover={{scale:1.04}} whileTap={{scale:.97}} id="btn-register"
-                className="inline-flex items-center gap-2 bg-[#4ADE80] text-[#080C0A] px-8 py-4 rounded-[16px] text-base font-bold tracking-tight shadow-xl hover:bg-[#22C55E] transition-colors">
-                Register Now <IArrow s={18}/>
+              <motion.button onClick={onRegister} whileHover={{scale:1.03}} whileTap={{scale:.97}} id="btn-register"
+                className="inline-flex items-center gap-2 bg-[#000000] text-[#E0EAE2] px-7 py-3.5 rounded-lg text-base font-bold tracking-tight shadow-lg hover:shadow-xl hover:bg-[#1A1A1A] transition-all">
+                Register Now <IArrow s={16}/>
               </motion.button>
             </span>
             {/* Social proof */}
             <div className="flex items-center gap-3 mt-6">
               <div className="flex -space-x-2">
-                {['#4ADE80','#22C55E','#16A34A','#15803D','#14532D'].map((c,i)=>(
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#080C0A] flex items-center justify-center text-white text-[.55rem] font-bold flex-shrink-0"
-                    style={{background:c, color: c==='#4ADE80' || c==='#22C55E' ? '#080C0A' : '#ffffff'}}>{'ABCDE'[i]}</div>
+                {['#000000','#C41E3A','#A31B0C','#8B0000','#6B0000'].map((c,i)=>(
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#080C0A] flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
+                    style={{background:c, color: c==='#000000' || c==='#C41E3A' ? '#080C0A' : '#ffffff'}}>{'ABCDE'[i]}</div>
                 ))}
               </div>
-              <p className="text-sm text-[#7A9582]"><strong className="text-[#E0EAE2]">347</strong> teams registered · <strong className="text-[#E0EAE2]">153</strong> spots left</p>
+              <p className="text-sm text-[#A0AAA0]"><strong className="text-[#E0EAE2]">347</strong> teams registered · <strong className="text-[#E0EAE2]">153</strong> spots left</p>
             </div>
           </div>
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-5 h-[2px] rounded bg-[#4ADE80]" />
-              <span className="text-[.7rem] font-bold uppercase tracking-[.15em] text-[#4ADE80]">Contact</span>
+              <div className="w-5 h-[2px] rounded bg-[#000000]" />
+              <span className="text-sm font-semibold tracking-wide text-[#000000]">Contact Us</span>
             </div>
-            <h2 className="text-[1.75rem] font-normal tracking-tight text-[#E0EAE2] mb-6">Send us a message</h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-[#E0EAE2] mb-6">Get in Touch</h2>
             <ContactForm />
           </div>
         </div>
@@ -1097,16 +1065,16 @@ function CTASection({ onRegister }) {
 function Footer() {
   return (
     <footer className="bg-[#0F1511] border-t border-[#263028] py-8 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[#7A9582]">
-        <div className="flex items-center gap-2 font-medium text-[#E0EAE2] text-base">
-          Mainframe&reg; <span className="text-[#7A9582] font-normal text-sm">&times; Hackcurity 2026</span>
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[#A0AAA0]">
+        <div className="flex items-center gap-2 font-semibold text-[#E0EAE2]">
+          Hackcurity <span className="text-[#A0AAA0] font-normal text-base">&times; 2026</span>
         </div>
         <div className="flex items-center gap-6">
           {['Privacy','Terms','Contact'].map(l => (
             <a key={l} href="#" className="hover:text-[#E0EAE2] transition-colors">{l}</a>
           ))}
         </div>
-        <span style={{opacity:.65}}>&copy; 2026 Mainframe Inc. All rights reserved.</span>
+        <span>&copy; 2026 All rights reserved.</span>
       </div>
     </footer>
   );

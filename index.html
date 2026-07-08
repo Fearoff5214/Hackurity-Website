@@ -28,56 +28,23 @@
     .animate-blink { animation: blink 1s step-end infinite; }
 
     /* â”€â”€ Custom cursor â”€â”€ */
-    *, *::before, *::after { cursor: none !important; box-sizing: border-box; }
-    #cx-dot {
-      position: fixed; z-index: 9999; pointer-events: none;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #4ADE80;
-      transform: translate(-50%,-50%);
-      transition: width .18s, height .18s;
-      will-change: left, top;
-    }
-    #cx-ring {
-      position: fixed; z-index: 9998; pointer-events: none;
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1.5px solid rgba(74,222,128,.32);
-      transform: translate(-50%,-50%);
-      transition: width .3s cubic-bezier(.34,1.56,.64,1),
-                  height .3s cubic-bezier(.34,1.56,.64,1),
-                  background .2s, border-color .2s;
-      will-change: left, top;
-    }
-    body.cx-hover #cx-ring { width:54px; height:54px; border-color:rgba(74,222,128,.55); background:rgba(74,222,128,.04); }
-    body.cx-click #cx-dot  { width:13px; height:13px; }
-    body.cx-click #cx-ring { width:28px; height:28px; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+
 
     /* â”€â”€ Mouse glow â”€â”€ */
-    #mx-glow {
-      position: fixed; z-index: 1; pointer-events: none;
-      width: 520px; height: 520px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(74,222,128,.09) 0%, transparent 65%);
-      transform: translate(-50%,-50%);
-      will-change: left, top;
-    }
 
-    /* â”€â”€ Particle trail â”€â”€ */
-    .mx-p {
-      position: fixed; pointer-events: none; border-radius: 50%; z-index: 9996;
-      transform: translate(-50%,-50%);
-      animation: mx-fade .75s ease forwards;
-    }
-    @keyframes mx-fade { 0%{opacity:.5;transform:translate(-50%,-50%) scale(1)} 100%{opacity:0;transform:translate(-50%,-50%) scale(0)} }
 
     /* â”€â”€ Tilt card â”€â”€ */
     .tilt { transform-style: preserve-3d; }
 
     /* â”€â”€ Selection â”€â”€ */
-    ::selection { background: #1A4530; color: #E0EAE2; }
+    ::selection { background: #3C2F3F; color: #E0EAE2; }
 
     /* â”€â”€ Scrollbar â”€â”€ */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #080C0A; }
-    ::-webkit-scrollbar-thumb { background: #1E2B22; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #3C2F3F; border-radius: 3px; }
 
     /* â”€â”€ Shared animations for motion shim â”€â”€ */
     @keyframes pulse { 0%,100%{opacity:.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.18)} }
@@ -88,10 +55,7 @@
 </head>
 <body>
 
-<!-- Cursor & glow layers -->
-<div id="cx-dot"></div>
-<div id="cx-ring"></div>
-<div id="mx-glow"></div>
+<!-- Cursor & glow layers removed -->
 <div id="root"></div>
 
 <!-- React 18 + ReactDOM -->
@@ -104,51 +68,15 @@
 <!-- â”€â”€ Mouse effects: plain JS, no Babel, runs immediately â”€â”€ -->
 <script>
 (function() {
-  var dot  = document.getElementById('cx-dot');
-  var ring = document.getElementById('cx-ring');
-  var glow = document.getElementById('mx-glow');
-  if (!dot || !ring) return;
+  return; // Mouse effects disabled
 
   var rx = -200, ry = -200, mx = -200, my = -200;
 
-  window.addEventListener('mousemove', function(e) {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
-    glow.style.left = mx + 'px'; glow.style.top = my + 'px';
-    // Particle trail
-    if (Math.random() > 0.6) {
-      var p = document.createElement('div');
-      var s = 3 + Math.random() * 5;
-      p.className = 'mx-p';
-      p.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+mx+'px;top:'+my+'px;background:rgba(74,222,128,'+(0.18+Math.random()*0.32)+')';
-      document.body.appendChild(p);
-      setTimeout(function(){ p.remove(); }, 780);
-    }
-  });
 
-  // Ring lerp (rAF)
-  (function lerp() {
-    rx += (mx - rx) * 0.11;
-    ry += (my - ry) * 0.11;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(lerp);
-  })();
 
-  // Hover / click states
-  document.addEventListener('mouseover', function(e) {
-    var el = e.target;
-    while (el) {
-      if (el.tagName === 'A' || el.tagName === 'BUTTON' ||
-          (el.className && typeof el.className === 'string' &&
-           (el.className.indexOf('tilt') >= 0 || el.className.indexOf('mag') >= 0))) {
-        document.body.classList.add('cx-hover'); return;
-      }
-      el = el.parentElement;
-    }
-    document.body.classList.remove('cx-hover');
-  });
-  document.addEventListener('mousedown', function() { document.body.classList.add('cx-click'); });
-  document.addEventListener('mouseup',   function() { document.body.classList.remove('cx-click'); });
+
+
+
 })();
 </script>
 

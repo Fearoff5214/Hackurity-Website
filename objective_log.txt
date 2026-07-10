@@ -1,5 +1,5 @@
 🧥 WEBSITE REFACTOR OBJECTIVE LOG
-Project: Jacket-Themed Brand Site
+Project: Hackurity-Website
 Version: 1.0
 Last Updated: 2026-07-10
 
@@ -26,7 +26,7 @@ Rewrite for clarity, warmth, and natural readability
 
 Eliminate jargon; keep language human and inviting
 
-Ensure tone aligns with "jacket" — durable, stylish, approachable
+Ensure tone aligns with our club jacket — durable, stylish, approachable
 
 ==================================================================
 
@@ -41,6 +41,7 @@ Audit cursor behavior — remove cursor: pointer from non-link/button elements
 
 ========================================================================
 4. COLOR STRATEGY
+Theme: Our club jacket
 Primary: Black (#000000)
 
 Secondary: To be defined (suggest: warm charcoal or muted off-white)

@@ -1,0 +1,60 @@
+🧥 WEBSITE REFACTOR OBJECTIVE LOG
+Project: Jacket-Themed Brand Site
+Version: 1.0
+Last Updated: 2026-07-10
+
+📋 OBJECTIVES
+
+====================================================================
+
+1. VISUAL DESIGN OVERHAUL
+Remove all glassmorphism effects (blur, transparency, backdrop filters)
+
+Eliminate AI-generated icons; replace with custom/clean vector graphics
+
+Remove cursor-pointer effects from all interactive elements
+
+Transition from current color palette to black-dominant theme (primary: #000000)
+
+Ensure secondary/accent colors complement black without overpowering
+
+========================================================================
+2. CONTENT REFINEMENT
+Review all microcopy, CTAs, and body text
+
+Rewrite for clarity, warmth, and natural readability
+
+Eliminate jargon; keep language human and inviting
+
+Ensure tone aligns with "jacket" — durable, stylish, approachable
+
+==================================================================
+
+3. UI/UX REMOVALS
+Locate and remove all glassmorphism cards, modals, and containers
+
+Replace with solid, flat or softly shadowed containers
+
+Remove any decorative AI-style icons (stars, gradients, abstract shapes)
+
+Audit cursor behavior — remove cursor: pointer from non-link/button elements
+
+========================================================================
+4. COLOR STRATEGY
+Primary: Black (#000000)
+
+Secondary: To be defined (suggest: warm charcoal or muted off-white)
+
+Accent: Minimal — reserved for CTAs (e.g., deep orange or bone white)
+
+✅ Ensure high contrast for accessibility
+
+=========================================================================
+🛠 IMPLEMENTATION TRACKER
+Task	Status	Notes
+Remove glassmorphism	⬜ Pending	
+Replace AI icons	⬜ Pending	
+Cursor audit	⬜ Pending	
+Rewrite content	⬜ Pending	
+Apply black theme	⬜ Pending	
+QA visual pass	⬜ Pending	

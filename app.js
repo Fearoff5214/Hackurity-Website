@@ -1,4 +1,4 @@
-const { useState, useEffect, useRef, Fragment } = React;
+﻿const { useState, useEffect, useRef, Fragment } = React;
 
 /* ══════════════════════════════════════════════════════════
    INLINE MOTION SHIM
@@ -178,7 +178,7 @@ function BackgroundVideo() {
   }, []);
 
   return (
-    <div ref={containerRef} className="order-last lg:order-none relative lg:absolute lg:inset-0 lg:z-0 overflow-hidden pointer-events-none w-full aspect-square md:aspect-video lg:aspect-auto lg:h-full bg-[#080C0A] lg:bg-transparent">
+    <div ref={containerRef} className="order-last lg:order-none relative lg:absolute lg:inset-0 lg:z-0 overflow-hidden pointer-events-none w-full aspect-square md:aspect-video lg:aspect-auto lg:h-full bg-[#040E1A] lg:bg-transparent">
       <video ref={vidRef} muted playsInline preload="auto"
         className="w-full h-full object-cover object-right lg:object-right-bottom">
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260601_110537_3a579fa0-7bbc-4d94-9d25-0e816c7840f5.mp4" type="video/mp4" />
@@ -232,13 +232,13 @@ function Navbar() {
   return (
     <>
       <header className={`fixed top-0 inset-x-0 z-50 px-5 sm:px-8 py-3.5 sm:py-4 flex flex-row justify-between items-center transition-all duration-300 ${scrolled
-        ? 'bg-[#080C0A]/75 backdrop-blur-xl border-b border-[#C41E3A]/20 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]'
-        : 'bg-[#080C0A]/25 backdrop-blur-md border-b border-transparent'
+        ? 'bg-[#040E1A]/75 backdrop-blur-xl border-b border-[#C41E3A]/20 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]'
+        : 'bg-[#040E1A]/25 backdrop-blur-md border-b border-transparent'
         }`}>
         {/* Logo */}
         <div className="flex flex-row items-end gap-3">
-          <span className="text-[21px] sm:text-[26px] tracking-tight text-[#E0EAE2] font-medium select-none">REVA Hackurity</span>
-          <span className="text-[25px] sm:text-[30px] text-[#E0EAE2] select-none tracking-[-0.02em] font-medium leading-none mb-1">&#10033;</span>
+          <span className="text-[21px] sm:text-[26px] tracking-tight text-[#F0E8D8] font-medium select-none">REVA Hackurity</span>
+          <span className="text-[25px] sm:text-[30px] text-[#F0E8D8] select-none tracking-[-0.02em] font-medium leading-none mb-1">&#10033;</span>
         </div>
 
         {/* Desktop nav with glassy slider */}
@@ -256,7 +256,7 @@ function Navbar() {
             }}
           />
 
-          <nav className="flex flex-row items-center text-base text-[#E0EAE2] gap-1 relative">
+          <nav className="flex flex-row items-center text-base text-[#F0E8D8] gap-1 relative">
             {links.map((l, i) => (
               <Fragment key={l.l}>
                 <a
@@ -301,7 +301,7 @@ function Navbar() {
                 });
               }}
               onMouseLeave={() => setHovered(null)}
-              className="px-3.5 py-1.5 text-base text-[#E0EAE2] underline underline-offset-4 hover:text-[#EF4444] transition-colors relative z-10 font-medium"
+              className="px-3.5 py-1.5 text-base text-[#F0E8D8] underline underline-offset-4 hover:text-[#EF4444] transition-colors relative z-10 font-medium"
             >
               Contact
             </a>
@@ -311,20 +311,20 @@ function Navbar() {
         {/* Hamburger */}
         <button onClick={() => setOpen(o => !o)} id="mobile-menu-btn" aria-label="Toggle menu"
           className="md:hidden flex flex-col gap-[5px] justify-center items-center w-8 h-8">
-          <span className={`block w-6 h-[2px] bg-[#E0EAE2] transition-all duration-300${open ? ' rotate-45 translate-y-[7px]' : ''}`} />
-          <span className={`block w-6 h-[2px] bg-[#E0EAE2] transition-all duration-300${open ? ' opacity-0' : ''}`} />
-          <span className={`block w-6 h-[2px] bg-[#E0EAE2] transition-all duration-300${open ? ' -rotate-45 -translate-y-[7px]' : ''}`} />
+          <span className={`block w-6 h-[2px] bg-[#F0E8D8] transition-all duration-300${open ? ' rotate-45 translate-y-[7px]' : ''}`} />
+          <span className={`block w-6 h-[2px] bg-[#F0E8D8] transition-all duration-300${open ? ' opacity-0' : ''}`} />
+          <span className={`block w-6 h-[2px] bg-[#F0E8D8] transition-all duration-300${open ? ' -rotate-45 -translate-y-[7px]' : ''}`} />
         </button>
       </header>
 
       {/* Mobile overlay */}
-      <div className={`fixed inset-0 z-40 bg-[#080C0A]/95 backdrop-blur-sm flex flex-col justify-center items-center gap-8 md:hidden transition-opacity duration-300${open ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'}`}>
+      <div className={`fixed inset-0 z-40 bg-[#040E1A]/95 backdrop-blur-sm flex flex-col justify-center items-center gap-8 md:hidden transition-opacity duration-300${open ? ' opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'}`}>
         {links.map(l => (
           <a key={l.l} href={l.h} onClick={() => setOpen(false)}
-            className="text-2xl font-medium text-[#E0EAE2] hover:text-[#EF4444] transition-colors">{l.l}</a>
+            className="text-2xl font-medium text-[#F0E8D8] hover:text-[#EF4444] transition-colors">{l.l}</a>
         ))}
         <a href="#cta-section" onClick={() => setOpen(false)}
-          className="text-lg text-[#E0EAE2] underline underline-offset-4 hover:text-[#EF4444] transition-colors">
+          className="text-lg text-[#F0E8D8] underline underline-offset-4 hover:text-[#EF4444] transition-colors">
           Contact
         </a>
       </div>
@@ -345,7 +345,7 @@ function ServicePills() {
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .5, delay: .35 }}>
       <p className="text-lg font-semibold tracking-tight mb-2">I'm interested in</p>
-      <p className="text-sm mb-8 text-[#A0AAA0]">Select interests (optional)</p>
+      <p className="text-sm mb-8 text-[#C4A882]">Select interests (optional)</p>
 
       <div className="flex flex-wrap gap-3 mb-5">
         {SERVICE_OPTIONS.map(s => {
@@ -356,7 +356,7 @@ function ServicePills() {
               whileHover={{ scale: 1.02 }} whileTap={{ scale: .98 }}
               className={'flex items-center gap-2 px-5 py-2.5 rounded-lg text-base font-medium outline-none transition-colors duration-150 ' + (on
                 ? 'bg-[#C41E3A] text-[#ffffff] font-bold shadow-md'
-                : 'bg-[#141B16] text-[#E0EAE2] border border-[#263028] hover:bg-[#1A2420]')}>
+                : 'bg-[#0A1A30] text-[#F0E8D8] border border-[#1A3055] hover:bg-[#0D2040]')}>
               {on && <span className="flex items-center"><ICheck s={12} /></span>}
               {s}
             </motion.button>
@@ -369,16 +369,16 @@ function ServicePills() {
         {!active ? (
           <motion.p key="empty"
             initial={{ opacity: 0 }} animate={{ opacity: .5 }} exit={{ opacity: 0 }} transition={{ duration: .2 }}
-            className="text-xs text-[#7A9582]">
+            className="text-xs text-[#A8896A]">
             Select your interests to continue.
           </motion.p>
         ) : (
           <motion.div key="active"
             initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
             transition={{ duration: .3, ease: 'easeInOut' }} className="overflow-hidden">
-            <div className="flex items-center justify-between gap-4 bg-[#0F1511] border border-[#263028] rounded-2xl px-5 py-4">
-              <p className="text-sm text-[#A0AAA0] font-medium">
-                You've selected: <strong className="font-semibold text-[#E0EAE2]">{selected.join(', ')}</strong>
+            <div className="flex items-center justify-between gap-4 bg-[#071428] border border-[#1A3055] rounded-2xl px-5 py-4">
+              <p className="text-sm text-[#C4A882] font-medium">
+                You've selected: <strong className="font-semibold text-[#F0E8D8]">{selected.join(', ')}</strong>
               </p>
               <a href="#cta-section"
                 className="flex items-center gap-1.5 font-semibold text-xs tracking-normal whitespace-nowrap text-[#C41E3A] hover:text-[#EF4444] transition-colors">
@@ -398,7 +398,7 @@ function ServicePills() {
 function HeroContent() {
   const { displayed, done } = useTypewriter("Build. Defend.\nSecure the Future.", 38, 600);
   return (
-    <div className="relative z-10 flex flex-col order-first lg:order-none w-full bg-[#080C0A] lg:bg-transparent pb-8 lg:pb-0 lg:min-h-screen">
+    <div className="relative z-10 flex flex-col order-first lg:order-none w-full bg-[#040E1A] lg:bg-transparent pb-8 lg:pb-0 lg:min-h-screen">
       <main id="spade-hero" className="w-full max-w-7xl mx-auto px-6 py-12 flex-1 flex flex-col justify-center">
 
         {/* Hackcurity badge */}
@@ -410,7 +410,7 @@ function HeroContent() {
 
         {/* Headline with typewriter */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6 }}>
-          <h1 className="text-5xl md:text-6xl lg:text-[76px] font-normal tracking-tight text-[#E0EAE2] leading-[1.08] mb-8 select-none w-full whitespace-pre-wrap">
+          <h1 className="text-5xl md:text-6xl lg:text-[76px] font-normal tracking-tight text-[#F0E8D8] leading-[1.08] mb-8 select-none w-full whitespace-pre-wrap">
             {displayed}
             {!done && <span className="inline-block w-[2px] h-[1.1em] bg-[#C41E3A] align-middle ml-[2px] animate-blink" />}
           </h1>
@@ -418,7 +418,7 @@ function HeroContent() {
 
         {/* Description */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .6, delay: .1 }}>
-          <p className="text-base md:text-lg text-[#A0AAA0] leading-relaxed font-normal mb-14 max-w-2xl">
+          <p className="text-base md:text-lg text-[#C4A882] leading-relaxed font-normal mb-14 max-w-2xl">
             Welcome to the REVA University Cybersecurity Club. We foster hands-on skills in ethical hacking, cryptography, and defense engineering. Join us for Hackcurity 2026, a flagship 48-hour hackathon where minds collide to solve real-world security challenges.
           </p>
         </motion.div>
@@ -432,7 +432,7 @@ function HeroContent() {
             { I: IUsers, t: 'Teams of 1–4' },
             { I: IClock, t: '48-Hour Sprint' },
           ].map(({ I, t }) => (
-            <div key={t} className="flex items-center gap-1.5 text-sm text-[#7A9582] bg-[#0F1511] border border-[#263028] rounded-lg px-3 py-1.5">
+            <div key={t} className="flex items-center gap-1.5 text-sm text-[#A8896A] bg-[#071428] border border-[#1A3055] rounded-lg px-3 py-1.5">
               <I />{t}
             </div>
           ))}
@@ -455,8 +455,8 @@ function SectionHeader({ tag, h2, sub }) {
         <div className="w-5 h-[2px] rounded bg-[#C41E3A]" />
         <span className="text-[12px] font-semibold tracking-wide text-[#C41E3A]">{tag}</span>
       </div>
-      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#E0EAE2] leading-tight mb-4">{h2}</h2>
-      {sub && <p className="text-base text-[#A0AAA0] leading-relaxed max-w-xl">{sub}</p>}
+      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-[#F0E8D8] leading-tight mb-4">{h2}</h2>
+      {sub && <p className="text-base text-[#C4A882] leading-relaxed max-w-xl">{sub}</p>}
     </motion.div>
   );
 }
@@ -473,15 +473,15 @@ function StatsBar() {
     { v: 'Global', I: IGlobe, l: 'Open to All' },
   ];
   return (
-    <section ref={ref} className="bg-[#0F1511] text-[#E0EAE2] border-y border-[#263028] py-11 px-6">
+    <section ref={ref} className="bg-[#071428] text-[#F0E8D8] border-y border-[#1A3055] py-11 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
         {stats.map(({ v, I, l }, i) => (
           <motion.div key={l} initial={{ opacity: 0, y: 20 }}
             animate={vis ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: .5, delay: i * .08 }}
             className="flex flex-col items-center gap-2 text-center">
             <I s={22} className="text-[#C41E3A]" />
-            <span className="text-2xl font-bold tracking-tight text-[#E0EAE2]">{v}</span>
-            <span className="text-xs font-medium tracking-wide text-[#A0AAA0]">{l}</span>
+            <span className="text-2xl font-bold tracking-tight text-[#F0E8D8]">{v}</span>
+            <span className="text-xs font-medium tracking-wide text-[#C4A882]">{l}</span>
           </motion.div>
         ))}
       </div>
@@ -507,18 +507,18 @@ function TrackCard({ track, delay }) {
   return (
     <motion.div ref={ref} initial={{ opacity: 0, y: 24 }}
       animate={vis ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }} transition={{ duration: .5, delay }}>
-      <div ref={tiltRef} className="tilt h-full rounded-2xl border border-[#263028] bg-[#0F1511] p-6 flex flex-col">
+      <div ref={tiltRef} className="tilt h-full rounded-2xl border border-[#1A3055] bg-[#071428] p-6 flex flex-col">
         <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-          style={{ background: '#1A2420', color: track.color }}>
+          style={{ background: '#0D2040', color: track.color }}>
           <track.I s={18} />
         </div>
-        <div className="text-lg font-semibold text-[#E0EAE2] mb-1">{getTrackEmoji(track.title)} {track.title}</div>
-        <div className="text-xs text-[#7A9582] mb-3 font-medium">{track.domain}</div>
-        <div className="text-sm text-[#A0AAA0] leading-relaxed mb-4 flex-1">{track.desc}</div>
+        <div className="text-lg font-semibold text-[#F0E8D8] mb-1">{getTrackEmoji(track.title)} {track.title}</div>
+        <div className="text-xs text-[#A8896A] mb-3 font-medium">{track.domain}</div>
+        <div className="text-sm text-[#C4A882] leading-relaxed mb-4 flex-1">{track.desc}</div>
         <div className="flex items-center justify-between gap-3">
           <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-lg"
             style={{ background: track.color + '12', color: track.color }}>{getTrackEmoji(track.tag)} {track.tag}</span>
-          <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#2A1A1A] text-[#C41E3A]">
+          <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-[#0E1E3A] text-[#C41E3A]">
             {track.problemStatement}
           </span>
         </div>
@@ -529,7 +529,7 @@ function TrackCard({ track, delay }) {
 
 function TracksSection() {
   return (
-    <section id="tracks-section" className="py-24 px-6 bg-[#080C0A]">
+    <section id="tracks-section" className="py-24 px-6 bg-[#040E1A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader tag="Challenge Tracks" h2={<>Pick Your Path</>}
           sub="Choose from six specialized security challenges with dedicated prizes, mentors, and real-world scenarios." />
@@ -564,18 +564,18 @@ function TLItem({ item, delay }) {
         <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-semibold shadow-md"
           style={{ background: item.c }}>{item.ph}</div>
       </div>
-      <div ref={tiltRef} className="tilt flex-1 bg-[#141B16] border border-[#263028] rounded-2xl p-5">
+      <div ref={tiltRef} className="tilt flex-1 bg-[#0A1A30] border border-[#1A3055] rounded-2xl p-5">
         <div className="flex items-start gap-3">
           <div className="lg:hidden w-[30px] h-[30px] rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0"
             style={{ background: item.c }}>{item.ph}</div>
           <div>
-            <div className="text-base font-semibold text-[#E0EAE2]">{item.l}</div>
-            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-[#A0AAA0] font-medium">
+            <div className="text-base font-semibold text-[#F0E8D8]">{item.l}</div>
+            <div className="flex items-center gap-1.5 mt-0.5 text-xs text-[#C4A882] font-medium">
               <ICalendar s={12} />{item.d}
             </div>
           </div>
         </div>
-        <p className="mt-3 text-sm text-[#A0AAA0] leading-relaxed">{item.t}</p>
+        <p className="mt-3 text-sm text-[#C4A882] leading-relaxed">{item.t}</p>
       </div>
     </motion.div>
   );
@@ -583,13 +583,13 @@ function TLItem({ item, delay }) {
 
 function TimelineSection() {
   return (
-    <section id="timeline-section" className="py-24 px-6 bg-[#0F1511] overflow-hidden">
+    <section id="timeline-section" className="py-24 px-6 bg-[#071428] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeader tag="Timeline" h2="Event Schedule"
           sub="Stay on track with all key dates and important milestones from registration through awards." />
         <div className="relative flex flex-col gap-5 mt-14">
           <div className="hidden lg:block absolute left-[52px] top-6 bottom-6 w-[2px] rounded-full"
-            style={{ background: 'linear-gradient(to bottom,#263028,#3C2F3F,#263028)' }} />
+            style={{ background: 'linear-gradient(to bottom,#1A3055,#1E3A5F,#1A3055)' }} />
           {TL.map((item, i) => <TLItem key={item.ph} item={item} delay={i * .08} />)}
         </div>
       </div>
@@ -615,14 +615,14 @@ function JudgeCard({ j, delay }) {
   return (
     <motion.div ref={ref} initial={{ opacity: 0, y: 20 }}
       animate={vis ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: .5, delay }}>
-      <div ref={tiltRef} className="tilt flex flex-col items-center gap-3 text-center p-6 rounded-2xl border border-[#263028] bg-[#0F1511]">
+      <div ref={tiltRef} className="tilt flex flex-col items-center gap-3 text-center p-6 rounded-2xl border border-[#1A3055] bg-[#071428]">
         <div className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-semibold border border-current"
           style={{ background: j.c + '20', color: j.c }}>
           <j.I s={28} />
         </div>
         <div>
-          <div className="text-base font-semibold text-[#E0EAE2]">{j.n}</div>
-          <div className="text-sm text-[#A0AAA0] leading-snug mt-0.5">{j.r}</div>
+          <div className="text-base font-semibold text-[#F0E8D8]">{j.n}</div>
+          <div className="text-sm text-[#C4A882] leading-snug mt-0.5">{j.r}</div>
         </div>
         <div className="text-xs font-semibold px-2 py-0.5 rounded bg-[#C41E3A]/10 text-[#C41E3A] border border-[#C41E3A]/20">{j.o}</div>
       </div>
@@ -632,7 +632,7 @@ function JudgeCard({ j, delay }) {
 
 function JudgesSection() {
   return (
-    <section id="judges-section" className="py-24 px-6 bg-[#080C0A]">
+    <section id="judges-section" className="py-24 px-6 bg-[#040E1A]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader tag="The Team" h2="Judges & Mentors"
           sub="Experienced security leaders and researchers guiding and evaluating your work." />
@@ -663,7 +663,7 @@ function SponsorsSection() {
     {
       l: 'Silver',
       badgeClass: 'text-[#E5E7EB] border-[#E5E7EB]/20 bg-[#E5E7EB]/5',
-      cardClass: 'border-[#263028] bg-[#141B16]/30 text-[#A0AAA0] font-medium text-base px-6 py-3 hover:border-[#C41E3A]/50 hover:bg-[#1A2420]/30 hover:text-white',
+      cardClass: 'border-[#1A3055] bg-[#0A1A30]/30 text-[#C4A882] font-medium text-base px-6 py-3 hover:border-[#C41E3A]/50 hover:bg-[#0D2040]/30 hover:text-white',
       ns: [
         { name: 'GridIron', icon: '🌐' },
         { name: 'RedThread', icon: '🧵' },
@@ -674,7 +674,7 @@ function SponsorsSection() {
     {
       l: 'Community',
       badgeClass: 'text-[#C41E3A] border-[#C41E3A]/30 bg-[#C41E3A]/5',
-      cardClass: 'border-[#263028]/60 bg-[#0F1511]/30 text-[#7A9582] font-medium text-sm px-5 py-2.5 hover:border-[#C41E3A]/40 hover:bg-[#141B16]/30 hover:text-[#E0EAE2]',
+      cardClass: 'border-[#1A3055]/60 bg-[#071428]/30 text-[#A8896A] font-medium text-sm px-5 py-2.5 hover:border-[#C41E3A]/40 hover:bg-[#0A1A30]/30 hover:text-[#F0E8D8]',
       ns: [
         { name: 'HackClub', icon: '🛸' },
         { name: 'OWASP', icon: '🐝' },
@@ -686,7 +686,7 @@ function SponsorsSection() {
   ];
 
   return (
-    <section id="sponsors-section" className="bg-[#0F1511] border-y border-[#263028] py-24 px-6">
+    <section id="sponsors-section" className="bg-[#071428] border-y border-[#1A3055] py-24 px-6">
       <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={vis ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: .6 }}
         className="max-w-7xl mx-auto flex flex-col items-center">
 
@@ -697,8 +697,8 @@ function SponsorsSection() {
             <span className="text-xs font-semibold tracking-wide text-[#C41E3A] uppercase">Partners</span>
             <div className="w-4 h-[2px] rounded bg-[#C41E3A]" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#E0EAE2] mb-3">Backed by Industry Leaders</h2>
-          <p className="text-sm text-[#A0AAA0] max-w-md mx-auto">Hackurity 2026 is made possible through the generous support of our security community partners.</p>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#F0E8D8] mb-3">Backed by Industry Leaders</h2>
+          <p className="text-sm text-[#C4A882] max-w-md mx-auto">Hackurity 2026 is made possible through the generous support of our security community partners.</p>
         </div>
 
         <div className="flex flex-col gap-12 w-full items-center">
@@ -735,7 +735,7 @@ function ContactForm() {
   const [st, setSt] = useState({ name: '', email: '', org: '', msg: '' });
   const [status, setS] = useState(null);
   const magRef = useMagnetic(0.4);
-  const inp = "w-full border-[1.5px] border-[#263028] rounded-lg px-4 py-3 text-base font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#C41E3A] focus:bg-[#1A2420] transition-all duration-200";
+  const inp = "w-full border-[1.5px] border-[#1A3055] rounded-lg px-4 py-3 text-base font-[inherit] text-[#F0E8D8] bg-[#0A1A30] focus:outline-none focus:border-[#C41E3A] focus:bg-[#0D2040] transition-all duration-200";
 
   const submit = e => {
     e.preventDefault();
@@ -748,25 +748,25 @@ function ContactForm() {
     <form onSubmit={submit} className="flex flex-col gap-4" noValidate>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-[#E0EAE2]">Name</label>
+          <label className="text-sm font-semibold text-[#F0E8D8]">Name</label>
           <input className={inp} type="text" placeholder="Your name"
             value={st.name} onChange={e => setSt(p => ({ ...p, name: e.target.value }))} />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-[#E0EAE2]">Email</label>
+          <label className="text-sm font-semibold text-[#F0E8D8]">Email</label>
           <input className={inp} type="email" placeholder="your@email.com"
             value={st.email} onChange={e => setSt(p => ({ ...p, email: e.target.value }))} />
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-semibold text-[#E0EAE2]">
+        <label className="text-sm font-semibold text-[#F0E8D8]">
           Organization <span style={{ opacity: .5, fontWeight: 400 }}>(optional)</span>
         </label>
         <input className={inp} type="text" placeholder="Your organization"
           value={st.org} onChange={e => setSt(p => ({ ...p, org: e.target.value }))} />
       </div>
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-semibold text-[#E0EAE2]">Message</label>
+        <label className="text-sm font-semibold text-[#F0E8D8]">Message</label>
         <textarea className={inp + ' resize-y min-h-[110px]'}
           placeholder="Tell us how we can help..."
           value={st.msg} onChange={e => setSt(p => ({ ...p, msg: e.target.value }))} />
@@ -819,7 +819,7 @@ function RegModal({ onClose }) {
 
   // ── Shared input style ────────────────────────────
   const inp = (err) =>
-    `w-full border-[1.5px] ${err ? 'border-red-500' : 'border-[#263028]'} rounded-[10px] px-4 py-[10px] text-[.9rem] font-[inherit] text-[#E0EAE2] bg-[#141B16] focus:outline-none focus:border-[#C41E3A] focus:bg-[#1A2420] transition-all duration-200`;
+    `w-full border-[1.5px] ${err ? 'border-red-500' : 'border-[#1A3055]'} rounded-[10px] px-4 py-[10px] text-[.9rem] font-[inherit] text-[#F0E8D8] bg-[#0A1A30] focus:outline-none focus:border-[#C41E3A] focus:bg-[#0D2040] transition-all duration-200`;
 
   // close on Escape
   useEffect(() => {
@@ -897,25 +897,25 @@ function RegModal({ onClose }) {
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
 
       {/* Modal panel */}
-      <div className="relative bg-[#0F1511] border border-[#263028] w-full max-w-2xl rounded-[24px] shadow-2xl overflow-hidden"
+      <div className="relative bg-[#071428] border border-[#1A3055] w-full max-w-2xl rounded-[24px] shadow-2xl overflow-hidden"
         style={{ maxHeight: '92vh', display: 'flex', flexDirection: 'column' }}>
 
         {/* Header */}
-        <div className="px-8 pt-8 pb-6 border-b border-[#263028] flex-shrink-0">
+        <div className="px-8 pt-8 pb-6 border-b border-[#1A3055] flex-shrink-0">
           <div className="flex items-start justify-between mb-6">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <div className="w-4 h-[2px] rounded bg-[#C41E3A]" />
                 <span className="text-xs font-semibold tracking-wide text-[#C41E3A]">Hackcurity 2026</span>
               </div>
-              <h2 className="text-2xl font-semibold tracking-tight text-[#E0EAE2]">
+              <h2 className="text-2xl font-semibold tracking-tight text-[#F0E8D8]">
                 {step === 'done' ? 'You\'re registered! 🎉' : 'Register Your Team'}
               </h2>
-              {step !== 'done' && <p className="text-sm text-[#A0AAA0] mt-1">Free registration · 500+ participants · $25,000 in prizes</p>}
+              {step !== 'done' && <p className="text-sm text-[#C4A882] mt-1">Free registration · 500+ participants · $25,000 in prizes</p>}
             </div>
             <button onClick={onClose} aria-label="Close"
-              className="w-9 h-9 rounded-full flex items-center justify-center border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] transition-colors flex-shrink-0 mt-1">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A9582" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+              className="w-9 h-9 rounded-full flex items-center justify-center border border-[#1A3055] bg-[#0A1A30] hover:bg-[#0D2040] transition-colors flex-shrink-0 mt-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8896A" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
             </button>
           </div>
 
@@ -931,15 +931,15 @@ function RegModal({ onClose }) {
                     <div className="flex flex-col items-center gap-1.5">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${done ? 'bg-[#C41E3A] text-[#ffffff]' :
                         curr ? 'bg-[#EF4444] text-[#ffffff] shadow-md shadow-emerald-950/20' :
-                          'bg-[#141B16] text-[#7A9582] border border-[#263028]'
+                          'bg-[#0A1A30] text-[#A8896A] border border-[#1A3055]'
                         }`}>
                         {done ? <ICheck s={13} /> : num}
                       </div>
-                      <span className={`text-[.65rem] font-semibold uppercase tracking-wider ${curr ? 'text-[#EF4444]' : done ? 'text-[#C41E3A]' : 'text-[#7A9582]'
+                      <span className={`text-[.65rem] font-semibold uppercase tracking-wider ${curr ? 'text-[#EF4444]' : done ? 'text-[#C41E3A]' : 'text-[#A8896A]'
                         }`}>{label}</span>
                     </div>
                     {i < STEPS.length - 1 && (
-                      <div className={`flex-1 h-[2px] mx-2 mb-5 rounded-full transition-all duration-500 ${done ? 'bg-[#C41E3A]' : 'bg-[#263028]'
+                      <div className={`flex-1 h-[2px] mx-2 mb-5 rounded-full transition-all duration-500 ${done ? 'bg-[#C41E3A]' : 'bg-[#1A3055]'
                         }`} />
                     )}
                   </Fragment>
@@ -957,13 +957,13 @@ function RegModal({ onClose }) {
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">👥 Team Name *</label>
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">👥 Team Name *</label>
                   <input className={inp(errors.name)} type="text" placeholder="e.g. Threat Research Team"
                     value={team.name} onChange={e => setTeam(p => ({ ...p, name: e.target.value }))} />
                   {errors.name && <span className="text-xs text-red-500">{errors.name}</span>}
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">🔢 Team Size *</label>
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🔢 Team Size *</label>
                   <select className={inp(errors.size)} value={team.size}
                     onChange={e => setTeam(p => ({ ...p, size: e.target.value }))}>
                     <option value="">Select…</option>
@@ -974,13 +974,13 @@ function RegModal({ onClose }) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">🏢 Organization <span className="normal-case font-normal opacity-50">(optional)</span></label>
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🏢 Organization <span className="normal-case font-normal opacity-50">(optional)</span></label>
                 <input className={inp(false)} type="text" placeholder="University or company"
                   value={team.institution} onChange={e => setTeam(p => ({ ...p, institution: e.target.value }))} />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">🎯 Challenge Track *</label>
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🎯 Challenge Track *</label>
                 <select className={inp(errors.track)} value={team.track}
                   onChange={e => setTeam(p => ({ ...p, track: e.target.value }))}>
                   <option value="">Choose a track…</option>
@@ -990,13 +990,13 @@ function RegModal({ onClose }) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">⚡ Experience Level *</label>
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">⚡ Experience Level *</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {LEVELS.map(l => (
                     <button key={l} type="button" onClick={() => setTeam(p => ({ ...p, level: l }))}
                       className={`py-2 px-3 rounded-[10px] text-sm font-medium border transition-all duration-150 text-center ${team.level === l
                         ? 'bg-[#C41E3A] text-[#ffffff] border-[#C41E3A] font-bold shadow-md'
-                        : 'bg-[#141B16] text-[#E0EAE2] border-[#263028] hover:border-[#C41E3A]'
+                        : 'bg-[#0A1A30] text-[#F0E8D8] border-[#1A3055] hover:border-[#C41E3A]'
                         }`}>{l}</button>
                   ))}
                 </div>
@@ -1004,10 +1004,10 @@ function RegModal({ onClose }) {
               </div>
 
               {/* Info pill */}
-              <div className="flex items-start gap-3 bg-[#141B16] border border-[#263028] rounded-2xl px-4 py-3 mt-1">
+              <div className="flex items-start gap-3 bg-[#0A1A30] border border-[#1A3055] rounded-2xl px-4 py-3 mt-1">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" strokeWidth="2" strokeLinecap="round" style={{ marginTop: 1, flexShrink: 0 }}><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
-                <p className="text-sm text-[#A0AAA0] leading-relaxed">
-                  You can change tracks until <strong className="text-[#E0EAE2]">July 25, 2026</strong>. All tracks have equal prize eligibility.
+                <p className="text-sm text-[#C4A882] leading-relaxed">
+                  You can change tracks until <strong className="text-[#F0E8D8]">July 25, 2026</strong>. All tracks have equal prize eligibility.
                 </p>
               </div>
             </div>
@@ -1017,31 +1017,31 @@ function RegModal({ onClose }) {
           {step === 2 && (
             <div className="flex flex-col gap-6">
               {Array.from({ length: memberCount }, (_, i) => (
-                <div key={i} className="rounded-[16px] border border-[#263028] bg-[#141B16] p-5">
+                <div key={i} className="rounded-[16px] border border-[#1A3055] bg-[#0A1A30] p-5">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-7 h-7 rounded-full flex items-center justify-center text-[.7rem] font-bold flex-shrink-0"
                       style={{ background: ['#C41E3A', '#EF4444', '#991B1B', '#7F1D1D'][i], color: '#ffffff' }}>{i + 1}</div>
-                    <span className="text-sm font-semibold text-[#E0EAE2]">
+                    <span className="text-sm font-semibold text-[#F0E8D8]">
                       {i === 0 ? 'Team Leader (you)' : `Member ${i + 1}`}
                     </span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#E0EAE2] flex items-center gap-1.5">👤 Full Name *</label>
+                      <label className="text-xs font-semibold text-[#F0E8D8] flex items-center gap-1.5">👤 Full Name *</label>
                       <input className={inp(errors[`m${i}name`])} type="text" placeholder="Your name"
                         value={members[i]?.name || ''}
                         onChange={e => setMembers(arr => { const a = [...arr]; a[i] = { ...a[i], name: e.target.value }; return a; })} />
                       {errors[`m${i}name`] && <span className="text-xs text-red-500">{errors[`m${i}name`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#E0EAE2] flex items-center gap-1.5">✉️ Email *</label>
+                      <label className="text-xs font-semibold text-[#F0E8D8] flex items-center gap-1.5">✉️ Email *</label>
                       <input className={inp(errors[`m${i}email`])} type="email" placeholder="name@email.com"
                         value={members[i]?.email || ''}
                         onChange={e => setMembers(arr => { const a = [...arr]; a[i] = { ...a[i], email: e.target.value }; return a; })} />
                       {errors[`m[` + i + `]email`] && <span className="text-xs text-red-500">{errors[`m${i}email`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#E0EAE2] flex items-center gap-1.5">🛠️ Role *</label>
+                      <label className="text-xs font-semibold text-[#F0E8D8] flex items-center gap-1.5">🛠️ Role *</label>
                       <select className={inp(errors[`m${i}role`])}
                         value={members[i]?.role || ''}
                         onChange={e => setMembers(arr => { const a = [...arr]; a[i] = { ...a[i], role: e.target.value }; return a; })}>
@@ -1051,7 +1051,7 @@ function RegModal({ onClose }) {
                       {errors[`m${i}role`] && <span className="text-[.7rem] text-red-500">{errors[`m${i}role`]}</span>}
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-xs font-semibold text-[#E0EAE2] flex items-center gap-1.5">🔗 Portfolio <span className="normal-case font-normal opacity-50">(optional)</span></label>
+                      <label className="text-xs font-semibold text-[#F0E8D8] flex items-center gap-1.5">🔗 Portfolio <span className="normal-case font-normal opacity-50">(optional)</span></label>
                       <input className={inp(false)} type="url" placeholder="https://github.com/username"
                         value={members[i]?.github || ''}
                         onChange={e => setMembers(arr => { const a = [...arr]; a[i] = { ...a[i], github: e.target.value }; return a; })} />
@@ -1066,7 +1066,7 @@ function RegModal({ onClose }) {
           {step === 3 && (
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-semibold text-[#E0EAE2] flex items-center gap-1.5">💡 Project Idea <span className="normal-case font-normal opacity-50">(brief summary)</span></label>
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">💡 Project Idea <span className="normal-case font-normal opacity-50">(brief summary)</span></label>
                 <textarea className={inp(errors.idea) + ' resize-y min-h-[110px]'}
                   placeholder="What will you build and why?"
                   value={extra.idea} onChange={e => setExtra(p => ({ ...p, idea: e.target.value }))} />
@@ -1074,7 +1074,7 @@ function RegModal({ onClose }) {
               </div>
 
               {/* Summary card */}
-              <div className="rounded-2xl border border-[#263028] bg-[#141B16] p-5">
+              <div className="rounded-2xl border border-[#1A3055] bg-[#0A1A30] p-5">
                 <p className="text-xs font-semibold tracking-wide text-[#C41E3A] flex items-center gap-1 mb-3">📝 Registration Summary</p>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
                   {[
@@ -1084,8 +1084,8 @@ function RegModal({ onClose }) {
                     ['⚡ Level', team.level],
                   ].map(([k, v]) => (
                     <div key={k}>
-                      <span className="text-[#A0AAA0]">{k}: </span>
-                      <span className="font-semibold text-[#E0EAE2]">{v}</span>
+                      <span className="text-[#C4A882]">{k}: </span>
+                      <span className="font-semibold text-[#F0E8D8]">{v}</span>
                     </div>
                   ))}
                 </div>
@@ -1096,13 +1096,13 @@ function RegModal({ onClose }) {
                 {[{ key: 'terms', label: <>I agree to the <a href="#" className="underline text-[#C41E3A] hover:text-[#EF4444]" onClick={e => e.stopPropagation()}>Terms & Conditions</a> of Hackcurity 2026.</> },
                 { key: 'conduct', label: <>I agree to uphold the <a href="#" className="underline text-[#C41E3A] hover:text-[#EF4444]" onClick={e => e.stopPropagation()}>Code of Conduct</a> throughout the event.</> }].map(({ key, label }) => (
                   <label key={key} className="flex items-start gap-3 cursor-pointer group">
-                    <span className={`mt-[2px] flex-shrink-0 w-5 h-5 rounded-[6px] border-[1.5px] flex items-center justify-center transition-all duration-150 ${extra[key] ? 'bg-[#C41E3A] border-[#C41E3A] text-[#ffffff]' : 'bg-[#141B16] border-[#263028] text-transparent group-hover:border-[#C41E3A]'
+                    <span className={`mt-[2px] flex-shrink-0 w-5 h-5 rounded-[6px] border-[1.5px] flex items-center justify-center transition-all duration-150 ${extra[key] ? 'bg-[#C41E3A] border-[#C41E3A] text-[#ffffff]' : 'bg-[#0A1A30] border-[#1A3055] text-transparent group-hover:border-[#C41E3A]'
                       }` + (errors[key] ? ' !border-red-500' : '')}>
                       {extra[key] && <ICheck s={11} />}
                     </span>
                     <input type="checkbox" className="sr-only" checked={extra[key]}
                       onChange={e => setExtra(p => ({ ...p, [key]: e.target.checked }))} />
-                    <span className="text-sm text-[#A0AAA0] leading-relaxed">{label}</span>
+                    <span className="text-sm text-[#C4A882] leading-relaxed">{label}</span>
                   </label>
                 ))}
                 {(errors.terms || errors.conduct) && (
@@ -1116,12 +1116,12 @@ function RegModal({ onClose }) {
           {step === 'done' && (
             <div className="flex flex-col items-center text-center py-8 gap-5">
               <div className="w-20 h-20 rounded-full bg-[#C41E3A] flex items-center justify-center shadow-2xl shadow-red-950/30">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#080C0A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#040E1A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold tracking-tight text-[#E0EAE2] mb-2">🎉 You're in, {members[0]?.name || 'Hacker'}!</h3>
-                <p className="text-[#A0AAA0] leading-relaxed max-w-sm">
-                  Team <strong className="text-[#E0EAE2]">{team.name}</strong> registered for <strong className="text-[#E0EAE2]">{getTrackEmoji(team.track)} {team.track}</strong>.
+                <h3 className="text-2xl font-semibold tracking-tight text-[#F0E8D8] mb-2">🎉 You're in, {members[0]?.name || 'Hacker'}!</h3>
+                <p className="text-[#C4A882] leading-relaxed max-w-sm">
+                  Team <strong className="text-[#F0E8D8]">{team.name}</strong> registered for <strong className="text-[#F0E8D8]">{getTrackEmoji(team.track)} {team.track}</strong>.
                   Confirmation email sent to all members.
                 </p>
               </div>
@@ -1131,9 +1131,9 @@ function RegModal({ onClose }) {
                   { v: '48h', l: 'Duration' },
                   { v: '$' + ['5,000', '8,000', '10,000', '6,000', '4,000', '3,000'][TRACKS_LIST.indexOf(team.track)] || '5,000', l: 'Track Prize' },
                 ].map(({ v, l }) => (
-                  <div key={l} className="rounded-xl border border-[#263028] bg-[#141B16] py-3 px-2 text-center">
-                    <div className="text-lg font-bold text-[#E0EAE2]">{v}</div>
-                    <div className="text-xs font-medium text-[#A0AAA0] tracking-wide">{l}</div>
+                  <div key={l} className="rounded-xl border border-[#1A3055] bg-[#0A1A30] py-3 px-2 text-center">
+                    <div className="text-lg font-bold text-[#F0E8D8]">{v}</div>
+                    <div className="text-xs font-medium text-[#C4A882] tracking-wide">{l}</div>
                   </div>
                 ))}
               </div>
@@ -1147,14 +1147,14 @@ function RegModal({ onClose }) {
 
         {/* Footer / nav */}
         {step !== 'done' && (
-          <div className="px-8 py-5 border-t border-[#263028] flex items-center justify-between flex-shrink-0 bg-[#141B16]">
-            <span className="text-xs text-[#A0AAA0]">
+          <div className="px-8 py-5 border-t border-[#1A3055] flex items-center justify-between flex-shrink-0 bg-[#0A1A30]">
+            <span className="text-xs text-[#C4A882]">
               Step {step} of {STEPS.length}
             </span>
             <div className="flex items-center gap-3">
               {step > 1 && (
                 <button onClick={back}
-                  className="px-5 py-2.5 rounded-lg text-sm font-medium text-[#E0EAE2] border border-[#263028] bg-[#141B16] hover:bg-[#1A2420] transition-colors">
+                  className="px-5 py-2.5 rounded-lg text-sm font-medium text-[#F0E8D8] border border-[#1A3055] bg-[#0A1A30] hover:bg-[#0D2040] transition-colors">
                   Back
                 </button>
               )}
@@ -1177,7 +1177,7 @@ function RegModal({ onClose }) {
 function CTASection({ onRegister }) {
   const magRef = useMagnetic(0.4);
   return (
-    <section id="cta-section" className="bg-[#080C0A] border-t border-[#263028] py-24 px-6">
+    <section id="cta-section" className="bg-[#040E1A] border-t border-[#1A3055] py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
           <div>
@@ -1193,11 +1193,11 @@ function CTASection({ onRegister }) {
             <div className="flex items-center gap-3 mt-6">
               <div className="flex -space-x-2">
                 {['#C41E3A', '#EF4444', '#991B1B', '#7F1D1D', '#B91C1C'].map((c, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#080C0A] flex items-center justify-center text-[#ffffff] text-xs font-bold flex-shrink-0"
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#040E1A] flex items-center justify-center text-[#ffffff] text-xs font-bold flex-shrink-0"
                     style={{ background: c }}>{'ABCDE'[i]}</div>
                 ))}
               </div>
-              <p className="text-sm text-[#A0AAA0]"><strong className="text-[#E0EAE2]">347</strong> teams registered · <strong className="text-[#E0EAE2]">153</strong> spots left</p>
+              <p className="text-sm text-[#C4A882]"><strong className="text-[#F0E8D8]">347</strong> teams registered · <strong className="text-[#F0E8D8]">153</strong> spots left</p>
             </div>
           </div>
           <div>
@@ -1205,7 +1205,7 @@ function CTASection({ onRegister }) {
               <div className="w-5 h-[2px] rounded bg-[#C41E3A]" />
               <span className="text-sm font-semibold tracking-wide text-[#C41E3A]">Contact Us</span>
             </div>
-            <h2 className="text-2xl font-semibold tracking-tight text-[#E0EAE2] mb-6">Get in Touch</h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-[#F0E8D8] mb-6">Get in Touch</h2>
             <ContactForm />
           </div>
         </div>
@@ -1219,14 +1219,14 @@ function CTASection({ onRegister }) {
  ══════════════════════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer className="bg-[#0F1511] border-t border-[#263028] py-8 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[#A0AAA0]">
-        <div className="flex items-center gap-2 font-semibold text-[#E0EAE2]">
-          Hackcurity <span className="text-[#A0AAA0] font-normal text-base">&times; 2026</span>
+    <footer className="bg-[#071428] border-t border-[#1A3055] py-8 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[#C4A882]">
+        <div className="flex items-center gap-2 font-semibold text-[#F0E8D8]">
+          Hackcurity <span className="text-[#C4A882] font-normal text-base">&times; 2026</span>
         </div>
         <div className="flex items-center gap-6">
           {['Privacy', 'Terms', 'Contact'].map(l => (
-            <a key={l} href="#" className="hover:text-[#E0EAE2] transition-colors">{l}</a>
+            <a key={l} href="#" className="hover:text-[#F0E8D8] transition-colors">{l}</a>
           ))}
         </div>
         <span>&copy; 2026 All rights reserved.</span>
@@ -1241,7 +1241,7 @@ function Footer() {
 function App() {
   const [regOpen, setRegOpen] = useState(false);
   return (
-    <div className="relative bg-[#080C0A] text-[#E0EAE2] font-sans selection:bg-[#1A4530] selection:text-[#E0EAE2] antialiased overflow-x-hidden flex flex-col lg:block lg:min-h-screen">
+    <div className="relative bg-[#040E1A] text-[#F0E8D8] font-sans selection:bg-[#0D2040] selection:text-[#F0E8D8] antialiased overflow-x-hidden flex flex-col lg:block lg:min-h-screen">
       <Navbar />
       <div className="lg:relative lg:min-h-screen">
         <BackgroundVideo />

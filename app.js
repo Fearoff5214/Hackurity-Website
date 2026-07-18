@@ -545,14 +545,13 @@ function TracksSection() {
    TIMELINE
  ══════════════════════════════════════════════════════════ */
 const TL = [
-  { ph: '01', c: '#C41E3A', l: '📝 Registration Opens', d: 'July 1, 2026', t: 'Sign up solo or as a team of up to 4. Early registrants receive a Hackcurity swag kit.' },
-  { ph: '02', c: '#A31B0C', l: '🔓 Problem Statements Released', d: 'July 15, 2026', t: 'All five challenge tracks go live. Study the briefs and start planning your approach.' },
-  { ph: '03', c: '#8B0000', l: '💬 Mentor Office Hours Begin', d: 'July 22, 2026', t: 'Weekly 1:1 sessions with industry mentors. Get feedback before the hackathon starts.' },
-  { ph: '04', c: '#C41E3A', l: '🚀 48-Hour Hackathon Kicks Off', d: 'Aug 2, 2026 — 09:00 IST', t: 'The clock starts. Build, break, defend. Mentors available around the clock.' },
-  { ph: '05', c: '#A31B0C', l: '🔒 Final Submissions Locked', d: 'Aug 4, 2026 — 09:00 IST', t: 'All code repositories freeze. Prepare your 5-minute demo pitch for the judges.' },
-  { ph: '06', c: '#8B0000', l: '🏆 Awards & Closing Ceremony', d: 'August 5, 2026', t: 'Winners announced live. $25,000 distributed across five tracks. See you on stage!' },
+  { ph: '01', c: '#C4A882', l: '📝 Registration Opens', d: 'July 1, 2026', t: 'Sign up solo or as a team of up to 4. Early registrants receive a Hackcurity swag kit.' },
+  { ph: '02', c: '#C4A882', l: '🔓 Problem Statements Released', d: 'July 15, 2026', t: 'All five challenge tracks go live. Study the briefs and start planning your approach.' },
+  { ph: '03', c: '#C4A882', l: '💬 Mentor Office Hours Begin', d: 'July 22, 2026', t: 'Weekly 1:1 sessions with industry mentors. Get feedback before the hackathon starts.' },
+  { ph: '04', c: '#C4A882', l: '🚀 48-Hour Hackathon Kicks Off', d: 'Aug 2, 2026 — 09:00 IST', t: 'The clock starts. Build, break, defend. Mentors available around the clock.' },
+  { ph: '05', c: '#C4A882', l: '🔒 Final Submissions Locked', d: 'Aug 4, 2026 — 09:00 IST', t: 'All code repositories freeze. Prepare your 5-minute demo pitch for the judges.' },
+  { ph: '06', c: '#C4A882', l: '🏆 Awards & Closing Ceremony', d: 'August 5, 2026', t: 'Winners announced live. $25,000 distributed across five tracks. See you on stage!' },
 ];
-
 function TLItem({ item, delay }) {
   const [ref, vis] = useInView();
   const tiltRef = useTilt(4);
@@ -601,12 +600,11 @@ function TimelineSection() {
    JUDGES
  ══════════════════════════════════════════════════════════ */
 const JUDGES = [
-  { n: 'Priya Raman', r: 'Head of Security Research', o: 'CipherCore', I: IEye, c: '#C41E3A' },
-  { n: 'Ankit Mehta', r: 'Principal Red Team Engineer', o: 'NullByte Labs', I: ISkull, c: '#A31B0C' },
-  { n: 'Sofia Chen', r: 'AI Safety Researcher', o: 'DeepGuard AI', I: IBrain, c: '#EF4444' },
-  { n: 'Marcus Webb', r: 'CISO', o: 'VaultSec', I: IShieldCheck, c: '#7F1D1D' },
-  { n: 'Dev Kapoor', r: 'Cryptography Engineer', o: 'Enclave.io', I: IFingerprint, c: '#B91C1C' },
-  { n: 'Yuki Tanaka', r: 'Penetration Tester', o: 'RedThread', I: IBug, c: '#DC2626' },
+  { n: 'Priya Raman', r: 'Head of Security Research', o: 'CipherCore', I: IEye, c: '#0A1A30' },
+  { n: 'Ankit Mehta', r: 'Principal Red Team Engineer', o: 'NullByte Labs', I: ISkull, c: '#0A1A30' },
+  { n: 'Sofia Chen', r: 'AI Safety Researcher', o: 'DeepGuard AI', I: IBrain, c: '#0A1A30' },
+  { n: 'Marcus Webb', r: 'CISO', o: 'VaultSec', I: IShieldCheck, c: '#0A1A30' },
+  { n: 'Dev Kapoor', r: 'Cryptography Engineer', o: 'Enclave.io', I: IFingerprint, c: '#0A1A30' },
 ];
 
 function JudgeCard({ j, delay }) {

@@ -1169,10 +1169,295 @@ function RegModal({ onClose }) {
   );
 }
 
+
+/* ══════════════════════════════════════════════════════════
+   SPONSOR MODAL  (choice → brochure | inquiry | sponsor-now)
+ ══════════════════════════════════════════════════════════ */
+// >>> Replace with your brochure PDF URL <<<
+const SPONSOR_BROCHURE_URL = 'https://revaedu-my.sharepoint.com/personal/23020300915_reva_edu_in/Documents/Hackurity2026/DOC-20260415-WA0013..pdf';
+
+const SPONSOR_TIERS = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+
+function SponsorModal({ onClose }) {
+  // view: 'choice' | 'inquiry' | 'sponsor' | 'done'
+  const [view, setView] = useState('choice');
+  const [doneKind, setDoneKind] = useState('');  // 'inquiry' | 'sponsor'
+  const [errors, setErrs] = useState({});
+
+  // Inquiry form state
+  const [inq, setInq] = useState({ company: '', person: '', email: '', phone: '', message: '' });
+
+  // Sponsor-now form state
+  const [spo, setSpo] = useState({ email: '', phone: '', previous: '', tier: '' });
+
+  const inp = (err) =>
+    `w-full border-[1.5px] ${err ? 'border-red-500' : 'border-[#1A3055]'} rounded-[10px] px-4 py-[10px] text-[.9rem] font-[inherit] text-[#F0E8D8] bg-[#0A1A30] focus:outline-none focus:border-[#C41E3A] focus:bg-[#0D2040] transition-all duration-200`;
+
+  useEffect(() => {
+    const fn = e => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', fn);
+    return () => document.removeEventListener('keydown', fn);
+  }, []);
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  function validateInquiry() {
+    const e = {};
+    if (!inq.company.trim()) e.company = 'Company name is required.';
+    if (!inq.person.trim()) e.person = 'Contact person is required.';
+    if (!inq.email.trim()) e.email = 'Email is required.';
+    else if (!/^[^@]+@[^@]+\.[^@]+$/.test(inq.email)) e.email = 'Valid email required.';
+    if (!inq.phone.trim()) e.phone = 'Phone is required.';
+    if (!inq.message.trim()) e.message = 'Please share a brief message.';
+    setErrs(e);
+    return Object.keys(e).length === 0;
+  }
+  function validateSponsor() {
+    const e = {};
+    if (!spo.email.trim()) e.email = 'Email is required.';
+    else if (!/^[^@]+@[^@]+\.[^@]+$/.test(spo.email)) e.email = 'Valid email required.';
+    if (!spo.phone.trim()) e.phone = 'Phone number is required.';
+    if (!spo.tier) e.tier = 'Select a sponsorship tier.';
+    setErrs(e);
+    return Object.keys(e).length === 0;
+  }
+
+  function submit() {
+    if (view === 'inquiry') {
+      if (!validateInquiry()) return;
+      setDoneKind('inquiry'); setView('done');
+    } else if (view === 'sponsor') {
+      if (!validateSponsor()) return;
+      setDoneKind('sponsor'); setView('done');
+    }
+  }
+  function back() { setErrs({}); setView('choice'); }
+
+  const headerTitle =
+    view === 'choice' ? 'Become a Sponsor' :
+    view === 'inquiry' ? 'Sponsor Inquiry' :
+    view === 'sponsor' ? 'Sponsor Now' :
+    'Thank you! 🎉';
+
+  const headerSub =
+    view === 'choice' ? 'Partner with Hackcurity 2026 · Reach 500+ hackers, Get Brand Visibility & Direct Student Engagement.' :
+    view === 'inquiry' ? 'Tell us about your organization — we\'ll get back within 48 hours' :
+    view === 'sponsor' ? 'Share a few details and our sponsorship team will finalize your package' :
+    '';
+
+  return (
+    <div
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,.65)', backdropFilter: 'blur(6px)' }}
+      onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+
+      <div className="relative bg-[#071428] border border-[#1A3055] w-full max-w-2xl rounded-[24px] shadow-2xl overflow-hidden"
+        style={{ maxHeight: '92vh', display: 'flex', flexDirection: 'column' }}>
+
+        {/* Header */}
+        <div className="px-8 pt-8 pb-6 border-b border-[#1A3055] flex-shrink-0">
+          <div className="flex items-start justify-between mb-2">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-4 h-[2px] rounded bg-[#C41E3A]" />
+                <span className="text-xs font-semibold tracking-wide text-[#C41E3A]">Hackcurity 2026</span>
+              </div>
+              <h2 className="text-2xl font-semibold tracking-tight text-[#F0E8D8]">{headerTitle}</h2>
+              {headerSub && <p className="text-sm text-[#C4A882] mt-1">{headerSub}</p>}
+            </div>
+            <button onClick={onClose} aria-label="Close"
+              className="w-9 h-9 rounded-full flex items-center justify-center border border-[#1A3055] bg-[#0A1A30] hover:bg-[#0D2040] transition-colors flex-shrink-0 mt-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8896A" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="flex-1 overflow-y-auto px-8 py-6">
+          {view === 'choice' && (
+            <div className="flex flex-col gap-4">
+              <p className="text-sm text-[#C4A882] leading-relaxed">
+                Choose how you'd like to move forward. You can review our full sponsorship brochure, send us an inquiry, or lock in your sponsorship today.
+              </p>
+
+              {/* 1) Brochure */}
+              <a href={SPONSOR_BROCHURE_URL} target="_blank" rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-4 rounded-[16px] border border-[#1A3055] bg-[#0A1A30] hover:border-[#C41E3A] hover:bg-[#0D2040] transition-all duration-200 p-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[#C41E3A] text-[#ffffff] text-lg flex-shrink-0">📄</div>
+                  <div>
+                    <div className="text-sm font-bold text-[#F0E8D8]">Sponsorship Brochure</div>
+                    <div className="text-xs text-[#C4A882] mt-0.5">Download the full deck — tiers, deliverables & audience metrics.</div>
+                  </div>
+                </div>
+                <IArrow s={16} />
+              </a>
+
+              {/* 2) Inquiry */}
+              <button type="button" onClick={() => { setErrs({}); setView('inquiry'); }}
+                className="group flex items-center justify-between gap-4 rounded-[16px] border border-[#1A3055] bg-[#0A1A30] hover:border-[#C41E3A] hover:bg-[#0D2040] transition-all duration-200 p-5 text-left">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[#EF4444] text-[#ffffff] text-lg flex-shrink-0">✉️</div>
+                  <div>
+                    <div className="text-sm font-bold text-[#F0E8D8]">Sponsor Inquiry Form</div>
+                    <div className="text-xs text-[#C4A882] mt-0.5">Have questions? Send us a note and our team will reach out.</div>
+                  </div>
+                </div>
+                <IArrow s={16} />
+              </button>
+
+              {/* 3) Sponsor Now */}
+              <button type="button" onClick={() => { setErrs({}); setView('sponsor'); }}
+                className="group flex items-center justify-between gap-4 rounded-[16px] border border-[#C41E3A] bg-[#C41E3A] hover:bg-[#EF4444] transition-all duration-200 p-5 text-left shadow-md">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center bg-[#040E1A] text-[#ffffff] text-lg flex-shrink-0">🚀</div>
+                  <div>
+                    <div className="text-sm font-bold text-[#ffffff]">Sponsor Now</div>
+                    <div className="text-xs text-[#F0E8D8]/90 mt-0.5">Pick a tier and confirm your sponsorship today.</div>
+                  </div>
+                </div>
+                <span className="text-[#ffffff]"><IArrow s={16} /></span>
+              </button>
+            </div>
+          )}
+
+          {view === 'inquiry' && (
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🏢 Company Name *</label>
+                  <input className={inp(errors.company)} type="text" placeholder="Acme Corp"
+                    value={inq.company} onChange={e => setInq(p => ({ ...p, company: e.target.value }))} />
+                  {errors.company && <span className="text-xs text-red-500">{errors.company}</span>}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">👤 Contact Person *</label>
+                  <input className={inp(errors.person)} type="text" placeholder="Full name"
+                    value={inq.person} onChange={e => setInq(p => ({ ...p, person: e.target.value }))} />
+                  {errors.person && <span className="text-xs text-red-500">{errors.person}</span>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">✉️ Email *</label>
+                  <input className={inp(errors.email)} type="email" placeholder="name@company.com"
+                    value={inq.email} onChange={e => setInq(p => ({ ...p, email: e.target.value }))} />
+                  {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">📞 Phone *</label>
+                  <input className={inp(errors.phone)} type="tel" placeholder="+91 000 000 0000"
+                    value={inq.phone} onChange={e => setInq(p => ({ ...p, phone: e.target.value }))} />
+                  {errors.phone && <span className="text-xs text-red-500">{errors.phone}</span>}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">💬 Message *</label>
+                <textarea className={inp(errors.message) + ' resize-y min-h-[110px]'}
+                  placeholder="Tell us about your sponsorship goals…"
+                  value={inq.message} onChange={e => setInq(p => ({ ...p, message: e.target.value }))} />
+                {errors.message && <span className="text-xs text-red-500">{errors.message}</span>}
+              </div>
+            </div>
+          )}
+
+          {view === 'sponsor' && (
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">✉️ Email *</label>
+                  <input className={inp(errors.email)} type="email" placeholder="name@company.com"
+                    value={spo.email} onChange={e => setSpo(p => ({ ...p, email: e.target.value }))} />
+                  {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">📞 Phone Number *</label>
+                  <input className={inp(errors.phone)} type="tel" placeholder="+91 000 000 0000"
+                    value={spo.phone} onChange={e => setSpo(p => ({ ...p, phone: e.target.value }))} />
+                  {errors.phone && <span className="text-xs text-red-500">{errors.phone}</span>}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🤝 Previous / Current Sponsors <span className="normal-case font-normal opacity-50">(if any)</span></label>
+                <textarea className={inp(false) + ' resize-y min-h-[90px]'}
+                  placeholder="e.g. Acme Corp (2024), Globex (2025)…"
+                  value={spo.previous} onChange={e => setSpo(p => ({ ...p, previous: e.target.value }))} />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm font-semibold text-[#F0E8D8] flex items-center gap-1.5">🏆 Sponsorship Tier *</label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {SPONSOR_TIERS.map(t => (
+                    <button key={t} type="button" onClick={() => setSpo(p => ({ ...p, tier: t }))}
+                      className={`py-2 px-3 rounded-[10px] text-sm font-medium border transition-all duration-150 text-center ${spo.tier === t
+                        ? 'bg-[#C41E3A] text-[#ffffff] border-[#C41E3A] font-bold shadow-md'
+                        : 'bg-[#0A1A30] text-[#F0E8D8] border-[#1A3055] hover:border-[#C41E3A]'
+                        }`}>{t}</button>
+                  ))}
+                </div>
+                {errors.tier && <span className="text-[.72rem] text-red-500">{errors.tier}</span>}
+              </div>
+
+              <div className="flex items-start gap-3 bg-[#0A1A30] border border-[#1A3055] rounded-2xl px-4 py-3 mt-1">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" strokeWidth="2" strokeLinecap="round" style={{ marginTop: 1, flexShrink: 0 }}><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                <p className="text-sm text-[#C4A882] leading-relaxed">
+                  Our sponsorship team will confirm tier deliverables & invoicing within <strong className="text-[#F0E8D8]">48 hours</strong>.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {view === 'done' && (
+            <div className="flex flex-col items-center text-center py-8 gap-5">
+              <div className="w-20 h-20 rounded-full bg-[#C41E3A] flex items-center justify-center shadow-2xl shadow-red-950/30">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#040E1A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>
+              </div>
+              <div>
+                <h3 className="text-2xl font-semibold tracking-tight text-[#F0E8D8] mb-2">
+                  {doneKind === 'inquiry' ? 'Inquiry received!' : 'Sponsorship request received!'}
+                </h3>
+                <p className="text-[#C4A882] leading-relaxed max-w-sm">
+                  {doneKind === 'inquiry'
+                    ? <>Thanks <strong className="text-[#F0E8D8]">{inq.person || 'partner'}</strong>. Our sponsorship team will reach out to <strong className="text-[#F0E8D8]">{inq.email}</strong> shortly.</>
+                    : <>Thanks! We've locked in your interest at the <strong className="text-[#F0E8D8]">{spo.tier}</strong> tier and will contact <strong className="text-[#F0E8D8]">{spo.email}</strong> to finalize details.</>}
+                </p>
+              </div>
+              <button onClick={onClose}
+                className="mt-2 bg-[#C41E3A] text-[#ffffff] px-7 py-3 rounded-lg font-bold text-sm hover:shadow-lg hover:bg-[#EF4444] transition-all shadow-md">
+                Close
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Footer / nav */}
+        {(view === 'inquiry' || view === 'sponsor') && (
+          <div className="px-8 py-5 border-t border-[#1A3055] flex items-center justify-between flex-shrink-0 bg-[#0A1A30]">
+            <button onClick={back}
+              className="px-5 py-2.5 rounded-lg text-sm font-medium text-[#F0E8D8] border border-[#1A3055] bg-[#0A1A30] hover:bg-[#0D2040] transition-colors">
+              Back
+            </button>
+            <motion.button onClick={submit} whileHover={{ scale: 1.02 }} whileTap={{ scale: .98 }}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold bg-[#C41E3A] text-[#ffffff] hover:shadow-lg hover:bg-[#EF4444] transition-all shadow-md">
+              {view === 'inquiry' ? 'Send Inquiry' : 'Confirm Sponsorship'}
+              <IArrow s={15} />
+            </motion.button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════
    CTA SECTION
  ══════════════════════════════════════════════════════════ */
-function CTASection({ onRegister }) {
+function CTASection({ onRegister, onSponsor }) {
   const magRef = useMagnetic(0.4);
   return (
     <section id="cta-section" className="bg-[#040E1A] border-t border-[#1A3055] py-24 px-6">
@@ -1181,12 +1466,18 @@ function CTASection({ onRegister }) {
           <div>
             <SectionHeader tag="Registration" h2={<>Join the Event</>}
               sub="Open to students, professionals, and researchers worldwide. Sign up free while spots are available." />
-            <span ref={magRef} className="mt-8 inline-block">
-              <motion.button onClick={onRegister} whileHover={{ scale: 1.03 }} whileTap={{ scale: .97 }} id="btn-register"
-                className="inline-flex items-center gap-2 bg-[#C41E3A] text-[#ffffff] px-7 py-3.5 rounded-lg text-base font-bold tracking-tight shadow-lg hover:shadow-xl hover:bg-[#EF4444] transition-all">
-                Register Now <IArrow s={16} />
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <span ref={magRef} className="inline-block">
+                <motion.button onClick={onRegister} whileHover={{ scale: 1.03 }} whileTap={{ scale: .97 }} id="btn-register"
+                  className="inline-flex items-center gap-2 bg-[#C41E3A] text-[#ffffff] px-7 py-3.5 rounded-lg text-base font-bold tracking-tight shadow-lg hover:shadow-xl hover:bg-[#EF4444] transition-all">
+                  Register Now <IArrow s={16} />
+                </motion.button>
+              </span>
+              <motion.button onClick={onSponsor} whileHover={{ scale: 1.03 }} whileTap={{ scale: .97 }} id="btn-sponsor"
+                className="inline-flex items-center gap-2 bg-transparent text-[#F0E8D8] border-[1.5px] border-[#C41E3A] px-7 py-3.5 rounded-lg text-base font-bold tracking-tight hover:bg-[#0D2040] hover:border-[#EF4444] transition-all">
+                Become a Sponsor <IArrow s={16} />
               </motion.button>
-            </span>
+            </div>
             {/* Social proof */}
             <div className="flex items-center gap-3 mt-6">
               <div className="flex -space-x-2">
@@ -1238,6 +1529,7 @@ function Footer() {
  ══════════════════════════════════════════════════════════ */
 function App() {
   const [regOpen, setRegOpen] = useState(false);
+  const [sponsorOpen, setSponsorOpen] = useState(false);
   return (
     <div className="relative bg-[#040E1A] text-[#F0E8D8] font-sans selection:bg-[#0D2040] selection:text-[#F0E8D8] antialiased overflow-x-hidden flex flex-col lg:block lg:min-h-screen">
       <Navbar />
@@ -1250,9 +1542,10 @@ function App() {
       <TimelineSection />
       <JudgesSection />
       <SponsorsSection />
-      <CTASection onRegister={() => setRegOpen(true)} />
+      <CTASection onRegister={() => setRegOpen(true)} onSponsor={() => setSponsorOpen(true)} />
       <Footer />
       {regOpen && <RegModal onClose={() => setRegOpen(false)} />}
+      {sponsorOpen && <SponsorModal onClose={() => setSponsorOpen(false)} />}
     </div>
   );
 }

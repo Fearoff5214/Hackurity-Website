@@ -1174,7 +1174,7 @@ function RegModal({ onClose }) {
    SPONSOR MODAL  (choice → brochure | inquiry | sponsor-now)
  ══════════════════════════════════════════════════════════ */
 // >>> Replace with your brochure PDF URL <<<
-const SPONSOR_BROCHURE_URL = 'https://revaedu-my.sharepoint.com/personal/23020300915_reva_edu_in/Documents/Hackurity2026/DOC-20260415-WA0013..pdf';
+const SPONSOR_BROCHURE_URL = 'https://drive.google.com/file/d/1SJcJpz-M5R4wPFpblXslNkSZS_JIQPre/view?usp=sharing';
 
 const SPONSOR_TIERS = ['Bronze', 'Silver', 'Gold', 'Platinum'];
 

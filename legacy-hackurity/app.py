@@ -6,12 +6,7 @@ import os
 import time
 
 PORT = 8000
-BASE_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
-
-# Check if Next.js static export exists, serve that instead of root
-DIRECTORY = os.path.join(BASE_DIRECTORY, "out")
-if not os.path.exists(DIRECTORY) or not os.path.isdir(DIRECTORY):
-    DIRECTORY = BASE_DIRECTORY
+DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 # Configure MIME types to prevent browser blocking due to strict MIME type checking
 MIME_MAP = {
@@ -51,15 +46,8 @@ server_thread = None
 is_running = False
 
 def start_server(port):
-    global server, server_thread, is_running, DIRECTORY
+    global server, server_thread, is_running
     
-    # Recalculate directory in case out/ was built after starting script
-    out_dir = os.path.join(BASE_DIRECTORY, "out")
-    if os.path.exists(out_dir) and os.path.isdir(out_dir):
-        DIRECTORY = out_dir
-    else:
-        DIRECTORY = BASE_DIRECTORY
-
     current_port = port
     max_tries = 20
     
@@ -100,7 +88,7 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     
     print("=" * 60)
-    print("      CYBERPUNK LAB INTERFACE — SERVER CONTROL CENTER")
+    print("      HACKCURITY 2026 — SERVER CONTROL CENTER")
     print("=" * 60)
     print("Controls:")
     print("  start   : Start the web server")
@@ -140,7 +128,6 @@ def main():
             elif cmd == "status":
                 if is_running:
                     print(f"[STATUS] ACTIVE - Running on http://localhost:{server.server_address[1]}/")
-                    print(f"[DIRECTORY] Serving from: {DIRECTORY}")
                 else:
                     print("[STATUS] INACTIVE - Web server is stopped.")
                     

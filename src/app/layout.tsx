@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OPERATION // ZERO_DAY — Global Cybersecurity Hackathon",
+  title: "OPERATION // HACKURITY — National Cybersecurity Hackathon",
   description: "Futuristic cybersecurity hackathon and Capture The Flag (CTF) infiltration interface.",
 };
 

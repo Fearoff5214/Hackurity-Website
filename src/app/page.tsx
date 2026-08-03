@@ -11,6 +11,8 @@ import {
   SimulatedLoadingBar, 
   TechTable 
 } from "@/components/TechElements";
+import EventPathway from "@/components/EventPathway";
+import EvaluationPanel from "@/components/EvaluationPanel";
 
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
@@ -40,6 +42,18 @@ const ReactorCore = dynamic(() => import("@/components/ReactorCore"), {
   )
 });
 
+// ============= OPERATIONAL DOMAIN REGISTRY (08 NODES) =============
+const DOMAINS = [
+  { code: "TRK-01", name: "AI Security", brief: "Adversarial robustness, model exfiltration and prompt-layer defence for deployed intelligence." },
+  { code: "TRK-02", name: "Cloud Security", brief: "Misconfigured tenancy, IAM privilege drift and container escape across hostile cloud estates." },
+  { code: "TRK-03", name: "Cryptography", brief: "Cipher weakness, key custody and protocol-level trust under post-quantum pressure." },
+  { code: "TRK-04", name: "Reverse Engineering", brief: "Binary teardown, firmware unpacking and obfuscation stripping on unknown payloads." },
+  { code: "TRK-05", name: "Digital Forensics", brief: "Artifact recovery, memory imaging and incident reconstruction from cold evidence." },
+  { code: "TRK-06", name: "Network Defense", brief: "Perimeter telemetry, intrusion detection and live traffic triage under sustained load." },
+  { code: "TRK-07", name: "Secure Software", brief: "Supply-chain integrity, secure-by-default build pipelines and hardened application logic." },
+  { code: "TRK-08", name: "Open Innovation", brief: "Unclassified sector — any defensive construct that proves itself against a real threat model." },
+];
+
 export default function Home() {
   const [currentSection, setCurrentSection] = useState("MISSION_BRIEF");
   const [chamberStatus, setChamberStatus] = useState("STABLE");
@@ -47,7 +61,7 @@ export default function Home() {
   // Registration states
   const [teamName, setTeamName] = useState("");
   const [captainEmail, setCaptainEmail] = useState("");
-  const [selectedDomain, setSelectedDomain] = useState("Domain 1");
+  const [selectedDomain, setSelectedDomain] = useState(`${DOMAINS[0].code} :: ${DOMAINS[0].name}`);
   const [registrationStatus, setRegistrationStatus] = useState<"IDLE" | "INJECTING" | "SUCCESS">("IDLE");
   const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
   
@@ -55,6 +69,8 @@ export default function Home() {
   const navLinks = [
     { name: "MISSION_BRIEF", href: "#mission_brief" },
     { name: "CTF_CHALLENGES", href: "#ctf_challenges" },
+    { name: "EVENT_PATHWAY", href: "#event_pathway" },
+    { name: "EVAL_PANEL", href: "#eval_panel" },
     { name: "LEADERBOARD", href: "#leaderboard" },
     { name: "JOIN_NODE", href: "#join_node" }
   ];
@@ -93,7 +109,7 @@ export default function Home() {
   const resetForm = () => {
     setTeamName("");
     setCaptainEmail("");
-    setSelectedDomain("Domain 1");
+    setSelectedDomain(`${DOMAINS[0].code} :: ${DOMAINS[0].name}`);
     setRegistrationStatus("IDLE");
     setTerminalHistory([]);
   };
@@ -236,20 +252,26 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">DOMAINS</span>
-                <span className="text-[10px] text-cyber-gray tracking-widest font-bold">RELEASE: 2 PROBLEMS / DOMAIN</span>
+                <span className="text-[10px] text-cyber-gray tracking-widest font-bold">08 DOMAINS // 2 PROBLEMS EACH</span>
               </div>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
-                // 02. HACKATHON DOMAINS // RULES
+                // 02. CHALLENGE DOMAINS // RULES
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                Hackurity features four dedicated operational domains. Each domain releases exactly **two problem statements** at launch. Choose your alignment wisely:
+                Eight operational domains orbit the core. Your squad claims exactly one. Each domain releases **two problem statements** at launch — select a node below and read its brief before locking alignment:
               </p>
               
-              <ul className="list-none flex flex-col gap-3 font-mono text-[11px] text-cyber-gray pl-1 mt-2">
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 1:</span> [ TBD_DOMAIN_01 ] — Exploit analysis and defensive mainframes.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 2:</span> [ TBD_DOMAIN_02 ] — Binary engineering and firmware security.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 3:</span> [ TBD_DOMAIN_03 ] — Cryptographic networks and ledger routing.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 4:</span> [ TBD_DOMAIN_04 ] — System vulnerability and threat intelligence.</li>
+              <ul className="list-none flex flex-col gap-2.5 font-mono text-[11px] text-cyber-gray pl-1 mt-2">
+                {DOMAINS.map((d, i) => (
+                  <li key={d.code} className="flex flex-col gap-0.5 border-l border-cyber-blue/15 pl-2 hover:border-cyber-tan/60 transition-colors">
+                    <div className="flex items-center gap-2">
+                      <span className="text-cyber-tan font-bold">▶ {d.code}</span>
+                      <span className="text-white uppercase tracking-wider font-bold">{d.name}</span>
+                      <span className="text-[8px] text-cyber-blue/60">[NODE_{String(i + 1).padStart(2, "0")}]</span>
+                    </div>
+                    <span className="text-[10px] text-cyber-gray/80 leading-relaxed">{d.brief}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -280,7 +302,100 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. SECTION THREE: "03. INFILTRATION LEADERBOARD" */}
+
+        {/* 4. SECTION THREE: "03. EVENT PATHWAY // OPERATION TIMELINE" */}
+        <section id="event_pathway" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+          <CornerCrosshairs />
+
+          {/* Left Column: Section brief */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-24">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">PATHWAY</span>
+              <span className="text-[10px] text-cyber-gray tracking-widest font-bold">08 SEQUENTIAL GATEWAYS</span>
+            </div>
+            <span className="text-[9px] tracking-widest text-cyber-tan font-bold uppercase font-mono">
+              // SYSTEM_SEQUENCE_NODE_03
+            </span>
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
+              03. EVENT PATHWAY <span className="text-cyber-tan">//</span> OPERATION TIMELINE
+            </h2>
+            <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+              The conduit is strictly linear. Each gateway unlocks only after the previous packet has been acknowledged — no node skips the queue. Scroll to trace the signal from first handshake to final recognition.
+            </p>
+
+            <div className="flex flex-col gap-3 mt-2">
+              <SimulatedLoadingBar value={38} label="PATHWAY SIGNAL TRACE" />
+              <div className="flex items-center justify-between text-[9px] text-cyber-blue/80 font-mono">
+                <span>SECTOR: TIMELINE_CONDUIT</span>
+                <span>STATUS: SEQUENCE LIVE</span>
+              </div>
+            </div>
+
+            <div className="font-mono text-[10px] text-cyber-tan/60 flex flex-col gap-1 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-2 mt-2">
+              <div>BREACH_WINDOW: 20 — 22 FEB 2026</div>
+              <div>DURATION: 48 HOURS CONTINUOUS</div>
+              <div>SQUAD_SIZE: 2 — 4 OPERATORS</div>
+            </div>
+          </div>
+
+          {/* Right Column: Animated pathway */}
+          <div className="lg:col-span-8 relative">
+            <div className="absolute -top-2 right-0 text-[8px] text-cyber-gray font-mono z-10">
+              SYS.MODULE: EVENT_PATHWAY_SEQUENCER
+            </div>
+            <div className="pt-4">
+              <EventPathway />
+            </div>
+          </div>
+        </section>
+
+        {/* 5. SECTION FOUR: "04. EVALUATION PANEL // MENTOR & JUDGE GRID" */}
+        <section id="eval_panel" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/10 relative">
+          <CornerCrosshairs />
+
+          {/* Left Column: Section brief */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-24">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">PANEL</span>
+              <span className="text-[10px] text-cyber-gray tracking-widest font-bold">06 REVIEW OPERATORS</span>
+            </div>
+            <span className="text-[9px] tracking-widest text-cyber-tan font-bold uppercase font-mono">
+              // SYSTEM_SEQUENCE_NODE_04
+            </span>
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
+              04. EVALUATION PANEL <span className="text-cyber-tan">//</span> MENTOR &amp; JUDGE GRID
+            </h2>
+            <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+              These are the people who will actually read your work. They come from payments infrastructure, offensive research, forensics and platform security — and they mentor on the floor before they score anything. Scoring rubrics ship alongside the problem statements.
+            </p>
+
+            <div className="flex flex-col gap-3 mt-2">
+              <SimulatedLoadingBar value={62} label="PANEL CLEARANCE SYNC" />
+              <div className="flex items-center justify-between text-[9px] text-cyber-blue/80 font-mono">
+                <span>SECTOR: REVIEW_GRID</span>
+                <span>STATUS: PANEL ONLINE</span>
+              </div>
+            </div>
+
+            <div className="font-mono text-[10px] text-cyber-tan/60 flex flex-col gap-1 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-2 mt-2">
+              <div>MENTOR_ROTATION: LIVE ACROSS 48 HRS</div>
+              <div>RUBRICS: PUBLISHED WITH BRIEFS</div>
+              <div>REVIEW_MODE: BLIND SCORING</div>
+            </div>
+          </div>
+
+          {/* Right Column: Panel grid */}
+          <div className="lg:col-span-8 relative">
+            <div className="absolute -top-2 right-0 text-[8px] text-cyber-gray font-mono z-10">
+              SYS.MODULE: EVALUATION_PANEL_REGISTRY
+            </div>
+            <div className="pt-4">
+              <EvaluationPanel />
+            </div>
+          </div>
+        </section>
+
+        {/* 6. SECTION FIVE: "05. INFILTRATION LEADERBOARD" */}
         <section id="leaderboard" className="flex flex-col gap-6 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
 
@@ -288,10 +403,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
             <div className="flex flex-col gap-1.5">
               <span className="text-[9px] tracking-widest text-cyber-tan font-bold uppercase">
-                // SYSTEM_SEQUENCE_NODE_03
+                // SYSTEM_SEQUENCE_NODE_05
               </span>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
-                03. INFILTRATION LEADERBOARD
+                05. INFILTRATION LEADERBOARD
               </h2>
             </div>
             <div className="font-mono text-[10px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
@@ -320,19 +435,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 5. SECTION FOUR: "04. JOIN NODE // REGISTRATION CONSOLE" */}
+        {/* 7. SECTION SIX: "06. JOIN NODE // REGISTRATION CONSOLE" */}
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
 
           {/* Left Column: Form Inputs */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-6">
             <div className="flex flex-col gap-4">
-              <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 04. JOIN NODE // INFILTRATION FORM</span>
+              <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 06. JOIN NODE // INFILTRATION FORM</span>
               <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase">
                 INJECT TEAM PAYLOAD
               </h2>
               <p className="font-mono text-xs text-cyber-gray leading-relaxed">
-                Fill out the team parameters to compile and inject your registration payload. Select one of the four domains (problem statements will be released soon).
+                Fill out the team parameters to compile and inject your registration payload. Select one of the eight operational domains (problem statements decrypt at launch).
               </p>
 
               <form onSubmit={handleRegister} className="flex flex-col gap-4 mt-2">
@@ -369,10 +484,9 @@ export default function Home() {
                     disabled={registrationStatus !== "IDLE"}
                     className="bg-cyber-dark border border-cyber-tan/30 px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan cursor-pointer transition-all rounded-none"
                   >
-                    <option>Domain 1</option>
-                    <option>Domain 2</option>
-                    <option>Domain 3</option>
-                    <option>Domain 4</option>
+                    {DOMAINS.map((d) => (
+                      <option key={d.code} value={`${d.code} :: ${d.name}`}>{`${d.code} :: ${d.name}`}</option>
+                    ))}
                   </select>
                 </div>
 

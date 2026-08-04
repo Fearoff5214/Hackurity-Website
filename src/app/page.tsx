@@ -417,10 +417,10 @@ export default function Home() {
                 title="TOP ATTACKING NODES LEADERBOARD"
                 headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
                 rows={[
-                  ["1ST PLACE", "TEAM_NULL_SECTOR", "SSH_BYPASS_INJECT", "1,250 PTS"],
-                  ["2ND PLACE", "TEAM_VOID_RUNNERS", "SQLX_BUFFER_EXPLOIT", "1,100 PTS"],
-                  ["3RD PLACE", "TEAM_PHANTOM_BYPASS", "OAUTH_FILTER_LEAK", "950 PTS"],
-                  ["4TH PLACE", "TEAM_STATIC_SHIELDS", "RSA_LATTICE_CRACK", "800 PTS"]
+                  ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
+                  ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
+                  ["3RD PLACE", "TBD", "TBD", "950 PTS"],
+                  ["4TH PLACE", "TBD", "TBD", "800 PTS"]
                 ]}
               />
             </div>

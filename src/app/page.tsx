@@ -45,11 +45,20 @@ export default function Home() {
   const [chamberStatus, setChamberStatus] = useState("STABLE");
 
   // Registration states
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const [registrationStep, setRegistrationStep] = useState(1);
   const [teamName, setTeamName] = useState("");
-  const [captainEmail, setCaptainEmail] = useState("");
-  const [selectedDomain, setSelectedDomain] = useState("Domain 1");
-  const [registrationStatus, setRegistrationStatus] = useState<"IDLE" | "INJECTING" | "SUCCESS">("IDLE");
-  const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
+  const [teamSize, setTeamSize] = useState("1");
+  const [university, setUniversity] = useState("");
+  const [selectedDomain, setSelectedDomain] = useState("");
+  const [experienceLevel, setExperienceLevel] = useState("");
+  const [members, setMembers] = useState([{ name: "", email: "", role: "", portfolio: "" }]);
+  const [projectIdea, setProjectIdea] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [acceptedConduct, setAcceptedConduct] = useState(false);
+  const [registrationComplete, setRegistrationComplete] = useState(false);
+  const [universityPlaceholder, setUniversityPlaceholder] = useState("");
+  const [portfolioPlaceholder, setPortfolioPlaceholder] = useState("");
   
   // Navigation Links
   const navLinks = [
@@ -91,44 +100,86 @@ export default function Home() {
     },
   ];
 
-  // Registration console injection handler
-  const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!teamName || !captainEmail) {
-      alert("SYS.ERR: Insufficient parameters. Set teamName and captainEmail.");
-      return;
-    }
+  const domainOptions = ["Domain 1", "Domain 2", "Domain 3", "Domain 4"];
+  const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];
+  // Replace these with the final public URLs (for example, /documents/terms.pdf) when the PDFs are ready.
+  const termsAndConditionsUrl = "http://127.0.0.1:5500/legacy-hackurity/index.html#";
+  const codeOfConductUrl = "http://127.0.0.1:5500/legacy-hackurity/index.html#";
 
-    setRegistrationStatus("INJECTING");
-    setTerminalHistory([
-      `guest@hackurity:~$ inject --team "${teamName}" --captain "${captainEmail}" --domain "${selectedDomain.toLowerCase().replace(/\s/g, "_")}"`
-    ]);
+  useEffect(() => {
+    const startTypingLoop = (samples: string[], setText: React.Dispatch<React.SetStateAction<string>>, speed: number) => {
+      let sampleIndex = 0;
+      let characterIndex = 0;
+      let isDeleting = false;
+      let holdTicks = 0;
 
-    const logs = [
-      "[INFO] PACKET CONDUITS COMMENCING TRANSMISSION...",
-      "[INFO] SCANNING NODE PATHS FOR EXPLOIT VECTOR...",
-      `[INFO] TARGETING NODE: STATION_ID_NO_45`,
-      "[SUCCESS] ACCESS GRANTED. EXPLOIT PAYLOAD INJECTED.",
-      `[SUCCESS] REGISTRATION CONFIRMED. SECURITY TOKEN: 0x${Math.floor(Math.random() * 0xffffff).toString(16).toUpperCase()}`
-    ];
-
-    logs.forEach((log, idx) => {
-      setTimeout(() => {
-        setTerminalHistory((prev) => [...prev, log]);
-        if (idx === logs.length - 1) {
-          setRegistrationStatus("SUCCESS");
+      return window.setInterval(() => {
+        const sample = samples[sampleIndex];
+        if (holdTicks > 0) {
+          holdTicks -= 1;
+          return;
         }
-      }, (idx + 1) * 800);
-    });
+        characterIndex += isDeleting ? -1 : 1;
+        setText(sample.slice(0, characterIndex));
+        if (!isDeleting && characterIndex === sample.length) {
+          holdTicks = 8;
+          isDeleting = true;
+        } else if (isDeleting && characterIndex === 0) {
+          isDeleting = false;
+          sampleIndex = (sampleIndex + 1) % samples.length;
+        }
+      }, speed);
+    };
+
+    const universityLoop = startTypingLoop([
+      "REVA University", "Christ University", "Dayananda Sagar University", "Presidency University", "R.V. College of Engineering", "PES University", "Ramaiah Institute of Technology"
+    ], setUniversityPlaceholder, 75);
+    const portfolioLoop = startTypingLoop(["GitHub", "LinkedIn", "Personal Website", "Other"], setPortfolioPlaceholder, 110);
+
+    return () => {
+      window.clearInterval(universityLoop);
+      window.clearInterval(portfolioLoop);
+    };
+  }, []);
+
+  const updateTeamSize = (value: string) => {
+    const size = Number(value);
+    setTeamSize(value);
+    setMembers((currentMembers) => Array.from(
+      { length: size },
+      (_, index) => currentMembers[index] ?? { name: "", email: "", role: "", portfolio: "" }
+    ));
   };
 
-  const resetForm = () => {
-    setTeamName("");
-    setCaptainEmail("");
-    setSelectedDomain("Domain 1");
-    setRegistrationStatus("IDLE");
-    setTerminalHistory([]);
+  const updateMember = (index: number, field: "name" | "email" | "role" | "portfolio", value: string) => {
+    setMembers((currentMembers) => currentMembers.map((member, memberIndex) => (
+      memberIndex === index ? { ...member, [field]: value } : member
+    )));
   };
+
+  const membersAreComplete = members.every((member) => (
+    member.name.trim() &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(member.email) &&
+    member.role
+  ));
+
+  const resetRegistration = () => {
+    setRegistrationStep(1);
+    setTeamName("");
+    setTeamSize("1");
+    setUniversity("");
+    setSelectedDomain("");
+    setExperienceLevel("");
+    setMembers([{ name: "", email: "", role: "", portfolio: "" }]);
+    setProjectIdea("");
+    setAcceptedTerms(false);
+    setAcceptedConduct(false);
+    setRegistrationComplete(false);
+  };
+
+  const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
+  const stepOneReady = Boolean(teamName.trim() && university.trim() && selectedDomain && experienceLevel);
+  const stepThreeReady = Boolean(projectIdea.trim() && acceptedTerms && acceptedConduct);
 
   return (
     <div className="min-h-screen bg-cyber-black text-white relative font-mono overflow-x-hidden cyber-grid">
@@ -448,135 +499,36 @@ export default function Home() {
         {/* 6. SECTION FIVE: "05. JOIN NODE // REGISTRATION CONSOLE" */}
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
-
-          {/* Left Column: Form Inputs */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
-            <div className="flex flex-col gap-4">
-              <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 05. JOIN NODE // INFILTRATION FORM</span>
-              <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase">
-                INJECT TEAM PAYLOAD
-              </h2>
-              <p className="font-mono text-xs text-cyber-gray leading-relaxed">
-                Fill out the team parameters to compile and inject your registration payload. Select one of the four domains (problem statements will be released soon).
-              </p>
-
-              <form onSubmit={handleRegister} className="flex flex-col gap-4 mt-2">
-                <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-cyber-tan uppercase font-bold">--team-name</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter team alias..." 
-                    value={teamName}
-                    onChange={(e) => setTeamName(e.target.value)}
-                    disabled={registrationStatus !== "IDLE"}
-                    className="bg-cyber-dark border border-cyber-tan/30 px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-cyber-tan uppercase font-bold">--captain-email</label>
-                  <input 
-                    type="email" 
-                    placeholder="captain@reva.edu.in" 
-                    value={captainEmail}
-                    onChange={(e) => setCaptainEmail(e.target.value)}
-                    disabled={registrationStatus !== "IDLE"}
-                    className="bg-cyber-dark border border-cyber-tan/30 px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none"
-                  />
-                </div>
-
-                {/* Choose Domain Option (1, 2, 3, 4) */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-cyber-tan uppercase font-bold">--domain-select</label>
-                  <select 
-                    value={selectedDomain}
-                    onChange={(e) => setSelectedDomain(e.target.value)}
-                    disabled={registrationStatus !== "IDLE"}
-                    className="bg-cyber-dark border border-cyber-tan/30 px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan cursor-pointer transition-all rounded-none"
-                  >
-                    <option>Domain 1</option>
-                    <option>Domain 2</option>
-                    <option>Domain 3</option>
-                    <option>Domain 4</option>
-                  </select>
-                </div>
-
-                {registrationStatus === "IDLE" ? (
-                  <button 
-                    type="submit"
-                    className="w-full mt-2 px-4 py-2 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
-                  >
-                    [ INJECT_REGISTRY_PAYLOAD ]
-                  </button>
-                ) : registrationStatus === "INJECTING" ? (
-                  <div className="w-full mt-2 px-4 py-2 border border-cyber-tan/20 bg-cyber-dark text-cyber-tan/50 font-mono text-[11px] tracking-widest text-center uppercase animate-pulse">
-                    [ INJECTING PAYLOAD DATA... ]
-                  </div>
-                ) : (
-                  <button 
-                    type="button"
-                    onClick={resetForm}
-                    className="w-full mt-2 px-4 py-2 border border-white/30 bg-white/5 text-white font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-white/10 transition-all"
-                  >
-                    [ REGISTER_ANOTHER_NODE ]
-                  </button>
-                )}
-              </form>
-            </div>
-            
-            <div className="text-[9px] text-cyber-tan/40 mt-4 leading-normal select-none">
-              SECURE REGISTRY: ALL DATA IS SIGNED AND ENCRYPTED IN TRANSIT.
-            </div>
+          <div className="lg:col-span-5 flex flex-col justify-center gap-5">
+            <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 05. JOIN NODE // SECURE REGISTRY</span>
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">INJECT TEAM PAYLOAD</h2>
+            <p className="font-mono text-xs text-cyber-gray leading-relaxed">
+              Open the registration console to assemble your unit profile, validate each operator, and queue the final mission payload.
+            </p>
+            <motion.button
+              type="button"
+              onClick={() => { resetRegistration(); setIsRegistrationOpen(true); }}
+              animate={{ boxShadow: ["0 0 0px rgba(99,102,241,0)", "0 0 18px rgba(99,102,241,0.5)", "0 0 14px rgba(210,180,140,0.45)", "0 0 0px rgba(99,102,241,0)"] }}
+              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative overflow-hidden w-full md:w-fit px-5 py-3 border border-cyber-tan/55 bg-cyber-tan/5 text-cyber-tan font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 transition-colors"
+            >
+              <motion.span aria-hidden="true" className="absolute inset-y-0 w-1/2 bg-cyber-blue/20 blur-md" animate={{ x: ["-180%", "260%"] }} transition={{ duration: 2.3, repeat: Infinity, ease: "linear" }} />
+              <span className="relative">[ INJECT_REGISTRY_PAYLOAD ]</span>
+            </motion.button>
+            <div className="text-[9px] text-cyber-tan/40 leading-normal select-none">SECURE REGISTRY: ALL DATA IS SIGNED AND ENCRYPTED IN TRANSIT.</div>
           </div>
 
-          {/* Right Column: Hacking Terminal Registration Console */}
-          <div className="lg:col-span-7 flex flex-col justify-between gap-6 pl-0 lg:pl-6">
-            <div className="flex flex-col gap-3 h-full">
-              <span className="text-[10px] tracking-widest text-cyber-tan font-bold font-mono">// PAYLOAD_COMPILER_OUTPUT</span>
-              
-              {/* Terminal Screen Console */}
-              <div className="w-full h-full min-h-[300px] bg-cyber-dark/80 border border-cyber-blue/15 p-4 font-mono text-[11px] leading-relaxed text-cyber-blue/90 overflow-hidden flex flex-col justify-between select-text relative">
-                <div className="absolute inset-0 bg-transparent pointer-events-none select-none border-b border-cyber-blue/5" />
-
-                <div className="flex flex-col gap-1 overflow-y-auto max-h-full font-mono text-glow-dim">
-                  <div>HACKURITY OS v4.8.8-hackurity</div>
-                  <div>(c) 2026 REVA Cybersecurity Club. Infiltration console ready.</div>
-                  <div className="mt-2 text-cyber-gray">
-                    guest@hackurity:~$ inject --team "{teamName || '...'}" --captain "{captainEmail || '...'}" --domain "{selectedDomain.toLowerCase().replace(/\s/g, "_")}"
-                  </div>
-
-                  {terminalHistory.map((line, idx) => (
-                    <div key={idx} className="mt-1">
-                      {line}
-                    </div>
-                  ))}
-
-                  {registrationStatus === "INJECTING" && (
-                    <div className="mt-2 flex items-center gap-1.5">
-                      <span className="w-1.5 h-3 bg-cyber-blue animate-[terminal-cursor_1s_step-end_infinite]" />
-                      <span className="text-cyber-gray font-bold animate-pulse">COMPILING PAYLOAD STRUCTS...</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Success Registration Panel */}
-                {registrationStatus === "SUCCESS" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="border border-cyber-tan bg-cyber-tan/10 p-3 mt-4 text-[10px] text-cyber-tan font-mono tracking-widest"
-                  >
-                    <div className="font-bold flex items-center gap-2 mb-1">
-                      <span className="w-2 h-2 bg-cyber-tan rounded-full" />
-                      <span>INJECTION SUCCESSFUL // CORE REGISTERED</span>
-                    </div>
-                    <div className="text-white">TEAM: {teamName.toUpperCase()}</div>
-                    <div className="text-white font-bold">DOMAIN ALIGNMENT: {selectedDomain.toUpperCase()}</div>
-                    <div className="text-white">ACCESS KEY: SHA256_0x{Math.floor(Math.random() * 0xffffffff).toString(16).toUpperCase()}</div>
-                  </motion.div>
-                )}
-              </div>
+          <div className="lg:col-span-7 min-h-[220px] border border-cyber-blue/15 bg-cyber-black/45 p-5 font-mono text-[11px] text-cyber-blue/80 flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute inset-0 cyber-grid opacity-60 pointer-events-none" />
+            <div className="relative flex items-center justify-between border-b border-cyber-blue/15 pb-3">
+              <span>// REGISTRY_UPLINK</span><span className="text-cyber-tan animate-pulse">READY</span>
             </div>
+            <div className="relative space-y-2 text-cyber-gray">
+              <div>guest@hackurity:~$ registry --await-team-payload</div>
+              <div className="text-white">&gt; SIGNAL DETECTED: AWAITING OPERATOR INPUT</div>
+              <div>&gt; ENCRYPTION: AES-256 // CHANNEL: SECURE</div>
+            </div>
+            <div className="relative h-px bg-cyber-blue/25"><motion.div className="absolute inset-y-0 left-0 bg-cyber-tan" animate={{ width: ["8%", "90%", "8%"] }} transition={{ duration: 3.5, repeat: Infinity }} /></div>
           </div>
         </section>
 
@@ -670,6 +622,82 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {isRegistrationOpen && (
+        <motion.div
+          role="presentation"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onMouseDown={() => setIsRegistrationOpen(false)}
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 p-0 backdrop-blur-sm md:items-center md:p-6"
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="registration-console-title"
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 270, damping: 28 }}
+            onMouseDown={(event) => event.stopPropagation()}
+            className="relative flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden border border-cyber-tan/35 bg-cyber-black shadow-[0_0_35px_rgba(99,102,241,0.22)] md:max-h-[88vh]"
+          >
+            <div className="flex items-start justify-between gap-4 border-b border-cyber-blue/15 bg-cyber-dark/80 px-5 py-4">
+              <div>
+                <div className="text-[9px] font-mono font-bold tracking-widest text-cyber-tan">// HACKURITY // SECURE REGISTRY</div>
+                <h2 id="registration-console-title" className="mt-1 font-heading text-base tracking-tight text-white">INJECT TEAM PAYLOAD</h2>
+              </div>
+              <button type="button" onClick={() => setIsRegistrationOpen(false)} className="border border-cyber-blue/25 px-2 py-1 font-mono text-xs text-cyber-gray transition-colors hover:border-cyber-tan hover:text-cyber-tan" aria-label="Close registration console">[ X ]</button>
+            </div>
+
+            {!registrationComplete && (
+              <div className="grid grid-cols-3 border-b border-cyber-blue/15 bg-cyber-black text-[9px] font-mono tracking-widest">
+                {["01 TEAM", "02 OPERATORS", "03 VERIFY"].map((step, index) => (
+                  <div key={step} className={`flex items-center gap-2 px-4 py-3 ${registrationStep === index + 1 ? "bg-cyber-tan/10 text-cyber-tan" : registrationStep > index + 1 ? "text-cyber-blue" : "text-cyber-gray/50"}`}>
+                    <span className={`h-1.5 w-1.5 rounded-full ${registrationStep >= index + 1 ? "bg-cyber-tan animate-pulse" : "bg-cyber-gray/30"}`} />{step}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="overflow-y-auto p-5 md:p-7">
+              {registrationComplete ? (
+                <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="border border-cyber-tan/45 bg-cyber-tan/5 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center border border-cyber-tan text-cyber-tan shadow-[0_0_18px_rgba(210,180,140,0.25)]">✓</div>
+                  <h3 className="font-heading text-base text-white">PAYLOAD VERIFIED</h3>
+                  <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">Your registration interface is complete. Connect this form to your registration backend before accepting live applications.</p>
+                  <button type="button" onClick={() => { setIsRegistrationOpen(false); resetRegistration(); }} className="mt-6 border border-cyber-tan/45 bg-cyber-tan/5 px-4 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10">[ CLOSE_CONSOLE ]</button>
+                </motion.div>
+              ) : registrationStep === 1 ? (
+                <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
+                  <div><span className="text-[9px] font-bold tracking-widest text-cyber-tan">// TEAM PROFILE</span><p className="mt-2 font-mono text-xs leading-relaxed text-cyber-gray">Compile the identity packet for your Hackurity unit.</p></div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <label className="space-y-1.5"><span className="text-[10px] font-mono font-bold text-cyber-tan">--team-name</span><input value={teamName} onChange={(event) => setTeamName(event.target.value)} placeholder="Enter team alias..." className={inputClass} /></label>
+                    <label className="space-y-1.5"><span className="text-[10px] font-mono font-bold text-cyber-tan">--team-size</span><select value={teamSize} onChange={(event) => updateTeamSize(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="1">1 (SOLO)</option><option value="2">2 (DUO)</option><option value="3">3 (TRIO)</option><option value="4">4 (SQUAD)</option></select></label>
+                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[10px] font-mono font-bold text-cyber-tan">--university</span><input value={university} onChange={(event) => setUniversity(event.target.value)} placeholder={`${universityPlaceholder || "University node"} |`} className={`${inputClass} placeholder:text-cyber-blue/55`} /></label>
+                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[10px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A DOMAIN...</option>{domainOptions.map((domain) => <option key={domain} value={domain}>{domain.toUpperCase()}</option>)}</select></label>
+                  </div>
+                  <div><div className="mb-2 text-[10px] font-mono font-bold text-cyber-tan">--experience-level</div><div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"].map((level, index) => <motion.button key={level} type="button" onClick={() => setExperienceLevel(level)} whileTap={{ scale: 0.97 }} animate={experienceLevel === level ? { boxShadow: ["0 0 4px rgba(99,102,241,0.2)", "0 0 16px rgba(210,180,140,0.45)", "0 0 4px rgba(99,102,241,0.2)"] } : {}} transition={{ duration: 1.8, repeat: Infinity }} className={`relative overflow-hidden border px-2 py-3 font-mono text-[9px] tracking-wider transition-colors ${experienceLevel === level ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" : "border-cyber-blue/20 bg-cyber-dark text-cyber-gray hover:border-cyber-blue/50"}`}><span className="relative">{level}</span><span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-cyber-blue" style={{ width: `${35 + index * 18}%` }} /></motion.button>)}</div></div>
+                </motion.div>
+              ) : registrationStep === 2 ? (
+                <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
+                  <div><span className="text-[9px] font-bold tracking-widest text-cyber-tan">// MEMBER DETAILS</span><p className="mt-2 font-mono text-xs leading-relaxed text-cyber-gray">Populate a record for each of the {teamSize} assigned operator{teamSize === "1" ? "" : "s"}.</p></div>
+                  {members.map((member, index) => <div key={index} className="border border-cyber-blue/15 bg-cyber-dark/45 p-4"><div className="mb-4 flex items-center gap-2 text-[10px] font-mono font-bold text-cyber-tan"><span className="h-1.5 w-1.5 bg-cyber-tan animate-pulse" />{index === 0 ? "TEAM LEADER (YOU)" : `TEAM MEMBER ${index + 1}`}</div><div className="grid gap-4 sm:grid-cols-2"><label className="space-y-1.5"><span className="text-[10px] font-mono text-cyber-gray">--name</span><input value={member.name} onChange={(event) => updateMember(index, "name", event.target.value)} className={inputClass} placeholder="Operator name..." /></label><label className="space-y-1.5"><span className="text-[10px] font-mono text-cyber-gray">--email</span><input type="email" value={member.email} onChange={(event) => updateMember(index, "email", event.target.value)} className={inputClass} placeholder="operator@gmail.com" /></label><label className="space-y-1.5"><span className="text-[10px] font-mono text-cyber-gray">--role</span><select value={member.role} onChange={(event) => updateMember(index, "role", event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT ROLE...</option>{roleOptions.map((role) => <option key={role} value={role}>{role.toUpperCase()}</option>)}</select></label><label className="space-y-1.5"><span className="text-[10px] font-mono text-cyber-gray">--portfolio</span><input value={member.portfolio} onChange={(event) => updateMember(index, "portfolio", event.target.value)} className={`${inputClass} placeholder:text-cyber-blue/55`} placeholder={`${portfolioPlaceholder || "Portfolio"} |`} /></label></div></div>)}
+                </motion.div>
+              ) : (
+                <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
+                  <div><span className="text-[9px] font-bold tracking-widest text-cyber-tan">// FINAL VERIFICATION</span><p className="mt-2 font-mono text-xs leading-relaxed text-cyber-gray">Attach a concise project objective, then confirm your operating protocols.</p></div>
+                  <label className="block space-y-1.5"><span className="text-[10px] font-mono font-bold text-cyber-tan">--project-idea // BRIEF SUMMARY</span><textarea value={projectIdea} onChange={(event) => setProjectIdea(event.target.value)} rows={4} placeholder="Describe the problem your team will investigate..." className={`${inputClass} resize-y`} /></label>
+                  <div className="grid gap-3 border border-cyber-blue/15 bg-cyber-dark/45 p-4 text-xs font-mono"><div className="text-[9px] tracking-widest text-cyber-blue">PAYLOAD SUMMARY</div><div className="grid gap-2 sm:grid-cols-2 text-cyber-gray"><span>TEAM: <strong className="text-white">{teamName || "UNSET"}</strong></span><span>SIZE: <strong className="text-white">{teamSize} OPERATOR{teamSize === "1" ? "" : "S"}</strong></span><span>TRACK: <strong className="text-white">{selectedDomain || "UNSET"}</strong></span><span>LEVEL: <strong className="text-white">{experienceLevel || "UNSET"}</strong></span></div></div>
+                  <div className="space-y-3"><label className="flex items-start gap-3 border border-cyber-blue/15 p-3 text-xs font-mono text-cyber-gray"><input type="checkbox" checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} className="mt-0.5 accent-cyber-tan" /><span>I agree to the <a href={termsAndConditionsUrl} target="_blank" rel="noreferrer" className="text-cyber-tan underline underline-offset-2 hover:text-white">Terms &amp; Conditions</a> of Hackurity 2026.</span></label><label className="flex items-start gap-3 border border-cyber-blue/15 p-3 text-xs font-mono text-cyber-gray"><input type="checkbox" checked={acceptedConduct} onChange={(event) => setAcceptedConduct(event.target.checked)} className="mt-0.5 accent-cyber-tan" /><span>I agree to uphold the <a href={codeOfConductUrl} target="_blank" rel="noreferrer" className="text-cyber-tan underline underline-offset-2 hover:text-white">Code of Conduct</a> throughout the event.</span></label></div>
+                </motion.div>
+              )}
+            </div>
+
+            {!registrationComplete && <div className="flex items-center justify-between gap-3 border-t border-cyber-blue/15 bg-cyber-dark/70 px-5 py-4"><button type="button" onClick={() => setRegistrationStep((step) => Math.max(1, step - 1))} disabled={registrationStep === 1} className="border border-cyber-blue/20 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue disabled:cursor-not-allowed disabled:opacity-30">[ BACK ]</button>{registrationStep < 3 ? <button type="button" onClick={() => setRegistrationStep((step) => step + 1)} disabled={registrationStep === 1 ? !stepOneReady : !membersAreComplete} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ CONTINUE ]</button> : <button type="button" onClick={() => setRegistrationComplete(true)} disabled={!stepThreeReady} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ REGISTER_PAYLOAD ]</button>}</div>}
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

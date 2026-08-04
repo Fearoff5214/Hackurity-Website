@@ -11,6 +11,7 @@ import {
   SimulatedLoadingBar, 
   TechTable 
 } from "@/components/TechElements";
+import EventPathway from "@/components/EventPathway";
 
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
@@ -69,38 +70,16 @@ export default function Home() {
     { name: "JOIN_NODE", href: "#join_node" }
   ];
 
-  const eventTimeline = [
-    {
-      marker: "T-30",
-      phase: "NODE REGISTRATION",
-      title: "OPEN THE ACCESS CHANNEL",
-      detail: "Assemble your unit, select an operational domain, and transmit the first encrypted registration packet.",
-      status: "REGISTRY: ONLINE",
-    },
-    {
-      marker: "T-07",
-      phase: "MISSION BRIEFING",
-      title: "SYNC WITH THE COMMAND GRID",
-      detail: "Verified teams receive the protocol, system constraints, and the final pre-infiltration intelligence drop.",
-      status: "UPLINK: LOCKED",
-    },
-    {
-      marker: "T+00",
-      phase: "PROBLEM DROP",
-      title: "BREACH SEQUENCE INITIATED",
-      detail: "The challenge vault unlocks. Deploy your build, defend your attack surface, and keep the data stream moving.",
-      status: "VAULT: UNSEALED",
-    },
-    {
-      marker: "T+48",
-      phase: "FINAL EXTRACTION",
-      title: "SUBMIT // VERIFY // ASCEND",
-      detail: "Transmit your final payload for validation. The highest-scoring nodes advance to the terminal leaderboard.",
-      status: "CORE: AWAITING INPUT",
-    },
+  const DOMAINS = [
+    { id: "TRK-01", name: "AI Security", brief: "Harden machine-learning pipelines against poisoning, prompt injection, and model theft." },
+    { id: "TRK-02", name: "Cloud Security", brief: "Seal misconfigured buckets, IAM drift, and container escapes across live cloud estates." },
+    { id: "TRK-03", name: "Cryptography", brief: "Break weak ciphers, audit key handling, and engineer post-quantum ready primitives." },
+    { id: "TRK-04", name: "Reverse Engineering", brief: "Disassemble binaries and firmware to expose hidden logic and undocumented payloads." },
+    { id: "TRK-05", name: "Digital Forensics", brief: "Reconstruct an intrusion from disk, memory, and log artefacts and trace the operator." },
+    { id: "TRK-06", name: "Network Defense", brief: "Detect lateral movement, tune sensors, and hold the perimeter under sustained probing." },
+    { id: "TRK-07", name: "Secure Software", brief: "Build applications that survive code review, dependency audits, and abuse testing." },
+    { id: "TRK-08", name: "Open Innovation", brief: "Any original security build that does not fit the standard operational tracks." }
   ];
-
-  const domainOptions = ["Domain 1", "Domain 2", "Domain 3", "Domain 4"];
   const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];
   // Replace these with the final public URLs (for example, /documents/terms.pdf) when the PDFs are ready.
   const termsAndConditionsUrl = "http://127.0.0.1:5500/legacy-hackurity/index.html#";
@@ -322,20 +301,25 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">DOMAINS</span>
-                <span className="text-[10px] text-cyber-gray tracking-widest font-bold">RELEASE: 2 PROBLEMS / DOMAIN</span>
+                <span className="text-[10px] text-cyber-gray tracking-widest font-bold">08 DOMAINS // 2 PROBLEMS EACH</span>
               </div>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
                 // 02. HACKATHON DOMAINS // RULES
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                Hackurity features four dedicated operational domains. Each domain releases exactly **two problem statements** at launch. Choose your alignment wisely:
+                Hackurity runs eight operational domains. Each domain unseals exactly two problem statements at launch. Lock your alignment before the breach window opens.
               </p>
-              
-              <ul className="list-none flex flex-col gap-3 font-mono text-[11px] text-cyber-gray pl-1 mt-2">
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 1:</span> [ TBD_DOMAIN_01 ] — Exploit analysis and defensive mainframes.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 2:</span> [ TBD_DOMAIN_02 ] — Binary engineering and firmware security.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 3:</span> [ TBD_DOMAIN_03 ] — Cryptographic networks and ledger routing.</li>
-                <li><span className="text-cyber-tan font-bold mr-2">▶ DOMAIN 4:</span> [ TBD_DOMAIN_04 ] — System vulnerability and threat intelligence.</li>
+
+              <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[11px] text-cyber-gray pl-1 mt-2">
+                {DOMAINS.map((domain) => (
+                  <li key={domain.id} className="border border-cyber-blue/10 bg-cyber-black/30 p-2.5 hover:border-cyber-tan/40 transition-colors">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-cyber-tan font-bold uppercase tracking-widest">◆ {domain.name}</span>
+                      <span className="text-[9px] text-cyber-blue/70">{domain.id}</span>
+                    </div>
+                    <span className="leading-relaxed">{domain.brief}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -388,60 +372,7 @@ export default function Home() {
           </div>
 
           <div className="relative py-2">
-            {/* The fixed conduit and travelling packets create the live-flow behaviour used by the reference timeline. */}
-            <div className="absolute left-[19px] md:left-1/2 top-4 bottom-4 w-px -translate-x-1/2 bg-cyber-blue/25" />
-            <motion.div
-              aria-hidden="true"
-              className="absolute left-[19px] md:left-1/2 top-4 w-px -translate-x-1/2 bg-cyber-tan shadow-[0_0_10px_rgba(210,180,140,0.75)]"
-              animate={{ height: ["0%", "100%", "0%"] }}
-              transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-            />
-
-            <div className="flex flex-col gap-6 md:gap-3">
-              {eventTimeline.map((event, index) => {
-                const isRight = index % 2 === 1;
-
-                return (
-                  <motion.article
-                    key={event.phase}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.35 }}
-                    transition={{ duration: 0.45, delay: index * 0.08 }}
-                    className="relative grid grid-cols-[40px_1fr] md:grid-cols-[1fr_72px_1fr] items-center gap-4 md:gap-0"
-                  >
-                    <div className={`hidden md:block ${isRight ? "col-start-1" : "col-start-3"}`}>
-                      <div className="border border-cyber-blue/20 bg-cyber-black/45 p-4 transition-all duration-300 hover:border-cyber-tan/45 hover:bg-cyber-tan/5">
-                        <div className="flex items-center justify-between gap-4 mb-3 text-[9px] font-mono tracking-widest">
-                          <span className="text-cyber-tan font-bold">{event.marker}</span>
-                          <span className="text-cyber-gray">{event.status}</span>
-                        </div>
-                        <div className="text-[10px] text-cyber-blue font-bold tracking-widest mb-1">// {event.phase}</div>
-                        <h3 className="font-heading text-sm text-white tracking-tight">{event.title}</h3>
-                        <p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">{event.detail}</p>
-                      </div>
-                    </div>
-
-                    <div className="relative z-10 col-start-1 md:col-start-2 flex justify-center self-stretch">
-                      <div className="relative mt-4 md:mt-0 flex h-10 w-10 items-center justify-center border border-cyber-tan/60 bg-cyber-black shadow-[0_0_12px_rgba(210,180,140,0.18)]">
-                        <span className="h-2 w-2 bg-cyber-tan animate-pulse" />
-                        <span className="absolute h-full w-full border border-cyber-tan/30 animate-ping" style={{ animationDelay: `${index * 0.45}s` }} />
-                      </div>
-                    </div>
-
-                    <div className="md:hidden col-start-2 border border-cyber-blue/20 bg-cyber-black/45 p-4 transition-all duration-300 hover:border-cyber-tan/45 hover:bg-cyber-tan/5">
-                      <div className="flex items-center justify-between gap-3 mb-3 text-[9px] font-mono tracking-widest">
-                        <span className="text-cyber-tan font-bold">{event.marker}</span>
-                        <span className="text-cyber-gray text-right">{event.status}</span>
-                      </div>
-                      <div className="text-[10px] text-cyber-blue font-bold tracking-widest mb-1">// {event.phase}</div>
-                      <h3 className="font-heading text-sm text-white tracking-tight">{event.title}</h3>
-                      <p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">{event.detail}</p>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
+            <EventPathway />
           </div>
         </section>
 
@@ -675,7 +606,7 @@ export default function Home() {
                     <label className="space-y-1.5"><span className="text-[10px] font-mono font-bold text-cyber-tan">--team-name</span><input value={teamName} onChange={(event) => setTeamName(event.target.value)} placeholder="Enter team alias..." className={inputClass} /></label>
                     <label className="space-y-1.5"><span className="text-[10px] font-mono font-bold text-cyber-tan">--team-size</span><select value={teamSize} onChange={(event) => updateTeamSize(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="1">1 (SOLO)</option><option value="2">2 (DUO)</option><option value="3">3 (TRIO)</option><option value="4">4 (SQUAD)</option></select></label>
                     <label className="space-y-1.5 sm:col-span-2"><span className="text-[10px] font-mono font-bold text-cyber-tan">--university</span><input value={university} onChange={(event) => setUniversity(event.target.value)} placeholder={`${universityPlaceholder || "University node"} |`} className={`${inputClass} placeholder:text-cyber-blue/55`} /></label>
-                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[10px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A DOMAIN...</option>{domainOptions.map((domain) => <option key={domain} value={domain}>{domain.toUpperCase()}</option>)}</select></label>
+                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[10px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A DOMAIN...</option>{DOMAINS.map((domain) => <option key={domain.id} value={domain.name}>{`${domain.id} // ${domain.name.toUpperCase()}`}</option>)}</select></label>
                   </div>
                   <div><div className="mb-2 text-[10px] font-mono font-bold text-cyber-tan">--experience-level</div><div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"].map((level, index) => <motion.button key={level} type="button" onClick={() => setExperienceLevel(level)} whileTap={{ scale: 0.97 }} animate={experienceLevel === level ? { boxShadow: ["0 0 4px rgba(99,102,241,0.2)", "0 0 16px rgba(210,180,140,0.45)", "0 0 4px rgba(99,102,241,0.2)"] } : {}} transition={{ duration: 1.8, repeat: Infinity }} className={`relative overflow-hidden border px-2 py-3 font-mono text-[9px] tracking-wider transition-colors ${experienceLevel === level ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" : "border-cyber-blue/20 bg-cyber-dark text-cyber-gray hover:border-cyber-blue/50"}`}><span className="relative">{level}</span><span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-cyber-blue" style={{ width: `${35 + index * 18}%` }} /></motion.button>)}</div></div>
                 </motion.div>

@@ -1,17 +1,21 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { 
   CornerCrosshairs, 
   BracketFrame, 
-  StatusDot, 
   SineWaveLoader, 
   SimulatedLoadingBar, 
   TechTable 
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
+import CctvFeed from "@/components/CctvFeed";
+import QueryTerminal from "@/components/QueryTerminal";
+import SponsorZone from "@/components/SponsorZone";
+import SiteLoader from "@/components/SiteLoader";
+import BinaryStarfield from "@/components/BinaryStarfield";
 
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
@@ -32,17 +36,9 @@ const CyberBreachConduit = dynamic(() => import("@/components/CyberBreachConduit
   )
 });
 
-const ReactorCore = dynamic(() => import("@/components/ReactorCore"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-cyber-dark/40 border border-cyber-blue/10">
-      <span className="text-xs text-cyber-blue/50 tracking-widest animate-pulse font-mono">// CALIBRATING REACTOR SCANNERS...</span>
-    </div>
-  )
-});
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState("MISSION_BRIEF");
+  const [currentSection, setCurrentSection] = useState("MISSION");
   const [chamberStatus, setChamberStatus] = useState("STABLE");
 
   // Registration states
@@ -60,26 +56,41 @@ export default function Home() {
   const [registrationComplete, setRegistrationComplete] = useState(false);
   const [universityPlaceholder, setUniversityPlaceholder] = useState("");
   const [portfolioPlaceholder, setPortfolioPlaceholder] = useState("");
-  
+
+  // Navbar behaviour: locks into "attack mode" once the user scrolls past the hero fold.
+  const [navAttack, setNavAttack] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setNavAttack(window.scrollY > 90);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   // Navigation Links
   const navLinks = [
-    { name: "MISSION_BRIEF", href: "#mission_brief" },
-    { name: "CTF_CHALLENGES", href: "#ctf_challenges" },
-    { name: "EVENT_FLOW", href: "#event_flow" },
-    { name: "LEADERBOARD", href: "#leaderboard" },
-    { name: "JOIN_NODE", href: "#join_node" }
+    { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
+    { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
+    { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
+    { name: "LEADERBOARD", label: "LEADERBOARD", href: "#leaderboard" },
+    { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
+    { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
+    { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }
   ];
 
+
   const DOMAINS = [
-    { id: "TRK-01", name: "AI Security", brief: "Harden machine-learning pipelines against poisoning, prompt injection, and model theft." },
-    { id: "TRK-02", name: "Cloud Security", brief: "Seal misconfigured buckets, IAM drift, and container escapes across live cloud estates." },
-    { id: "TRK-03", name: "Cryptography", brief: "Break weak ciphers, audit key handling, and engineer post-quantum ready primitives." },
-    { id: "TRK-04", name: "Reverse Engineering", brief: "Disassemble binaries and firmware to expose hidden logic and undocumented payloads." },
-    { id: "TRK-05", name: "Digital Forensics", brief: "Reconstruct an intrusion from disk, memory, and log artefacts and trace the operator." },
-    { id: "TRK-06", name: "Network Defense", brief: "Detect lateral movement, tune sensors, and hold the perimeter under sustained probing." },
-    { id: "TRK-07", name: "Secure Software", brief: "Build applications that survive code review, dependency audits, and abuse testing." },
-    { id: "TRK-08", name: "Open Innovation", brief: "Any original security build that does not fit the standard operational tracks." }
+    { id: "TRK-01", name: "AI Security", brief: "Keep AI systems safe — stop people from tricking a model, stealing it, or feeding it bad data." },
+    { id: "TRK-02", name: "Cloud Security", brief: "Find and fix the settings that accidentally leave cloud storage, accounts, or containers wide open." },
+    { id: "TRK-03", name: "Cryptography", brief: "Work with the maths that hides data: break weak encryption and build stronger, future-proof versions." },
+    { id: "TRK-04", name: "Reverse Engineering", brief: "Take apart an app or device to understand what its code really does, including anything hidden." },
+    { id: "TRK-05", name: "Digital Forensics", brief: "Investigate an attack after it happened — use files, memory and logs to piece together who did what." },
+    { id: "TRK-06", name: "Network Defense", brief: "Watch network traffic, spot an attacker moving through it, and shut them out before they spread." },
+    { id: "TRK-07", name: "Secure Software", brief: "Build apps that hold up when someone deliberately tries to misuse or break into them." },
+    { id: "TRK-08", name: "Open Innovation", brief: "Have a security idea that doesn't fit the tracks above? Build it here — anything original is welcome." }
   ];
+
   const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];
   // Replace these with the final public URLs (for example, /documents/terms.pdf) when the PDFs are ready.
   const termsAndConditionsUrl = "http://127.0.0.1:5500/legacy-hackurity/index.html#";
@@ -162,54 +173,171 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-cyber-black text-white relative font-mono overflow-x-hidden cyber-grid">
+      {/* Site boot sequence */}
+      <SiteLoader />
+
+      {/* Ambient animated background: gradient glows + binary starfield + magenta glitter */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 ambient-glow" />
+      <BinaryStarfield />
+
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.06)_0%,transparent_60%)] pointer-events-none" />
 
-      {/* 1. NAVIGATION BAR */}
-      <header className="sticky top-0 z-40 w-full bg-cyber-black/85 backdrop-blur-md border-b border-cyber-blue/10 px-4 md:px-8 py-3 flex items-center justify-between gap-3 select-none">
-        {/* Left: Stylized Geometric Logo */}
-        <div className="flex shrink-0 items-center gap-3">
-          <svg viewBox="0 0 100 100" className="w-8 h-8 filter drop-shadow-[0_0_4px_rgba(99,102,241,0.8)] fill-none stroke-cyber-tan stroke-[6] cursor-pointer">
-            <polygon points="50,15 85,80 15,80" />
-            <polygon points="50,40 70,80 30,80" className="opacity-60 stroke-[4]" />
-            <line x1="50" y1="15" x2="50" y2="80" className="opacity-40 stroke-[2] stroke-white" />
-          </svg>
-          <span className="font-heading text-xs tracking-[0.25em] font-bold text-white hidden sm:inline select-none">
-            HACKURITY <span className="text-cyber-tan">//</span> SEC
-          </span>
-        </div>
-
-        {/* Center: Monospace Navigation Links */}
-        <nav
-          aria-label="Primary navigation"
-          className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto whitespace-nowrap scroll-smooth overscroll-x-contain touch-pan-x px-1 md:justify-center md:gap-8 md:overflow-visible"
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setCurrentSection(link.name)}
-              className={`shrink-0 text-[9px] md:text-[10px] tracking-widest transition-all duration-300 font-mono relative py-1 hover:text-cyber-tan ${
-                currentSection === link.name ? "text-cyber-tan font-bold text-glow-tan" : "text-cyber-gray"
-              }`}
+      {/* 1. NAVIGATION BAR — sticks to the top and shifts into "attack mode" on scroll */}
+      <motion.header
+        initial={false}
+        animate={{
+          backgroundColor: navAttack ? "rgba(3,3,12,0.94)" : "rgba(0,0,0,0.7)",
+          paddingTop: navAttack ? 8 : 14,
+          paddingBottom: navAttack ? 8 : 14,
+        }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        className={`sticky top-0 z-40 w-full select-none border-b px-4 backdrop-blur-md md:px-8 ${
+          navAttack ? "border-cyber-tan/30 nav-attack" : "border-cyber-blue/10"
+        }`}
+      >
+        {/* Attack-mode scan line */}
+        <AnimatePresence>
+          {navAttack && (
+            <motion.span
+              key="nav-scan"
+              aria-hidden="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] overflow-hidden"
             >
-              {`[${link.name}]`}
-              {currentSection === link.name && (
-                <motion.span
-                  layoutId="activeNavLine"
-                  className="absolute bottom-0 left-0 w-full h-[1.5px] bg-cyber-tan shadow-tan"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </a>
-          ))}
-        </nav>
+              <motion.span
+                className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-cyber-tan to-transparent"
+                animate={{ x: ["-40%", "340%"] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
+              />
+            </motion.span>
+          )}
+        </AnimatePresence>
 
-        {/* Right: Status Indicator */}
-        <div className="flex shrink-0 items-center gap-2">
-          <StatusDot statusText="NETWORK SECURE" active={chamberStatus === "STABLE"} />
+        <div className="flex items-center justify-between gap-3">
+          {/* Left: Stylized Geometric Logo */}
+          <a href="#mission_brief" className="flex shrink-0 items-center gap-2.5">
+            <motion.svg
+              viewBox="0 0 100 100"
+              animate={navAttack ? { rotate: [0, -4, 4, 0] } : { rotate: 0 }}
+              transition={{ duration: 3, repeat: navAttack ? Infinity : 0, ease: "easeInOut" }}
+              className="h-8 w-8 fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_4px_rgba(99,102,241,0.8)]"
+            >
+              <polygon points="50,15 85,80 15,80" />
+              <polygon points="50,40 70,80 30,80" className="opacity-60 stroke-[4]" />
+              <line x1="50" y1="15" x2="50" y2="80" className="opacity-40 stroke-[2] stroke-white" />
+            </motion.svg>
+            <span className="font-heading text-[11px] font-bold tracking-[0.22em] text-white sm:text-xs">
+              HACKURITY <span className="text-cyber-tan">//</span> SEC
+            </span>
+          </a>
+
+          {/* Desktop navigation */}
+          <nav
+            aria-label="Primary navigation"
+            className="hidden items-center gap-6 lg:flex xl:gap-8"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setCurrentSection(link.name)}
+                className={`relative shrink-0 py-1 font-mono text-[10px] tracking-widest transition-colors duration-300 hover:text-cyber-tan ${
+                  currentSection === link.name ? "font-bold text-cyber-tan" : "text-cyber-gray"
+                }`}
+              >
+                {`[${link.name}]`}
+                {currentSection === link.name && (
+                  <motion.span
+                    layoutId="activeNavLine"
+                    className="absolute bottom-0 left-0 h-[1.5px] w-full bg-cyber-tan"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right: register shortcut + mobile menu trigger */}
+          <div className="flex shrink-0 items-center gap-2">
+            <a
+              href="#join_node"
+              onClick={() => setCurrentSection("REGISTER")}
+              className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[10px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
+            >
+              Register Now
+            </a>
+            <button
+              type="button"
+              onClick={() => setNavOpen((open) => !open)}
+              aria-expanded={navOpen}
+              aria-label="Toggle navigation menu"
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-cyber-blue/30 bg-cyber-black/60 lg:hidden"
+            >
+              <motion.span
+                animate={navOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                className="block h-[2px] w-5 bg-cyber-tan"
+              />
+              <motion.span
+                animate={navOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="block h-[2px] w-5 bg-cyber-tan"
+              />
+              <motion.span
+                animate={navOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                className="block h-[2px] w-5 bg-cyber-tan"
+              />
+            </button>
+          </div>
         </div>
-      </header>
+
+        {/* Mobile navigation panel — every link visible at once, no sideways scrolling */}
+        <AnimatePresence>
+          {navOpen && (
+            <motion.nav
+              key="mobile-nav"
+              aria-label="Mobile navigation"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="overflow-hidden lg:hidden"
+            >
+              <div className="mt-3 grid grid-cols-2 gap-2 border-t border-cyber-blue/15 pt-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      setCurrentSection(link.name);
+                      setNavOpen(false);
+                    }}
+                    className={`border px-3 py-3 font-mono text-[11px] tracking-widest transition-colors ${
+                      currentSection === link.name
+                        ? "border-cyber-tan/60 bg-cyber-tan/10 font-bold text-cyber-tan"
+                        : "border-cyber-blue/20 bg-cyber-dark/70 text-cyber-gray"
+                    }`}
+                  >
+                    {`[${link.name}]`}
+                  </a>
+                ))}
+                <a
+                  href="#join_node"
+                  onClick={() => {
+                    setCurrentSection("REGISTER");
+                    setNavOpen(false);
+                  }}
+                  className="col-span-2 border border-cyber-tan/60 bg-cyber-tan/15 px-3 py-3 text-center font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase"
+                >
+                  Register Now
+                </a>
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
 
       {/* MAIN CONTAINER */}
       <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10">
@@ -238,8 +366,9 @@ export default function Home() {
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
               </p>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray mt-2">
-                Infiltrate the secure mainframe. Modulate electromagnetic loops and breach data streams using high-speed volumetric code injections to capture hidden flags. The terminal eye tracks your movement.
+                A 48-hour cybersecurity hackathon for students. Pick a track, team up, and build or break something real — hidden challenges, live mentors, and prizes at the end. No prior security experience needed.
               </p>
+
             </div>
 
             <div className="flex flex-col gap-4">
@@ -307,7 +436,7 @@ export default function Home() {
                 // 02. HACKATHON DOMAINS // RULES
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                Hackurity runs eight operational domains. Each domain unseals exactly two problem statements at launch. Lock your alignment before the breach window opens.
+                There are eight themes to choose from, and each one comes with two problem statements released at the start. Pick the theme that fits your team before the build window opens.
               </p>
 
               <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[11px] text-cyber-gray pl-1 mt-2">
@@ -363,7 +492,7 @@ export default function Home() {
                 03. EVENT EXECUTION TIMELINE
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                Track the operation from initial signal to final extraction. Every phase is a live handoff in the Hackurity mission chain.
+                Here is what happens and when, from the day registrations open to the closing prize ceremony. Each step hands over to the next, so you always know what is coming.
               </p>
             </div>
             <div className="font-mono text-[9px] tracking-widest text-cyber-tan/70 border border-cyber-tan/15 bg-cyber-tan/5 px-3 py-2">
@@ -389,6 +518,9 @@ export default function Home() {
               <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
                 04. INFILTRATION LEADERBOARD
               </h2>
+              <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-cyber-gray">
+                Live scores from the venue, plus a camera feed from the hall itself. Ask for access to unscramble the camera view.
+              </p>
             </div>
             <div className="font-mono text-[10px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
               <div>MONITOR_GRID: LEADERBOARD</div>
@@ -396,13 +528,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mobile devices can swipe across the wider scanner field; desktop retains the full-width display. */}
-          <div
-            aria-label="Reactor scanner field. Swipe horizontally on mobile to inspect the full display."
-            className="w-full overflow-x-auto overscroll-x-contain touch-pan-x border border-cyber-blue/10 relative"
-          >
-            <div className="h-[380px] min-w-[560px] md:min-w-0 relative">
-              <ReactorCore />
+          {/* Venue camera panel: blurred until the visitor requests access. */}
+          <div className="w-full border border-cyber-blue/10 relative">
+            <div className="h-[380px] w-full relative">
+              <CctvFeed />
             </div>
           </div>
 
@@ -417,7 +546,7 @@ export default function Home() {
                 title="TOP ATTACKING NODES LEADERBOARD"
                 headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
                 rows={[
-                  ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
+                  ["1ST PLACE", "TBS", "TBD", "1,250 PTS"],
                   ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
                   ["3RD PLACE", "TBD", "TBD", "950 PTS"],
                   ["4TH PLACE", "TBD", "TBD", "800 PTS"]
@@ -431,20 +560,22 @@ export default function Home() {
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
           <div className="lg:col-span-5 flex flex-col justify-center gap-5">
-            <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 05. JOIN NODE // SECURE REGISTRY</span>
-            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">INJECT TEAM PAYLOAD</h2>
+            <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 05. REGISTER NOW // SECURE REGISTRY</span>
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">SECURE YOUR NODE NOW</h2>
             <p className="font-mono text-xs text-cyber-gray leading-relaxed">
-              Open the registration console to assemble your unit profile, validate each operator, and queue the final mission payload.
+              Fill in your team details, add each member, and confirm your entry. It takes about two minutes and registration is completely free.
             </p>
             <motion.button
               type="button"
               onClick={() => { resetRegistration(); setIsRegistrationOpen(true); }}
-              animate={{ boxShadow: ["0 0 0px rgba(99,102,241,0)", "0 0 18px rgba(99,102,241,0.5)", "0 0 14px rgba(210,180,140,0.45)", "0 0 0px rgba(99,102,241,0)"] }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative overflow-hidden w-full md:w-fit px-5 py-3 border border-cyber-tan/55 bg-cyber-tan/5 text-cyber-tan font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 transition-colors"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              animate={{ boxShadow: ["0 0 8px rgba(210,180,140,0.35)", "0 0 28px rgba(210,180,140,0.75)", "0 0 8px rgba(99,102,241,0.4)"] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative overflow-hidden w-full md:w-fit px-6 py-3.5 border-2 border-cyber-tan/70 bg-cyber-tan/15 text-white font-mono text-xs font-bold tracking-[0.2em] text-center uppercase cursor-pointer hover:bg-cyber-tan/25 transition-colors"
             >
-              <motion.span aria-hidden="true" className="absolute inset-y-0 w-1/2 bg-cyber-blue/20 blur-md" animate={{ x: ["-180%", "260%"] }} transition={{ duration: 2.3, repeat: Infinity, ease: "linear" }} />
-              <span className="relative">[ INJECT_REGISTRY_PAYLOAD ]</span>
+              <motion.span aria-hidden="true" className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent" animate={{ x: ["0%", "420%"] }} transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }} />
+              <span className="relative">Secure Your Node Now →</span>
             </motion.button>
             <div className="text-[9px] text-cyber-tan/40 leading-normal select-none">SECURE REGISTRY: ALL DATA IS SIGNED AND ENCRYPTED IN TRANSIT.</div>
           </div>
@@ -460,6 +591,49 @@ export default function Home() {
               <div>&gt; ENCRYPTION: AES-256 // CHANNEL: SECURE</div>
             </div>
             <div className="relative h-px bg-cyber-blue/25"><motion.div className="absolute inset-y-0 left-0 bg-cyber-tan" animate={{ width: ["8%", "90%", "8%"] }} transition={{ duration: 3.5, repeat: Infinity }} /></div>
+          </div>
+        </section>
+
+        {/* 7. SECTION SIX: QUERY TERMINAL */}
+        <section id="query_terminal" className="flex flex-col gap-6 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+          <CornerCrosshairs />
+          <div className="flex flex-col gap-2 border-b border-cyber-blue/15 pb-4 md:flex-row md:items-end md:justify-between">
+            <div className="flex max-w-2xl flex-col gap-2">
+              <span className="text-[9px] font-bold tracking-widest text-cyber-tan uppercase">// SYSTEM_SEQUENCE_NODE_06</span>
+              <h2 className="font-heading text-xl tracking-tight text-white uppercase md:text-2xl">06. QUERY TERMINAL</h2>
+              <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+                Common questions, answered plainly. Pick a question on the left and the answer prints out on the right.
+              </p>
+            </div>
+            <div className="border border-cyber-tan/15 bg-cyber-tan/5 px-3 py-2 font-mono text-[9px] tracking-widest text-cyber-tan/70">
+              RESPONSE_MODE: LIVE
+            </div>
+          </div>
+          <QueryTerminal />
+        </section>
+
+        {/* 8. SECTION SEVEN: SPONSOR NOW */}
+        <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+          <CornerCrosshairs />
+          <div className="lg:col-span-6 flex flex-col justify-center gap-5">
+            <span className="text-[9px] font-bold tracking-widest text-cyber-tan uppercase font-mono">// SYSTEM_SEQUENCE_NODE_07</span>
+            <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase md:text-2xl">07. SPONSOR NOW</h2>
+            <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+              Back the event and put your brand in front of hundreds of student security engineers. Download the brochure, send us a question, or pick a partnership tier straight away.
+            </p>
+            <SponsorZone />
+          </div>
+          <div className="lg:col-span-6 relative min-h-[220px] border border-cyber-blue/15 bg-cyber-black/45 p-5 font-mono text-[11px] text-cyber-blue/80">
+            <div className="absolute inset-0 cyber-grid opacity-60 pointer-events-none" />
+            <div className="relative flex items-center justify-between border-b border-cyber-blue/15 pb-3">
+              <span>// PARTNER_UPLINK</span><span className="text-cyber-tan animate-pulse">OPEN</span>
+            </div>
+            <div className="relative mt-4 space-y-2 text-cyber-gray">
+              <div>guest@hackurity:~$ partners --overview</div>
+              <div className="text-white">&gt; 4 partnership tiers available</div>
+              <div>&gt; Reach: 500+ students across engineering campuses</div>
+              <div>&gt; Includes stage time, branding and hiring access</div>
+            </div>
           </div>
         </section>
 

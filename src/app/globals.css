@@ -3,6 +3,8 @@
 @theme {
   --font-heading: var(--font-michroma), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-terminal: Consolas, "Consolas", "Lucida Console", "JetBrains Mono", monospace;
+
 
   --color-cyber-blue: #6366f1;
   --color-cyber-blue-glow: rgba(99, 102, 241, 0.2);
@@ -156,3 +158,34 @@ body {
   font-weight: 300;
   pointer-events: none;
 }
+
+/* ── Ambient atmosphere ───────────────────────────────────────────────── */
+
+/* Soft blue / tan side glows + centre lift, sits behind the binary starfield */
+.ambient-glow {
+  background:
+    radial-gradient(60% 45% at 0% 25%, rgba(99, 102, 241, 0.16), transparent 70%),
+    radial-gradient(55% 45% at 100% 20%, rgba(210, 180, 140, 0.12), transparent 70%),
+    radial-gradient(70% 50% at 50% 100%, rgba(99, 102, 241, 0.12), transparent 72%),
+    radial-gradient(45% 35% at 85% 70%, rgba(217, 70, 239, 0.08), transparent 72%);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift {
+  0% { opacity: 0.75; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 1; transform: translate3d(0, -1.5%, 0) scale(1.04); }
+}
+
+/* Navbar "attack mode" edge pulse once it locks to the top of the viewport */
+@keyframes nav-attack {
+  0%, 100% { box-shadow: 0 1px 0 rgba(99, 102, 241, 0.35), 0 8px 26px rgba(0, 0, 0, 0.75); }
+  50% { box-shadow: 0 1px 0 rgba(210, 180, 140, 0.6), 0 10px 34px rgba(99, 102, 241, 0.28); }
+}
+
+.nav-attack {
+  animation: nav-attack 3s ease-in-out infinite;
+}
+
+/* Hide the scrollbar on the mobile nav rail while keeping it swipeable */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

@@ -14,8 +14,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OPERATION // HACKURITY — National Cybersecurity Hackathon",
-  description: "Futuristic cybersecurity hackathon and Capture The Flag (CTF) infiltration interface.",
+  title: "HACKURITY 2026 — POWERED BY IBM",
+  description: "HACKURITY 2026, powered by IBM — a cybersecurity hackathon for the next generation of defenders.",
 };
 
 export default function RootLayout({

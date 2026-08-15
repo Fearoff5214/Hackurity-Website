@@ -7,10 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 export const SPONSOR_BROCHURE_URL = "/documents/hackurity-sponsorship-brochure.pdf";
 
 const TIERS = [
-  { name: "BRONZE TIER", note: "Entry partner", ring: "border-[#cd7f32]/70", text: "text-[#e2a06a]", glow: "rgba(205,127,50,0.45)", bg: "bg-[#cd7f32]/10" },
-  { name: "SILVER TIER", note: "Supporting partner", ring: "border-[#c0c0c0]/70", text: "text-[#dcdcdc]", glow: "rgba(192,192,192,0.45)", bg: "bg-[#c0c0c0]/10" },
-  { name: "GOLD TIER", note: "Featured partner", ring: "border-[#d4af37]/75", text: "text-[#e8c451]", glow: "rgba(212,175,55,0.5)", bg: "bg-[#d4af37]/10" },
-  { name: "PLATINUM TIER", note: "Title partner", ring: "border-[#a7c7e7]/75", text: "text-[#dbe9f7]", glow: "rgba(167,199,231,0.5)", bg: "bg-[#a7c7e7]/10" },
+  { name: "BRONZE TIER", note: "Entry partner", ring: "border-[#cd7f32]/70", text: "text-[#e2a06a]", glow: "rgba(205,127,50,0.45)", bg: "bg-[#cd7f32]/10", benefit: "Community visibility" },
+  { name: "SILVER TIER", note: "Supporting partner", ring: "border-[#c0c0c0]/70", text: "text-[#dcdcdc]", glow: "rgba(192,192,192,0.45)", bg: "bg-[#c0c0c0]/10", benefit: "Campus engagement" },
+  { name: "GOLD TIER", note: "Featured partner", ring: "border-[#d4af37]/75", text: "text-[#e8c451]", glow: "rgba(212,175,55,0.5)", bg: "bg-[#d4af37]/10", benefit: "Stage & brand presence" },
+  { name: "PLATINUM TIER", note: "Title partner", ring: "border-[#a7c7e7]/75", text: "text-[#dbe9f7]", glow: "rgba(167,199,231,0.5)", bg: "bg-[#a7c7e7]/10", benefit: "Premier partnership" },
 ];
 
 export default function SponsorZone() {
@@ -53,7 +53,7 @@ export default function SponsorZone() {
             animate={{ x: ["0%", "420%"] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.6 }}
           />
-          <span className="relative">Sponsor Now</span>
+          <span className="relative">Explore Sponsorship</span>
         </motion.button>
         <p className="font-mono text-[9px] tracking-widest text-cyber-blue/50 uppercase">
           Brochure // enquiry // partnership tiers
@@ -78,14 +78,14 @@ export default function SponsorZone() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16 }}
               onMouseDown={(event) => event.stopPropagation()}
-              className="w-full max-w-md border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(99,102,241,0.3)]"
+              className="w-full max-w-2xl border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(99,102,241,0.3)] md:p-8"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="font-mono text-[9px] font-bold tracking-widest text-cyber-blue">
                     // PARTNERSHIP CHANNEL
                   </div>
-                  <h3 className="mt-1 font-heading text-sm text-white uppercase">Sponsor Hackurity</h3>
+                  <h3 className="mt-2 font-heading text-base leading-relaxed text-white uppercase md:text-lg">Partner with Hackurity 2026</h3>
                 </div>
                 <button
                   type="button"
@@ -97,29 +97,27 @@ export default function SponsorZone() {
                 </button>
               </div>
 
-              <p className="mt-3 font-mono text-[11px] leading-relaxed text-cyber-gray">
-                Pick how you would like to move forward.
+              <p className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray">
+                Discover the partnership deck, ask a question, or choose a tier to begin a conversation with our team.
               </p>
 
-              <div className="mt-5 flex flex-col gap-3">
+              <div className="mt-6 grid gap-3 md:grid-cols-3">
                 <a
                   href={SPONSOR_BROCHURE_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between border border-cyber-tan/35 bg-cyber-tan/5 px-4 py-3 font-mono text-[11px] tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/15"
+                  className="group flex min-h-28 flex-col justify-between border border-cyber-tan/35 bg-cyber-tan/5 p-4 font-mono text-xs font-bold tracking-widest text-cyber-tan uppercase transition-all hover:-translate-y-1 hover:bg-cyber-tan/15"
                 >
-                  <span>View Brochure</span>
-                  <span className="text-cyber-tan/60">PDF ↗</span>
+                  <span>View brochure</span>
+                  <span className="text-cyber-tan/60 group-hover:text-cyber-tan">PDF ↗</span>
                 </a>
 
                 <a
                   href="/sponsor-inquiry"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between border border-cyber-blue/35 bg-cyber-blue/5 px-4 py-3 font-mono text-[11px] tracking-widest text-cyber-blue uppercase transition-colors hover:bg-cyber-blue/15"
+                  className="group flex min-h-28 flex-col justify-between border border-cyber-blue/35 bg-cyber-blue/5 p-4 font-mono text-xs font-bold tracking-widest text-cyber-blue uppercase transition-all hover:-translate-y-1 hover:bg-cyber-blue/15"
                 >
-                  <span>Inquire About Sponsorship</span>
-                  <span className="text-cyber-blue/60">FORM ↗</span>
+                  <span>Inquire about sponsorship</span>
+                  <span className="text-cyber-blue/60 group-hover:text-cyber-blue">OPEN FORM ↗</span>
                 </a>
 
                 <motion.button
@@ -139,7 +137,7 @@ export default function SponsorZone() {
                     ],
                   }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative overflow-hidden border border-fuchsia-400/50 bg-gradient-to-r from-cyber-blue/20 via-fuchsia-500/20 to-cyber-tan/20 px-4 py-3.5 font-mono text-[11px] font-bold tracking-[0.2em] text-white uppercase"
+                  className="relative flex min-h-28 flex-col items-start justify-between overflow-hidden border border-fuchsia-400/50 bg-gradient-to-br from-cyber-blue/25 via-fuchsia-500/20 to-cyber-tan/20 p-4 font-mono text-xs font-bold tracking-widest text-white uppercase"
                 >
                   <motion.span
                     aria-hidden="true"
@@ -147,7 +145,7 @@ export default function SponsorZone() {
                     animate={{ x: ["0%", "420%"] }}
                     transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
                   />
-                  <span className="relative">Sponsor Now →</span>
+                  <span className="relative">Select a tier</span><span className="relative text-white/70">Start here →</span>
                 </motion.button>
               </div>
             </motion.div>
@@ -174,14 +172,14 @@ export default function SponsorZone() {
               exit={{ opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
               onMouseDown={(event) => event.stopPropagation()}
-              className="flex max-h-[92dvh] w-full max-w-xl flex-col overflow-hidden border border-cyber-blue/40 bg-cyber-black shadow-[0_0_35px_rgba(99,102,241,0.28)]"
+              className="flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden border border-cyber-blue/40 bg-cyber-black shadow-[0_0_35px_rgba(99,102,241,0.28)]"
             >
               <div className="flex items-start justify-between gap-4 border-b border-cyber-blue/15 bg-cyber-dark/80 px-5 py-4">
                 <div>
                   <div className="font-mono text-[9px] font-bold tracking-widest text-cyber-blue">
                     // HACKURITY // SPONSOR REGISTRY
                   </div>
-                  <h3 className="mt-1 font-heading text-sm text-white uppercase">Become a partner</h3>
+                  <h3 className="mt-2 font-heading text-base leading-relaxed text-white uppercase md:text-lg">Choose your partnership tier</h3>
                 </div>
                 <button
                   type="button"
@@ -215,8 +213,8 @@ export default function SponsorZone() {
                   </motion.div>
                 ) : (
                   <div className="space-y-5">
-                    <p className="font-mono text-[11px] leading-relaxed text-cyber-gray">
-                      Share a few details and we will send across the tier pack and next steps.
+                    <p className="font-mono text-sm leading-relaxed text-cyber-gray">
+                      Select the partnership level that fits your goals. You can refine the package with our team after submitting your interest.
                     </p>
 
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -259,28 +257,30 @@ export default function SponsorZone() {
                       <div className="mb-2 font-mono text-[10px] font-bold text-cyber-blue">
                         --sponsorship-tier
                       </div>
-                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        {TIERS.map((option) => {
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {TIERS.map((option, index) => {
                           const selected = tier === option.name;
                           return (
                             <motion.button
                               key={option.name}
                               type="button"
                               onClick={() => setTier(option.name)}
-                              whileHover={{ y: -3 }}
-                              whileTap={{ scale: 0.96 }}
+                              whileHover={{ y: -4, scale: 1.015 }}
+                              whileTap={{ scale: 0.98 }}
                               animate={
                                 selected
-                                  ? { boxShadow: [`0 0 4px ${option.glow}`, `0 0 22px ${option.glow}`, `0 0 4px ${option.glow}`] }
-                                  : {}
+                                  ? { boxShadow: [`0 0 5px ${option.glow}`, `0 0 28px ${option.glow}`, `0 0 10px ${option.glow}`], borderColor: [option.glow, "rgba(255,255,255,0.78)", option.glow] }
+                                  : { boxShadow: "0 0 0 rgba(0,0,0,0)" }
                               }
                               transition={{ duration: 1.7, repeat: Infinity }}
-                              className={`flex flex-col items-start gap-1 border px-3 py-3 text-left font-mono text-[9px] tracking-widest uppercase transition-colors ${option.ring} ${
-                                selected ? option.bg : "bg-cyber-dark/60"
+                              className={`group relative flex min-h-28 flex-col items-start justify-between overflow-hidden border p-4 text-left font-mono tracking-widest uppercase transition-colors ${option.ring} ${
+                                selected ? option.bg : "bg-cyber-dark/60 hover:bg-white/[0.035]"
                               } ${option.text}`}
                             >
-                              <span className="font-bold">{option.name}</span>
-                              <span className="text-[8px] normal-case text-cyber-gray">{option.note}</span>
+                              <span className="absolute right-3 top-3 font-heading text-2xl opacity-15">0{index + 1}</span>
+                              <span className="relative text-xs font-bold">{option.name}</span>
+                              <span className="relative text-[10px] normal-case text-cyber-gray">{option.note} · {option.benefit}</span>
+                              {selected && <motion.span layoutId="tier-selected" className="absolute inset-x-0 bottom-0 h-1 bg-current" />}
                             </motion.button>
                           );
                         })}

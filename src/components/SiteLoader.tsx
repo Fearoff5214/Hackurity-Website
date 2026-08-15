@@ -89,7 +89,7 @@ export default function SiteLoader() {
                 HACKURITY
               </motion.h1>
               <p className="mt-2 font-mono text-[9px] tracking-[0.35em] text-cyber-tan uppercase">
-                OPERATIONS NETWORK
+                POWERED BY IBM
               </p>
             </div>
 

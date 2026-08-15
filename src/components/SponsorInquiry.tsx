@@ -48,7 +48,7 @@ export default function SponsorInquiryPage() {
       <div className="relative mx-auto w-full max-w-2xl">
         <div className="mb-8 text-center">
           <div className="font-mono text-[10px] font-bold tracking-[0.4em] text-cyber-tan uppercase">
-            // HACKURITY // PARTNERSHIP DESK
+            // HACKURITY 2026 — POWERED BY IBM // PARTNERSHIP DESK
           </div>
           <h1 className="mt-3 font-heading text-lg leading-tight text-white uppercase md:text-2xl">
             Sponsorship Enquiry

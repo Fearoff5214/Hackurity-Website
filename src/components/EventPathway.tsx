@@ -2,66 +2,9 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion";
+import { EVENT_SCHEDULE, type EventScheduleItem } from "@/data/eventSchedule";
 
-type Gateway = {
-  id: string;
-  title: string;
-  window: string;
-  brief: string;
-};
-
-const GATEWAYS: Gateway[] = [
-  {
-    id: "G-01",
-    title: "NODE REGISTRATION",
-    window: "05 JAN — 02 FEB",
-    brief: "Team dossiers open. Payload identities compiled and queued for handshake.",
-  },
-  {
-    id: "G-02",
-    title: "PROBLEM STATEMENTS",
-    window: "06 FEB",
-    brief: "Classified briefs decrypted. Two statements per operational domain released.",
-  },
-  {
-    id: "G-03",
-    title: "WORKSHOP UPLINK",
-    window: "10 — 14 FEB",
-    brief: "Tooling calibration and threat-modelling drills pushed to all connected nodes.",
-  },
-  {
-    id: "G-04",
-    title: "BREACH WINDOW OPENS",
-    window: "20 FEB // 09:00",
-    brief: "48-hour infiltration clock initialises. All conduits go live simultaneously.",
-  },
-  {
-    id: "G-05",
-    title: "MENTOR CHANNELS",
-    window: "20 — 21 FEB",
-    brief: "Rotating advisor sessions. Encrypted guidance relayed on request.",
-  },
-  {
-    id: "G-06",
-    title: "PAYLOAD SUBMISSION",
-    window: "22 FEB // 09:00",
-    brief: "Artefacts locked, hashed and sealed. No further commits accepted.",
-  },
-  {
-    id: "G-07",
-    title: "FINAL DEFENCE",
-    window: "22 FEB // 13:00",
-    brief: "Live defence of exploit logic before the evaluation panel.",
-  },
-  {
-    id: "G-08",
-    title: "RECOGNITION PROTOCOL",
-    window: "22 FEB // 18:00",
-    brief: "Secured vault unlocked. Top attacking nodes are decorated.",
-  },
-];
-
-function GatewayRow({ gate, index }: { gate: Gateway; index: number }) {
+function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number }) {
   const ref = useRef<HTMLLIElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
 
@@ -100,7 +43,7 @@ function GatewayRow({ gate, index }: { gate: Gateway; index: number }) {
               {gate.title}
             </h3>
           </div>
-          <span className="font-mono text-[9px] tracking-widest text-cyber-blue/80 text-glow-dim">
+          <span className="font-terminal text-xs font-bold tracking-[0.08em] text-cyber-blue/90 md:text-sm">
             {gate.window}
           </span>
         </div>
@@ -143,7 +86,7 @@ export default function EventPathway() {
       />
 
       <ol className="flex flex-col">
-        {GATEWAYS.map((gate, i) => (
+        {EVENT_SCHEDULE.map((gate, i) => (
           <GatewayRow key={gate.id} gate={gate} index={i} />
         ))}
       </ol>

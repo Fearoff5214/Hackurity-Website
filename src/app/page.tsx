@@ -11,11 +11,12 @@ import {
   TechTable 
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
-import CctvFeed from "@/components/CctvFeed";
+import EventActivityStatus from "@/components/EventActivityStatus";
 import QueryTerminal from "@/components/QueryTerminal";
 import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
+import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
 
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
@@ -359,29 +360,24 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-ping" />
                 <span>CTF_NODE_CONNECTED</span>
               </span>
-              <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl tracking-tight leading-none text-white uppercase text-glow-tan">
-                OPERATION <span className="text-cyber-tan">//</span> HACKURITY
+              <h1 className="font-heading text-xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-2xl lg:text-3xl">
+                HACKURITY 2026 <span className="text-cyber-tan">—</span> POWERED BY IBM
               </h1>
               <p className="font-mono text-[10px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
               </p>
-              <p className="font-mono text-xs leading-relaxed text-cyber-gray mt-2">
-                A 48-hour cybersecurity hackathon for students. Pick a track, team up, and build or break something real — hidden challenges, live mentors, and prizes at the end. No prior security experience needed.
-              </p>
+              <div className="mt-2 space-y-3 border-l-2 border-cyber-tan/45 pl-4">
+                <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+                  Hackurity 2026 is a 48-hour cybersecurity hackathon for curious builders, problem-solvers and future defenders. Pick a track, form a team, and turn a security challenge into something useful, resilient and real.
+                </p>
+                <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+                  Across workshops, mentor channels and the final defence, participants will investigate modern attack surfaces, learn from one another and present ideas that make the digital world safer. New to cybersecurity? You belong here too.
+                </p>
+              </div>
 
             </div>
 
             <div className="flex flex-col gap-4">
-              <TechTable 
-                title="HACKURITY MAIN NETWORK TELEMETRY"
-                headers={["Threat Matrix", "Status Value", "Status"]}
-                rows={[
-                  ["ACTIVE THREATS", "1,024 SOURCES", "HIGH_LOAD"],
-                  ["ENCRYPTION LEVEL", "AES-256", "NOMINAL"],
-                  ["SYSTEM STATUS", "COMPROMISED", "WARNING"]
-                ]}
-              />
-
               <div className="grid grid-cols-2 gap-3 mt-1">
                 <a 
                   href="#join_node"
@@ -506,7 +502,7 @@ export default function Home() {
         </section>
 
         {/* 5. SECTION FOUR: "04. INFILTRATION LEADERBOARD" */}
-        <section id="leaderboard" className="flex flex-col gap-6 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+        <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
           <CornerCrosshairs />
 
           {/* Symmetrical Header */}
@@ -519,7 +515,7 @@ export default function Home() {
                 04. INFILTRATION LEADERBOARD
               </h2>
               <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-cyber-gray">
-                Live scores from the venue, plus a camera feed from the hall itself. Ask for access to unscramble the camera view.
+                Follow the strongest teams as the event unfolds. The live activity channel alongside the rankings automatically follows the event schedule.
               </p>
             </div>
             <div className="font-mono text-[10px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
@@ -528,31 +524,26 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Venue camera panel: blurred until the visitor requests access. */}
-          <div className="w-full border border-cyber-blue/10 relative">
-            <div className="h-[380px] w-full relative">
-              <CctvFeed />
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+            <div
+              tabIndex={0}
+              aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
+              className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2"
+            >
+              <div className="min-w-[640px]">
+                <TechTable 
+                  title="TOP ATTACKING NODES LEADERBOARD"
+                  headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
+                  rows={[
+                    ["1ST PLACE", "TBS", "TBD", "1,250 PTS"],
+                    ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
+                    ["3RD PLACE", "TBD", "TBD", "950 PTS"],
+                    ["4TH PLACE", "TBD", "TBD", "800 PTS"]
+                  ]}
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Leaderboard Table below it */}
-          <div
-            tabIndex={0}
-            aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
-            className="w-full mt-4 overflow-x-auto overscroll-x-contain touch-pan-x pb-2"
-          >
-            <div className="min-w-[640px]">
-              <TechTable 
-                title="TOP ATTACKING NODES LEADERBOARD"
-                headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
-                rows={[
-                  ["1ST PLACE", "TBS", "TBD", "1,250 PTS"],
-                  ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
-                  ["3RD PLACE", "TBD", "TBD", "950 PTS"],
-                  ["4TH PLACE", "TBD", "TBD", "800 PTS"]
-                ]}
-              />
-            </div>
+            <EventActivityStatus />
           </div>
         </section>
 
@@ -637,6 +628,10 @@ export default function Home() {
           </div>
         </section>
 
+        <PartnersSection />
+
+        <MentorsSection />
+
         {/* 6. SPECIFICATIONS & TECH STATS */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           {/* Left panel */}
@@ -706,6 +701,8 @@ export default function Home() {
           </BracketFrame>
         </section>
 
+        <ContactSection />
+
       </main>
 
       {/* FOOTER */}
@@ -713,7 +710,7 @@ export default function Home() {
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <span className="font-heading text-xs tracking-[0.2em] font-bold text-white text-glow-tan">
-              HACKURITY <span className="text-cyber-tan">//</span> HACKATHON
+              HACKURITY 2026 <span className="text-cyber-tan">//</span> POWERED BY IBM
             </span>
             <span className="text-[10px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
           </div>

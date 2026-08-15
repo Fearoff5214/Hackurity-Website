@@ -103,7 +103,7 @@ export default function SponsorZone() {
 
               <div className="mt-6 grid gap-3 md:grid-cols-3">
                 <a
-                  href={SPONSOR_BROCHURE_URL}
+                  href= "https://drive.google.com/file/d/1SJcJpz-M5R4wPFpblXslNkSZS_JIQPre/view?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex min-h-28 flex-col justify-between border border-cyber-tan/35 bg-cyber-tan/5 p-4 font-mono text-xs font-bold tracking-widest text-cyber-tan uppercase transition-all hover:-translate-y-1 hover:bg-cyber-tan/15"

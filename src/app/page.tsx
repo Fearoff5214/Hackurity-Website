@@ -16,6 +16,7 @@ import QueryTerminal from "@/components/QueryTerminal";
 import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
+import ibmLogo from "@/assests/ibm-logo.svg";
 import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
 
 // Dynamically import WebGL elements to prevent SSR issues
@@ -174,7 +175,7 @@ export default function Home() {
   const stepThreeReady = Boolean(projectIdea.trim() && acceptedTerms && acceptedConduct);
 
   return (
-    <div className="min-h-screen bg-cyber-black text-white relative font-mono overflow-x-hidden cyber-grid">
+    <div className="min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
       {/* Site boot sequence */}
       <SiteLoader />
 
@@ -185,16 +186,16 @@ export default function Home() {
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.06)_0%,transparent_60%)] pointer-events-none" />
 
-      {/* 1. NAVIGATION BAR — sticks to the top and shifts into "attack mode" on scroll */}
+      {/* 1. NAVIGATION BAR — fixed to top, compacts on scroll */}
       <motion.header
         initial={false}
         animate={{
-          backgroundColor: navAttack ? "rgba(3,3,12,0.94)" : "rgba(0,0,0,0.7)",
+          backgroundColor: navAttack ? "rgba(3,3,12,0.96)" : "rgba(0,0,0,0.82)",
           paddingTop: navAttack ? 8 : 14,
           paddingBottom: navAttack ? 8 : 14,
         }}
         transition={{ duration: 0.35, ease: "easeOut" }}
-        className={`sticky top-0 z-40 w-full select-none border-b px-4 backdrop-blur-md md:px-8 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full select-none border-b px-4 backdrop-blur-md md:px-8 ${
           navAttack ? "border-cyber-tan/30 nav-attack" : "border-cyber-blue/10"
         }`}
       >
@@ -219,21 +220,34 @@ export default function Home() {
         </AnimatePresence>
 
         <div className="flex items-center justify-between gap-3">
-          {/* Left: Stylized Geometric Logo */}
+          {/* Left: Stylized Geometric Logo — compacts to logo-only on scroll */}
           <a href="#mission_brief" className="flex shrink-0 items-center gap-2.5">
             <motion.svg
               viewBox="0 0 100 100"
               animate={navAttack ? { rotate: [0, -4, 4, 0] } : { rotate: 0 }}
-              transition={{ duration: 3, repeat: navAttack ? Infinity : 0, ease: "easeInOut" }}
-              className="h-8 w-8 fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_4px_rgba(99,102,241,0.8)]"
+              transition={{ duration: navAttack ? 3 : 0.35, repeat: navAttack ? Infinity : 0, ease: "easeInOut" }}
+              className={`fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_4px_rgba(99,102,241,0.8)] transition-all duration-350 ease-out ${
+                navAttack ? "h-7 w-7" : "h-8 w-8"
+              }`}
             >
               <polygon points="50,15 85,80 15,80" />
               <polygon points="50,40 70,80 30,80" className="opacity-60 stroke-[4]" />
               <line x1="50" y1="15" x2="50" y2="80" className="opacity-40 stroke-[2] stroke-white" />
             </motion.svg>
-            <span className="font-heading text-[11px] font-bold tracking-[0.22em] text-white sm:text-xs">
-              HACKURITY <span className="text-cyber-tan">//</span> SEC
-            </span>
+            <AnimatePresence initial={false}>
+              {!navAttack && (
+                <motion.span
+                  key="nav-brand-text"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="overflow-hidden whitespace-nowrap font-heading text-[11px] font-bold tracking-[0.22em] text-white sm:text-xs"
+                >
+                  HACKURITY <span className="text-cyber-tan">//</span> SEC
+                </motion.span>
+              )}
+            </AnimatePresence>
           </a>
 
           {/* Desktop navigation */}
@@ -340,6 +354,11 @@ export default function Home() {
         </AnimatePresence>
       </motion.header>
 
+      {/* Spacer so page content clears the fixed navbar */}
+      <div
+        aria-hidden="true"
+        className={`transition-[height] duration-350 ease-out ${navAttack ? "h-[52px]" : "h-[60px]"}`}
+      />
 
       {/* MAIN CONTAINER */}
       <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10">
@@ -362,8 +381,15 @@ export default function Home() {
                 <span>CTF_NODE_CONNECTED</span>
               </span>
               <h1 className="font-heading text-xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-2xl lg:text-3xl">
-                HACKURITY 2026 <span className="text-cyber-tan">—</span> powered by ibm 
+                HACKURITY 2026
               </h1>
+              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className="font-heading text-lg text-cyber-tan md:text-xl">—</span>
+                <span className="font-mono text-xs tracking-[0.25em] text-cyber-gray lowercase md:text-sm">
+                  powered by
+                </span>
+                <img src={ibmLogo.src} alt="IBM" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
+              </div>
               <p className="font-mono text-[10px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
               </p>
@@ -726,26 +752,40 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+          <div className="relative min-h-[320px]">
             <div
-              tabIndex={0}
-              aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
-              className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2"
+              className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch blur-[2px] opacity-50 pointer-events-none select-none"
+              aria-hidden="true"
             >
-              <div className="min-w-[640px]">
-                <TechTable 
-                  title="TOP ATTACKING NODES LEADERBOARD"
-                  headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
-                  rows={[
-                    ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
-                    ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
-                    ["3RD PLACE", "TBD", "TBD", "950 PTS"],
-                    ["4TH PLACE", "TBD", "TBD", "800 PTS"]
-                  ]}
-                />
+              <div className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2">
+                <div className="min-w-[640px]">
+                  <TechTable 
+                    title="TOP ATTACKING NODES LEADERBOARD"
+                    headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
+                    rows={[
+                      ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
+                      ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
+                      ["3RD PLACE", "TBD", "TBD", "950 PTS"],
+                      ["4TH PLACE", "TBD", "TBD", "800 PTS"]
+                    ]}
+                  />
+                </div>
               </div>
+              <EventActivityStatus />
             </div>
-            <EventActivityStatus />
+
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-cyber-black/25 px-4">
+              <button
+                type="button"
+                disabled
+                className="border border-cyber-tan/50 bg-cyber-tan/10 px-6 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase cursor-not-allowed opacity-90"
+              >
+                View Leader Board
+              </button>
+              <p className="mt-3 max-w-xs text-center font-mono text-[9px] leading-relaxed tracking-wide text-cyber-gray/80">
+                (Leader board will be available after the conclusion of event)
+              </p>
+            </div>
           </div>
         </section>
 
@@ -755,8 +795,14 @@ export default function Home() {
       <footer className="w-full bg-cyber-dark/40 border-t border-cyber-blue/10 py-10 px-4 md:px-8 mt-16 select-none relative z-10 text-xs text-cyber-gray">
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <span className="font-heading text-xs tracking-[0.2em] font-bold text-white text-glow-tan">
-              HACKURITY 2026 <span className="text-cyber-tan">//</span> POWERED BY IBM
+            <span className="flex flex-wrap items-center gap-x-2 gap-y-1 font-heading text-xs tracking-[0.2em] font-bold text-white text-glow-tan">
+              HACKURITY 2026
+              <span className="inline-flex items-center gap-2 normal-case">
+                <span className="font-mono text-[10px] font-normal tracking-[0.25em] text-cyber-gray lowercase md:text-xs">
+                  powered by
+                </span>
+                <img src={ibmLogo.src} alt="IBM" className="h-6 w-auto object-contain md:h-7" />
+              </span>
             </span>
             <span className="text-[10px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
           </div>

@@ -77,7 +77,8 @@ export default function Home() {
     { name: "LEADERBOARD", label: "LEADERBOARD", href: "#leaderboard" },
     { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
     { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
-    { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }
+    // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }, 
+    {name : "CONTACT US" , label : "CONTACT_US" , href : "#contact_us"}
   ];
 
 
@@ -361,7 +362,7 @@ export default function Home() {
                 <span>CTF_NODE_CONNECTED</span>
               </span>
               <h1 className="font-heading text-xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-2xl lg:text-3xl">
-                HACKURITY 2026 <span className="text-cyber-tan">—</span> POWERED BY IBM
+                HACKURITY 2026 <span className="text-cyber-tan">—</span> powered by ibm 
               </h1>
               <p className="font-mono text-[10px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
@@ -383,7 +384,7 @@ export default function Home() {
                   href="#join_node"
                   className="px-4 py-2.5 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[10px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
                 >
-                  [ ACCESS_NODE ]
+                  [ REGISTER NOW]
                 </a>
                 <button 
                   onClick={() => {
@@ -429,7 +430,7 @@ export default function Home() {
                 <span className="text-[10px] text-cyber-gray tracking-widest font-bold">08 DOMAINS // 2 PROBLEMS EACH</span>
               </div>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
-                // 02. HACKATHON DOMAINS // RULES
+                // HACKATHON DOMAINS // RULES
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
                 There are eight themes to choose from, and each one comes with two problem statements released at the start. Pick the theme that fits your team before the build window opens.
@@ -485,7 +486,7 @@ export default function Home() {
                 // SYSTEM_SEQUENCE_NODE_03
               </span>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
-                03. EVENT EXECUTION TIMELINE
+                EVENT EXECUTION TIMELINE
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
                 Here is what happens and when, from the day registrations open to the closing prize ceremony. Each step hands over to the next, so you always know what is coming.
@@ -502,11 +503,11 @@ export default function Home() {
         </section>
 
         {/* 5. SECTION FOUR: "04. INFILTRATION LEADERBOARD" */}
-        <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
-          <CornerCrosshairs />
+        {/* <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
+          <CornerCrosshairs /> */}
 
           {/* Symmetrical Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
+          {/* <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
             <div className="flex flex-col gap-1.5">
               <span className="text-[9px] tracking-widest text-cyber-tan font-bold uppercase">
                 // SYSTEM_SEQUENCE_NODE_04
@@ -522,9 +523,9 @@ export default function Home() {
               <div>MONITOR_GRID: LEADERBOARD</div>
               <div>STATION_ID: NO_45</div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+          {/* <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
             <div
               tabIndex={0}
               aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
@@ -535,7 +536,7 @@ export default function Home() {
                   title="TOP ATTACKING NODES LEADERBOARD"
                   headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
                   rows={[
-                    ["1ST PLACE", "TBS", "TBD", "1,250 PTS"],
+                    ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
                     ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
                     ["3RD PLACE", "TBD", "TBD", "950 PTS"],
                     ["4TH PLACE", "TBD", "TBD", "800 PTS"]
@@ -545,13 +546,13 @@ export default function Home() {
             </div>
             <EventActivityStatus />
           </div>
-        </section>
+        </section> */}
 
         {/* 6. SECTION FIVE: "05. JOIN NODE // REGISTRATION CONSOLE" */}
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
           <div className="lg:col-span-5 flex flex-col justify-center gap-5">
-            <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">// 05. REGISTER NOW // SECURE REGISTRY</span>
+            <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">//REGISTER NOW // SECURE REGISTRY</span>
             <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">SECURE YOUR NODE NOW</h2>
             <p className="font-mono text-xs text-cyber-gray leading-relaxed">
               Fill in your team details, add each member, and confirm your entry. It takes about two minutes and registration is completely free.
@@ -591,7 +592,7 @@ export default function Home() {
           <div className="flex flex-col gap-2 border-b border-cyber-blue/15 pb-4 md:flex-row md:items-end md:justify-between">
             <div className="flex max-w-2xl flex-col gap-2">
               <span className="text-[9px] font-bold tracking-widest text-cyber-tan uppercase">// SYSTEM_SEQUENCE_NODE_06</span>
-              <h2 className="font-heading text-xl tracking-tight text-white uppercase md:text-2xl">06. QUERY TERMINAL</h2>
+              <h2 className="font-heading text-xl tracking-tight text-white uppercase md:text-2xl">QUERY TERMINAL</h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
                 Common questions, answered plainly. Pick a question on the left and the answer prints out on the right.
               </p>
@@ -608,7 +609,7 @@ export default function Home() {
           <CornerCrosshairs />
           <div className="lg:col-span-6 flex flex-col justify-center gap-5">
             <span className="text-[9px] font-bold tracking-widest text-cyber-tan uppercase font-mono">// SYSTEM_SEQUENCE_NODE_07</span>
-            <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase md:text-2xl">07. SPONSOR NOW</h2>
+            <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase md:text-2xl">SPONSOR NOW</h2>
             <p className="font-mono text-xs leading-relaxed text-cyber-gray">
               Back the event and put your brand in front of hundreds of student security engineers. Download the brochure, send us a question, or pick a partnership tier straight away.
             </p>
@@ -633,9 +634,9 @@ export default function Home() {
         <MentorsSection />
 
         {/* 6. SPECIFICATIONS & TECH STATS */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        {/* <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch"> */}
           {/* Left panel */}
-          <BracketFrame>
+          {/* <BracketFrame>
             <div className="flex flex-col gap-4 relative">
               <div className="flex justify-between items-center text-[10px] text-cyber-tan border-b border-cyber-blue/10 pb-2">
                 <span>STATION: HACKURITY_CONDUIT_GRID</span>
@@ -662,10 +663,10 @@ export default function Home() {
                 ATTENTION: DO NOT INJECT UNVERIFIED CODE PAYLOADS OUTSIDE SANDBOXED CONTAINMENT CORE CHANNELS.
               </div>
             </div>
-          </BracketFrame>
+          </BracketFrame> */}
 
           {/* Right panel */}
-          <BracketFrame>
+          {/* <BracketFrame>
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-center text-[10px] text-cyber-tan border-b border-cyber-blue/10 pb-2">
                 <span>MODULE: STACK_SPECIFICATIONS</span>
@@ -699,9 +700,54 @@ export default function Home() {
               </div>
             </div>
           </BracketFrame>
-        </section>
+        </section> */}
 
         <ContactSection />
+         {/* 5. SECTION FOUR: "04. INFILTRATION LEADERBOARD" */}
+        <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
+          <CornerCrosshairs />
+
+          {/* Symmetrical Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[9px] tracking-widest text-cyber-tan font-bold uppercase">
+                // SYSTEM_SEQUENCE_NODE_04
+              </span>
+              <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
+                LEADERBOARD
+              </h2>
+              <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-cyber-gray">
+                Follow the strongest teams as the event unfolds. The live activity channel alongside the rankings automatically follows the event schedule.
+              </p>
+            </div>
+            <div className="font-mono text-[10px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
+              <div>MONITOR_GRID: LEADERBOARD</div>
+              <div>STATION_ID: NO_45</div>
+            </div>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+            <div
+              tabIndex={0}
+              aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
+              className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2"
+            >
+              <div className="min-w-[640px]">
+                <TechTable 
+                  title="TOP ATTACKING NODES LEADERBOARD"
+                  headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
+                  rows={[
+                    ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
+                    ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
+                    ["3RD PLACE", "TBD", "TBD", "950 PTS"],
+                    ["4TH PLACE", "TBD", "TBD", "800 PTS"]
+                  ]}
+                />
+              </div>
+            </div>
+            <EventActivityStatus />
+          </div>
+        </section>
 
       </main>
 

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ibmLogo from "@/assests/ibm-logo.svg";
 
 const BOOT_LINES = [
   "Establishing secure connection",
@@ -88,9 +89,12 @@ export default function SiteLoader() {
               >
                 HACKURITY
               </motion.h1>
-              <p className="mt-2 font-mono text-[9px] tracking-[0.35em] text-cyber-tan uppercase">
-                POWERED BY IBM
-              </p>
+              <div className="mt-2 flex items-center justify-center gap-2.5">
+                <span className="font-mono text-[10px] tracking-[0.35em] text-cyber-gray lowercase sm:text-xs">
+                  powered by
+                </span>
+                <img src={ibmLogo.src} alt="IBM" className="h-6 w-auto object-contain sm:h-7" />
+              </div>
             </div>
 
             <div className="w-full">

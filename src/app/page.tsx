@@ -18,6 +18,7 @@ import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import ibmLogo from "@/assests/ibm-logo.svg";
 import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
+import CreatorsSection from "@/components/CreatorsSection";
 
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
@@ -79,7 +80,8 @@ export default function Home() {
     { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
     { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
     // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }, 
-    {name : "CONTACT US" , label : "CONTACT_US" , href : "#contact_us"}
+    {name : "CONTACT US" , label : "CONTACT_US" , href : "#contact_us"},
+    { name: "CREATORS", label: "MEET_THE_CREATORS", href: "#meet_the_creators" }
   ];
 
 
@@ -788,6 +790,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <CreatorsSection />
 
       </main>
 

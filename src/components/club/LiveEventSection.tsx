@@ -73,7 +73,7 @@ export default function LiveEventSection() {
                 Hackurity 2026
               </h3>
               <p className="mt-4 max-w-xl font-mono text-[12.5px] leading-relaxed text-cyber-gray">
-                Our biggest event of the year: a two-day cybersecurity hackathon where student teams
+                Our biggest event of the year: a 24-hour cybersecurity hackathon where student teams
                 pick a challenge track, build something over the weekend and present it to a panel.
                 Beginners and experienced teams compete in the same space, with mentors on the floor
                 the whole time.

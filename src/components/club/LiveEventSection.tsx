@@ -11,7 +11,7 @@ const FACTS = [
   { label: "Dates", value: "14 – 15 March 2026" },
   { label: "Venue", value: "REVA University, Bangalore" },
   { label: "Team size", value: "3 – 4 members" },
-  { label: "Entry", value: "Free for all students" },
+  { label: "Entry", value: "₹800 per team" },
 ];
 
 function useCountdown() {

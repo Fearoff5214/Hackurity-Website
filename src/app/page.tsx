@@ -633,6 +633,32 @@ export default function Home() {
         </section>
 
         {/* 8. SECTION SEVEN: SPONSOR NOW */}
+        {/* <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+          <CornerCrosshairs />
+          <div className="lg:col-span-6 flex flex-col justify-center gap-5">
+            <span className="text-[9px] font-bold tracking-widest text-cyber-tan uppercase font-mono">// SYSTEM_SEQUENCE_NODE_07</span>
+            <h2 className="font-heading text-xl tracking-tight leading-none text-white uppercase md:text-2xl">SPONSOR NOW</h2>
+            <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+              Back the event and put your brand in front of hundreds of student security engineers. Download the brochure, send us a question, or pick a partnership tier straight away.
+            </p>
+            <SponsorZone />
+          </div>
+          <div className="lg:col-span-6 relative min-h-[220px] border border-cyber-blue/15 bg-cyber-black/45 p-5 font-mono text-[11px] text-cyber-blue/80">
+            <div className="absolute inset-0 cyber-grid opacity-60 pointer-events-none" />
+            <div className="relative flex items-center justify-between border-b border-cyber-blue/15 pb-3">
+              <span>// PARTNER_UPLINK</span><span className="text-cyber-tan animate-pulse">OPEN</span>
+            </div>
+            <div className="relative mt-4 space-y-2 text-cyber-gray">
+              <div>guest@hackurity:~$ partners --overview</div>
+              <div className="text-white">&gt; 4 partnership tiers available</div>
+              <div>&gt; Reach: 500+ students across engineering campuses</div>
+              <div>&gt; Includes stage time, branding and hiring access</div>
+            </div>
+          </div>
+        </section> */}
+        <MentorsSection/>
+        <PartnersSection />
+ {/* 8. SECTION SEVEN: SPONSOR NOW */}
         <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
           <CornerCrosshairs />
           <div className="lg:col-span-6 flex flex-col justify-center gap-5">
@@ -657,9 +683,7 @@ export default function Home() {
           </div>
         </section>
 
-        <PartnersSection />
-
-        <MentorsSection />
+        {/* <MentorsSection /> */}
 
         {/* 6. SPECIFICATIONS & TECH STATS */}
         {/* <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch"> */}

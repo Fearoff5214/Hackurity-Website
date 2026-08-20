@@ -48,11 +48,11 @@ export default function Home() {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [registrationStep, setRegistrationStep] = useState(1);
   const [teamName, setTeamName] = useState("");
-  const [teamSize, setTeamSize] = useState("1");
+  const [teamSize, setTeamSize] = useState("3");
   const [university, setUniversity] = useState("");
   const [selectedDomain, setSelectedDomain] = useState("");
   const [experienceLevel, setExperienceLevel] = useState("");
-  const [members, setMembers] = useState([{ name: "", email: "", role: "", portfolio: "" }]);
+  const [members, setMembers] = useState([{ name: "", email: "", role: "", portfolio: "" },{ name: "", email: "", role: "", portfolio: "" },{ name: "", email: "", role: "", portfolio: "" },]);
   const [projectIdea, setProjectIdea] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedConduct, setAcceptedConduct] = useState(false);
@@ -137,14 +137,20 @@ export default function Home() {
     };
   }, []);
 
+  const TEAM_SIZE_OPTIONS = ["3", "4"] as const;
+
   const updateTeamSize = (value: string) => {
-    const size = Number(value);
-    setTeamSize(value);
+    const safeValue = TEAM_SIZE_OPTIONS.includes(value as typeof TEAM_SIZE_OPTIONS[number])
+      ? value
+      : TEAM_SIZE_OPTIONS[0];
+    const size = Number(safeValue);
+    setTeamSize(safeValue);
     setMembers((currentMembers) => Array.from(
       { length: size },
       (_, index) => currentMembers[index] ?? { name: "", email: "", role: "", portfolio: "" }
     ));
   };
+
 
   const updateMember = (index: number, field: "name" | "email" | "role" | "portfolio", value: string) => {
     setMembers((currentMembers) => currentMembers.map((member, memberIndex) => (
@@ -161,11 +167,11 @@ export default function Home() {
   const resetRegistration = () => {
     setRegistrationStep(1);
     setTeamName("");
-    setTeamSize("1");
+    setTeamSize("3");
     setUniversity("");
     setSelectedDomain("");
     setExperienceLevel("");
-    setMembers([{ name: "", email: "", role: "", portfolio: "" }]);
+    setMembers([{ name: "", email: "", role: "", portfolio: "" },      { name: "", email: "", role: "", portfolio: "" },      { name: "", email: "", role: "", portfolio: "" },]);
     setProjectIdea("");
     setAcceptedTerms(false);
     setAcceptedConduct(false);

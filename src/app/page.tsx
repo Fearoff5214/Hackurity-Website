@@ -246,7 +246,7 @@ export default function Home() {
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   className="overflow-hidden whitespace-nowrap font-heading text-[11px] font-bold tracking-[0.22em] text-white sm:text-xs"
                 >
-                  HACKURITY <span className="text-cyber-tan">//</span> REVA CSE
+                  HACKURITY <span className="text-cyber-tan">//</span> 2026
                 </motion.span>
               )}
             </AnimatePresence>
@@ -397,7 +397,7 @@ export default function Home() {
               </p>
               <div className="mt-2 space-y-3 border-l-2 border-cyber-tan/45 pl-4">
                 <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                  Hackurity 2026 is a 48-hour cybersecurity hackathon for curious builders, problem-solvers and future defenders. Pick a track, form a team, and turn a security challenge into something useful, resilient and real.
+                  Hackurity 2026 is a 24-hour cybersecurity hackathon for curious builders, problem-solvers and future defenders. Pick a track, form a team, and turn a security challenge into something useful, resilient and real.
                 </p>
                 <p className="font-mono text-xs leading-relaxed text-cyber-gray">
                   Across workshops, mentor channels and the final defence, participants will investigate modern attack surfaces, learn from one another and present ideas that make the digital world safer. New to cybersecurity? You belong here too.
@@ -458,7 +458,7 @@ export default function Home() {
                 <span className="text-[10px] text-cyber-gray tracking-widest font-bold">08 DOMAINS // 2 PROBLEMS EACH</span>
               </div>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
-                // HACKATHON DOMAINS // RULES
+                // HACKATHON DOMAINS 
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
                 There are eight themes to choose from, and each one comes with two problem statements released at the start. Pick the theme that fits your team before the build window opens.
@@ -581,7 +581,7 @@ export default function Home() {
           <CornerCrosshairs />
           <div className="lg:col-span-5 flex flex-col justify-center gap-5">
             <span className="text-[9px] tracking-widest text-cyber-tan font-bold font-mono">//REGISTER NOW // SECURE REGISTRY</span>
-            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">SECURE YOUR NODE NOW</h2>
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">REGISTRATION TERMINAL</h2>
             <p className="font-mono text-xs text-cyber-gray leading-relaxed">
               Fill in your team details, add each member, and confirm your entry. It takes about two minutes and registration is completely free.
             </p>
@@ -595,7 +595,7 @@ export default function Home() {
               className="relative overflow-hidden w-full md:w-fit px-6 py-3.5 border-2 border-cyber-tan/70 bg-cyber-tan/15 text-white font-mono text-xs font-bold tracking-[0.2em] text-center uppercase cursor-pointer hover:bg-cyber-tan/25 transition-colors"
             >
               <motion.span aria-hidden="true" className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent" animate={{ x: ["0%", "420%"] }} transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }} />
-              <span className="relative">Secure Your Node Now →</span>
+              <span className="relative">REGISTER YOUR TEAM NOW→</span>
             </motion.button>
             <div className="text-[9px] text-cyber-tan/40 leading-normal select-none">SECURE REGISTRY: ALL DATA IS SIGNED AND ENCRYPTED IN TRANSIT.</div>
           </div>

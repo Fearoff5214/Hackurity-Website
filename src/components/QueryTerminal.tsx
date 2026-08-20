@@ -22,19 +22,19 @@ const RECORDS: QaRecord[] = [
     id: "03",
     question: "Is there a registration fee?",
     answer:
-      "No fee at all. Entry, workshops, meals and everything you need on site are covered by our partners.",
+      "A minimum fee of ₹800 is applicable for registration of team consisting <min 3>//< max 4> members ",
   },
   {
     id: "04",
     question: "Is the event online or in person?",
     answer:
-      "The 48-hour build happens in person at the venue. The workshops and problem-statement briefings in the weeks before are streamed and recorded so you can watch from anywhere.",
+      "The 24-hour build happens in person at the venue. The workshops and problem-statement briefings in the weeks before are streamed and recorded so you can watch from anywhere.",
   },
   {
     id: "05",
     question: "What should my team bring?",
     answer:
-      "Laptops, chargers, any special hardware your track needs, and a valid student ID. Internet, power, desks and lab machines are provided.",
+      "Laptops, chargers, any special hardware your track needs, a valid student ID & Entry pass for the event provided at the University Enterance Gate. Internet, power, desks and lab machines are provided.",
   },
   {
     id: "06",

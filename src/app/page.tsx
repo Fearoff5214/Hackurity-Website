@@ -246,7 +246,7 @@ export default function Home() {
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   className="overflow-hidden whitespace-nowrap font-heading text-[11px] font-bold tracking-[0.22em] text-white sm:text-xs"
                 >
-                  HACKURITY <span className="text-cyber-tan">//</span> SEC
+                  HACKURITY <span className="text-cyber-tan">//</span> REVA CSE
                 </motion.span>
               )}
             </AnimatePresence>

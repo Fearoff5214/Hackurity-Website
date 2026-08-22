@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackurity 2026 — REVA University Cybersecurity Club</title>
+  <meta name="description" content="Hackurity 2026 is the flagship cybersecurity hackathon organized by the Cybersecurity Club, CSE Department, REVA University." />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] } } }
+    };
+  </script>
+
+  <style>
+    /* â”€â”€ CSS custom property â”€â”€ */
+    :root { --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+    /* â”€â”€ Typewriter cursor blink (as specified) â”€â”€ */
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .animate-blink { animation: blink 1s step-end infinite; }
+
+    /* â”€â”€ Custom cursor â”€â”€ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+
+
+    /* â”€â”€ Mouse glow â”€â”€ */
+
+
+    /* â”€â”€ Tilt card â”€â”€ */
+    .tilt { transform-style: preserve-3d; }
+
+    /* â”€â”€ Selection â”€â”€ */
+    ::selection { background: #1E3A5F; color: #F0E8D8; }
+
+    /* â”€â”€ Scrollbar â”€â”€ */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #040E1A; }
+    ::-webkit-scrollbar-thumb { background: #1E3A5F; border-radius: 3px; }
+
+    /* â”€â”€ Shared animations for motion shim â”€â”€ */
+    @keyframes pulse { 0%,100%{opacity:.65;transform:scale(1)} 50%{opacity:1;transform:scale(1.18)} }
+    @keyframes scaleIn { from{opacity:0;transform:scale(0.45)} to{opacity:1;transform:scale(1)} }
+
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+
+<!-- Cursor & glow layers removed -->
+<div id="root"></div>
+
+<!-- React 18 + ReactDOM -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<!-- Babel Standalone (JSX) -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- â”€â”€ Mouse effects: plain JS, no Babel, runs immediately â”€â”€ -->
+<script>
+(function() {
+  return; // Mouse effects disabled
+
+  var rx = -200, ry = -200, mx = -200, my = -200;
+
+
+
+
+
+
+})();
+</script>
+
+<!-- ── React Application ── -->
+<script>
+  if (window.Babel) {
+    Babel.registerPreset('custom-react', {
+      presets: [
+        [Babel.availablePresets['react'], { runtime: 'classic' }]
+      ]
+    });
+  }
+</script>
+<script type="text/babel" data-presets="custom-react" src="app.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ type Person = { name: string; role: string; url: string; image: string; bio?: st
 
 // Swap any `url` and `logo` values here when partnerships are confirmed.
 const PARTNERS: Partner[] = [
-  { name: "Palo Alto Networks", url: "https://www.paloaltonetworks.com", logo: "https://logo.clearbit.com/paloaltonetworks.com?size=256" },
+  { name: "IBM", url: "https://www.ibm.com/", logo: "https://www.ibm.com/brand/experience-guides/developer/8f4e3cc2b5d52354a6d43c8edba1e3c9/02_8-bar-reverse.svg" },
   { name: "Fortinet", url: "https://www.fortinet.com", logo: "https://logo.clearbit.com/fortinet.com?size=256" },
   { name: "Microsoft Security", url: "https://www.microsoft.com/security", logo: "https://logo.clearbit.com/microsoft.com?size=256" },
   { name: "CrowdStrike", url: "https://www.crowdstrike.com", logo: "https://logo.clearbit.com/crowdstrike.com?size=256" },

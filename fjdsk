@@ -1,0 +1,392 @@
+[33mcommit 4ad44b202e502e0cd8fee1164457ea6779ec8e45[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32momer_commits_3rd_branch[m[33m, [m[1;32mmain[m[33m)[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 23:02:42 2026 +0530
+
+    small change
+
+[33mcommit 894d7441c840cbc9cb9b710edd96c209a47e093f[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 22:55:28 2026 +0530
+
+    small change
+
+[33mcommit 689c4d2b25fff3a97c6d8b70918019c2f26449bc[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 22:50:14 2026 +0530
+
+    Created New Landing Page for the club that hosts link directing to Official Hackurity Website
+
+[33mcommit c3927cf34a88068bc1520d2cbc462bca172e0f5a[m
+Merge: 60d4036 3f1d27e
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 20:07:08 2026 +0530
+
+    Merge pull request #20 from Fearoff5214/feature-15-aug
+    
+    temporary files
+
+[33mcommit 3f1d27e3f5271f6a42db51aef1ece6b42ec00636[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 20:04:14 2026 +0530
+
+    temporary files
+
+[33mcommit 60d4036b47c82351807a7b567eaeb8a3f7d32967[m
+Merge: d5492be 031490d
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 19:21:01 2026 +0530
+
+    Merge pull request #19 from Fearoff5214/feature-15-aug
+    
+    fixed issue the previously was unresolved
+
+[33mcommit 031490df61680941d5fb021e0e730b2290b27451[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 19:18:26 2026 +0530
+
+    fixed issue the previously was unresolved
+
+[33mcommit d5492bef98e896888c8dbedf29d2d385787a3811[m
+Merge: ba0cd6e d8cb995
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 16:51:36 2026 +0530
+
+    Merge pull request #18 from Fearoff5214/feature-15-aug
+    
+    fixed error with operator detail showing 1 member for any teamsize
+
+[33mcommit d8cb99575210ca3248a1807d76dd0b8d87b0e7e8[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 16:50:24 2026 +0530
+
+    fixed error with operator detail showing 1 member for any teamsize
+
+[33mcommit ba0cd6e6311c609121ebe77af37c2bea5d990f7f[m
+Merge: d785a39 76c14ef
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 16:39:37 2026 +0530
+
+    Merge pull request #17 from Fearoff5214/feature-15-aug
+    
+    registration limited to 3-4 members
+
+[33mcommit 76c14ef9b2c68f12395a447f411eaf94d6925f14[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 16:38:09 2026 +0530
+
+    registration limited to 3-4 members
+
+[33mcommit d785a39566f26c9cbcf3ec6664d6368ffaef7f51[m
+Merge: 6c95d00 f49e599
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 16:25:16 2026 +0530
+
+    Merge pull request #16 from Fearoff5214/feature-15-aug
+    
+    re allocated section to match proper orders
+
+[33mcommit f49e599e8e77498e2dd8fb4b947c4e0e244983e9[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 16:22:25 2026 +0530
+
+    re allocated section to match proper orders
+
+[33mcommit 6c95d00629e244c416789dbc568a818736dc428c[m
+Merge: ec2e9fd 587b207
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 16:12:46 2026 +0530
+
+    Merge pull request #15 from Fearoff5214/feature-15-aug
+    
+     made some terms simpler for user feasibility
+
+[33mcommit 587b207c02973cdc194aae5ec2d2be02522f2b21[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 16:11:16 2026 +0530
+
+     made some terms simpler for user feasibility
+
+[33mcommit ec2e9fd4e61c23f2dd3d57c6a685584a9a85d926[m
+Merge: 32c76bb e441bc3
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Aug 20 14:22:57 2026 +0530
+
+    Merge pull request #14 from Fearoff5214/feature-15-aug
+    
+    Header name changed
+
+[33mcommit e441bc39c04faea806afd16e72f440f199fff089[m
+Author: Sedrah Maryam <sedrah1107@gmailcom>
+Date:   Thu Aug 20 14:20:05 2026 +0530
+
+    Header name changed
+
+[33mcommit 32c76bbbf227202c4089816a08eb7695e2cd0514[m
+Merge: f84b789 d0dce5f
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 17:48:14 2026 +0530
+
+    Merge pull request #13 from Fearoff5214/feature-15-aug
+    
+    terms&condition pdf added
+
+[33mcommit d0dce5fcad380a0c7eb04fbb60dc4c0b77a65824[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 17:47:10 2026 +0530
+
+    terms&condition pdf added
+
+[33mcommit f84b7899ec473fab70b15adda28de1809dff0913[m
+Merge: 94d033a 8c90130
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 15:30:03 2026 +0530
+
+    Merge pull request #12 from Fearoff5214/feature-15-aug
+    
+    added creator section for reviews"
+
+[33mcommit 8c901307840078a5d609a872bccb9ab519526577[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 15:27:40 2026 +0530
+
+    added creator section for reviews"
+    
+    "
+
+[33mcommit 94d033a3f899f5d6fc98d4eb26201806b493efcc[m
+Merge: 2c78742 0bf7dda
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 00:53:36 2026 +0530
+
+    Merge pull request #11 from Fearoff5214/feature-15-aug
+    
+    fixed ui , navbar sticks , leaderboard hidden
+
+[33mcommit 0bf7dda7120f754344619560cc81f9c77f2a6082[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 00:50:38 2026 +0530
+
+    fixed ui
+
+[33mcommit b4a5e45d23dd6051693563908a57cc19462b4edc[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 00:11:51 2026 +0530
+
+    new logo test
+
+[33mcommit 2c78742fdb84d2913a4aa911dad8f4ab7a1f9669[m
+Merge: c1ad217 00f8a5d
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 00:08:49 2026 +0530
+
+    Merge pull request #10 from Fearoff5214/feature-15-aug
+    
+    new logo test
+
+[33mcommit 00f8a5d4088b5844a270d4a5ad7231c8f363e0ae[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Mon Aug 17 00:08:00 2026 +0530
+
+    new logo test
+
+[33mcommit c1ad217c02a29ceff9db6e00a85acba9d926bc21[m
+Merge: 57acea5 c898e5d
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 22:42:38 2026 +0530
+
+    Merge pull request #9 from Fearoff5214/feature-15-aug
+    
+    small adjustments
+
+[33mcommit c898e5d8aa755e16d7c6f3700efe2fd7f328c7b3[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 22:41:34 2026 +0530
+
+    small adjustments
+
+[33mcommit 57acea5e87edbeb6022f7ef92ee0566cb4367fc0[m
+Merge: c363522 f0d716d
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 02:48:40 2026 +0530
+
+    Merge pull request #8 from Fearoff5214/feature-15-aug
+    
+    Feature 15 aug
+
+[33mcommit f0d716d6f1635480da316a1c9a5637c44ca738b5[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 02:45:55 2026 +0530
+
+    accesible brochure link added
+
+[33mcommit 63ded1d9aac346ae9b94a3442108e5ba34d2f18b[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 02:33:54 2026 +0530
+
+    inquiry update
+
+[33mcommit c3635221dc9ebede8b43363efa14dff09af422e4[m
+Merge: dc3fc02 0135229
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 02:30:50 2026 +0530
+
+    Merge pull request #7 from Fearoff5214/feature-15-aug
+    
+    testing features on 15 aug , removed and added stuff. Contact us , me…
+
+[33mcommit 0135229b768e46d5515aaee44417a91a66ed8d0e[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 02:29:26 2026 +0530
+
+    testing features on 15 aug , removed and added stuff. Contact us , mentor and sponsors sections , updated sponsor now pop ups , increased text sizes , re named the website
+
+[33mcommit dc3fc0262998a73136ea712648f763968a4a5507[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sun Aug 16 01:24:43 2026 +0530
+
+    Sponsorship inquiry fix
+
+[33mcommit 30ffd81539ddf89f891d98797eda97198208d949[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Wed Aug 5 23:12:47 2026 +0530
+
+    V2.0 significance enhancement
+
+[33mcommit 45ec329dd2e5895f357a984615e3ef01070c0d53[m[33m ([m[1;33mtag: [m[1;33mv2.0[m[33m)[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 18:16:24 2026 +0530
+
+    tbd
+
+[33mcommit e4416136d4308a423975565ff2a7e085206218fc[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 18:03:52 2026 +0530
+
+    reworked version
+
+[33mcommit 73e2e114d175375b8951751a125bd62099e7f9e4[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 17:41:30 2026 +0530
+
+    registry paload majorly changed
+
+[33mcommit d6e2e304e23fdee38046b4f9972009e789be3b44[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 17:15:22 2026 +0530
+
+    slide able nav bar test commit
+
+[33mcommit 8218b12c6ab6f8d5fbfde8e9e681fe70335ff23b[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 00:49:42 2026 +0530
+
+    title name modified to hackurity
+
+[33mcommit e3350c1c65c898139fdc3d575b0b203f4043a274[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Tue Aug 4 00:20:36 2026 +0530
+
+    Addition and modifications on platform
+
+[33mcommit d0b14a2cf955ee294440b14d420cbc7aa5908b1f[m
+Merge: ef18121 59a0ecb
+Author: Tanush-Jain <tanushjain2004@hotmail.com>
+Date:   Sun Aug 2 12:22:18 2026 +0530
+
+    Merge branch 'feature/my-new-feature'
+
+[33mcommit 59a0ecbcd98c76b601081ae8db2b4b8ab7ae934d[m[33m ([m[1;31morigin/feature/my-new-feature[m[33m)[m
+Author: Tanush-Jain <tanushjain2004@hotmail.com>
+Date:   Sun Aug 2 12:14:59 2026 +0530
+
+    major changes
+
+[33mcommit ef18121ef87f6e4e91f679ce7f5650bc73763846[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Thu Jul 30 19:00:24 2026 +0530
+
+    PDF link no longer requires log-in to MS
+
+[33mcommit c2425957fa95764678fc4e9d85b5a22d83c03f5f[m[33m ([m[1;31morigin/omer_review[m[33m)[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Wed Jul 29 02:59:46 2026 +0530
+
+    Added Sponsorship Section
+
+[33mcommit 0fc4aa214bfb3b47dbebd461bfda0ee8f5c84db6[m
+Merge: f39039b aac42b4
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sat Jul 18 22:48:46 2026 +0530
+
+    Merge pull request #4 from Fearoff5214/omer_review
+    
+    changed the colors of 'event schedule icon' --> tan & 'judges icons' …
+
+[33mcommit aac42b46b28b8b02d432235d8b66c2a083f78f53[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Sat Jul 18 22:46:27 2026 +0530
+
+    changed the colors of 'event schedule icon' --> tan & 'judges icons' --> dark blue
+
+[33mcommit f39039b96aeb47ebfa3318415c39f6c9ec7ce5a5[m
+Author: Logaa Paramesh L T <parameshlogaa@users.noreply.github.com>
+Date:   Mon Jul 13 01:16:39 2026 +0530
+
+    changed the colors
+
+[33mcommit 46e2ccb1752ae6a6c2df5c2a8b36f82f22c48abc[m
+Merge: b061eff 31c5d94
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Fri Jul 10 16:07:02 2026 +0530
+
+    Merge pull request #3 from Fearoff5214/omer_review
+    
+    modified tracker
+
+[33mcommit 31c5d94706c42ca90c88608aacc7c512b866f76d[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Fri Jul 10 16:05:49 2026 +0530
+
+    modified tracker
+
+[33mcommit b061effa07e6b1190ad7a12d0d3d2269bad7421c[m
+Merge: 6f5f543 4fbbe15
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Fri Jul 10 16:01:52 2026 +0530
+
+    Merge pull request #2 from Fearoff5214/omer_review
+    
+    created a objective tracker to review
+
+[33mcommit 4fbbe15bc30e221968e76bffcccaf5d900d1a3da[m
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Fri Jul 10 15:59:31 2026 +0530
+
+    created a objective tracker to review
+
+[33mcommit 6f5f543e1019b91885c8f31c22c627ed9409fcd0[m
+Merge: cb9fb46 72a8574
+Author: Mohammed Omar <omarofficial1054@gmail.com>
+Date:   Fri Jul 10 15:50:29 2026 +0530
+
+    Merge pull request #1 from Fearoff5214/feature/my-new-feature
+    
+    updated the UI and made changes
+
+[33mcommit 72a8574c699d4db39a98f158463b96e2979595a4[m
+Author: Tanush-Jain <tanushjain2004@hotmail.com>
+Date:   Fri Jul 10 15:24:32 2026 +0530
+
+    updated the UI and made changes
+
+[33mcommit cb9fb46502f71d9d939b497f48bb299791aa3249[m
+Author: Logaa Paramesh L T <parameshlogaa@users.noreply.github.com>
+Date:   Wed Jul 8 22:49:09 2026 +0530
+
+    Refine hackathon UI and content
+
+[33mcommit ef3a6bb0076a54abd2b502cfcb56f9dbffa60c83[m
+Author: Logaa Paramesh L T <147327006+Fearoff5214@users.noreply.github.com>
+Date:   Thu Jun 18 09:34:24 2026 +0530
+
+    Refactor: Split React application code and add python controller server script

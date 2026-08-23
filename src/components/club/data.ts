@@ -29,7 +29,7 @@ export const DEPARTMENTS: Department[] = [
   {
     id: "leadership",
     label: "Leadership",
-    blurb: "The two people who set the direction for the year and keep every team moving.",
+    blurb: "The people who set the direction for the year and keep every team moving.",
     people: [
       dummy(
         "Verril Vaaz",
@@ -44,6 +44,13 @@ export const DEPARTMENTS: Department[] = [
         "Show up, help someone, learn something. That is a good day.",
         "dharma-teja",
         "+91 98450 22346",
+      ),
+      dummy(
+        "Adithya Naik",
+        "Vice President",
+        "Plan for the worst case, then build for the common one.",
+        "adithya-naik",
+        "+91 98450 22347",
       ),
     ],
   },
@@ -159,49 +166,57 @@ export const DEPARTMENTS: Department[] = [
       ),
     ],
   },
+  {
+    id: "social-media",
+    label: "Social Media",
+    blurb: "Runs the club's presence online — placeholder roster, real names to follow.",
+    people: [
+      dummy(
+        "TBD",
+        "Social Media Head",
+        "Placeholder entry — swap in the real details.",
+        "social-media-head",
+        "+91 00000 00000",
+      ),
+    ],
+  },
 ];
 
-export type Faculty = Person & { title: string };
+export type TeamPortrait = {
+  name: string;
+  role: string;
+  linkedin: string;
+  photo: string;
+};
 
-export const FACULTY: Faculty[] = [
+// Photos and LinkedIn URLs land here as they're provided; until then the
+// card falls back to initials and a disabled LinkedIn icon.
+export const CONVENORS: TeamPortrait[] = [
   {
-    name: "Dr. Anand Krishnan",
-    title: "Faculty In-Charge",
-    role: "Professor, School of Computing & IT",
-    saying: "Students learn security best when they are allowed to try, fail and try again.",
-    email: "anand.krishnan@reva.edu.in",
-    phone: "+91 80 4696 6666",
-    github: "https://github.com/anand-krishnan",
-    linkedin: "https://www.linkedin.com/in/anand-krishnan",
+    name: "Dr. Ashwin Kumar U M",
+    role: "Director & Professor, School of Computer Science and Engineering",
+    linkedin: "",
+    photo: "/team/ashwinkumar-um.jpg",
   },
   {
-    name: "Dr. Priya Nandini",
-    title: "Faculty Co-ordinator",
-    role: "Associate Professor, Computer Science",
-    saying: "A curious student with a lab is worth more than any textbook chapter.",
-    email: "priya.nandini@reva.edu.in",
-    phone: "+91 80 4696 6667",
-    github: "https://github.com/priya-nandini",
-    linkedin: "https://www.linkedin.com/in/priya-nandini",
+    name: "Dr. N P Nethravathi",
+    role: "Professor and HOD of CSE (IoT and Cybersecurity including Blockchain Technology)",
+    linkedin: "",
+    photo: "/team/np-nethravathi.jpg",
+  },
+];
+
+export const FACULTY_IN_CHARGE: TeamPortrait[] = [
+  {
+    name: "Prof. Sathish G C",
+    role: "Associate Professor, School of Computer Science and Engineering",
+    linkedin: "",
+    photo: "/team/sathish-gc.jpg",
   },
   {
-    name: "Prof. Ravi Shankar",
-    title: "Technical Advisor",
-    role: "Assistant Professor, Networks & Systems",
-    saying: "Understand the network first. Everything else follows from that.",
-    email: "ravi.shankar@reva.edu.in",
-    phone: "+91 80 4696 6668",
-    github: "https://github.com/ravi-shankar",
-    linkedin: "https://www.linkedin.com/in/ravi-shankar",
-  },
-  {
-    name: "Dr. Fatima Sheikh",
-    title: "Industry Liaison",
-    role: "Professor, Data Privacy & Governance",
-    saying: "Good security is mostly good habits, repeated.",
-    email: "fatima.sheikh@reva.edu.in",
-    phone: "+91 80 4696 6669",
-    github: "https://github.com/fatima-sheikh",
-    linkedin: "https://www.linkedin.com/in/fatima-sheikh",
+    name: "Prof. Kiran M",
+    role: "Assistant Professor & Head of B.Tech — Artificial Intelligence and Data Science",
+    linkedin: "",
+    photo: "/team/kiran-m.jpg",
   },
 ];

@@ -124,13 +124,16 @@ export const DEPARTMENTS: Department[] = [
     label: "Design Department",
     blurb: "Owns the look of everything the club puts out, from posters to this website.",
     people: [
-      dummy(
-        "Chethan K",
-        "Member",
-        "Bio coming soon.",
-        "chethan-k",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Chethan K",
+          "Design Lead",
+          "One-man army — owns every pixel the club puts out.",
+          "chethan-k",
+          "+91733-78344158",
+        ),
+        email: "chethankumar23.2005@gmail.com",
+      },
     ],
   },
   {

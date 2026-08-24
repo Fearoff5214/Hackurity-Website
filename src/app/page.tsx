@@ -1,7 +1,6 @@
-// import { createFileRoute, Link } from "@tanstack/react-router";
 "use client";
 import React from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 import { motion, useScroll, useSpring } from "framer-motion";
 import BinaryFlowField from "@/components/club/BinaryFlowField";
 import ClubNav from "@/components/club/ClubNav";
@@ -9,35 +8,6 @@ import AboutSection from "@/components/club/AboutSection";
 import LiveEventSection from "@/components/club/LiveEventSection";
 import MembersSection from "@/components/club/MembersSection";
 import FacultySection from "@/components/club/FacultySection";
-// export const metadata = {
-//   title: "Cybersecurity Club — REVA University, Bangalore",
-//   description:
-//     "The student-run Cybersecurity Club at REVA University, Bangalore. Founded in 2023. See our current event, our members and our faculty in charge.",
-//     alternates: {
-//       canonical: "https://revacyberclub.tech",
-//     },
-// };
-// export const Route = createFileRoute("/")({
-//   head: () => ({
-//     meta: [
-//       { title: "Cybersecurity Club — REVA University, Bangalore" },
-//       {
-//         name: "description",
-//         content:
-//           "The student-run Cybersecurity Club at REVA University, Bangalore. Founded in 2023. See our current event, our members and our faculty in charge.",
-//       },
-//       { property: "og:title", content: "Cybersecurity Club — REVA University, Bangalore" },
-//       {
-//         property: "og:description",
-//         content:
-//           "Weekly hands-on security sessions, competitions and our annual hackathon. Meet the team behind the club.",
-//       },
-//       { property: "og:type", content: "website" },
-//       { name: "twitter:card", content: "summary_large_image" },
-//     ],
-//   }),
-//   component: ClubHome,
-// });
 
 export default function ClubHome() {
   const { scrollYProgress } = useScroll();

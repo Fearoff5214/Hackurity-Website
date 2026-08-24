@@ -54,7 +54,6 @@ const CyberBreachConduit = dynamic(() => import("@/components/CyberBreachConduit
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState("MISSION");
-  const [chamberStatus, setChamberStatus] = useState("STABLE");
 
   // Registration states
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
@@ -425,25 +424,13 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-2 gap-3 mt-1">
-                <a 
+              <div className="mt-1">
+                <a
                   href="#join_node"
-                  className="px-4 py-2.5 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
+                  className="block w-full px-4 py-2.5 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
                 >
                   [ REGISTER NOW]
                 </a>
-                <button 
-                  onClick={() => {
-                    setChamberStatus(chamberStatus === "STABLE" ? "WARN" : "STABLE");
-                  }}
-                  className={`px-4 py-2.5 border font-mono text-[11px] tracking-widest text-center uppercase cursor-pointer transition-all duration-300 ${
-                    chamberStatus === "STABLE" 
-                      ? "border-white/20 bg-white/5 text-white hover:bg-white/10" 
-                      : "border-red-500/50 bg-red-950/20 text-red-400 hover:bg-red-900/10 shadow-[0_0_8px_rgba(239,68,68,0.3)]"
-                  }`}
-                >
-                  {chamberStatus === "STABLE" ? "[ SHIELD_WARN ]" : "[ STABILIZE ]"}
-                </button>
               </div>
             </div>
           </div>

@@ -31,13 +31,16 @@ export const DEPARTMENTS: Department[] = [
     label: "Leadership",
     blurb: "The people who set the direction for the year and keep every team moving.",
     people: [
-      dummy(
-        "Verril Vaaz",
-        "President",
-        "Ask questions early. Most problems are easier to fix before they grow.",
-        "verril-vaaz",
-        "+91 98450 12345",
-      ),
+      {
+        ...dummy(
+          "Verril Vaaz",
+          "President",
+          "Ask questions early. Most problems are easier to fix before they grow.",
+          "verril-vaaz",
+          "+91 98450 12345",
+        ),
+        linkedin: "https://www.linkedin.com/in/verrilvaz",
+      },
       dummy(
         "Dharma Teja",
         "Vice President",

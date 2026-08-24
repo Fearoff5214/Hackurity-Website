@@ -3,21 +3,24 @@
 
 import { motion } from "framer-motion";
 
-type Partner = { name: string; url: string; logo: string };
+type Partner = { name: string; url: string };
 type Person = { name: string; role: string; url: string; image: string; bio?: string; phone?: string; email?: string };
 
-// Swap any `url` and `logo` values here when partnerships are confirmed.
+// Swap the `url` values here when partnerships are confirmed.
+// Rendered as text wordmarks rather than fetched logos: the old logo.clearbit.com
+// URLs no longer resolve (Clearbit shut the free logo API down), and hotlinking
+// real brand assets isn't appropriate until these partnerships are confirmed anyway.
 const PARTNERS: Partner[] = [
-  { name: "IBM", url: "https://www.ibm.com/", logo: "https://www.ibm.com/brand/experience-guides/developer/8f4e3cc2b5d52354a6d43c8edba1e3c9/02_8-bar-reverse.svg" },
-  { name: "Fortinet", url: "https://www.fortinet.com", logo: "https://logo.clearbit.com/fortinet.com?size=256" },
-  { name: "Microsoft Security", url: "https://www.microsoft.com/security", logo: "https://logo.clearbit.com/microsoft.com?size=256" },
-  { name: "CrowdStrike", url: "https://www.crowdstrike.com", logo: "https://logo.clearbit.com/crowdstrike.com?size=256" },
-  { name: "Cisco Security", url: "https://www.cisco.com/go/security", logo: "https://logo.clearbit.com/cisco.com?size=256" },
-  { name: "Okta", url: "https://www.okta.com", logo: "https://logo.clearbit.com/okta.com?size=256" },
-  { name: "Check Point", url: "https://www.checkpoint.com", logo: "https://logo.clearbit.com/checkpoint.com?size=256" },
-  { name: "Zscaler", url: "https://www.zscaler.com", logo: "https://logo.clearbit.com/zscaler.com?size=256" },
-  { name: "Broadcom Security", url: "https://www.broadcom.com/solutions/security", logo: "https://logo.clearbit.com/broadcom.com?size=256" },
-  { name: "Proofpoint", url: "https://www.proofpoint.com", logo: "https://logo.clearbit.com/proofpoint.com?size=256" },
+  { name: "IBM", url: "https://www.ibm.com/" },
+  { name: "Fortinet", url: "https://www.fortinet.com" },
+  { name: "Microsoft Security", url: "https://www.microsoft.com/security" },
+  { name: "CrowdStrike", url: "https://www.crowdstrike.com" },
+  { name: "Cisco Security", url: "https://www.cisco.com/go/security" },
+  { name: "Okta", url: "https://www.okta.com" },
+  { name: "Check Point", url: "https://www.checkpoint.com" },
+  { name: "Zscaler", url: "https://www.zscaler.com" },
+  { name: "Broadcom Security", url: "https://www.broadcom.com/solutions/security" },
+  { name: "Proofpoint", url: "https://www.proofpoint.com" },
 ];
 
 const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111126&color=d2b48c&bold=true&size=360&font-size=0.34`;
@@ -28,18 +31,12 @@ const MENTORS: Person[] = [
   { name: "Dharma Teja", role: "Cybersecurity Mentor", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), bio: "Helps teams turn sharp technical ideas into clear, demonstrable security outcomes." },
   { name: "Logaa Paramesh", role: "Technical Mentor", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh"), bio: "Focuses on resilient architecture, engineering detail and execution under pressure." },
   { name: "Tanush Jain", role: "Industry Mentor", url: "https://www.linkedin.com/in/tanush-jain-17601321a/", image: avatar("Tanush Jain"), bio: "Guides teams through product thinking, pitching and the human side of security." },
-  { name: "Aarav Shah", role: "Red Team Judge", url: "https://www.linkedin.com/", image: avatar("Aarav Shah"), bio: "Placeholder profile — replace with a confirmed judge and their LinkedIn link." },
-  { name: "Meera Iyer", role: "Cloud Security Judge", url: "https://www.linkedin.com/", image: avatar("Meera Iyer"), bio: "Placeholder profile — replace with a confirmed judge and their LinkedIn link." },
-  { name: "Kabir Nair", role: "Forensics Mentor", url: "https://www.linkedin.com/", image: avatar("Kabir Nair"), bio: "Placeholder profile — replace with a confirmed mentor and their LinkedIn link." },
-  { name: "Ananya Rao", role: "Application Security Judge", url: "https://www.linkedin.com/", image: avatar("Ananya Rao"), bio: "Placeholder profile — replace with a confirmed judge and their LinkedIn link." },
-  { name: "Rohan Menon", role: "Threat Intelligence Mentor", url: "https://www.linkedin.com/", image: avatar("Rohan Menon"), bio: "Placeholder profile — replace with a confirmed mentor and their LinkedIn link." },
-  { name: "Sana Kapoor", role: "Blue Team Judge", url: "https://www.linkedin.com/", image: avatar("Sana Kapoor"), bio: "Placeholder profile — replace with a confirmed judge and their LinkedIn link." },
 ];
 
 const CONTACTS: Person[] = [
-  { name: "Verril Vaz", role: "Cybersecurity Club President", url: "https://www.linkedin.com/", image: avatar("Verril Vaz"), phone: "+91 8971889830", email: "verril.vaz@hackurity.example" },
-  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280", email: "dharma.teja@hackurity.example" },
-  { name: "Logaa Paramesh", role: "Cybersecurity Club Technical Head", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh"), phone: "+91 88704 96955", email: "logaa.paramesh@hackurity.example" },
+  { name: "Verril Vaz", role: "Cybersecurity Club President", url: "https://www.linkedin.com/in/verrilvaz", image: avatar("Verril Vaz"), phone: "+91 8971889830", email: "verrilvaz404@gmail.com" },
+  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280", email: "rcdt009@gmail.com" },
+  { name: "Logaa Paramesh", role: "Cybersecurity Club Technical Head", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh"), phone: "+91 88704 96955", email: "parameshlogaa@gmail.com" },
 ];
 
 const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });
@@ -51,8 +48,8 @@ export function PartnersSection() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {PARTNERS.map((partner, index) => <motion.a key={partner.name} href={partner.url} target="_blank" rel="noreferrer" initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} whileHover={{ y: -5, borderColor: "rgba(210,180,140,0.7)" }} transition={{ duration: 0.45, ease: "easeOut" }} className="group relative flex min-h-28 flex-col items-center justify-center overflow-hidden border border-cyber-blue/20 bg-white/[0.035] p-5 text-center shadow-[0_8px_25px_rgba(0,0,0,0.18)]">
           <span className="absolute inset-x-0 top-0 h-px origin-left bg-cyber-tan scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
-          <img src={partner.logo} alt={`${partner.name} logo`} className="h-11 max-w-[130px] object-contain brightness-0 invert opacity-85 transition duration-300 group-hover:scale-105 group-hover:opacity-100" onError={(event) => { event.currentTarget.style.display = "none"; }} />
-          <span className="mt-3 font-mono text-[10px] font-bold tracking-wider text-cyber-gray transition-colors group-hover:text-cyber-tan">{partner.name}</span>
+          <span className="font-heading text-sm tracking-wider text-white uppercase opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100">{partner.name}</span>
+          <span className="mt-3 font-mono text-[10px] font-bold tracking-wider text-cyber-gray transition-colors group-hover:text-cyber-tan">{"// CONFIRMED SOON"}</span>
         </motion.a>)}
       </div>
     </section>

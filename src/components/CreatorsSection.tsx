@@ -14,8 +14,17 @@ type Creator = {
 
 const CREATORS: Creator[] = [
   {
-    name: "Mohammad Omar",
+    name: "Logaa Paramesh",
     role: "Lead Developer",
+    quote:"Don't Touch it if it works, it will break.",
+    phone: "+91 88704 96955",
+    email: "parameshlogaa@gmail.com",
+    github: "https://github.com/Fearoff5214",
+    linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
+  },
+  {
+    name: "Mohammad Omar",
+    role: "Developer",
     quote: "If you find a bug in this site, DM me. If you don't, I did my job right.",
     phone: "+91 74559 04156",
     email: "omarofficial1054@gmail.com",
@@ -29,13 +38,6 @@ const CREATORS: Creator[] = [
     email: "brandwopio76@gmail.com",
     github: "https://github.com/Tanush-Jain",
     linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
-  },
-  {
-    name: "Logaa Paramesh",
-    role: "Developer",
-    phone: "+91 88704 96955",
-    github: "https://github.com/Fearoff5214",
-    linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
   },
 ];
 

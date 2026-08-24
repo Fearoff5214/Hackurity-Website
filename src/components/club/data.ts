@@ -76,7 +76,7 @@ export const DEPARTMENTS: Department[] = [
         ...dummy(
           "Mohammad Omar",
           "Core Technical Associate",
-          "Good notes today save hours tomorrow.",
+          "Immense value only lies at the intersection of multiple domains.",
           "mohammad-omar",
           "+91 74559 04156",
         ),

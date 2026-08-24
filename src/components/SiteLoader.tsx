@@ -90,7 +90,7 @@ export default function SiteLoader() {
                 HACKURITY
               </motion.h1>
               <div className="mt-2 flex items-center justify-center gap-2.5">
-                <span className="font-mono text-[10px] tracking-[0.35em] text-cyber-gray lowercase sm:text-xs">
+                <span className="font-mono text-[11px] tracking-[0.35em] text-cyber-gray lowercase sm:text-xs">
                   powered by
                 </span>
                 <img src={ibmLogo.src} alt="IBM" className="h-6 w-auto object-contain sm:h-7" />
@@ -98,7 +98,7 @@ export default function SiteLoader() {
             </div>
 
             <div className="w-full">
-              <div className="mb-2 flex items-end justify-between font-mono text-[10px] text-cyber-gray">
+              <div className="mb-2 flex items-end justify-between font-mono text-[11px] text-cyber-gray">
                 <span className="text-cyber-blue">
                   &gt; {BOOT_LINES[lineIndex]}
                   <span className="ml-0.5 animate-pulse text-cyber-tan">▌</span>
@@ -112,7 +112,7 @@ export default function SiteLoader() {
                   transition={{ ease: "linear" }}
                 />
               </div>
-              <div className="mt-3 flex justify-between font-mono text-[8px] tracking-widest text-cyber-gray/60">
+              <div className="mt-3 flex justify-between font-mono text-[9px] tracking-widest text-cyber-gray/60">
                 <span>AES-256 // CHANNEL SECURE</span>
                 <span>NODE_HACKURITY_045</span>
               </div>

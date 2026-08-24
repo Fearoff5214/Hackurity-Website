@@ -296,12 +296,12 @@ export default function BinaryHuman() {
   return (
     <div className="w-full h-full min-h-[350px] relative">
       {/* Corner indicators in Tan */}
-      <span className="absolute top-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
       
-      <div className="absolute top-4 left-4 z-10 font-mono text-[9px] text-cyber-blue/60 tracking-wider">
+      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-cyber-blue/60 tracking-wider">
         <div>SYS.MODEL: BINARY_HUMANOID_CLOUD</div>
         <div>STATUS: REACTIVE_CURVATURE_ACTIVE</div>
       </div>

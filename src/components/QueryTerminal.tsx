@@ -86,7 +86,7 @@ export default function QueryTerminal() {
     <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
       {/* Query index */}
       <div className="lg:col-span-5 flex flex-col gap-3">
-        <div className="flex items-center justify-between border border-cyber-blue/15 bg-cyber-black/50 px-3 py-2 font-mono text-[9px] tracking-widest text-cyber-tan">
+        <div className="flex items-center justify-between border border-cyber-blue/15 bg-cyber-black/50 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan">
           <span>QUERY_INDEX</span>
           <span className="text-cyber-gray">{RECORDS.length} RECORDS</span>
         </div>
@@ -102,19 +102,19 @@ export default function QueryTerminal() {
               <button
                 type="button"
                 onClick={() => setActiveId(record.id)}
-                className={`flex w-full items-start gap-3 px-3 py-3 text-left font-terminal text-[11px] transition-colors ${
+                className={`flex w-full items-start gap-3 px-3 py-3 text-left font-terminal text-[12px] transition-colors ${
                   record.id === active.id
                     ? "bg-cyber-tan/10 text-cyber-tan"
                     : "text-cyber-gray hover:bg-cyber-blue/5 hover:text-white"
                 }`}
               >
-                <span className="mt-0.5 font-mono text-[9px] font-bold text-cyber-blue/80">{record.id}</span>
+                <span className="mt-0.5 font-mono text-[10px] font-bold text-cyber-blue/80">{record.id}</span>
                 <span className="leading-relaxed">{record.question}</span>
               </button>
             </li>
           ))}
           {filtered.length === 0 && (
-            <li className="px-3 py-4 font-terminal text-[11px] text-cyber-gray/60">
+            <li className="px-3 py-4 font-terminal text-[12px] text-cyber-gray/60">
               no matching record found.
             </li>
           )}
@@ -124,7 +124,7 @@ export default function QueryTerminal() {
       {/* Terminal output */}
       <div className="lg:col-span-7 relative flex min-h-[300px] flex-col border border-cyber-blue/15 bg-cyber-black/60">
         <div className="pointer-events-none absolute inset-0 cyber-grid opacity-50" />
-        <div className="relative flex items-center justify-between border-b border-cyber-blue/15 bg-cyber-dark/70 px-4 py-2.5 font-mono text-[9px] tracking-widest">
+        <div className="relative flex items-center justify-between border-b border-cyber-blue/15 bg-cyber-dark/70 px-4 py-2.5 font-mono text-[10px] tracking-widest">
           <span className="text-cyber-tan">// RECORD_RETRIEVED</span>
           <span className="flex items-center gap-1.5 text-cyber-blue">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyber-blue" />
@@ -133,24 +133,24 @@ export default function QueryTerminal() {
         </div>
 
         <div className="relative flex flex-1 flex-col gap-4 p-4 md:p-5">
-          <div className="font-terminal text-[11px] text-cyber-gray">
+          <div className="font-terminal text-[12px] text-cyber-gray">
             guest@hackurity:~$ query --record {active.id}
           </div>
           <motion.h3
             key={`${active.id}-q`}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-heading text-[13px] leading-snug text-white uppercase md:text-sm"
+            className="font-heading text-[14px] leading-snug text-white uppercase md:text-sm"
           >
             {active.question}
           </motion.h3>
-          <p className="font-terminal text-[12px] leading-relaxed text-cyber-gray md:text-[13px]">
+          <p className="font-terminal text-[13px] leading-relaxed text-cyber-gray md:text-[14px]">
             <span className="mr-1.5 text-cyber-tan">&gt;</span>
             {typed}
             <span className="ml-0.5 animate-pulse text-cyber-tan">▌</span>
           </p>
 
-          <div className="mt-auto flex items-center justify-between border-t border-cyber-blue/10 pt-3 font-mono text-[8px] tracking-widest text-cyber-gray/60">
+          <div className="mt-auto flex items-center justify-between border-t border-cyber-blue/10 pt-3 font-mono text-[9px] tracking-widest text-cyber-gray/60">
             <span>RECORD {active.id} / {String(RECORDS.length).padStart(2, "0")}</span>
             <span className="text-cyber-tan/60">CHANNEL: AES-256</span>
           </div>

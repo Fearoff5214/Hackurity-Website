@@ -61,7 +61,7 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-mono text-[10px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
+            className="font-mono text-[11px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
           >
             REVA University · Bangalore · Since 2023
           </motion.span>
@@ -79,7 +79,7 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-7 max-w-xl font-mono text-[13px] leading-relaxed text-cyber-gray"
+            className="mt-7 max-w-xl font-mono text-[14px] leading-relaxed text-cyber-gray"
           >
             A student group that meets every week to learn how systems get broken into, and how to
             keep them safe. Open to anyone on campus, whatever year you are in and whatever you
@@ -94,14 +94,14 @@ export default function ClubHome() {
           >
             <Link
               href="/hackurity"
-              className="group inline-flex items-center gap-3 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
+              className="group inline-flex items-center gap-3 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[12px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
             >
               More about Hackurity
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
             <a
               href="#about"
-              className="inline-flex items-center gap-2 border border-cyber-blue/30 px-6 py-3.5 font-mono text-[11px] tracking-[0.2em] text-cyber-gray uppercase transition-colors hover:border-cyber-blue hover:text-white"
+              className="inline-flex items-center gap-2 border border-cyber-blue/30 px-6 py-3.5 font-mono text-[12px] tracking-[0.2em] text-cyber-gray uppercase transition-colors hover:border-cyber-blue hover:text-white"
             >
               About the club
             </a>
@@ -111,7 +111,7 @@ export default function ClubHome() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="mt-20 flex items-center gap-3 font-mono text-[10px] tracking-widest text-cyber-gray uppercase"
+            className="mt-20 flex items-center gap-3 font-mono text-[11px] tracking-widest text-cyber-gray uppercase"
           >
             <motion.span
               animate={{ y: [0, 6, 0] }}
@@ -126,22 +126,22 @@ export default function ClubHome() {
 
         <AboutSection />
         <LiveEventSection />
-        <MembersSection />
         <FacultySection />
+        <MembersSection />
 
         <footer className="relative border-t border-cyber-blue/15 bg-black/70 px-5 py-12 md:px-8">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5">
             <div>
-              <p className="font-heading text-[11px] tracking-[0.22em] uppercase">
+              <p className="font-heading text-[12px] tracking-[0.22em] uppercase">
                 Cybersecurity Club <span className="text-cyber-tan">//</span> REVA University
               </p>
-              <p className="mt-2 font-mono text-[10px] text-cyber-gray">
-                School of Computing &amp; Information Technology, Bangalore, Karnataka
+              <p className="mt-2 font-mono text-[11px] text-cyber-gray">
+                School of Computer Science and Engineering, Bangalore, Karnataka
               </p>
             </div>
             <a
               href="mailto:cyberclub@reva.edu.in"
-              className="font-mono text-[10px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
+              className="font-mono text-[11px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
             >
               cyberclub@reva.edu.in ↗
             </a>

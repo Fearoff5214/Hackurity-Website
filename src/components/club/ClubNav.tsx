@@ -46,7 +46,7 @@ export default function ClubNav() {
             <polygon points="50,40 70,80 30,80" className="stroke-[4] opacity-60" />
             <line x1="50" y1="15" x2="50" y2="80" className="stroke-white stroke-[2] opacity-40" />
           </motion.svg>
-          <span className="font-heading text-[11px] font-bold tracking-[0.22em] sm:text-xs">
+          <span className="font-heading text-[12px] font-bold tracking-[0.22em] sm:text-xs">
             CYBER CLUB <span className="text-cyber-tan">//</span> REVA
           </span>
         </a>
@@ -56,7 +56,7 @@ export default function ClubNav() {
             <a
               key={link.href}
               href={link.href}
-              className="font-mono text-[10px] tracking-widest text-cyber-gray uppercase transition-colors hover:text-cyber-tan"
+              className="font-mono text-[11px] tracking-widest text-cyber-gray uppercase transition-colors hover:text-cyber-tan"
             >
               {`[${link.label}]`}
             </a>
@@ -66,7 +66,7 @@ export default function ClubNav() {
         <div className="flex items-center gap-2">
           <Link
             href="/hackurity"
-            className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[10px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
+            className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
           >
             Hackurity 2026
           </Link>
@@ -101,7 +101,7 @@ export default function ClubNav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="border border-cyber-blue/10 px-3 py-2.5 font-mono text-[11px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+                  className="border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
                 >
                   {link.label}
                 </a>
@@ -109,7 +109,7 @@ export default function ClubNav() {
               <Link
                 href="/hackurity"
                 onClick={() => setOpen(false)}
-                className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2.5 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase"
+                className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2.5 font-mono text-[12px] font-bold tracking-widest text-cyber-tan uppercase"
               >
                 Hackurity 2026
               </Link>

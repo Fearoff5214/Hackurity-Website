@@ -59,8 +59,8 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
           )}
         </div>
 
-        <h3 className="mt-3 font-heading text-[12px] leading-relaxed uppercase">{person.name}</h3>
-        <p className="mt-1 font-mono text-[10px] leading-relaxed text-cyber-gray">{person.role}</p>
+        <h3 className="mt-3 font-heading text-[13px] leading-relaxed uppercase">{person.name}</h3>
+        <p className="mt-1 font-mono text-[11px] leading-relaxed text-cyber-gray">{person.role}</p>
       </motion.article>
     </Reveal>
   );
@@ -70,7 +70,7 @@ function PortraitGroup({ label, people }: { label: string; people: TeamPortrait[
   return (
     <div className="mt-12 first:mt-0">
       <Reveal>
-        <span className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan">
+        <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan">
           {`// ${label}`}
         </span>
       </Reveal>

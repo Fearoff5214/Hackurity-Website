@@ -313,13 +313,13 @@ export default function KineticSculpture() {
   return (
     <div className="w-full h-full min-h-[350px] relative">
       {/* Technical corner indicators in Tan */}
-      <span className="absolute top-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
       
       {/* Telemetry info HUD overlay */}
-      <div className="absolute top-4 left-4 z-10 font-mono text-[9px] text-cyber-blue/60 tracking-wider">
+      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-cyber-blue/60 tracking-wider">
         <div>SYS.ENCRYPTION: SHIELD_ENVELOPE</div>
         <div>NODE_STATE: SHIFTING_LOCKS</div>
       </div>
@@ -357,7 +357,7 @@ function SculptureFallback() {
         </div>
       </div>
 
-      <div className="absolute bottom-4 left-4 font-mono text-[9px] text-cyber-blue/60 tracking-wider">
+      <div className="absolute bottom-4 left-4 font-mono text-[10px] text-cyber-blue/60 tracking-wider">
         <div>SYS.RENDER_MODE: CSS_FALLBACK</div>
         <div>STATUS: COMPAT_ACTIVE</div>
       </div>

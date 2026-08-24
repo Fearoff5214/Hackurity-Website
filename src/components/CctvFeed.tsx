@@ -39,7 +39,7 @@ export default function CctvFeed() {
       />
 
       {/* Feed HUD */}
-      <div className="absolute left-4 top-4 z-20 border border-cyber-tan/25 bg-cyber-black/80 p-3 font-mono text-[10px] tracking-wider text-cyber-tan">
+      <div className="absolute left-4 top-4 z-20 border border-cyber-tan/25 bg-cyber-black/80 p-3 font-mono text-[11px] tracking-wider text-cyber-tan">
         <div className="flex items-center gap-1.5 font-bold">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyber-tan" />
           <span>CCTV_FEED // VENUE CAMERA 01</span>
@@ -50,10 +50,10 @@ export default function CctvFeed() {
 
       <div className="absolute right-4 top-4 z-20 flex flex-col items-end font-heading text-lg text-cyber-tan md:text-xl">
         <span className="font-bold tracking-widest">NO-45</span>
-        <span className="mt-1 font-mono text-[9px] tracking-wider text-cyber-gray">ACTIVE CAMERA UNIT</span>
+        <span className="mt-1 font-mono text-[10px] tracking-wider text-cyber-gray">ACTIVE CAMERA UNIT</span>
       </div>
 
-      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 border border-red-500/30 bg-cyber-black/85 px-3 py-1.5 font-mono text-[10px] tracking-wider text-red-400">
+      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 border border-red-500/30 bg-cyber-black/85 px-3 py-1.5 font-mono text-[11px] tracking-wider text-red-400">
         <span className="h-2 w-2 animate-pulse rounded-full bg-red-600" />
         <span>CAM_01 [REC]</span>
       </div>
@@ -69,11 +69,11 @@ export default function CctvFeed() {
           <motion.span
             animate={{ boxShadow: ["0 0 0 rgba(210,180,140,0)", "0 0 22px rgba(210,180,140,0.45)", "0 0 0 rgba(210,180,140,0)"] }}
             transition={{ duration: 2.2, repeat: Infinity }}
-            className="border border-cyber-tan/60 bg-cyber-tan/10 px-5 py-3 font-mono text-[11px] tracking-widest text-cyber-tan uppercase md:text-xs"
+            className="border border-cyber-tan/60 bg-cyber-tan/10 px-5 py-3 font-mono text-[12px] tracking-widest text-cyber-tan uppercase md:text-xs"
           >
             [ ACCESS CCTV_FEED ? ]
           </motion.span>
-          <span className="font-mono text-[9px] tracking-widest text-cyber-gray">
+          <span className="font-mono text-[10px] tracking-widest text-cyber-gray">
             EMAIL VERIFICATION REQUIRED TO UNSCRAMBLE THE STREAM
           </span>
         </button>
@@ -96,11 +96,11 @@ export default function CctvFeed() {
               onMouseDown={(event) => event.stopPropagation()}
               className="w-full max-w-sm border border-cyber-tan/40 bg-cyber-dark p-5 shadow-[0_0_30px_rgba(99,102,241,0.25)]"
             >
-              <div className="font-mono text-[9px] font-bold tracking-widest text-cyber-tan">
+              <div className="font-mono text-[10px] font-bold tracking-widest text-cyber-tan">
                 // CAMERA ACCESS REQUEST
               </div>
               <h3 className="mt-2 font-heading text-sm text-white uppercase">Verify your email</h3>
-              <p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">
+              <p className="mt-2 font-mono text-[12px] leading-relaxed text-cyber-gray">
                 Enter your email to unlock the venue camera. No password needed for now.
               </p>
               <input
@@ -115,7 +115,7 @@ export default function CctvFeed() {
                 <button
                   type="button"
                   onClick={() => setAskOpen(false)}
-                  className="border border-cyber-blue/20 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue"
+                  className="border border-cyber-blue/20 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue"
                 >
                   [ CANCEL ]
                 </button>
@@ -126,7 +126,7 @@ export default function CctvFeed() {
                     setUnlocked(true);
                     setAskOpen(false);
                   }}
-                  className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/20 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/20 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   [ UNLOCK_FEED ]
                 </button>

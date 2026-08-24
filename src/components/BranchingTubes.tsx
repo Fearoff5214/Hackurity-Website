@@ -60,7 +60,7 @@ export default function BranchingTubes() {
       </svg>
       
       {/* HUD diagnostic details */}
-      <div className="absolute bottom-3 left-4 font-mono text-[9px] text-cyber-green/50 tracking-wider">
+      <div className="absolute bottom-3 left-4 font-mono text-[10px] text-cyber-green/50 tracking-wider">
         <div>SYS.FLOW_VALVE: V_ACTIVE</div>
         <div>VALVE_FLUX: 38.8 L/S</div>
       </div>

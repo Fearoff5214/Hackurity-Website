@@ -294,7 +294,7 @@ export default function ReactorCore() {
       </div>
 
       {/* Top Left: System Status HUD overlay */}
-      <div className="absolute top-6 left-6 z-30 font-mono text-[10px] text-cyber-tan tracking-wider bg-black p-3 border border-cyber-tan/25">
+      <div className="absolute top-6 left-6 z-30 font-mono text-[11px] text-cyber-tan tracking-wider bg-black p-3 border border-cyber-tan/25">
         <div className="font-bold flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-pulse" />
           <span>REACTOR // STATE: CORE_PRESSURIZED</span>
@@ -307,7 +307,7 @@ export default function ReactorCore() {
         <div className="mt-3 flex gap-2">
           <button 
             onClick={() => setFeedMode("SIMULATION")}
-            className={`px-2 py-0.5 border text-[9px] cursor-pointer tracking-wider transition-all duration-200 ${
+            className={`px-2 py-0.5 border text-[10px] cursor-pointer tracking-wider transition-all duration-200 ${
               feedMode === "SIMULATION" 
                 ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" 
                 : "border-cyber-tan/20 text-cyber-tan/50 hover:text-cyber-tan"
@@ -317,7 +317,7 @@ export default function ReactorCore() {
           </button>
           <button 
             onClick={() => setFeedMode("CAMERA_FEED")}
-            className={`px-2 py-0.5 border text-[9px] cursor-pointer tracking-wider transition-all duration-200 ${
+            className={`px-2 py-0.5 border text-[10px] cursor-pointer tracking-wider transition-all duration-200 ${
               feedMode === "CAMERA_FEED" 
                 ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" 
                 : "border-cyber-tan/20 text-cyber-tan/50 hover:text-cyber-tan"
@@ -331,7 +331,7 @@ export default function ReactorCore() {
       {/* Top Right: Active Terminal Number Overlay */}
       <div className="absolute top-6 right-6 z-30 font-heading text-lg md:text-xl text-cyber-tan flex flex-col items-end">
         <span className="tracking-widest font-bold font-heading">NO-45</span>
-        <span className="font-mono text-[9px] text-cyber-gray tracking-wider mt-1 select-none">ACTIVE TERMINAL UNIT</span>
+        <span className="font-mono text-[10px] text-cyber-gray tracking-wider mt-1 select-none">ACTIVE TERMINAL UNIT</span>
       </div>
 
       {/* Center Canvas or Camera feed */}
@@ -351,7 +351,7 @@ export default function ReactorCore() {
           }}
         >
           {/* CCTV Camera - Clean without blurry scanlines */}
-          <div className="absolute bottom-6 right-6 flex items-center gap-2 bg-black px-3 py-1.5 border border-red-500/30 text-red-400 font-mono text-[10px] tracking-wider z-20">
+          <div className="absolute bottom-6 right-6 flex items-center gap-2 bg-black px-3 py-1.5 border border-red-500/30 text-red-400 font-mono text-[11px] tracking-wider z-20">
             <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
             <span>CAM_01 [REC]</span>
           </div>
@@ -359,7 +359,7 @@ export default function ReactorCore() {
       )}
 
       {/* Bottom overlay loading indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-2/3 max-w-sm bg-black p-2 border border-cyber-blue/20 text-center font-mono text-[9px] text-cyber-blue tracking-widest uppercase z-30">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-2/3 max-w-sm bg-black p-2 border border-cyber-blue/20 text-center font-mono text-[10px] text-cyber-blue tracking-widest uppercase z-30">
         <div className="mb-1 flex justify-between px-1">
           <span>PRESSURIZATION SEQUENCER</span>
           <span className="animate-pulse">LOADING</span>

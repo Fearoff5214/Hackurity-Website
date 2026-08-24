@@ -270,24 +270,24 @@ export default function ThreatMap() {
       onMouseLeave={() => setIsDdos(false)}
     >
       {/* Corner crosshairs in Tan */}
-      <span className="absolute top-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
 
       {/* HUD status label overlay */}
-      <div className="absolute top-4 left-4 z-10 font-mono text-[9px] text-cyber-tan/60 tracking-wider">
+      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-cyber-tan/60 tracking-wider">
         <div>SYS.NODE_GRID: GLOBAL_THREAT_MAP</div>
         <div>ACTIVE_CONNECTIONS: {isDdos ? "320+ ATTACK_NODES" : "90_PEER_LINKS"}</div>
       </div>
 
       {/* Top right CCTV/Telemetry display */}
-      <div className="absolute top-4 right-4 z-10 font-mono text-[9px] text-right text-cyber-tan/60 tracking-wider flex flex-col items-end">
+      <div className="absolute top-4 right-4 z-10 font-mono text-[10px] text-right text-cyber-tan/60 tracking-wider flex flex-col items-end">
         <div className={`font-bold flex items-center gap-1 ${isDdos ? "text-red-400" : "text-cyber-blue"}`}>
           <span className={`w-1.5 h-1.5 rounded-full ${isDdos ? "bg-red-500 animate-ping" : "bg-cyber-blue animate-pulse"}`} />
           <span>{isDdos ? "VECTOR_ALERT: DDOS_DETECTED" : "PORT_STATUS: LISTENING"}</span>
         </div>
-        <div className="text-cyber-gray mt-0.5 text-[8px] uppercase select-none">
+        <div className="text-cyber-gray mt-0.5 text-[9px] uppercase select-none">
           {isDdos ? "HOVER TRIGGER: ACTIVE" : "HOVER OVER MAP TO ATTACK"}
         </div>
       </div>
@@ -300,7 +300,7 @@ export default function ThreatMap() {
 
       {/* Bottom status alert box */}
       {isDdos && (
-        <div className="absolute bottom-4 left-4 right-4 bg-red-950/20 border border-red-500/30 p-2 text-center text-red-400 text-[10px] font-mono tracking-widest animate-pulse z-10">
+        <div className="absolute bottom-4 left-4 right-4 bg-red-950/20 border border-red-500/30 p-2 text-center text-red-400 text-[11px] font-mono tracking-widest animate-pulse z-10">
           WARNING: CONCENTRATED FLOOD SEQUENCE DETECTED // TARGETING NODE_ID_000
         </div>
       )}

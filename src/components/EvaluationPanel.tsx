@@ -97,28 +97,28 @@ export default function EvaluationPanel() {
 
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 shrink-0 border border-cyber-tan/30 bg-cyber-tan/5 flex items-center justify-center font-mono text-[11px] font-bold text-cyber-tan tracking-widest">
+              <div className="w-10 h-10 shrink-0 border border-cyber-tan/30 bg-cyber-tan/5 flex items-center justify-center font-mono text-[12px] font-bold text-cyber-tan tracking-widest">
                 {member.initials}
               </div>
               <div className="flex flex-col">
                 <span className="font-heading text-sm text-white uppercase tracking-tight leading-tight">
                   {member.name}
                 </span>
-                <span className="font-mono text-[10px] text-cyber-blue/80 leading-tight mt-0.5">
+                <span className="font-mono text-[11px] text-cyber-blue/80 leading-tight mt-0.5">
                   {member.role}
                 </span>
               </div>
             </div>
-            <span className="font-mono text-[8px] text-cyber-gray shrink-0">
+            <span className="font-mono text-[9px] text-cyber-gray shrink-0">
               PNL-{String(i + 1).padStart(2, "0")}
             </span>
           </div>
 
-          <div className="font-mono text-[10px] text-cyber-tan/70 border-y border-cyber-blue/10 py-1.5">
+          <div className="font-mono text-[11px] text-cyber-tan/70 border-y border-cyber-blue/10 py-1.5">
             ORG_NODE: {member.org.toUpperCase()}
           </div>
 
-          <p className="font-mono text-[11px] leading-relaxed text-cyber-gray">
+          <p className="font-mono text-[12px] leading-relaxed text-cyber-gray">
             {member.description}
           </p>
 
@@ -126,7 +126,7 @@ export default function EvaluationPanel() {
             {member.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[9px] font-mono border border-cyber-blue/20 text-cyber-blue/80 px-1.5 py-0.5"
+                className="text-[10px] font-mono border border-cyber-blue/20 text-cyber-blue/80 px-1.5 py-0.5"
               >
                 {tag}
               </span>
@@ -137,7 +137,7 @@ export default function EvaluationPanel() {
             href={member.profile}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-[10px] text-cyber-tan hover:text-white transition-colors duration-200 tracking-widest uppercase"
+            className="font-mono text-[11px] text-cyber-tan hover:text-white transition-colors duration-200 tracking-widest uppercase"
           >
             &gt; OPEN_DOSSIER
           </a>

@@ -51,16 +51,16 @@ export default function AboutSection() {
       <div className="grid gap-10 lg:grid-cols-[1.25fr_1fr]">
         <Reveal delay={0.05}>
           <div className="bracket-container glass-panel p-6 md:p-8">
-            <p className="font-mono text-[12.5px] leading-relaxed text-cyber-gray">
+            <p className="font-mono text-[13.5px] leading-relaxed text-cyber-gray">
               Today we are a student-run club of a few hundred members across every year of study.
               We meet every week to run hands-on sessions, practice on safe lab setups and work
               through real problems together. Beginners are welcome — most of our members joined
               knowing nothing about the subject.
             </p>
-            <p className="mt-4 font-mono text-[12.5px] leading-relaxed text-cyber-gray">
+            <p className="mt-4 font-mono text-[13.5px] leading-relaxed text-cyber-gray">
               Alongside the weekly sessions we organise talks, competitions and one large annual
               event. Everything is planned and run by students, with guidance from faculty in the
-              School of Computing and Information Technology. Our aim is simple: help members leave
+              School of Computer Science and Engineering. Our aim is simple: help members leave
               university with skills they can actually use, and a group of people they can keep
               learning with.
             </p>
@@ -69,7 +69,7 @@ export default function AboutSection() {
               {STATS.map((stat) => (
                 <div key={stat.label} className="bg-black/70 px-4 py-5 text-center">
                   <div className="font-heading text-base text-cyber-tan">{stat.value}</div>
-                  <div className="mt-2 font-mono text-[9px] tracking-widest text-cyber-gray uppercase">
+                  <div className="mt-2 font-mono text-[10px] tracking-widest text-cyber-gray uppercase">
                     {stat.label}
                   </div>
                 </div>
@@ -83,14 +83,14 @@ export default function AboutSection() {
             <Reveal key={item.title} delay={0.08 * index} y={18}>
               <article className="group border border-cyber-blue/15 bg-black/50 p-5 transition-colors hover:border-cyber-tan/40">
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-heading text-[11.5px] leading-relaxed uppercase">
+                  <h3 className="font-heading text-[12.5px] leading-relaxed uppercase">
                     {item.title}
                   </h3>
-                  <span className="font-mono text-[9px] tracking-widest text-cyber-blue/70">
+                  <span className="font-mono text-[10px] tracking-widest text-cyber-blue/70">
                     {item.year}
                   </span>
                 </div>
-                <p className="mt-3 font-mono text-[11px] leading-relaxed text-cyber-gray">
+                <p className="mt-3 font-mono text-[12px] leading-relaxed text-cyber-gray">
                   {item.text}
                 </p>
               </article>
@@ -101,14 +101,14 @@ export default function AboutSection() {
 
       <Reveal delay={0.1} className="mt-10">
         <div className="dot-mesh border border-cyber-blue/15 p-6">
-          <span className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan">
+          <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan">
             {"// CERTIFICATIONS OUR MEMBERS HOLD"}
           </span>
           <div className="mt-4 flex flex-wrap gap-2">
             {CERTIFICATIONS.map((item) => (
               <span
                 key={item}
-                className="border border-cyber-blue/25 bg-black/60 px-3 py-1.5 font-mono text-[10px] tracking-wide text-cyber-gray"
+                className="border border-cyber-blue/25 bg-black/60 px-3 py-1.5 font-mono text-[11px] tracking-wide text-cyber-gray"
               >
                 {item}
               </span>

@@ -14,7 +14,7 @@ type Creator = {
 
 const CREATORS: Creator[] = [
   {
-    name: "Logaa Paramesh",
+    name: "Logaa Paramesh L T",
     role: "Lead Developer",
     quote:"Don't Touch it if it works, it will break.",
     phone: "+91 88704 96955",

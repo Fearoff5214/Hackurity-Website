@@ -29,14 +29,14 @@ const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURICo
 const MENTORS: Person[] = [
   { name: "Mohammad Omar", role: "Security Mentor", url: "https://www.linkedin.com/in/mohammad-omar-a81b28388/", image: avatar("Mohammad Omar"), bio: "Brings a builder's eye to secure systems, threat modelling and practical problem solving." },
   { name: "Dharma Teja", role: "Cybersecurity Mentor", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), bio: "Helps teams turn sharp technical ideas into clear, demonstrable security outcomes." },
-  { name: "Logaa Paramesh", role: "Technical Mentor", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh"), bio: "Focuses on resilient architecture, engineering detail and execution under pressure." },
+  { name: "Logaa Paramesh L T", role: "Technical Mentor", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh L T"), bio: "Focuses on resilient architecture, engineering detail and execution under pressure." },
   { name: "Tanush Jain", role: "Industry Mentor", url: "https://www.linkedin.com/in/tanush-jain-17601321a/", image: avatar("Tanush Jain"), bio: "Guides teams through product thinking, pitching and the human side of security." },
 ];
 
 const CONTACTS: Person[] = [
   { name: "Verril Vaz", role: "Cybersecurity Club President", url: "https://www.linkedin.com/in/verrilvaz", image: avatar("Verril Vaz"), phone: "+91 8971889830", email: "verrilvaz404@gmail.com" },
   { name: "Dharma Teja", role: "Cybersecurity Club Vice President", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280", email: "rcdt009@gmail.com" },
-  { name: "Logaa Paramesh", role: "Cybersecurity Club Technical Head", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh"), phone: "+91 88704 96955", email: "parameshlogaa@gmail.com" },
+  { name: "Logaa Paramesh L T", role: "Cybersecurity Club Technical Head", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh L T"), phone: "+91 88704 96955", email: "parameshlogaa@gmail.com" },
 ];
 
 const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });

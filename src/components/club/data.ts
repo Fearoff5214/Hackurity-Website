@@ -33,21 +33,26 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Verril Vaaz",
+          "Verril Vaz",
           "President",
           "Ask questions early. Most problems are easier to fix before they grow.",
           "verril-vaaz",
-          "+91 98450 12345",
+          "+91 8971889830",
         ),
+        email: "verrilvaz404@gmail.com",
         linkedin: "https://www.linkedin.com/in/verrilvaz",
       },
-      dummy(
-        "Dharma Teja",
-        "Vice President",
-        "Show up, help someone, learn something. That is a good day.",
-        "dharma-teja",
-        "+91 98450 22346",
-      ),
+      {
+        ...dummy(
+          "Dharma Teja",
+          "Vice President",
+          "Show up, help someone, learn something. That is a good day.",
+          "dharma-teja",
+          "+91 79 7565 0280",
+        ),
+        email: "rcdt009@gmail.com",
+        linkedin: "https://www.linkedin.com/in/dharmatejarc06/",
+      },
     ],
   },
   {
@@ -55,27 +60,42 @@ export const DEPARTMENTS: Department[] = [
     label: "Technical Department",
     blurb: "Runs the workshops, labs and practice challenges the club is known for.",
     people: [
-      dummy(
-        "Logaa Paramesh",
-        "Technical Head",
-        "Break it in a lab first, so you never learn it the hard way later.",
-        "logaa-paramesh",
-        "+91 88704 96955",
-      ),
-      dummy(
-        "Mohammad Omar",
-        "Core Technical Associate",
-        "Good notes today save hours tomorrow.",
-        "mohammad-omar",
-        "+91 74559 04156",
-      ),
-      dummy(
-        "Tanush Jain",
-        "Technical Associate",
-        "Start small, finish it, then make it better.",
-        "tanush-jain",
-        "+91 89707 90411",
-      ),
+      {
+        ...dummy(
+          "Logaa Paramesh L T",
+          "Technical Head",
+          "Break it in a lab first, so you never learn it the hard way later.",
+          "logaa-paramesh",
+          "+91 88704 96955",
+        ),
+        email: "parameshlogaa@gmail.com",
+        github: "https://github.com/Fearoff5214",
+        linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
+      },
+      {
+        ...dummy(
+          "Mohammad Omar",
+          "Core Technical Associate",
+          "Good notes today save hours tomorrow.",
+          "mohammad-omar",
+          "+91 74559 04156",
+        ),
+        email: "omarofficial1054@gmail.com",
+        github: "https://github.com/MohammadOmar1054",
+        linkedin: "https://www.linkedin.com/in/mohammad-omar-a81b28388/",
+      },
+      {
+        ...dummy(
+          "Tanush Jain",
+          "Technical Associate",
+          "Start small, finish it, then make it better.",
+          "tanush-jain",
+          "+91 89707 90411",
+        ),
+        email: "brandwopio76@gmail.com",
+        github: "https://github.com/Tanush-Jain",
+        linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
+      },
     ],
   },
   {

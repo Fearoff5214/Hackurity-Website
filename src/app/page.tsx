@@ -33,7 +33,7 @@ export default function ClubHome() {
             transition={{ duration: 0.6 }}
             className="font-mono text-[11px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
           >
-            REVA University · Bangalore · Since 2023
+            REVA University · Bengaluru · Since 2024
           </motion.span>
 
           <motion.h1
@@ -42,7 +42,7 @@ export default function ClubHome() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-6 max-w-3xl font-heading text-3xl leading-[1.35] uppercase md:text-5xl md:leading-[1.3]"
           >
-            The Cybersecurity Club
+            REVA Cybersecurity Club
           </motion.h1>
 
           <motion.p
@@ -106,15 +106,28 @@ export default function ClubHome() {
                 Cybersecurity Club <span className="text-cyber-tan">//</span> REVA University
               </p>
               <p className="mt-2 font-mono text-[11px] text-cyber-gray">
-                School of Computer Science and Engineering, Bangalore, Karnataka
+                School of Computer Science and Engineering, Bengaluru, Karnataka
               </p>
             </div>
-            <a
-              href="mailto:cyberclub@reva.edu.in"
-              className="font-mono text-[11px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
-            >
-              cyberclub@reva.edu.in ↗
-            </a>
+            <div className="flex items-center gap-5">
+              <a
+                href="mailto:cyberclub@reva.edu.in"
+                className="font-mono text-[11px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
+              >
+                cyberclub@reva.edu.in ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/company/cybersecurity-club-reva/posts/?feedView=all"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="REVA Cybersecurity Club on LinkedIn"
+                className="flex h-8 w-8 items-center justify-center border border-cyber-blue/30 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </footer>
       </main>

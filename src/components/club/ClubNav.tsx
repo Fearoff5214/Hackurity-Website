@@ -36,16 +36,14 @@ export default function ClubNav() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
         <a href="#top" className="flex shrink-0 items-center gap-2.5">
-          <motion.svg
-            viewBox="0 0 100 100"
+          <motion.div
             animate={scrolled ? { rotate: [0, -4, 4, 0] } : { rotate: 0 }}
             transition={{ duration: scrolled ? 3 : 0.35, repeat: scrolled ? Infinity : 0 }}
-            className={`fill-none stroke-cyber-tan stroke-[6] transition-all ${scrolled ? "h-7 w-7" : "h-8 w-8"}`}
+            className={`transition-all ${scrolled ? "h-8 w-8" : "h-9 w-9"}`}
           >
-            <polygon points="50,15 85,80 15,80" />
-            <polygon points="50,40 70,80 30,80" className="stroke-[4] opacity-60" />
-            <line x1="50" y1="15" x2="50" y2="80" className="stroke-white stroke-[2] opacity-40" />
-          </motion.svg>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/club-logo-icon.png" alt="" className="h-full w-full object-contain" />
+          </motion.div>
           <span className="font-heading text-[12px] font-bold tracking-[0.22em] sm:text-xs">
             CYBER CLUB <span className="text-cyber-tan">//</span> REVA
           </span>
@@ -64,6 +62,17 @@ export default function ClubNav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <a
+            href="https://www.linkedin.com/company/cybersecurity-club-reva/posts/?feedView=all"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="REVA Cybersecurity Club on LinkedIn"
+            className="hidden h-9 w-9 items-center justify-center border border-cyber-blue/30 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan sm:flex"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+            </svg>
+          </a>
           <Link
             href="/hackurity"
             className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
@@ -113,6 +122,18 @@ export default function ClubNav() {
               >
                 Hackurity 2026
               </Link>
+              <a
+                href="https://www.linkedin.com/company/cybersecurity-club-reva/posts/?feedView=all"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+              >
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+                </svg>
+                LinkedIn
+              </a>
             </div>
           </motion.nav>
         )}

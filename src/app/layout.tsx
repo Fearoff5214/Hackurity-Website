@@ -18,15 +18,15 @@ export const metadata: Metadata = {
   // description: "HACKURITY 2026, powered by IBM — a cybersecurity hackathon for the next generation of defenders.",
   metadataBase: new URL("https://revacyberclub.tech"),
   title:{
-    default: "Cybersecurity Club — REVA University, Bangalore",
+    default: "Cybersecurity Club — REVA University, Bengaluru",
     template: "%s — Cybersecurity Club, REVA University",
   },
   description:
-    "The student-run Cybersecurity Club at REVA University, Bangalore. Founded in 2023. See our current event, our members and our faculty in charge.",
+    "The student-run Cybersecurity Club at REVA University, Bengaluru. Founded in 2024. See our current event, our members and our faculty in charge.",
   openGraph: {
     type : "website",
-    siteName: "Cybersecurity Club — REVA University, Bangalore",
-    title: "Cybersecurity Club — REVA University, Bangalore",
+    siteName: "Cybersecurity Club — REVA University, Bengaluru",
+    title: "Cybersecurity Club — REVA University, Bengaluru",
     description:
       "Weekly hands-on security sessions, competitions and our annual hackathon. Meet the team behind the club.",
     url: "https://revacyberclub.tech",

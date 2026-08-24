@@ -2,7 +2,7 @@
 import { Reveal, SectionHeading } from "./Reveal";
 
 const STATS = [
-  { value: "2023", label: "Founded" },
+  { value: "2024", label: "Founded" },
   { value: "240+", label: "Active members" },
   { value: "45+", label: "Workshops held" },
   { value: "12", label: "Inter-college wins" },
@@ -45,7 +45,7 @@ export default function AboutSection() {
       <SectionHeading
         tag="About the club"
         title="Who we are"
-        description="The Cybersecurity Club at REVA University, Bangalore, started in 2023 with a small group of students who wanted a place to learn security properly instead of picking it up in bits and pieces."
+        description="The Cybersecurity Club at REVA University, Bengaluru, started in 2024 with a small group of students who wanted a place to learn security properly instead of picking it up in bits and pieces."
       />
 
       <div className="grid gap-10 lg:grid-cols-[1.25fr_1fr]">

@@ -9,7 +9,7 @@ const TARGET = new Date("2026-03-14T09:00:00+05:30").getTime();
 
 const FACTS = [
   { label: "Dates", value: "14 – 15 March 2026" },
-  { label: "Venue", value: "REVA University, Bangalore" },
+  { label: "Venue", value: "REVA University, Bengaluru" },
   { label: "Team size", value: "3 – 4 members" },
   { label: "Entry", value: "₹800 per team" },
 ];

@@ -30,7 +30,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
               src={person.photo}
               alt={person.name}
               onError={() => setPhotoFailed(true)}
-              className="absolute inset-0 h-full w-full object-cover grayscale"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           )}
           {photoFailed && (
@@ -45,7 +45,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
               target="_blank"
               rel="noreferrer"
               aria-label={`${person.name} on LinkedIn`}
-              className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-cyber-blue/40 bg-cyber-black/80 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+              className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-cyber-blue/40 bg-cyber-black/80 text-white transition-colors hover:border-cyber-tan hover:text-cyber-tan"
             >
               <LinkedInIcon />
             </a>

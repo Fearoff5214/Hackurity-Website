@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { 
   CornerCrosshairs, 
   BracketFrame, 
@@ -22,12 +23,12 @@ import { ContactSection, MentorsSection, PartnersSection } from "@/components/Co
 import CreatorsSection from "@/components/CreatorsSection";
 
 // export const metadata: Metadata = {
-//   title: "Hackurity 2026 — REVA University, Bangalore",
+//   title: "Hackurity 2026 — REVA University, Bengaluru",
 //   description: "Hackurity 2026, powered by IBM — a cybersecurity hackathon for the next generation of defenders.",
 //   alternates: {canonical: "https://revacyberclub.tech/hackurity"},
 //   openGraph: {
 //     type: "website",
-//     title: "Hackurity 2026 — REVA University, Bangalore",
+//     title: "Hackurity 2026 — REVA University, Bengaluru",
 //     description: "Hackurity 2026, powered by IBM — a cybersecurity hackathon for the next generation of defenders.",
 //     url: "https://revacyberclub.tech/hackurity",
 //   },
@@ -239,7 +240,14 @@ export default function Home() {
         </AnimatePresence>
 
         <div className="flex items-center justify-between gap-3">
-          {/* Left: Stylized Geometric Logo — compacts to logo-only on scroll */}
+          {/* Left: back to club site + Stylized Geometric Logo — compacts to logo-only on scroll */}
+          <Link
+            href="/"
+            aria-label="Back to the Cybersecurity Club site"
+            className="hidden shrink-0 items-center gap-1.5 border border-cyber-blue/25 px-2.5 py-1.5 font-mono text-[10px] tracking-widest text-cyber-gray uppercase transition-colors hover:border-cyber-tan hover:text-cyber-tan sm:flex"
+          >
+            <span aria-hidden="true">←</span> Cyber Club
+          </Link>
           <a href="#mission_brief" className="flex shrink-0 items-center gap-2.5">
             <motion.svg
               viewBox="0 0 100 100"
@@ -367,6 +375,13 @@ export default function Home() {
                 >
                   Register Now
                 </a>
+                <Link
+                  href="/"
+                  onClick={() => setNavOpen(false)}
+                  className="col-span-2 flex items-center justify-center gap-1.5 border border-cyber-blue/20 bg-cyber-dark/70 px-3 py-3 text-center font-mono text-[12px] tracking-widest text-cyber-gray uppercase"
+                >
+                  <span aria-hidden="true">←</span> Back to Cyber Club
+                </Link>
               </div>
             </motion.nav>
           )}

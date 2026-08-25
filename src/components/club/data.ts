@@ -103,20 +103,27 @@ export const DEPARTMENTS: Department[] = [
     label: "Marketing Department",
     blurb: "Tells the club's story on campus and brings new people through the door.",
     people: [
-      dummy(
-        "Sharmily",
-        "Member",
-        "Bio coming soon.",
-        "sharmily",
-        "+91 00000 00000",
-      ),
-      dummy(
-        "Rachana",
-        "Member",
-        "Bio coming soon.",
-        "rachana",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Sharmily",
+          "Marketing Head",
+          "There is nothing called a SUCCESS or FAILURE, Everything is a different experience! ",
+          "sharmily",
+          "+91 9008897013",
+        ),
+        email: "sharmi16605@gmail.com",
+        github: "https://github.com/Sharmily-cloud",
+        linkedin: "https://www.linkedin.com/in/sharmily-h-46873b293?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      },
+      {
+        ...dummy(
+          "Rachana",
+          "Member",
+          "Bio coming soon.",
+          "rachana",
+          "+91 00000 00000",
+        ),
+      },
     ],
   },
   {
@@ -141,6 +148,19 @@ export const DEPARTMENTS: Department[] = [
     label: "Event Management",
     blurb: "Plans the schedule, the venue and the hundred small things on event day.",
     people: [
+      
+      {
+        ...dummy(
+          "KP Yogesh",
+          "Member",
+          "Hack the threats. Protect the future.",
+          "kp-yogesh",
+          "+91 7337669542",
+        ),
+        email: "kpyogesh25@gmail.com",
+        github: "https://github.com/yogeshkp04?tab=repositories",
+        linkedin: "http://www.linkedin.com/in/kpyogesh",
+      },
       dummy(
         "Rohith L",
         "Member",
@@ -183,13 +203,18 @@ export const DEPARTMENTS: Department[] = [
     label: "Social Media",
     blurb: "Runs the club's presence online.",
     people: [
-      dummy(
+      {
+      ...dummy(
         "Shrishail Biradar",
         "Member",
-        "Bio coming soon.",
+        "All power is within you",
         "shrishail-biradar",
-        "+91 00000 00000",
+        "+91 9880221935",
       ),
+      email: "shrishailbiradar2004@gmail.com",
+      github: "https://github.com/Shrishailgb24?utm_source=chatgpt.com",
+      linkedin: "https://www.linkedin.com/in/shrishail-biradar-761833296?utm_source=share_via&utm_content=profile&utm_medium=member_android",     
+    },
       dummy(
         "Shreya Hiremath",
         "Member",

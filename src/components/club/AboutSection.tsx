@@ -7,14 +7,6 @@ const STATS = [
   { value: "3+", label: "Workshops held" },
 ];
 
-const CERTIFICATIONS = [
-  "CompTIA Security+",
-  "Certified Ethical Hacker",
-  "Cisco CyberOps Associate",
-  "AWS Cloud Practitioner",
-  "Google Cybersecurity Certificate",
-];
-
 export default function AboutSection() {
   return (
     <section id="about" className="relative mx-auto max-w-6xl px-5 py-24 md:px-8">
@@ -48,24 +40,6 @@ export default function AboutSection() {
                   {stat.label}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
-      <Reveal delay={0.1} className="mt-10">
-        <div className="dot-mesh border border-cyber-blue/15 p-6">
-          <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan">
-            {"// CERTIFICATIONS OUR MEMBERS HOLD"}
-          </span>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {CERTIFICATIONS.map((item) => (
-              <span
-                key={item}
-                className="border border-cyber-blue/25 bg-black/60 px-3 py-1.5 font-mono text-[11px] tracking-wide text-cyber-gray"
-              >
-                {item}
-              </span>
             ))}
           </div>
         </div>

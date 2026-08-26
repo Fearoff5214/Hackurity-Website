@@ -69,6 +69,8 @@ export default function Home() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedConduct, setAcceptedConduct] = useState(false);
   const [registrationComplete, setRegistrationComplete] = useState(false);
+  const [isSubmittingRegistration, setIsSubmittingRegistration] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
   const [universityPlaceholder, setUniversityPlaceholder] = useState("");
   const [portfolioPlaceholder, setPortfolioPlaceholder] = useState("");
 
@@ -188,6 +190,38 @@ export default function Home() {
     setAcceptedTerms(false);
     setAcceptedConduct(false);
     setRegistrationComplete(false);
+    setRegistrationError("");
+  };
+
+  const submitRegistration = async () => {
+    setIsSubmittingRegistration(true);
+    setRegistrationError("");
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          teamName,
+          teamSize,
+          university,
+          selectedDomain,
+          experienceLevel,
+          members,
+          projectIdea,
+          acceptedTerms,
+          acceptedConduct,
+        }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || "Registration failed. Please try again.");
+      }
+      setRegistrationComplete(true);
+    } catch (err) {
+      setRegistrationError(err instanceof Error ? err.message : "Registration failed. Please try again.");
+    } finally {
+      setIsSubmittingRegistration(false);
+    }
   };
 
   const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
@@ -936,7 +970,25 @@ export default function Home() {
               )}
             </div>
 
-            {!registrationComplete && <div className="flex items-center justify-between gap-3 border-t border-cyber-blue/15 bg-cyber-dark/70 px-5 py-4"><button type="button" onClick={() => setRegistrationStep((step) => Math.max(1, step - 1))} disabled={registrationStep === 1} className="border border-cyber-blue/20 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue disabled:cursor-not-allowed disabled:opacity-30">[ BACK ]</button>{registrationStep < 3 ? <button type="button" onClick={() => setRegistrationStep((step) => step + 1)} disabled={registrationStep === 1 ? !stepOneReady : !membersAreComplete} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ CONTINUE ]</button> : <button type="button" onClick={() => setRegistrationComplete(true)} disabled={!stepThreeReady} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ REGISTER_PAYLOAD ]</button>}</div>}
+            {!registrationComplete && (
+              <div className="border-t border-cyber-blue/15 bg-cyber-dark/70">
+                {registrationError && (
+                  <div className="border-b border-red-500/30 bg-red-950/30 px-5 py-2 font-mono text-[11px] text-red-400">
+                    {registrationError}
+                  </div>
+                )}
+                <div className="flex items-center justify-between gap-3 px-5 py-4">
+                  <button type="button" onClick={() => setRegistrationStep((step) => Math.max(1, step - 1))} disabled={registrationStep === 1 || isSubmittingRegistration} className="border border-cyber-blue/20 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue disabled:cursor-not-allowed disabled:opacity-30">[ BACK ]</button>
+                  {registrationStep < 3 ? (
+                    <button type="button" onClick={() => setRegistrationStep((step) => step + 1)} disabled={registrationStep === 1 ? !stepOneReady : !membersAreComplete} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ CONTINUE ]</button>
+                  ) : (
+                    <button type="button" onClick={submitRegistration} disabled={!stepThreeReady || isSubmittingRegistration} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[11px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">
+                      {isSubmittingRegistration ? "[ SUBMITTING... ]" : "[ REGISTER_PAYLOAD ]"}
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}

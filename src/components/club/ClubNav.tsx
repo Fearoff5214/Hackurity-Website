@@ -73,6 +73,19 @@ export default function ClubNav() {
               <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
             </svg>
           </a>
+          <a
+            href="https://www.instagram.com/reva_cybersecurity_official?igsi=ZmM2MDIzNDR2dHN1"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="REVA Cybersecurity Club on Instagram"
+            className="hidden h-9 w-9 items-center justify-center border border-cyber-blue/30 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan sm:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
           <Link
             href="/hackurity"
             className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
@@ -133,6 +146,20 @@ export default function ClubNav() {
                   <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
                 </svg>
                 LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/reva_cybersecurity_official?igsi=ZmM2MDIzNDR2dHN1"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-3.5 w-3.5">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+                </svg>
+                Instagram
               </a>
             </div>
           </motion.nav>

@@ -2,16 +2,19 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { motion } from "framer-motion";
+import ibmLogo from "@/assests/ibm-logo.svg";
 
-type Partner = { name: string; url: string };
+type Partner = { name: string; url: string; logo?: string };
 type Person = { name: string; role: string; url: string; image: string; bio?: string; phone?: string; email?: string };
 
-// Swap the `url` values here when partnerships are confirmed.
-// Rendered as text wordmarks rather than fetched logos: the old logo.clearbit.com
-// URLs no longer resolve (Clearbit shut the free logo API down), and hotlinking
-// real brand assets isn't appropriate until these partnerships are confirmed anyway.
+// Swap the `url` values here when partnerships are confirmed, and add a
+// `logo` once you have the real asset — see IBM below for the pattern.
+// Everything else renders as a text wordmark rather than a fetched logo:
+// the old logo.clearbit.com URLs no longer resolve (Clearbit shut the free
+// logo API down), and hotlinking real brand assets isn't appropriate until
+// these partnerships are confirmed anyway.
 const PARTNERS: Partner[] = [
-  { name: "IBM", url: "https://www.ibm.com/" },
+  { name: "IBM", url: "https://www.ibm.com/", logo: ibmLogo.src },
   { name: "Fortinet", url: "https://www.fortinet.com" },
   { name: "Microsoft Security", url: "https://www.microsoft.com/security" },
   { name: "CrowdStrike", url: "https://www.crowdstrike.com" },
@@ -48,8 +51,14 @@ export function PartnersSection() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {PARTNERS.map((partner, index) => <motion.a key={partner.name} href={partner.url} target="_blank" rel="noreferrer" initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} whileHover={{ y: -5, borderColor: "rgba(210,180,140,0.7)" }} transition={{ duration: 0.45, ease: "easeOut" }} className="group relative flex min-h-28 flex-col items-center justify-center overflow-hidden border border-cyber-blue/20 bg-white/[0.035] p-5 text-center shadow-[0_8px_25px_rgba(0,0,0,0.18)]">
           <span className="absolute inset-x-0 top-0 h-px origin-left bg-cyber-tan scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
-          <span className="font-heading text-sm tracking-wider text-white uppercase opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100">{partner.name}</span>
-          <span className="mt-3 font-mono text-[10px] font-bold tracking-wider text-cyber-gray transition-colors group-hover:text-cyber-tan">{"// CONFIRMED SOON"}</span>
+          {partner.logo ? (
+            <img src={partner.logo} alt={`${partner.name} logo`} className="h-9 max-w-[120px] object-contain opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100" />
+          ) : (
+            <>
+              <span className="font-heading text-sm tracking-wider text-white uppercase opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100">{partner.name}</span>
+              <span className="mt-3 font-mono text-[10px] font-bold tracking-wider text-cyber-gray transition-colors group-hover:text-cyber-tan">{"// CONFIRMED SOON"}</span>
+            </>
+          )}
         </motion.a>)}
       </div>
     </section>

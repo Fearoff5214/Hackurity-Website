@@ -133,6 +133,8 @@ export const DEPARTMENTS: Department[] = [
           "+91733-78344158",
         ),
         email: "chethankumar23.2005@gmail.com",
+        github: "https://github.com/chetank23",
+        linkedin: "https://www.linkedin.com/in/chetank23/",
       },
     ],
   },
@@ -190,13 +192,16 @@ export const DEPARTMENTS: Department[] = [
         "shrishail-biradar",
         "+91 00000 00000",
       ),
-      dummy(
-        "Shreya Hiremath",
-        "Member",
-        "Bio coming soon.",
-        "shreya-hiremath",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Shreya Hiremath",
+          "Member",
+          "Bio coming soon.",
+          "shreya-hiremath",
+          "+91 00000 00000",
+        ),
+        linkedin: "https://www.linkedin.com/in/shreya-hiremath-86a853331",
+      },
     ],
   },
 ];

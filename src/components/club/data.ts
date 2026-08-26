@@ -76,7 +76,7 @@ export const DEPARTMENTS: Department[] = [
         ...dummy(
           "Mohammad Omar",
           "Core Technical Associate",
-          "Good notes today save hours tomorrow.",
+          "Immense knowledge is fetched by having an intersection of many interests.",
           "mohammad-omar",
           "+91 74559 04156",
         ),
@@ -103,20 +103,27 @@ export const DEPARTMENTS: Department[] = [
     label: "Marketing Department",
     blurb: "Tells the club's story on campus and brings new people through the door.",
     people: [
-      dummy(
-        "Sharmily",
-        "Member",
-        "Bio coming soon.",
-        "sharmily",
-        "+91 00000 00000",
-      ),
-      dummy(
-        "Rachana",
-        "Member",
-        "Bio coming soon.",
-        "rachana",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Sharmily",
+          "Marketing Head",
+          "There is nothing called a SUCCESS or FAILURE, Everything is a different experience! ",
+          "sharmily",
+          "+91 9008897013",
+        ),
+        email: "sharmi16605@gmail.com",
+        github: "https://github.com/Sharmily-cloud",
+        linkedin: "https://www.linkedin.com/in/sharmily-h-46873b293",
+      },
+      {
+        ...dummy(
+          "Rachana",
+          "Member",
+          "Bio coming soon.",
+          "rachana",
+          "+91 00000 00000",
+        ),
+      },
     ],
   },
   {
@@ -143,6 +150,18 @@ export const DEPARTMENTS: Department[] = [
     label: "Event Management",
     blurb: "Plans the schedule, the venue and the hundred small things on event day.",
     people: [
+      {
+        ...dummy(
+          "KP Yogesh",
+          "Member",
+          "Hack the threats. Protect the future.",
+          "kp-yogesh",
+          "+91 7337669542",
+        ),
+        email: "kpyogesh25@gmail.com",
+        github: "https://github.com/yogeshkp04",
+        linkedin: "https://www.linkedin.com/in/kpyogesh",
+      },
       dummy(
         "Rohith L",
         "Member",
@@ -171,13 +190,6 @@ export const DEPARTMENTS: Department[] = [
         "adithi-bisappa-gowda",
         "+91 00000 00000",
       ),
-      dummy(
-        "Yogesh K P",
-        "Member",
-        "Bio coming soon.",
-        "yogesh-k-p",
-        "+91 00000 00000",
-      ),
     ],
   },
   {
@@ -185,13 +197,18 @@ export const DEPARTMENTS: Department[] = [
     label: "Social Media",
     blurb: "Runs the club's presence online.",
     people: [
-      dummy(
-        "Shrishail Biradar",
-        "Member",
-        "Bio coming soon.",
-        "shrishail-biradar",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Shrishail Biradar",
+          "Member",
+          "All power is within you",
+          "shrishail-biradar",
+          "+91 9880221935",
+        ),
+        email: "shrishailbiradar2004@gmail.com",
+        github: "https://github.com/Shrishailgb24",
+        linkedin: "https://www.linkedin.com/in/shrishail-biradar-761833296",
+      },
       {
         ...dummy(
           "Shreya Hiremath",

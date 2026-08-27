@@ -14,8 +14,17 @@ type Creator = {
 
 const CREATORS: Creator[] = [
   {
-    name: "Mohammad Omar",
+    name: "Logaa Paramesh L T",
     role: "Lead Developer",
+    quote:"Don't Touch it if it works, it will break.",
+    phone: "+91 88704 96955",
+    email: "parameshlogaa@gmail.com",
+    github: "https://github.com/Fearoff5214",
+    linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
+  },
+  {
+    name: "Mohammad Omar",
+    role: "Developer",
     quote: "If you find a bug in this site, DM me. If you don't, I did my job right.",
     phone: "+91 74559 04156",
     email: "omarofficial1054@gmail.com",
@@ -30,13 +39,6 @@ const CREATORS: Creator[] = [
     github: "https://github.com/Tanush-Jain",
     linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
   },
-  {
-    name: "Logaa Paramesh",
-    role: "Developer",
-    phone: "+91 88704 96955",
-    github: "https://github.com/Fearoff5214",
-    linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
-  },
 ];
 
 export default function CreatorsSection() {
@@ -46,13 +48,13 @@ export default function CreatorsSection() {
       className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/20 p-6 md:p-8"
     >
       <div className="mb-6">
-        <span className="font-mono text-[10px] font-bold tracking-widest text-cyber-tan">
+        <span className="font-mono text-[11px] font-bold tracking-widest text-cyber-tan">
           {"// BUILD_CREW"}
         </span>
         <h2 className="mt-2 font-heading text-lg leading-relaxed text-white uppercase md:text-xl">
           Meet the Creators
         </h2>
-        <p className="mt-2 max-w-xl font-mono text-[10px] leading-relaxed text-cyber-gray">
+        <p className="mt-2 max-w-xl font-mono text-[11px] leading-relaxed text-cyber-gray">
           The operators who designed, coded and shipped this terminal.
         </p>
       </div>
@@ -69,25 +71,25 @@ export default function CreatorsSection() {
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h3 className="font-heading text-[12px] leading-relaxed text-white uppercase">
+                <h3 className="font-heading text-[13px] leading-relaxed text-white uppercase">
                   {person.name}
                 </h3>
-                <p className="font-mono text-[9px] font-bold tracking-wide text-cyber-tan">
+                <p className="font-mono text-[10px] font-bold tracking-wide text-cyber-tan">
                   {person.role}
                 </p>
               </div>
-              <span className="font-mono text-[9px] tracking-widest text-cyber-blue/60">
+              <span className="font-mono text-[10px] tracking-widest text-cyber-blue/60">
                 {`0${index + 1}`}
               </span>
             </div>
 
             {person.quote && (
-              <p className="mt-4 border-l border-cyber-tan/40 pl-3 font-mono text-[10px] leading-relaxed text-cyber-gray italic">
+              <p className="mt-4 border-l border-cyber-tan/40 pl-3 font-mono text-[11px] leading-relaxed text-cyber-gray italic">
                 &ldquo;{person.quote}&rdquo;
               </p>
             )}
 
-            <div className="mt-4 space-y-1 font-mono text-[10px] text-cyber-gray">
+            <div className="mt-4 space-y-1 font-mono text-[11px] text-cyber-gray">
               <a
                 href={`tel:${person.phone.replace(/\s/g, "")}`}
                 className="block hover:text-white"
@@ -109,7 +111,7 @@ export default function CreatorsSection() {
                 href={person.github}
                 target="_blank"
                 rel="noreferrer"
-                className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[9px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
               >
                 GITHUB ↗
               </a>
@@ -117,7 +119,7 @@ export default function CreatorsSection() {
                 href={person.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[9px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
               >
                 LINKEDIN ↗
               </a>

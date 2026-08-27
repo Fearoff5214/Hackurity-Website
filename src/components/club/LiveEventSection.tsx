@@ -9,7 +9,7 @@ const TARGET = new Date("2026-03-14T09:00:00+05:30").getTime();
 
 const FACTS = [
   { label: "Dates", value: "14 – 15 March 2026" },
-  { label: "Venue", value: "REVA University, Bangalore" },
+  { label: "Venue", value: "REVA University, Bengaluru" },
   { label: "Team size", value: "3 – 4 members" },
   { label: "Entry", value: "₹800 per team" },
 ];
@@ -60,11 +60,11 @@ export default function LiveEventSection() {
           <div className="grid gap-px bg-cyber-blue/15 lg:grid-cols-[1.4fr_1fr]">
             <div className="bg-black/70 p-6 md:p-9">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="flex items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-1.5 font-mono text-[10px] font-bold tracking-widest text-cyber-tan uppercase">
+                <span className="flex items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-1.5 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase">
                   <span className="live-dot inline-block h-2 w-2 rounded-full bg-cyber-tan" />
                   Registration open
                 </span>
-                <span className="font-mono text-[10px] tracking-widest text-cyber-gray">
+                <span className="font-mono text-[11px] tracking-widest text-cyber-gray">
                   Updated just now
                 </span>
               </div>
@@ -72,7 +72,7 @@ export default function LiveEventSection() {
               <h3 className="mt-6 font-heading text-2xl leading-relaxed uppercase md:text-4xl">
                 Hackurity 2026
               </h3>
-              <p className="mt-4 max-w-xl font-mono text-[12.5px] leading-relaxed text-cyber-gray">
+              <p className="mt-4 max-w-xl font-mono text-[13.5px] leading-relaxed text-cyber-gray">
                 Our biggest event of the year: a 24-hour cybersecurity hackathon where student teams
                 pick a challenge track, build something over the weekend and present it to a panel.
                 Beginners and experienced teams compete in the same space, with mentors on the floor
@@ -82,10 +82,10 @@ export default function LiveEventSection() {
               <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {FACTS.map((fact) => (
                   <div key={fact.label} className="border-l border-cyber-blue/30 pl-3">
-                    <dt className="font-mono text-[9px] tracking-widest text-cyber-blue/70 uppercase">
+                    <dt className="font-mono text-[10px] tracking-widest text-cyber-blue/70 uppercase">
                       {fact.label}
                     </dt>
-                    <dd className="mt-1.5 font-mono text-[11px] leading-relaxed">{fact.value}</dd>
+                    <dd className="mt-1.5 font-mono text-[12px] leading-relaxed">{fact.value}</dd>
                   </div>
                 ))}
               </dl>
@@ -93,19 +93,19 @@ export default function LiveEventSection() {
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
                   href="/hackurity"
-                  className="group relative inline-flex items-center gap-3 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
+                  className="group relative inline-flex items-center gap-3 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[12px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
                 >
                   Join Hackurity
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
-                <span className="font-mono text-[10px] tracking-wide text-cyber-gray">
+                <span className="font-mono text-[11px] tracking-wide text-cyber-gray">
                   Takes you to the full event page
                 </span>
               </div>
             </div>
 
             <div className="bg-black/85 p-6 md:p-8">
-              <span className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan">
+              <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan">
                 {"// LIVE STATUS"}
               </span>
 
@@ -121,19 +121,19 @@ export default function LiveEventSection() {
                     >
                       {String(unit.value).padStart(2, "0")}
                     </motion.div>
-                    <div className="mt-2 font-mono text-[8px] tracking-widest text-cyber-gray uppercase">
+                    <div className="mt-2 font-mono text-[9px] tracking-widest text-cyber-gray uppercase">
                       {unit.label}
                     </div>
                   </div>
                 ))}
               </div>
-              <p className="mt-3 font-mono text-[10px] tracking-wide text-cyber-gray">
+              <p className="mt-3 font-mono text-[11px] tracking-wide text-cyber-gray">
                 Time left until day one begins.
               </p>
 
               <div className="mt-7 space-y-4">
                 <div>
-                  <div className="flex items-baseline justify-between font-mono text-[10px] tracking-widest text-cyber-gray uppercase">
+                  <div className="flex items-baseline justify-between font-mono text-[11px] tracking-widest text-cyber-gray uppercase">
                     <span>Registrations</span>
                     <motion.span
                       key={registered}
@@ -154,7 +154,7 @@ export default function LiveEventSection() {
                   </div>
                 </div>
 
-                <ul className="space-y-2 border-t border-cyber-blue/15 pt-4 font-mono text-[10.5px] leading-relaxed text-cyber-gray">
+                <ul className="space-y-2 border-t border-cyber-blue/15 pt-4 font-mono text-[11.5px] leading-relaxed text-cyber-gray">
                   <li className="flex justify-between gap-3">
                     <span>Teams confirmed</span>
                     <span className="text-white">118</span>

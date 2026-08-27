@@ -263,6 +263,9 @@ function ConduitScene({ texture }: { texture: THREE.Texture }) {
 export default function CyberBreachConduit() {
   const [mounted, setMounted] = useState(false);
   const [binaryTexture, setBinaryTexture] = useState<THREE.Texture | null>(null);
+  // Bumped to force a full Canvas remount if the GPU drops the WebGL context
+  // (otherwise the canvas is left painted solid white with no way to recover).
+  const [canvasKey, setCanvasKey] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -297,18 +300,25 @@ export default function CyberBreachConduit() {
 
   return (
     <div className="w-full h-full min-h-[350px] relative border border-cyber-blue/10 bg-cyber-dark/20 flex flex-col items-stretch bracket-container">
-      <span className="absolute top-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[10px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
       
-      <div className="absolute top-4 left-4 z-10 font-mono text-[9px] text-cyber-blue/60 tracking-wider">
+      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-cyber-blue/60 tracking-wider">
         <div>SYS.STREAM_MODE: FIBER_NUMBERS_FLOW</div>
         <div>CONDUITS: ACTIVE [4_NODES]</div>
       </div>
 
       <Canvas
+        key={canvasKey}
         camera={{ position: [0, 0, 8], fov: 45 }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener("webglcontextlost", (event) => {
+            event.preventDefault();
+            setCanvasKey((key) => key + 1);
+          });
+        }}
       >
         <ConduitScene texture={binaryTexture} />
         <OrbitControls enableZoom={false} enablePan={false} />

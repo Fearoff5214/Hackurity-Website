@@ -1,7 +1,8 @@
 services:
   - type: web
     name: hackurity-website
-    env: static
+    runtime: static
+    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./out
     envVars:

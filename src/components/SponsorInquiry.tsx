@@ -50,13 +50,13 @@ export default function SponsorInquiryPage() {
 
       <div className="relative mx-auto w-full max-w-2xl">
         <div className="mb-8 text-center">
-          <div className="font-mono text-[10px] font-bold tracking-[0.4em] text-cyber-tan uppercase">
+          <div className="font-mono text-[11px] font-bold tracking-[0.4em] text-cyber-tan uppercase">
             // HACKURITY 2026 — POWERED BY IBM // PARTNERSHIP DESK
           </div>
           <h1 className="mt-3 font-heading text-lg leading-tight text-white uppercase md:text-2xl">
             Sponsorship Enquiry
           </h1>
-          <p className="mx-auto mt-4 max-w-lg font-mono text-[11px] leading-relaxed text-cyber-gray md:text-xs">
+          <p className="mx-auto mt-4 max-w-lg font-mono text-[12px] leading-relaxed text-cyber-gray md:text-xs">
             Tell us a little about your organisation and what you would like to know. Our team replies
             to every enquiry, usually within two working days.
           </p>
@@ -73,7 +73,7 @@ export default function SponsorInquiryPage() {
           <span className="absolute bottom-0 left-0 h-6 w-6 border-b-2 border-l-2 border-cyber-tan" />
           <span className="absolute bottom-0 right-0 h-6 w-6 border-b-2 border-r-2 border-cyber-tan" />
 
-          <div className="flex items-center justify-between border-b border-cyber-blue/15 px-5 py-3 font-mono text-[9px] tracking-widest">
+          <div className="flex items-center justify-between border-b border-cyber-blue/15 px-5 py-3 font-mono text-[10px] tracking-widest">
             <span className="text-cyber-tan">ENQUIRY_FORM_01</span>
             <span className="flex items-center gap-1.5 text-cyber-blue">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyber-blue" />
@@ -91,7 +91,7 @@ export default function SponsorInquiryPage() {
               <button
                 type="button"
                 onClick={() => setSent(false)}
-                className="mt-6 border border-cyber-blue/40 bg-cyber-blue/10 px-4 py-2 font-mono text-[10px] tracking-widest text-cyber-blue hover:bg-cyber-blue/20"
+                className="mt-6 border border-cyber-blue/40 bg-cyber-blue/10 px-4 py-2 font-mono text-[11px] tracking-widest text-cyber-blue hover:bg-cyber-blue/20"
               >
                 [ SEND_ANOTHER ]
               </button>
@@ -120,7 +120,7 @@ export default function SponsorInquiryPage() {
               }}
             >
               <label className="block space-y-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-wider text-cyber-blue">
+                <span className="font-mono text-[11px] font-bold tracking-wider text-cyber-blue">
                   --company-name
                 </span>
                 <input
@@ -132,7 +132,7 @@ export default function SponsorInquiryPage() {
               </label>
 
               <label className="block space-y-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-wider text-cyber-blue">
+                <span className="font-mono text-[11px] font-bold tracking-wider text-cyber-blue">
                   --phone-number
                 </span>
                 <input
@@ -145,7 +145,7 @@ export default function SponsorInquiryPage() {
               </label>
 
               <div className="space-y-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-wider text-cyber-blue">
+                <span className="font-mono text-[11px] font-bold tracking-wider text-cyber-blue">
                   --email
                 </span>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
@@ -164,14 +164,14 @@ export default function SponsorInquiryPage() {
                     aria-label="Email domain"
                   />
                 </div>
-                <p className="font-mono text-[9px] tracking-wider text-cyber-gray/50">
+                <p className="font-mono text-[10px] tracking-wider text-cyber-gray/50">
                   Full address: {emailUser || "—"}
                   {emailDomain}
                 </p>
               </div>
 
               <label className="block space-y-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-wider text-cyber-blue">
+                <span className="font-mono text-[11px] font-bold tracking-wider text-cyber-blue">
                   --your-name
                 </span>
                 <input
@@ -183,7 +183,7 @@ export default function SponsorInquiryPage() {
               </label>
 
               <label className="block space-y-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-wider text-cyber-blue">
+                <span className="font-mono text-[11px] font-bold tracking-wider text-cyber-blue">
                   --your-enquiry
                 </span>
                 <textarea
@@ -223,7 +223,7 @@ export default function SponsorInquiryPage() {
         <div className="mt-8 text-center">
           <a
             href="/"
-            className="font-mono text-[10px] tracking-widest text-cyber-gray uppercase transition-colors hover:text-cyber-tan"
+            className="font-mono text-[11px] tracking-widest text-cyber-gray uppercase transition-colors hover:text-cyber-tan"
           >
             ← back to hackurity
           </a>

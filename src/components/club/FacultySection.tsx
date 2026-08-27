@@ -23,14 +23,14 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
 
   return (
     <Reveal delay={index * 0.07} y={20}>
-      <motion.article whileHover={{ y: -4 }} transition={{ duration: 0.25 }} className="glass-panel bracket-container h-full p-4">
+      <motion.article whileHover={{ y: -4 }} transition={{ duration: 0.25 }} className="glass-panel bracket-container h-full w-40 shrink-0 p-3 sm:w-44">
         <div className="relative aspect-[4/5] w-full overflow-hidden border border-cyber-tan/25 bg-cyber-tan/10">
           {!photoFailed && (
             <img
               src={person.photo}
               alt={person.name}
               onError={() => setPhotoFailed(true)}
-              className="absolute inset-0 h-full w-full object-cover grayscale"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           )}
           {photoFailed && (
@@ -45,7 +45,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
               target="_blank"
               rel="noreferrer"
               aria-label={`${person.name} on LinkedIn`}
-              className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-cyber-blue/40 bg-cyber-black/80 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+              className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-cyber-blue/40 bg-cyber-black/80 text-white transition-colors hover:border-cyber-tan hover:text-cyber-tan"
             >
               <LinkedInIcon />
             </a>
@@ -59,8 +59,10 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
           )}
         </div>
 
-        <h3 className="mt-3 font-heading text-[12px] leading-relaxed uppercase">{person.name}</h3>
-        <p className="mt-1 font-mono text-[10px] leading-relaxed text-cyber-gray">{person.role}</p>
+        <h3 className="mt-3 font-heading text-[13px] leading-relaxed uppercase">{person.name}</h3>
+        <p className="mt-1 line-clamp-2 font-mono text-[11px] leading-relaxed text-cyber-gray" title={person.role}>
+          {person.role}
+        </p>
       </motion.article>
     </Reveal>
   );
@@ -68,13 +70,13 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
 
 function PortraitGroup({ label, people }: { label: string; people: TeamPortrait[] }) {
   return (
-    <div className="mt-12 first:mt-0">
+    <div>
       <Reveal>
-        <span className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan">
+        <span className="font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan">
           {`// ${label}`}
         </span>
       </Reveal>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+      <div className="mt-4 flex flex-wrap gap-4">
         {people.map((person, index) => (
           <PortraitCard key={person.name} person={person} index={index} />
         ))}
@@ -92,8 +94,11 @@ export default function FacultySection() {
         description="The teaching staff who support the club, approve our events and help members connect their coursework with what we do here."
       />
 
-      <PortraitGroup label="CONVENORS" people={CONVENORS} />
-      <PortraitGroup label="FACULTY IN-CHARGE" people={FACULTY_IN_CHARGE} />
+      <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+        <PortraitGroup label="CONVENORS" people={CONVENORS} />
+        <div aria-hidden="true" className="hidden self-stretch border-l border-cyber-blue/15 lg:block" />
+        <PortraitGroup label="FACULTY IN-CHARGE" people={FACULTY_IN_CHARGE} />
+      </div>
     </section>
   );
 }

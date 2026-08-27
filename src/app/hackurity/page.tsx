@@ -77,18 +77,29 @@ export default function Home() {
   const [portfolioPlaceholder, setPortfolioPlaceholder] = useState("");
 
   // Google sign-in gate: registration can only be submitted by an authenticated user.
-  const [supabase] = useState(() => createClient());
+  // Client is created lazily in an effect (never during SSR/build prerendering),
+  // so a missing Supabase env var can't take down the whole page build.
+  const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    let client: ReturnType<typeof createClient>;
+    try {
+      client = createClient();
+    } catch (err) {
+      console.error("Supabase client could not be created — check env vars:", err);
+      return;
+    }
+    setSupabase(client);
+    client.auth.getUser().then(({ data }) => setUser(data.user ?? null));
+    const { data: listener } = client.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
     return () => listener.subscription.unsubscribe();
-  }, [supabase]);
+  }, []);
 
   const handleGoogleSignIn = async () => {
+    if (!supabase) return;
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/auth/callback?next=/hackurity` },
@@ -96,6 +107,7 @@ export default function Home() {
   };
 
   const handleSignOut = async () => {
+    if (!supabase) return;
     await supabase.auth.signOut();
   };
 

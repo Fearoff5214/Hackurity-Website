@@ -1,10 +1,9 @@
 services:
   - type: web
     name: hackurity-website
-    runtime: node
-    plan: free
+    env: static
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    staticPublishPath: ./out
     envVars:
       - key: NODE_VERSION
         value: 20.18.0

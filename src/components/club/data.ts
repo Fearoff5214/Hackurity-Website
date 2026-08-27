@@ -113,58 +113,14 @@ export const DEPARTMENTS: Department[] = [
   {
     id: "design",
     label: "Design Department",
-    blurb: "Owns the look of everything the club puts out, from posters to this website.",
-    people: [
-      dummy(
-        "Chetan",
-        "Design Lead",
-        "Clean beats clever almost every time.",
-        "chetan",
-        "+91 98450 66350",
-      ),
-      dummy(
-        "Nisha Kulkarni",
-        "Visual Designer",
-        "Details are what people actually notice.",
-        "nisha-kulkarni",
-        "+91 98450 77351",
-      ),
-      dummy(
-        "Arjun Shetty",
-        "Motion Designer",
-        "Movement should help you read, not distract you.",
-        "arjun-shetty",
-        "+91 98450 88352",
-      ),
-    ],
+    blurb: "Owns the look of everything the club puts out, from posters to this website. Roster coming soon.",
+    people: [],
   },
   {
     id: "events",
     label: "Event Management",
-    blurb: "Plans the schedule, the venue and the hundred small things on event day.",
-    people: [
-      dummy(
-        "Sneha Iyer",
-        "Events Head",
-        "A calm event day is built two weeks earlier.",
-        "sneha-iyer",
-        "+91 98450 99353",
-      ),
-      dummy(
-        "Karthik Naik",
-        "Logistics Associate",
-        "Always have a backup plan and a spare cable.",
-        "karthik-naik",
-        "+91 98451 10354",
-      ),
-      dummy(
-        "Meghna Das",
-        "Volunteer Coordinator",
-        "Take care of the volunteers and they take care of the event.",
-        "meghna-das",
-        "+91 98451 21355",
-      ),
-    ],
+    blurb: "Plans the schedule, the venue and the hundred small things on event day. Roster coming soon.",
+    people: [],
   },
   {
     id: "social-media",
@@ -178,6 +134,15 @@ export const DEPARTMENTS: Department[] = [
         "social-media-head",
         "+91 00000 00000",
       ),
+      {
+        name: "Shreya Hiremath",
+        role: "Social Media Associate",
+        saying: "Placeholder entry — swap in the real details.",
+        email: "shreya-hiremath@revacyberclub.in",
+        phone: "+91 00000 00000",
+        github: "https://github.com/NinjaCoder03",
+        linkedin: "https://www.linkedin.com/in/shreya-hiremath-86a853331?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      },
     ],
   },
 ];

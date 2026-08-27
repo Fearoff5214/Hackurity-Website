@@ -20,6 +20,7 @@ import BinaryStarfield from "@/components/BinaryStarfield";
 import ibmLogo from "@/assests/ibm-logo.svg";
 import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
+import { submitRegistration } from "@/lib/submissions";
 
 // export const metadata: Metadata = {
 //   title: "Hackurity 2026 — REVA University, Bangalore",
@@ -69,6 +70,8 @@ export default function Home() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedConduct, setAcceptedConduct] = useState(false);
   const [registrationComplete, setRegistrationComplete] = useState(false);
+  const [registrationSubmitting, setRegistrationSubmitting] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
   const [universityPlaceholder, setUniversityPlaceholder] = useState("");
   const [portfolioPlaceholder, setPortfolioPlaceholder] = useState("");
 
@@ -188,6 +191,30 @@ export default function Home() {
     setAcceptedTerms(false);
     setAcceptedConduct(false);
     setRegistrationComplete(false);
+    setRegistrationError("");
+  };
+
+  const handleRegisterSubmit = async () => {
+    setRegistrationError("");
+    setRegistrationSubmitting(true);
+    try {
+      await submitRegistration({
+        teamName,
+        teamSize,
+        university,
+        domain: selectedDomain,
+        experienceLevel,
+        members: members.slice(0, Number(teamSize)),
+        projectIdea,
+        acceptedTerms,
+        acceptedConduct,
+      });
+      setRegistrationComplete(true);
+    } catch (error) {
+      setRegistrationError(error instanceof Error ? error.message : "Submission failed. Please try again.");
+    } finally {
+      setRegistrationSubmitting(false);
+    }
   };
 
   const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
@@ -905,7 +932,7 @@ export default function Home() {
                 <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="border border-cyber-tan/45 bg-cyber-tan/5 p-6 text-center">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center border border-cyber-tan text-cyber-tan shadow-[0_0_18px_rgba(210,180,140,0.25)]">✓</div>
                   <h3 className="font-heading text-base text-white">PAYLOAD VERIFIED</h3>
-                  <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">Your registration interface is complete. Connect this form to your registration backend before accepting live applications.</p>
+                  <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">Your team registration has been received. Our organisers will reach out with next steps.</p>
                   <button type="button" onClick={() => { setIsRegistrationOpen(false); resetRegistration(); }} className="mt-6 border border-cyber-tan/45 bg-cyber-tan/5 px-4 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10">[ CLOSE_CONSOLE ]</button>
                 </motion.div>
               ) : registrationStep === 1 ? (
@@ -934,7 +961,13 @@ export default function Home() {
               )}
             </div>
 
-            {!registrationComplete && <div className="flex items-center justify-between gap-3 border-t border-cyber-blue/15 bg-cyber-dark/70 px-5 py-4"><button type="button" onClick={() => setRegistrationStep((step) => Math.max(1, step - 1))} disabled={registrationStep === 1} className="border border-cyber-blue/20 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue disabled:cursor-not-allowed disabled:opacity-30">[ BACK ]</button>{registrationStep < 3 ? <button type="button" onClick={() => setRegistrationStep((step) => step + 1)} disabled={registrationStep === 1 ? !stepOneReady : !membersAreComplete} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ CONTINUE ]</button> : <button type="button" onClick={() => setRegistrationComplete(true)} disabled={!stepThreeReady} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ REGISTER_PAYLOAD ]</button>}</div>}
+            {!registrationComplete && registrationStep === 3 && registrationError && (
+              <div className="border-t border-red-500/30 bg-red-500/10 px-5 py-2 font-mono text-[10px] tracking-wider text-red-400">
+                {registrationError}
+              </div>
+            )}
+
+            {!registrationComplete && <div className="flex items-center justify-between gap-3 border-t border-cyber-blue/15 bg-cyber-dark/70 px-5 py-4"><button type="button" onClick={() => setRegistrationStep((step) => Math.max(1, step - 1))} disabled={registrationStep === 1} className="border border-cyber-blue/20 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-gray transition-colors hover:border-cyber-blue disabled:cursor-not-allowed disabled:opacity-30">[ BACK ]</button>{registrationStep < 3 ? <button type="button" onClick={() => setRegistrationStep((step) => step + 1)} disabled={registrationStep === 1 ? !stepOneReady : !membersAreComplete} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">[ CONTINUE ]</button> : <button type="button" onClick={handleRegisterSubmit} disabled={!stepThreeReady || registrationSubmitting} className="border border-cyber-tan/45 bg-cyber-tan/5 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30">{registrationSubmitting ? "[ TRANSMITTING... ]" : "[ REGISTER_PAYLOAD ]"}</button>}</div>}
           </motion.div>
         </motion.div>
       )}

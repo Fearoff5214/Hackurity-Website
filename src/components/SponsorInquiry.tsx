@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import { useTypingPlaceholder } from "@/components/useTypingPlaceholder";
+import { submitSponsorInquiry } from "@/lib/submissions";
 
 const PHONE_SAMPLES = ["+91 xxxxxxxxxx"];
 const EMAIL_SAMPLES = ["xxxxx", "your.name", "partnerships"];
@@ -22,6 +23,8 @@ export default function SponsorInquiryPage() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const phonePlaceholder = useTypingPlaceholder(PHONE_SAMPLES, 110);
   const emailPlaceholder = useTypingPlaceholder(EMAIL_SAMPLES, 100);
@@ -83,7 +86,7 @@ export default function SponsorInquiryPage() {
               <h2 className="font-heading text-sm text-white uppercase">Enquiry sent</h2>
               <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">
                 Thanks {name.split(" ")[0] || "there"} — we have your details and will get back to you
-                shortly. (Hook this form up to your backend to receive live submissions.)
+                shortly.
               </p>
               <button
                 type="button"
@@ -96,9 +99,24 @@ export default function SponsorInquiryPage() {
           ) : (
             <form
               className="space-y-5 p-5 md:p-7"
-              onSubmit={(event) => {
+              onSubmit={async (event) => {
                 event.preventDefault();
-                setSent(true);
+                setSubmitError("");
+                setSubmitting(true);
+                try {
+                  await submitSponsorInquiry({
+                    company,
+                    phone,
+                    email: `${emailUser}${emailDomain}`,
+                    name,
+                    message,
+                  });
+                  setSent(true);
+                } catch (error) {
+                  setSubmitError(error instanceof Error ? error.message : "Submission failed. Please try again.");
+                } finally {
+                  setSubmitting(false);
+                }
               }}
             >
               <label className="block space-y-1.5">
@@ -177,14 +195,18 @@ export default function SponsorInquiryPage() {
                 />
               </label>
 
+              {submitError && (
+                <p className="font-mono text-[10px] tracking-wider text-red-400">{submitError}</p>
+              )}
+
               <motion.button
                 type="submit"
-                disabled={!ready}
-                whileHover={ready ? { scale: 1.01 } : {}}
-                whileTap={ready ? { scale: 0.98 } : {}}
+                disabled={!ready || submitting}
+                whileHover={ready && !submitting ? { scale: 1.01 } : {}}
+                whileTap={ready && !submitting ? { scale: 0.98 } : {}}
                 className="relative w-full overflow-hidden border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3.5 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 disabled:cursor-not-allowed disabled:opacity-30"
               >
-                {ready && (
+                {ready && !submitting && (
                   <motion.span
                     aria-hidden="true"
                     className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
@@ -192,7 +214,7 @@ export default function SponsorInquiryPage() {
                     transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                   />
                 )}
-                <span className="relative">[ SEND_ENQUIRY ]</span>
+                <span className="relative">{submitting ? "[ SENDING... ]" : "[ SEND_ENQUIRY ]"}</span>
               </motion.button>
             </form>
           )}

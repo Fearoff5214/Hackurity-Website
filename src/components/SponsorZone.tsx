@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitSponsorApplication } from "@/lib/submissions";
 
 // Replace this with the real brochure PDF link when it is ready.
 export const SPONSOR_BROCHURE_URL = "/documents/hackurity-sponsorship-brochure.pdf";
@@ -22,6 +23,21 @@ export default function SponsorZone() {
   const [phone, setPhone] = useState("");
   const [pastSponsors, setPastSponsors] = useState("");
   const [tier, setTier] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSponsorSubmit = async () => {
+    setSubmitError("");
+    setSubmitting(true);
+    try {
+      await submitSponsorApplication({ email, phone, pastSponsors, tier });
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const inputClass =
     "w-full rounded-none border border-cyber-blue/25 bg-cyber-black px-3 py-2.5 font-terminal text-xs text-white placeholder:text-cyber-gray/40 focus:border-cyber-blue focus:outline-none";
@@ -125,6 +141,7 @@ export default function SponsorZone() {
                   onClick={() => {
                     setOptionsOpen(false);
                     setSubmitted(false);
+                    setSubmitError("");
                     setSponsorFormOpen(true);
                   }}
                   whileHover={{ scale: 1.02 }}
@@ -200,8 +217,7 @@ export default function SponsorZone() {
                   >
                     <h4 className="font-heading text-sm text-white uppercase">Request received</h4>
                     <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">
-                      Thanks for your interest. Our partnerships team will reach out shortly. (Connect
-                      this form to your backend to store live submissions.)
+                      Thanks for your interest. Our partnerships team will reach out shortly.
                     </p>
                     <button
                       type="button"
@@ -287,13 +303,17 @@ export default function SponsorZone() {
                       </div>
                     </div>
 
+                    {submitError && (
+                      <p className="font-mono text-[10px] tracking-wider text-red-400">{submitError}</p>
+                    )}
+
                     <button
                       type="button"
-                      disabled={!formReady}
-                      onClick={() => setSubmitted(true)}
+                      disabled={!formReady || submitting}
+                      onClick={handleSponsorSubmit}
                       className="w-full border border-cyber-blue/50 bg-cyber-blue/10 px-4 py-3 font-mono text-[11px] font-bold tracking-widest text-white uppercase transition-colors hover:bg-cyber-blue/20 disabled:cursor-not-allowed disabled:opacity-30"
                     >
-                      [ SUBMIT_SPONSORSHIP_REQUEST ]
+                      {submitting ? "[ SUBMITTING... ]" : "[ SUBMIT_SPONSORSHIP_REQUEST ]"}
                     </button>
                   </div>
                 )}

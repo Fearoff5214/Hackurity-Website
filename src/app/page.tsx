@@ -74,38 +74,59 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-4 max-w-xl"
+            className="mt-8 w-full max-w-2xl"
           >
             <Link
               href="/hackurity"
-              className="group relative block overflow-hidden border border-cyber-tan/50 bg-gradient-to-r from-cyber-tan/10 via-cyber-blue/10 to-transparent p-3 transition-all hover:border-cyber-tan hover:shadow-tan"
+              className="group relative block overflow-hidden border border-cyber-tan/30 bg-black/40 backdrop-blur-sm transition-all duration-300 hover:border-cyber-tan/80 hover:shadow-tan"
             >
-              <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent" />
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-cyber-tan animate-pulse" />
-                  <div>
-                    <p className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
-                      {"// Upcoming event"}
-                    </p>
-                    <p className="font-heading text-xl uppercase tracking-wide text-white sm:text-2xl leading-tight">
-                      Hackurity <span className="text-cyber-tan">2026</span>
-                    </p>
-                    <p className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] leading-snug text-cyber-gray">
+              {/* top scan line */}
+              <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent opacity-70" />
+              {/* soft glow that grows on hover */}
+              <span className="pointer-events-none absolute -left-24 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-cyber-tan/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-60" />
+              {/* corner ticks */}
+              <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-cyber-tan/70" />
+              <span className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-cyber-tan/70" />
+
+              <div className="relative flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:p-6">
+                <div className="min-w-0">
+                  <p className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyber-tan opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyber-tan" />
+                    </span>
+                    {"// Upcoming event"}
+                  </p>
+
+                  <p className="mt-3 font-heading text-2xl leading-none uppercase tracking-wide text-white sm:text-3xl">
+                    Hackurity <span className="text-cyber-tan">2026</span>
+                  </p>
+
+                  <div className="mt-3 h-px w-16 bg-gradient-to-r from-cyber-tan to-transparent transition-all duration-300 group-hover:w-28" />
+
+                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] leading-none text-cyber-gray">
+                    <span className="flex items-center gap-2">
                       Powered by
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-7 w-auto object-contain" />
-                      — a 24-hour cybersecurity hackathon
-                    </p>
+                      <img
+                        src="/sponsors/IBMBOB.jpg"
+                        alt="IBM Bob"
+                        className="h-6 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100"
+                      />
+                    </span>
+                    <span className="hidden h-3 w-px bg-cyber-blue/30 sm:inline-block" />
+                    <span>a 24-hour cybersecurity hackathon</span>
                   </div>
                 </div>
-                <span className="flex shrink-0 items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/15 px-3 py-1.5 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
+
+                <span className="flex shrink-0 items-center justify-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
                   Explore
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
               </div>
             </Link>
           </motion.div>
+
 
           <motion.div
             initial={{ opacity: 0 }}

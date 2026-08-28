@@ -49,7 +49,7 @@ export default function ClubNav() {
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/reva-university-logo.png"
+            src="/brand/revalogo.jpeg"
             alt="REVA University"
             className={`hidden object-contain transition-all sm:block ${scrolled ? "h-6" : "h-7"}`}
           />

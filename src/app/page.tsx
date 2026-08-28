@@ -94,7 +94,7 @@ export default function ClubHome() {
                     <p className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] leading-snug text-cyber-gray">
                       Powered by
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/sponsors/IBMBOB.jpg" alt="IBM Bob" className="h-7 w-auto object-contain" />
+                      <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-7 w-auto object-contain" />
                       — a 24-hour cybersecurity hackathon
                     </p>
                   </div>

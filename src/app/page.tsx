@@ -74,24 +74,24 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="mt-6 max-w-xl"
+            className="mt-4 max-w-xl"
           >
             <Link
               href="/hackurity"
-              className="group relative block overflow-hidden border border-cyber-tan/50 bg-gradient-to-r from-cyber-tan/10 via-cyber-blue/10 to-transparent p-5 transition-all hover:border-cyber-tan hover:shadow-tan"
+              className="group relative block overflow-hidden border border-cyber-tan/50 bg-gradient-to-r from-cyber-tan/10 via-cyber-blue/10 to-transparent p-3 transition-all hover:border-cyber-tan hover:shadow-tan"
             >
               <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent" />
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
                   <span className="h-2 w-2 shrink-0 rounded-full bg-cyber-tan animate-pulse" />
                   <div>
                     <p className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
                       {"// Upcoming event"}
                     </p>
-                    <p className="mt-1 font-heading text-xl uppercase tracking-wide text-white sm:text-2xl">
+                    <p className="font-heading text-xl uppercase tracking-wide text-white sm:text-2xl leading-tight">
                       Hackurity <span className="text-cyber-tan">2026</span>
                     </p>
-                    <p className="mt-1 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-cyber-gray">
+                    <p className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] leading-snug text-cyber-gray">
                       Powered by
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src="/sponsors/IBMBOB.jpg" alt="IBM Bob" className="h-7 w-auto object-contain" />
@@ -99,7 +99,7 @@ export default function ClubHome() {
                     </p>
                   </div>
                 </div>
-                <span className="flex shrink-0 items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/15 px-4 py-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
+                <span className="flex shrink-0 items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/15 px-3 py-1.5 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
                   Explore
                   <span className="transition-transform group-hover:translate-x-1">→</span>
                 </span>

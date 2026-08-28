@@ -492,7 +492,7 @@ export default function Home() {
                 <span className="font-mono text-xs tracking-[0.25em] text-cyber-gray lowercase md:text-sm">
                   powered by
                 </span>
-                <img src="/sponsors/ibm-bob.png" alt="IBM Bob" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
+                <img src="public/sponsors/IBMBOB.jpg" alt="IBM Bob" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
               </div>
               <p className="font-mono text-[11px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
@@ -919,7 +919,7 @@ export default function Home() {
                 <span className="font-mono text-[11px] font-normal tracking-[0.25em] text-cyber-gray lowercase md:text-xs">
                   powered by
                 </span>
-                <img src="/sponsors/ibm-bob.png" alt="IBM Bob" className="h-6 w-auto object-contain md:h-7" />
+                <img src="public/sponsors/IBMBOB.jpg" alt="IBM Bob" className="h-6 w-auto object-contain md:h-7" />
               </span>
             </span>
             <span className="text-[11px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>

@@ -316,7 +316,7 @@ export default function Home() {
             <span aria-hidden="true">←</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/club-logo-icon.png" alt="REVA Cybersecurity Club" className="h-4 w-4 object-contain" />
-            Cybersecurity Club
+            
           </Link>
           <a href="#mission_brief" className="flex shrink-0 items-center gap-2.5">
             <motion.svg

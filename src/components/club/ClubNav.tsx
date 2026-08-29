@@ -47,12 +47,6 @@ export default function ClubNav() {
           <span className="font-heading text-[12px] font-bold tracking-[0.22em] sm:text-xs">
             CYBERSECURITY CLUB REVA
           </span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/brand/revalogo.jpeg"
-            alt="REVA University"
-            className={`hidden object-contain transition-all sm:block ${scrolled ? "h-6" : "h-7"}`}
-          />
         </a>
 
         <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">

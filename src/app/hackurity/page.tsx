@@ -5,15 +5,13 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { 
-  CornerCrosshairs, 
-  BracketFrame, 
-  SineWaveLoader, 
-  SimulatedLoadingBar, 
-  TechTable 
+import {
+  CornerCrosshairs,
+  BracketFrame,
+  SineWaveLoader,
+  SimulatedLoadingBar,
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
-import EventActivityStatus from "@/components/EventActivityStatus";
 import QueryTerminal from "@/components/QueryTerminal";
 import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
@@ -127,7 +125,6 @@ export default function Home() {
     { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
     { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
     { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
-    { name: "LEADERBOARD", label: "LEADERBOARD", href: "#leaderboard" },
     { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
     { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
     // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }, 
@@ -137,14 +134,9 @@ export default function Home() {
 
 
   const DOMAINS = [
-    { id: "TRK-01", name: "AI Security", brief: "Keep AI systems safe — stop people from tricking a model, stealing it, or feeding it bad data." },
-    { id: "TRK-02", name: "Cloud Security", brief: "Find and fix the settings that accidentally leave cloud storage, accounts, or containers wide open." },
-    { id: "TRK-03", name: "Cryptography", brief: "Work with the maths that hides data: break weak encryption and build stronger, future-proof versions." },
-    { id: "TRK-04", name: "Reverse Engineering", brief: "Take apart an app or device to understand what its code really does, including anything hidden." },
-    { id: "TRK-05", name: "Digital Forensics", brief: "Investigate an attack after it happened — use files, memory and logs to piece together who did what." },
-    { id: "TRK-06", name: "Network Defense", brief: "Watch network traffic, spot an attacker moving through it, and shut them out before they spread." },
-    { id: "TRK-07", name: "Secure Software", brief: "Build apps that hold up when someone deliberately tries to misuse or break into them." },
-    { id: "TRK-08", name: "Open Innovation", brief: "Have a security idea that doesn't fit the tracks above? Build it here — anything original is welcome." }
+    { id: "TRK-A", name: "AI + Security Crossover", brief: "Secure AI systems or use AI to secure things — stop model theft, prompt injection, data poisoning, or build smarter defenses." },
+    { id: "TRK-B", name: "Broad Cybersecurity", brief: "Classic security ground: networks, web apps, systems and the everyday attacks that target them." },
+    { id: "TRK-C", name: "Web3 / Blockchain Security", brief: "Break or defend smart contracts, wallets and decentralized systems where a single bug can move real money." },
   ];
 
   const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];
@@ -492,7 +484,10 @@ export default function Home() {
                 <span className="font-mono text-xs tracking-[0.25em] text-cyber-gray lowercase md:text-sm">
                   powered by
                 </span>
-                <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
+                <span className="inline-flex items-center gap-1.5">
+                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
+                  <span className="font-sans text-base font-bold text-white md:text-lg">IBM Bob</span>
+                </span>
               </div>
               <p className="font-mono text-[11px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
@@ -520,8 +515,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column: 3D Binary Face Centerpiece */}
-          <div className="lg:col-span-7 flex flex-col justify-center items-center relative overflow-hidden bg-transparent p-4 h-[420px]">
+          {/* Right Column: 3D Binary Face Centerpiece — desktop only, skipped on mobile */}
+          <div className="hidden lg:col-span-7 lg:flex flex-col justify-center items-center relative overflow-hidden bg-transparent p-4 h-[420px]">
             <div className="w-full h-full relative">
               <BinaryFace />
             </div>
@@ -536,7 +531,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. SECTION TWO: "02. HACKATHON DOMAINS" */}
+        {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
         <section id="ctf_challenges" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/10 relative">
           <CornerCrosshairs />
 
@@ -544,14 +539,14 @@ export default function Home() {
           <div className="lg:col-span-5 flex flex-col justify-between gap-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-[11px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">DOMAINS</span>
-                <span className="text-[11px] text-cyber-gray tracking-widest font-bold">08 DOMAINS // 2 PROBLEMS EACH</span>
+                <span className="text-[11px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">TRACKS</span>
+                <span className="text-[11px] text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
               </div>
               <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
-                // HACKATHON DOMAINS 
+                // HACKATHON TRACKS
               </h2>
               <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                There are eight themes to choose from, and each one comes with two problem statements released at the start. Pick the theme that fits your team before the build window opens.
+                There are three tracks to choose from, and each one comes with two problem statements released at the start. Pick the track that fits your team before the build window opens.
               </p>
 
               <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[12px] text-cyber-gray pl-1 mt-2">
@@ -571,7 +566,7 @@ export default function Home() {
             <div className="flex flex-col gap-3 mt-6">
               <SimulatedLoadingBar value={92} label="INFILTRATION DECRYPTION MATRIX" />
               <div className="flex items-center justify-between text-[10px] text-cyber-blue/80 font-mono">
-                <span>SECTOR: DOMAIN_FLOW_MATRIX</span>
+                <span>SECTOR: TRACK_FLOW_MATRIX</span>
                 <span>STATUS: STREAMS ONLINE</span>
               </div>
             </div>
@@ -619,52 +614,6 @@ export default function Home() {
             <EventPathway />
           </div>
         </section>
-
-        {/* 5. SECTION FOUR: "04. INFILTRATION LEADERBOARD" */}
-        {/* <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
-          <CornerCrosshairs /> */}
-
-          {/* Symmetrical Header */}
-          {/* <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] tracking-widest text-cyber-tan font-bold uppercase">
-                // SYSTEM_SEQUENCE_NODE_04
-              </span>
-              <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
-                04. INFILTRATION LEADERBOARD
-              </h2>
-              <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-cyber-gray">
-                Follow the strongest teams as the event unfolds. The live activity channel alongside the rankings automatically follows the event schedule.
-              </p>
-            </div>
-            <div className="font-mono text-[11px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
-              <div>MONITOR_GRID: LEADERBOARD</div>
-              <div>STATION_ID: NO_45</div>
-            </div>
-          </div> */}
-
-          {/* <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
-            <div
-              tabIndex={0}
-              aria-label="Leaderboard table. Swipe horizontally on mobile to view all columns."
-              className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2"
-            >
-              <div className="min-w-[640px]">
-                <TechTable 
-                  title="TOP ATTACKING NODES LEADERBOARD"
-                  headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
-                  rows={[
-                    ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
-                    ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
-                    ["3RD PLACE", "TBD", "TBD", "950 PTS"],
-                    ["4TH PLACE", "TBD", "TBD", "800 PTS"]
-                  ]}
-                />
-              </div>
-            </div>
-            <EventActivityStatus />
-          </div>
-        </section> */}
 
         {/* 6. SECTION FIVE: "05. JOIN NODE // REGISTRATION CONSOLE" */}
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
@@ -845,65 +794,6 @@ export default function Home() {
         </section> */}
 
         <ContactSection />
-         {/* 5. SECTION FOUR: "04. INFILTRATION LEADERBOARD" */}
-        <section id="leaderboard" className="flex flex-col gap-7 items-stretch crosshair-corner border border-cyber-blue/10 bg-cyber-dark/20 p-7 relative md:p-8">
-          <CornerCrosshairs />
-
-          {/* Symmetrical Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-cyber-blue/15 pb-4">
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] tracking-widest text-cyber-tan font-bold uppercase">
-                // SYSTEM_SEQUENCE_NODE_04
-              </span>
-              <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">
-                LEADERBOARD
-              </h2>
-              <p className="mt-2 max-w-xl font-mono text-xs leading-relaxed text-cyber-gray">
-                Follow the strongest teams as the event unfolds. The live activity channel alongside the rankings automatically follows the event schedule.
-              </p>
-            </div>
-            <div className="font-mono text-[11px] text-cyber-tan/60 flex items-center gap-4 bg-cyber-tan/5 border border-cyber-tan/10 px-3 py-1.5">
-              <div>MONITOR_GRID: LEADERBOARD</div>
-              <div>STATION_ID: NO_45</div>
-            </div>
-          </div>
-
-          <div className="relative min-h-[320px]">
-            <div
-              className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch blur-[2px] opacity-50 pointer-events-none select-none"
-              aria-hidden="true"
-            >
-              <div className="w-full overflow-x-auto overscroll-x-contain touch-pan-x pb-2">
-                <div className="min-w-[640px]">
-                  <TechTable 
-                    title="TOP ATTACKING NODES LEADERBOARD"
-                    headers={["Rank", "Team Name", "Access Vector", "CTF Score"]}
-                    rows={[
-                      ["1ST PLACE", "TBD", "TBD", "1,250 PTS"],
-                      ["2ND PLACE", "TBD", "TBD", "1,100 PTS"],
-                      ["3RD PLACE", "TBD", "TBD", "950 PTS"],
-                      ["4TH PLACE", "TBD", "TBD", "800 PTS"]
-                    ]}
-                  />
-                </div>
-              </div>
-              <EventActivityStatus />
-            </div>
-
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-cyber-black/25 px-4">
-              <button
-                type="button"
-                disabled
-                className="border border-cyber-tan/50 bg-cyber-tan/10 px-6 py-3 font-mono text-[12px] font-bold tracking-[0.2em] text-cyber-tan uppercase cursor-not-allowed opacity-90"
-              >
-                View Leader Board
-              </button>
-              <p className="mt-3 max-w-xs text-center font-mono text-[10px] leading-relaxed tracking-wide text-cyber-gray/80">
-                (Leader board will be available after the conclusion of event)
-              </p>
-            </div>
-          </div>
-        </section>
 
         <CreatorsSection />
 
@@ -919,7 +809,10 @@ export default function Home() {
                 <span className="font-mono text-[11px] font-normal tracking-[0.25em] text-cyber-gray lowercase md:text-xs">
                   powered by
                 </span>
-                <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-6 w-auto object-contain md:h-7" />
+                <span className="inline-flex items-center gap-1">
+                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-6 w-auto object-contain md:h-7" />
+                  <span className="font-sans text-xs font-bold text-white md:text-sm">IBM Bob</span>
+                </span>
               </span>
             </span>
             <span className="text-[11px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
@@ -987,7 +880,7 @@ export default function Home() {
                     <label className="space-y-1.5"><span className="text-[11px] font-mono font-bold text-cyber-tan">--team-name</span><input value={teamName} onChange={(event) => setTeamName(event.target.value)} placeholder="Enter team alias..." className={inputClass} /></label>
                     <label className="space-y-1.5"><span className="text-[11px] font-mono font-bold text-cyber-tan">--team-size</span><select value={teamSize} onChange={(event) => updateTeamSize(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="3">3 (TRIO)</option><option value="4">4 (SQUAD)</option></select></label>
                     <label className="space-y-1.5 sm:col-span-2"><span className="text-[11px] font-mono font-bold text-cyber-tan">--university</span><input value={university} onChange={(event) => setUniversity(event.target.value)} placeholder={`${universityPlaceholder || "University node"} |`} className={`${inputClass} placeholder:text-cyber-blue/55`} /></label>
-                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[11px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A DOMAIN...</option>{DOMAINS.map((domain) => <option key={domain.id} value={domain.name}>{`${domain.id} // ${domain.name.toUpperCase()}`}</option>)}</select></label>
+                    <label className="space-y-1.5 sm:col-span-2"><span className="text-[11px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A TRACK...</option>{DOMAINS.map((domain) => <option key={domain.id} value={domain.name}>{`${domain.id} // ${domain.name.toUpperCase()}`}</option>)}</select></label>
                   </div>
                   <div><div className="mb-2 text-[11px] font-mono font-bold text-cyber-tan">--experience-level</div><div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"].map((level, index) => <motion.button key={level} type="button" onClick={() => setExperienceLevel(level)} whileTap={{ scale: 0.97 }} animate={experienceLevel === level ? { boxShadow: ["0 0 4px rgba(99,102,241,0.2)", "0 0 16px rgba(210,180,140,0.45)", "0 0 4px rgba(99,102,241,0.2)"] } : {}} transition={{ duration: 1.8, repeat: Infinity }} className={`relative overflow-hidden border px-2 py-3 font-mono text-[10px] tracking-wider transition-colors ${experienceLevel === level ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" : "border-cyber-blue/20 bg-cyber-dark text-cyber-gray hover:border-cyber-blue/50"}`}><span className="relative">{level}</span><span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-cyber-blue" style={{ width: `${35 + index * 18}%` }} /></motion.button>)}</div></div>
                 </motion.div>

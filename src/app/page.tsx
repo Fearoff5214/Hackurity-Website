@@ -26,7 +26,8 @@ export default function ClubHome() {
 
       <main className="relative z-10">
         {/* Hero */}
-        <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-5 pt-28 pb-16 md:px-8">
+        <section className="mx-auto grid min-h-screen max-w-6xl grid-cols-1 items-center gap-10 px-5 pt-28 pb-16 md:px-8 lg:grid-cols-[1fr_auto]">
+        <div className="flex flex-col justify-center">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -113,6 +114,7 @@ export default function ClubHome() {
                         alt="IBM Bob"
                         className="h-6 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100"
                       />
+                      <span className="font-sans text-xs font-bold text-white">IBM Bob</span>
                     </span>
                     <span className="hidden h-3 w-px bg-cyber-blue/30 sm:inline-block" />
                     <span>a 24-hour cybersecurity hackathon</span>
@@ -143,10 +145,25 @@ export default function ClubHome() {
             </motion.span>
             Scroll to explore
           </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="hidden w-72 shrink-0 justify-self-center overflow-hidden rounded-sm bg-white p-6 shadow-[0_0_40px_rgba(210,180,140,0.15)] lg:block"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/reva-university-logo.png"
+            alt="REVA University"
+            className="h-auto w-full object-contain"
+          />
+        </motion.div>
         </section>
 
-        <AboutSection />
         <LiveEventSection />
+        <AboutSection />
         <FacultySection />
         <MembersSection />
 

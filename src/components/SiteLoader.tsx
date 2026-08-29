@@ -92,7 +92,10 @@ export default function SiteLoader() {
                 <span className="font-mono text-[11px] tracking-[0.35em] text-cyber-gray lowercase sm:text-xs">
                   powered by
                 </span>
-                <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain sm:h-10" />
+                <span className="inline-flex items-center gap-1.5">
+                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain sm:h-10" />
+                  <span className="font-sans text-lg font-bold text-white sm:text-xl">IBM Bob</span>
+                </span>
               </div>
             </div>
 

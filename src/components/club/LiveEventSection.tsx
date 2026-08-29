@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Reveal, SectionHeading } from "./Reveal";
 
-const TARGET = new Date("2026-03-14T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-10-16T09:00:00+05:30").getTime();
 
 const FACTS = [
-  { label: "Dates", value: "14 – 15 March 2026" },
+  { label: "Dates", value: "16 – 17 October 2026" },
   { label: "Venue", value: "REVA University, Bengaluru" },
   { label: "Team size", value: "3 – 4 members" },
   { label: "Entry", value: "₹800 per team" },
@@ -165,7 +165,7 @@ export default function LiveEventSection() {
                   </li>
                   <li className="flex justify-between gap-3">
                     <span>Registration closes</span>
-                    <span className="text-white">07 March 2026</span>
+                    <span className="text-white">09 October 2026</span>
                   </li>
                 </ul>
               </div>

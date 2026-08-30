@@ -151,7 +151,7 @@ export default function ClubHome() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="hidden w-72 shrink-0 justify-self-center overflow-hidden rounded-sm bg-white p-6 shadow-[0_0_40px_rgba(210,180,140,0.15)] lg:block"
+          className="hidden w-72 shrink-0 justify-self-center overflow-hidden rounded-sm p-6 shadow-[0_0_40px_rgba(210,180,140,0.15)] lg:block"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

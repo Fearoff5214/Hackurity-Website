@@ -35,16 +35,16 @@ export default function ClubNav() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-        <a href="#top" className="flex shrink-0 items-center gap-2.5">
+        <a href="#top" className="flex min-w-0 shrink items-center gap-2.5">
           <motion.div
             animate={scrolled ? { rotate: [0, -4, 4, 0] } : { rotate: 0 }}
             transition={{ duration: scrolled ? 3 : 0.35, repeat: scrolled ? Infinity : 0 }}
-            className={`transition-all ${scrolled ? "h-8 w-8" : "h-9 w-9"}`}
+            className={`shrink-0 transition-all ${scrolled ? "h-8 w-8" : "h-9 w-9"}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/club-logo-icon.png" alt="" className="h-full w-full object-contain" />
           </motion.div>
-          <span className="font-heading text-[12px] font-bold tracking-[0.22em] sm:text-xs">
+          <span className="truncate font-heading text-[10px] font-bold tracking-[0.14em] sm:text-xs sm:tracking-[0.22em]">
             CYBERSECURITY CLUB REVA
           </span>
         </a>

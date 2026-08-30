@@ -94,7 +94,7 @@ export default function SponsorZone() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16 }}
               onMouseDown={(event) => event.stopPropagation()}
-              className="w-full max-w-2xl border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(99,102,241,0.3)] md:p-8"
+              className="max-h-[92dvh] w-full max-w-2xl overflow-y-auto border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(99,102,241,0.3)] md:p-8"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>

@@ -79,6 +79,8 @@ export default function Home() {
   // so a missing Supabase env var can't take down the whole page build.
   const [supabase, setSupabase] = useState<ReturnType<typeof createClient> | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [existingRegistration, setExistingRegistration] = useState<{ teamName: string } | null>(null);
+  const [checkingRegistration, setCheckingRegistration] = useState(false);
 
   useEffect(() => {
     let client: ReturnType<typeof createClient>;
@@ -89,9 +91,29 @@ export default function Home() {
       return;
     }
     setSupabase(client);
-    client.auth.getUser().then(({ data }) => setUser(data.user ?? null));
+
+    const syncUser = async (nextUser: User | null) => {
+      setUser(nextUser);
+      if (!nextUser) {
+        setExistingRegistration(null);
+        return;
+      }
+      setCheckingRegistration(true);
+      const { data, error } = await client
+        .from("registrations")
+        .select("team_name")
+        .eq("user_id", nextUser.id)
+        .maybeSingle();
+      if (error) {
+        console.error("Could not check for an existing registration:", error);
+      }
+      setExistingRegistration(data ? { teamName: data.team_name } : null);
+      setCheckingRegistration(false);
+    };
+
+    client.auth.getUser().then(({ data }) => syncUser(data.user ?? null));
     const { data: listener } = client.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      syncUser(session?.user ?? null);
     });
     return () => listener.subscription.unsubscribe();
   }, []);
@@ -251,7 +273,7 @@ export default function Home() {
 
   const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
   const stepOneReady = Boolean(teamName.trim() && university.trim() && selectedDomain && experienceLevel);
-  const stepThreeReady = Boolean(projectIdea.trim() && acceptedTerms && acceptedConduct && user);
+  const stepThreeReady = Boolean(acceptedTerms && acceptedConduct && user && !existingRegistration);
 
   return (
     <div className="min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
@@ -892,18 +914,32 @@ export default function Home() {
               ) : (
                 <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
                   <div><span className="text-[10px] font-bold tracking-widest text-cyber-tan">// FINAL VERIFICATION</span><p className="mt-2 font-mono text-xs leading-relaxed text-cyber-gray">Attach a concise project objective, then confirm your operating protocols.</p></div>
-                  <label className="block space-y-1.5"><span className="text-[11px] font-mono font-bold text-cyber-tan">--project-idea // BRIEF SUMMARY</span><textarea value={projectIdea} onChange={(event) => setProjectIdea(event.target.value)} rows={4} placeholder="Describe the problem your team will investigate..." className={`${inputClass} resize-y`} /></label>
+                  <label className="block space-y-1.5"><span className="text-[11px] font-mono font-bold text-cyber-tan">--about-yourselves // BRIEF SUMMARY <span className="text-cyber-gray/50 normal-case">(optional)</span></span><textarea value={projectIdea} onChange={(event) => setProjectIdea(event.target.value)} rows={4} placeholder="Tell us a bit about your team, your interests, or what you're hoping to build..." className={`${inputClass} resize-y`} /></label>
                   <div className="grid gap-3 border border-cyber-blue/15 bg-cyber-dark/45 p-4 text-xs font-mono"><div className="text-[10px] tracking-widest text-cyber-blue">PAYLOAD SUMMARY</div><div className="grid gap-2 sm:grid-cols-2 text-cyber-gray"><span>TEAM: <strong className="text-white">{teamName || "UNSET"}</strong></span><span>SIZE: <strong className="text-white">{teamSize} OPERATOR{teamSize === "1" ? "" : "S"}</strong></span><span>TRACK: <strong className="text-white">{selectedDomain || "UNSET"}</strong></span><span>LEVEL: <strong className="text-white">{experienceLevel || "UNSET"}</strong></span></div></div>
                   <div className="space-y-3"><label className="flex items-start gap-3 border border-cyber-blue/15 p-3 text-xs font-mono text-cyber-gray"><input type="checkbox" checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} className="mt-0.5 accent-cyber-tan" /><span>I agree to the <a href="https://drive.google.com/file/d/1lLndnRTWvXNcE0halurnytvk-Fv-CawP/view?usp=sharing" target="_blank" rel="noreferrer" className="text-cyber-tan underline underline-offset-2 hover:text-white">Terms &amp; Conditions</a> of Hackurity 2026.</span></label><label className="flex items-start gap-3 border border-cyber-blue/15 p-3 text-xs font-mono text-cyber-gray"><input type="checkbox" checked={acceptedConduct} onChange={(event) => setAcceptedConduct(event.target.checked)} className="mt-0.5 accent-cyber-tan" /><span>I agree to uphold the <a href={codeOfConductUrl} target="_blank" rel="noreferrer" className="text-cyber-tan underline underline-offset-2 hover:text-white">Code of Conduct</a> throughout the event.</span></label></div>
                   <div className="border border-cyber-blue/15 bg-cyber-dark/45 p-4">
                     <div className="mb-2 text-[10px] tracking-widest text-cyber-blue">--verify-identity</div>
-                    {user ? (
-                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-cyber-gray">
-                        <span>Signed in as <strong className="text-white">{user.email}</strong></span>
-                        <button type="button" onClick={handleSignOut} className="text-[11px] tracking-widest text-cyber-tan/70 underline underline-offset-2 hover:text-cyber-tan">
-                          Sign out
-                        </button>
-                      </div>
+                    {checkingRegistration ? (
+                      <p className="font-mono text-[11px] text-cyber-gray/70">Checking registration status…</p>
+                    ) : user ? (
+                      existingRegistration ? (
+                        <div className="space-y-2 text-xs font-mono text-cyber-gray">
+                          <p>
+                            <strong className="text-white">{user.email}</strong> is already registered under team{" "}
+                            <strong className="text-cyber-tan">{existingRegistration.teamName}</strong>. Each account can only submit one team.
+                          </p>
+                          <button type="button" onClick={handleSignOut} className="text-[11px] tracking-widest text-cyber-tan/70 underline underline-offset-2 hover:text-cyber-tan">
+                            Sign out and use a different account
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-cyber-gray">
+                          <span>Signed in as <strong className="text-white">{user.email}</strong></span>
+                          <button type="button" onClick={handleSignOut} className="text-[11px] tracking-widest text-cyber-tan/70 underline underline-offset-2 hover:text-cyber-tan">
+                            Sign out
+                          </button>
+                        </div>
+                      )
                     ) : (
                       <div className="space-y-2">
                         <p className="font-mono text-xs leading-relaxed text-cyber-gray">Sign in with Google to submit your registration.</p>

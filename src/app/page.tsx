@@ -155,7 +155,7 @@ export default function ClubHome() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/reva-university-logo.png"
+            src="/brand/logo-icon.png"
             alt="REVA University"
             className="h-auto w-full object-contain"
           />

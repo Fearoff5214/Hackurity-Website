@@ -17,13 +17,8 @@ const PARTNERS: Partner[] = [
 
 const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111126&color=d2b48c&bold=true&size=360&font-size=0.34`;
 
-// Replace the placeholder records and avatar URLs with confirmed mentor profiles/photos.
-const MENTORS: Person[] = [
-  { name: "Mohammad Omar", role: "Security Mentor", url: "https://www.linkedin.com/in/mohammad-omar-a81b28388/", image: avatar("Mohammad Omar"), bio: "Brings a builder's eye to secure systems, threat modelling and practical problem solving." },
-  { name: "Dharma Teja", role: "Cybersecurity Mentor", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), bio: "Helps teams turn sharp technical ideas into clear, demonstrable security outcomes." },
-  { name: "Logaa Paramesh L T", role: "Technical Mentor", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh L T"), bio: "Focuses on resilient architecture, engineering detail and execution under pressure." },
-  { name: "Tanush Jain", role: "Industry Mentor", url: "https://www.linkedin.com/in/tanush-jain-17601321a/", image: avatar("Tanush Jain"), bio: "Guides teams through product thinking, pitching and the human side of security." },
-];
+// Judging panel is still being confirmed — every slot is a placeholder for now.
+const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 
 const CONTACTS: Person[] = [
   { name: "Verril Vaz", role: "Cybersecurity Club President", url: "https://www.linkedin.com/in/verrilvaz", image: avatar("Verril Vaz"), phone: "+91 8971889830", email: "verrilvaz404@gmail.com" },
@@ -54,15 +49,15 @@ export function PartnersSection() {
   );
 }
 
-export function MentorsSection() {
+export function JudgesSection() {
   return (
-    <section id="mentors_judges" className="crosshair-corner relative overflow-hidden border border-cyber-blue/10 bg-cyber-dark/20 p-6 md:p-8">
-      <div className="mb-8 max-w-2xl"><span className="font-mono text-[11px] font-bold tracking-widest text-cyber-tan">{"// ADVISORY_CHANNEL"}</span><h2 className="mt-2 font-heading text-xl leading-relaxed text-white uppercase md:text-2xl">Meet your mentors &amp; judges</h2><p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">The people in your corner when an idea needs a sharper edge. The first four profiles use the supplied LinkedIn pages; the remaining records are clearly marked placeholders.</p></div>
+    <section id="judges" className="crosshair-corner relative overflow-hidden border border-cyber-blue/10 bg-cyber-dark/20 p-6 md:p-8">
+      <div className="mb-8 max-w-2xl"><span className="font-mono text-[11px] font-bold tracking-widest text-cyber-tan">{"// EVALUATION_PANEL"}</span><h2 className="mt-2 font-heading text-xl leading-relaxed text-white uppercase md:text-2xl">Meet your judges</h2><p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">The panel that scores the final defence. Profiles are being confirmed — full details land here soon.</p></div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {MENTORS.map((person, index) => <motion.a key={person.name} href={person.url} target="_blank" rel="noreferrer" initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.15 }} whileHover={{ y: -6 }} transition={{ duration: 0.45, ease: "easeOut" }} className="group overflow-hidden border border-cyber-blue/20 bg-cyber-black/45 p-3 transition-colors hover:border-cyber-tan/60">
-          <div className="relative aspect-[4/3] overflow-hidden bg-cyber-dark"><img src={person.image} alt={`${person.name} profile placeholder`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-cyber-black to-transparent px-3 pb-2 pt-8 font-mono text-[10px] tracking-widest text-cyber-tan opacity-0 transition group-hover:opacity-100">VIEW LINKEDIN ↗</span></div>
-          <div className="pt-3"><h3 className="font-heading text-[12px] leading-relaxed text-white uppercase">{person.name}</h3><p className="mt-1 font-mono text-[10px] font-bold tracking-widest text-cyber-tan">{person.role}</p><p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">{person.bio}</p></div>
-        </motion.a>)}
+        {JUDGE_SLOTS.map((slot, index) => <motion.div key={slot} initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.45, ease: "easeOut" }} className="overflow-hidden border border-cyber-blue/20 bg-cyber-black/45 p-3">
+          <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-cyber-dark"><span className="font-heading text-3xl text-cyber-tan/40">?</span><span className="absolute left-2 top-2 font-mono text-[9px] tracking-widest text-cyber-blue/60">JUDGE_{String(slot).padStart(2, "0")}</span></div>
+          <div className="pt-3"><h3 className="font-heading text-[12px] leading-relaxed text-white uppercase">Judge details coming soon</h3><p className="mt-1 font-mono text-[10px] font-bold tracking-widest text-cyber-tan">TO BE ANNOUNCED</p><p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">Profile, role and background will be published closer to the event.</p></div>
+        </motion.div>)}
       </div>
     </section>
   );

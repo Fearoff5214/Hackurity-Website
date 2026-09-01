@@ -17,7 +17,7 @@ import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import CyberCursor from "@/components/CyberCursor";
-import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
+import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
@@ -53,6 +53,18 @@ const CyberBreachConduit = dynamic(() => import("@/components/CyberBreachConduit
   )
 });
 
+
+// Navigation Links — also drive the scroll-spy that highlights the active section.
+const navLinks = [
+  { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
+  { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
+  { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
+  { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
+  { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
+  // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" },
+  { name: "CONTACT US", label: "CONTACT_US", href: "#contact_us" },
+  { name: "CREATORS", label: "MEET_THE_CREATORS", href: "#meet_the_creators" },
+];
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState("MISSION");
@@ -143,17 +155,37 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Navigation Links
-  const navLinks = [
-    { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
-    { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
-    { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
-    { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
-    { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
-    // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" }, 
-    {name : "CONTACT US" , label : "CONTACT_US" , href : "#contact_us"},
-    { name: "CREATORS", label: "MEET_THE_CREATORS", href: "#meet_the_creators" }
-  ];
+  // Scroll-spy: keep the navbar highlight in sync with the section in view.
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => {
+        const el = document.querySelector(link.href);
+        return el instanceof HTMLElement ? { name: link.name, el } : null;
+      })
+      .filter((entry): entry is { name: string; el: HTMLElement } => entry !== null);
+    if (sections.length === 0) return;
+
+    const onSpy = () => {
+      const probe = window.scrollY + window.innerHeight * 0.3;
+      let nextName = sections[0].name;
+      for (const section of sections) {
+        const top = section.el.getBoundingClientRect().top + window.scrollY;
+        if (top - 1 <= probe) nextName = section.name;
+      }
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+        nextName = sections[sections.length - 1].name;
+      }
+      setCurrentSection((prev) => (prev === nextName ? prev : nextName));
+    };
+
+    onSpy();
+    window.addEventListener("scroll", onSpy, { passive: true });
+    window.addEventListener("resize", onSpy);
+    return () => {
+      window.removeEventListener("scroll", onSpy);
+      window.removeEventListener("resize", onSpy);
+    };
+  }, []);
 
 
   const DOMAINS = [
@@ -525,7 +557,7 @@ export default function Home() {
                     { k: "DATE", v: "23 – 24 October 2026" },
                     { k: "BUILD WINDOW", v: "23 Oct 09:00 → 24 Oct 09:00 IST" },
                     { k: "VENUE", v: "REVA University, Bengaluru" },
-                    { k: "LOCATION", v: "School of CSE, Bengaluru, Karnataka" },
+                    { k: "DEPARTMENT", v: "CSE (IoT, Cyber Security including Blockchain Technology)" },
                     { k: "TEAM SIZE", v: "3 – 4 members" },
                     { k: "ENTRY", v: "Free · ₹300/person food package" },
                     { k: "REGISTRATION", v: "22 Sep – 12 Oct 2026" },
@@ -736,7 +768,7 @@ export default function Home() {
             </div>
           </div>
         </section> */}
-        <MentorsSection/>
+        <JudgesSection/>
         <PartnersSection />
  {/* 8. SECTION SEVEN: SPONSOR NOW */}
         <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
@@ -762,8 +794,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* <MentorsSection /> */}
 
         {/* 6. SPECIFICATIONS & TECH STATS */}
         {/* <section className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch"> */}

@@ -14,12 +14,45 @@ const LINKS = [
 export default function ClubNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the nav item for whichever section is in view.
+  useEffect(() => {
+    const sections = LINKS
+      .map((link) => {
+        const el = document.querySelector(link.href);
+        return el instanceof HTMLElement ? { href: link.href, el } : null;
+      })
+      .filter((entry): entry is { href: string; el: HTMLElement } => entry !== null);
+    if (sections.length === 0) return;
+
+    const onSpy = () => {
+      const probe = window.scrollY + window.innerHeight * 0.3;
+      let next = "";
+      for (const section of sections) {
+        const top = section.el.getBoundingClientRect().top + window.scrollY;
+        if (top - 1 <= probe) next = section.href;
+      }
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+        next = sections[sections.length - 1].href;
+      }
+      setActive((prev) => (prev === next ? prev : next));
+    };
+
+    onSpy();
+    window.addEventListener("scroll", onSpy, { passive: true });
+    window.addEventListener("resize", onSpy);
+    return () => {
+      window.removeEventListener("scroll", onSpy);
+      window.removeEventListener("resize", onSpy);
+    };
   }, []);
 
   return (
@@ -54,7 +87,10 @@ export default function ClubNav() {
             <a
               key={link.href}
               href={link.href}
-              className="font-mono text-[11px] tracking-widest text-cyber-gray uppercase transition-colors hover:text-cyber-tan"
+              aria-current={active === link.href ? "true" : undefined}
+              className={`font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-cyber-tan ${
+                active === link.href ? "font-bold text-cyber-tan" : "text-cyber-gray"
+              }`}
             >
               {`[${link.label}]`}
             </a>
@@ -123,7 +159,12 @@ export default function ClubNav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+                  aria-current={active === link.href ? "true" : undefined}
+                  className={`border px-3 py-2.5 font-mono text-[12px] tracking-widest uppercase transition-colors ${
+                    active === link.href
+                      ? "border-cyber-tan/50 bg-cyber-tan/10 font-bold text-cyber-tan"
+                      : "border-cyber-blue/10 text-cyber-gray hover:border-cyber-tan/40 hover:text-cyber-tan"
+                  }`}
                 >
                   {link.label}
                 </a>

@@ -53,7 +53,7 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
         </p>
         <div className="mt-3 h-px w-full bg-gradient-to-r from-cyber-blue/20 via-cyber-blue/5 to-transparent" />
         <div className="mt-2 flex items-center justify-between font-mono text-[9px] text-cyber-gray/60">
-          <span>SEQ_INDEX: {String(index + 1).padStart(2, "0")}/08</span>
+          <span>SEQ_INDEX: {String(index + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}</span>
           <span className="text-cyber-tan/50 group-hover:text-cyber-tan transition-colors">
             GATEWAY_LOCKED_LINEAR
           </span>

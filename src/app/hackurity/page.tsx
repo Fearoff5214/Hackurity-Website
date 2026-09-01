@@ -16,6 +16,7 @@ import QueryTerminal from "@/components/QueryTerminal";
 import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
+import CyberCursor from "@/components/CyberCursor";
 import { ContactSection, MentorsSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import type { User } from "@supabase/supabase-js";
@@ -277,6 +278,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
+      {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
+      <CyberCursor />
+
       {/* Site boot sequence */}
       <SiteLoader />
 

@@ -514,13 +514,28 @@ export default function Home() {
               <p className="font-mono text-[11px] tracking-wider text-cyber-tan font-bold uppercase">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
               </p>
-              <div className="mt-2 space-y-3 border-l-2 border-cyber-tan/45 pl-4">
-                <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                  Hackurity 2026 is a 24-hour cybersecurity hackathon for curious builders, problem-solvers and future defenders. Pick a track, form a team, and turn a security challenge into something useful, resilient and real.
-                </p>
-                <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                  Across workshops, mentor channels and the final defence, participants will investigate modern attack surfaces, learn from one another and present ideas that make the digital world safer. New to cybersecurity? You belong here too.
-                </p>
+              <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
+                <dl className="grid grid-cols-1 gap-x-4 gap-y-2.5 font-mono text-xs sm:grid-cols-2">
+                  {[
+                    { k: "FORMAT", v: "24-hour hackathon // on-site" },
+                    { k: "DATE", v: "16 – 17 October 2026" },
+                    { k: "BUILD WINDOW", v: "16 Oct 09:00 → 17 Oct 09:00 IST" },
+                    { k: "VENUE", v: "REVA University, Bengaluru" },
+                    { k: "LOCATION", v: "School of CSE, Bengaluru, Karnataka" },
+                    { k: "TEAM SIZE", v: "3 – 4 members" },
+                    { k: "ENTRY FEE", v: "₹800 per team" },
+                    { k: "REGISTRATION", v: "15 Sep – 05 Oct 2026" },
+                    { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
+                    { k: "PRIZES", v: "Ceremony 17 Oct, 18:00 IST" },
+                  ].map((row) => (
+                    <div key={row.k} className="flex flex-col gap-0.5">
+                      <dt className="text-[10px] font-bold tracking-[0.2em] text-cyber-tan uppercase">
+                        {row.k}
+                      </dt>
+                      <dd className="leading-relaxed text-cyber-gray">{row.v}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
 
             </div>

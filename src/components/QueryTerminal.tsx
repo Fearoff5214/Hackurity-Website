@@ -5,70 +5,257 @@ import { motion } from "framer-motion";
 
 type QaRecord = { id: string; question: string; answer: string };
 
+const PAGE_SIZE = 6;
+
 const RECORDS: QaRecord[] = [
   {
     id: "01",
     question: "Who can take part?",
     answer:
-      "Any student currently enrolled in a college or university in India. Teams can have two to four people. Teams built from different colleges or different subjects are very welcome — mixed teams often do the best.",
+      "Any student currently enrolled in a college or university in India. Teams are 3–4 people, and students from different colleges and different academic backgrounds are welcome to form a team together.",
   },
   {
     id: "02",
-    question: "Do I need cybersecurity experience?",
+    question: "Is Hackurity online or offline?",
     answer:
-      "No. About a third of every batch is brand new to security. The workshops before the event exist exactly for beginners, and first-time teams get a mentor on priority.",
+      "Hackurity is a fully offline hackathon. Everyone attends in person at the venue on the 23rd and 24th of October 2026.",
   },
   {
     id: "03",
     question: "Is there a registration fee?",
     answer:
-      "A minimum fee of ₹800 is applicable for registration of team consisting <min 3>//< max 4> members ",
+      "No. Registration for Hackurity is completely free. Participants attending the offline hackathon only need to opt for the event food package, which costs ₹300 per person.",
   },
   {
     id: "04",
-    question: "Is the event online or in person?",
+    question: "What does the ₹300 food package cover?",
     answer:
-      "The 24-hour build happens in person at the venue. The workshops and problem-statement briefings in the weeks before are streamed and recorded so you can watch from anywhere.",
+      "The ₹300 package covers breakfast, lunch, snacks and dinner across the event. It is compulsory for every participant attending the hackathon in person.",
   },
   {
     id: "05",
-    question: "What should my team bring?",
+    question: "Is the food package optional?",
     answer:
-      "Laptops, chargers, any special hardware your track needs, a valid student ID & Entry pass for the event provided at the University Enterance Gate. Internet, power, desks and lab machines are provided.",
+      "No. Anyone attending the offline hackathon is required to opt for the ₹300 per-person food package.",
   },
   {
     id: "06",
-    question: "How will we be judged?",
+    question: "What is the team size?",
     answer:
-      "Four things carry weight: how technically deep the work is, whether the security choices are actually correct, whether it could be used in the real world, and how well you explain it in the final presentation. The scoring sheet is published along with the problem statements.",
+      "Every team must have 3 or 4 members. Teammates can be from the same college or from different colleges — both are allowed.",
   },
   {
     id: "07",
-    question: "Can we keep working on our project after the event?",
+    question: "Do I need prior cybersecurity experience?",
     answer:
-      "Yes. You own everything you build. Several past projects are now open-source tools that people still use.",
+      "No. You do not need to be an expert in cybersecurity. A willingness to learn, build and solve problems is what matters, and teams with mixed technical backgrounds are encouraged.",
+  },
+  {
+    id: "08",
+    question: "When will the problem statements be released?",
+    answer:
+      "The problem statements are revealed about one week before the hackathon. This gives registered teams time to study the challenges and decide which problem they want to work on.",
+  },
+  {
+    id: "09",
+    question: "Can we change our track after registration?",
+    answer:
+      "Yes. Teams can change their selected track after registering, including after the problem statements are released, so you can pick the statement that best matches your interests and skills.",
+  },
+  {
+    id: "10",
+    question: "Can students from different colleges form a team?",
+    answer:
+      "Yes. Cross-college teams are welcome. You can form a team with students from different colleges and different academic backgrounds.",
+  },
+  {
+    id: "11",
+    question: "What should my team bring?",
+    answer:
+      "Since Hackurity is offline, bring your laptops, chargers and any other equipment your build needs. Come prepared to work on site for the full event.",
+  },
+  {
+    id: "12",
+    question: "How will the projects be judged?",
+    answer:
+      "Projects are evaluated on technical implementation, creativity, relevance to the problem statement, functionality, security considerations and overall impact. The detailed judging criteria are shared with participants before or during the hackathon.",
+  },
+  {
+    id: "13",
+    question: "What will I get by participating?",
+    answer:
+      "You get the chance to compete for prize money, receive a certificate, get Hackurity merchandise, gain hands-on experience on real-world cybersecurity challenges, meet other students and enthusiasts, and showcase your technical skills.",
+  },
+  {
+    id: "14",
+    question: "Will every participant receive a certificate?",
+    answer:
+      "Yes. Every participant who attends the hackathon receives a certificate of participation.",
+  },
+  {
+    id: "15",
+    question: "Will participants get merchandise?",
+    answer:
+      "Hackurity merchandise is distributed to teams in recognition of outstanding performance during the event.",
+  },
+  {
+    id: "16",
+    question: "When is Hackurity?",
+    answer:
+      "Hackurity takes place on the 23rd and 24th of October 2026 and is run as an offline hackathon.",
+  },
+  {
+    id: "17",
+    question: "Where will Hackurity be held?",
+    answer:
+      "Hackurity is held on campus at REVA University, Bengaluru. The exact hall and entry-gate details are shared with registered teams ahead of the event.",
+  },
+  {
+    id: "18",
+    question: "What skills can I use at Hackurity?",
+    answer:
+      "You can bring skills in cybersecurity, web development, programming, networking, digital forensics, cryptography, UI/UX, research and problem solving. Teams with a spread of different skill sets tend to do well.",
   },
 ];
+
+// ── Lightweight text matching ────────────────────────────────────────────
+// Turns a free-form question ("How much is the fee?") into keywords and finds
+// every record whose question or answer contains a matching word.
+
+const STOPWORDS = new Set([
+  "a", "an", "the", "is", "are", "am", "was", "were", "be", "been", "being",
+  "to", "of", "for", "from", "in", "on", "at", "by", "with", "about", "as", "into",
+  "do", "does", "did", "done", "have", "has", "had", "will", "would", "shall",
+  "should", "can", "could", "may", "might", "must", "i", "we", "you", "they",
+  "he", "she", "it", "me", "us", "my", "our", "your", "their", "this", "that",
+  "these", "those", "there", "here", "and", "or", "but", "if", "so", "than",
+  "then", "how", "what", "when", "where", "which", "who", "whom", "why", "much",
+  "many", "get", "got", "need", "needs", "want", "any", "some", "all", "no",
+  "not", "please", "tell", "know", "about",
+]);
+
+function stem(word: string): string {
+  if (word.length <= 3) return word;
+  return (
+    word
+      .replace(/ies$/, "y")
+      .replace(/(ings|ing|ers|er|ed|es|s)$/, "") || word
+  );
+}
+
+function tokenize(text: string): string[] {
+  return (text.toLowerCase().match(/[a-z0-9₹]+/g) ?? []).filter(Boolean);
+}
+
+function keyTokens(text: string): string[] {
+  const out = new Set<string>();
+  for (const raw of tokenize(text)) {
+    if (raw.length < 2 || STOPWORDS.has(raw)) continue;
+    out.add(stem(raw));
+  }
+  return [...out];
+}
+
+// True when two words are the "same" allowing for a plural / typo / prefix.
+function wordsMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.length < 4 || b.length < 4) return false;
+  if (a.includes(b) || b.includes(a)) return true;
+  if (Math.abs(a.length - b.length) > 1) return false;
+  // one-edit distance
+  let i = 0;
+  let j = 0;
+  let edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      i += 1;
+      j += 1;
+      continue;
+    }
+    edits += 1;
+    if (edits > 1) return false;
+    if (a.length > b.length) i += 1;
+    else if (b.length > a.length) j += 1;
+    else {
+      i += 1;
+      j += 1;
+    }
+  }
+  edits += a.length - i + (b.length - j);
+  return edits <= 1;
+}
 
 export default function QueryTerminal() {
   const [activeId, setActiveId] = useState(RECORDS[0].id);
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(0);
   const [typed, setTyped] = useState("");
+
+  // Pre-index the keywords for every record once.
+  const recordWords = useMemo(
+    () =>
+      RECORDS.map((record) => ({
+        id: record.id,
+        words: new Set([...keyTokens(record.question), ...keyTokens(record.answer)]),
+      })),
+    []
+  );
+
+  const parsedKeys = useMemo(() => keyTokens(query), [query]);
+
+  const filtered = useMemo(() => {
+    const raw = query.trim().toLowerCase();
+    if (!raw) return RECORDS;
+
+    // No meaningful keywords (e.g. "how much?") — fall back to a plain contains.
+    if (parsedKeys.length === 0) {
+      return RECORDS.filter(
+        (record) =>
+          record.question.toLowerCase().includes(raw) ||
+          record.answer.toLowerCase().includes(raw)
+      );
+    }
+
+    // Score each record by how many of the parsed keywords it contains.
+    return recordWords
+      .map((record) => {
+        let score = 0;
+        for (const key of parsedKeys) {
+          for (const word of record.words) {
+            if (wordsMatch(key, word)) {
+              score += 1;
+              break;
+            }
+          }
+        }
+        return { id: record.id, score };
+      })
+      .filter((entry) => entry.score > 0)
+      .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id))
+      .map((entry) => RECORDS.find((record) => record.id === entry.id)!);
+  }, [query, parsedKeys, recordWords]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages - 1);
+  const pageItems = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE);
 
   const active = useMemo(
     () => RECORDS.find((record) => record.id === activeId) ?? RECORDS[0],
     [activeId]
   );
 
-  const filtered = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    if (!needle) return RECORDS;
-    return RECORDS.filter(
-      (record) =>
-        record.question.toLowerCase().includes(needle) ||
-        record.answer.toLowerCase().includes(needle)
-    );
+  // Reset to the first page whenever the query changes.
+  useEffect(() => {
+    setPage(0);
   }, [query]);
+
+  // Keep the active record inside the current result set.
+  useEffect(() => {
+    if (filtered.length === 0) return;
+    if (!filtered.some((record) => record.id === activeId)) {
+      setActiveId(filtered[0].id);
+    }
+  }, [filtered, activeId]);
 
   // Type the active answer out, character by character.
   useEffect(() => {
@@ -88,16 +275,35 @@ export default function QueryTerminal() {
       <div className="lg:col-span-5 flex flex-col gap-3">
         <div className="flex items-center justify-between border border-cyber-blue/15 bg-cyber-black/50 px-3 py-2 font-mono text-[10px] tracking-widest text-cyber-tan">
           <span>QUERY_INDEX</span>
-          <span className="text-cyber-gray">{RECORDS.length} RECORDS</span>
+          <span className="text-cyber-gray">
+            {query.trim() ? `${filtered.length} / ${RECORDS.length}` : RECORDS.length} RECORDS
+          </span>
         </div>
-        <input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="search a question..."
-          className="w-full rounded-none border border-cyber-tan/25 bg-cyber-black px-3 py-2.5 font-terminal text-xs text-white placeholder:text-cyber-gray/40 focus:border-cyber-tan focus:outline-none"
-        />
+
+        <div className="flex flex-col gap-1.5">
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="search a question... (e.g. how much is the fee)"
+            className="w-full rounded-none border border-cyber-tan/25 bg-cyber-black px-3 py-2.5 font-terminal text-xs text-white placeholder:text-cyber-gray/40 focus:border-cyber-tan focus:outline-none"
+          />
+          {query.trim() && parsedKeys.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 px-0.5 font-mono text-[9px] tracking-widest text-cyber-gray/70">
+              <span className="text-cyber-tan/70">PARSED_KEYS:</span>
+              {parsedKeys.map((key) => (
+                <span
+                  key={key}
+                  className="border border-cyber-blue/20 bg-cyber-blue/5 px-1.5 py-0.5 text-cyber-blue/90"
+                >
+                  {key}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
         <ul className="flex flex-col divide-y divide-cyber-blue/10 border border-cyber-blue/10 bg-cyber-dark/30">
-          {filtered.map((record) => (
+          {pageItems.map((record) => (
             <li key={record.id}>
               <button
                 type="button"
@@ -119,6 +325,50 @@ export default function QueryTerminal() {
             </li>
           )}
         </ul>
+
+        {/* Pagination */}
+        {filtered.length > 0 && (
+          <div className="flex items-center justify-between border border-cyber-blue/15 bg-cyber-black/50 px-2 py-1.5 font-mono text-[10px] tracking-widest">
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.max(0, current - 1))}
+              disabled={safePage === 0}
+              className="border border-cyber-blue/20 px-2 py-1 text-cyber-gray transition-colors hover:border-cyber-tan hover:text-cyber-tan disabled:cursor-not-allowed disabled:opacity-25"
+            >
+              [ PREV ]
+            </button>
+
+            <div className="flex items-center gap-2">
+              <span className="text-cyber-tan">
+                PAGE {String(safePage + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}
+              </span>
+              <span className="hidden items-center gap-1 sm:flex">
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    aria-label={`Go to page ${index + 1}`}
+                    onClick={() => setPage(index)}
+                    className={`h-1.5 w-1.5 rotate-45 border transition-colors ${
+                      index === safePage
+                        ? "border-cyber-tan bg-cyber-tan"
+                        : "border-cyber-blue/40 hover:border-cyber-tan"
+                    }`}
+                  />
+                ))}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.min(totalPages - 1, current + 1))}
+              disabled={safePage >= totalPages - 1}
+              className="border border-cyber-blue/20 px-2 py-1 text-cyber-gray transition-colors hover:border-cyber-tan hover:text-cyber-tan disabled:cursor-not-allowed disabled:opacity-25"
+            >
+              [ NEXT ]
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Terminal output */}

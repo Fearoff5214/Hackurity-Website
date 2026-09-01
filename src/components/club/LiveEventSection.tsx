@@ -11,7 +11,7 @@ const FACTS = [
   { label: "Dates", value: "23 – 24 October 2026" },
   { label: "Venue", value: "REVA University, Bengaluru" },
   { label: "Team size", value: "3 – 4 members" },
-  { label: "Entry", value: "₹800 per team" },
+  { label: "Entry", value: "Free · ₹300 food package" },
 ];
 
 function useCountdown() {

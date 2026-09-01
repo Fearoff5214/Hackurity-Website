@@ -527,7 +527,7 @@ export default function Home() {
                     { k: "VENUE", v: "REVA University, Bengaluru" },
                     { k: "LOCATION", v: "School of CSE, Bengaluru, Karnataka" },
                     { k: "TEAM SIZE", v: "3 – 4 members" },
-                    { k: "ENTRY FEE", v: "₹800 per team" },
+                    { k: "ENTRY", v: "Free · ₹300/person food package" },
                     { k: "REGISTRATION", v: "22 Sep – 12 Oct 2026" },
                     { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
                     { k: "PRIZES", v: "Ceremony 24 Oct, 18:00 IST" },

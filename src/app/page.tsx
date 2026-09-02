@@ -529,28 +529,28 @@ export default function Home() {
           {/* Left Column: Title & stats */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <span className="text-[12px] tracking-[0.3em] text-cyber-tan font-bold flex items-center gap-1.5">
+              <span className="text-[14px] tracking-[0.3em] text-cyber-tan font-bold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-ping" />
                 <span>CTF_NODE_CONNECTED</span>
               </span>
-              <h1 className="font-heading text-xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-2xl lg:text-3xl">
+              <h1 className="font-heading text-2xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-3xl lg:text-4xl">
                 HACKURITY 2026
               </h1>
               <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="font-heading text-lg text-cyber-tan md:text-xl">—</span>
-                <span className="font-mono text-xs tracking-[0.25em] text-cyber-gray lowercase md:text-sm">
+                <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
+                <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">
                   powered by
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain md:h-9 lg:h-10" />
-                  <span className="font-sans text-base font-bold text-white md:text-lg">IBM Bob</span>
+                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain md:h-10 lg:h-11" />
+                  <span className="font-sans text-lg font-bold text-white md:text-xl">IBM Bob</span>
                 </span>
               </div>
-              <p className="font-mono text-[13px] tracking-wider text-cyber-tan font-bold uppercase">
+              <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY
               </p>
               <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
-                <dl className="grid grid-cols-1 gap-x-4 gap-y-3.5 font-mono text-xs sm:grid-cols-2">
+                <dl className="grid grid-cols-1 gap-x-4 gap-y-4 font-mono text-sm sm:grid-cols-2">
                   {[
                     { k: "FORMAT", v: "24-hour hackathon // on-site" },
                     { k: "DATE", v: "23 – 24 October 2026" },
@@ -563,10 +563,10 @@ export default function Home() {
                     { k: "PRIZES", v: "Ceremony 24 Oct, 18:00 IST" },
                   ].map((row) => (
                     <div key={row.k} className="flex flex-col gap-0.5">
-                      <dt className="text-[11px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">
+                      <dt className="text-[12px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">
                         {row.k}
                       </dt>
-                      <dd className="text-[13px] font-medium leading-relaxed text-white">{row.v}</dd>
+                      <dd className="text-[15px] font-medium leading-relaxed text-white">{row.v}</dd>
                     </div>
                   ))}
                 </dl>
@@ -578,7 +578,7 @@ export default function Home() {
               <div className="mt-1">
                 <a
                   href="#join_node"
-                  className="block w-full px-4 py-2.5 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[13px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
+                  className="block w-full px-4 py-3 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[15px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
                 >
                   [ REGISTER NOW]
                 </a>

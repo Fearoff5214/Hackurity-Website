@@ -1,12 +1,20 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion";
 import { EVENT_SCHEDULE, type EventScheduleItem } from "@/data/eventSchedule";
 
 function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number }) {
   const ref = useRef<HTMLLIElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px -15% 0px" });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.92", "start 0.55"],
+  });
+  const revealX = useTransform(scrollYProgress, [0, 1], [-24, 0]);
+  const revealOpacity = useTransform(scrollYProgress, [0, 1], [0.25, 1]);
+  const revealScale = useTransform(scrollYProgress, [0, 1], [0.97, 1]);
 
   return (
     <li ref={ref} className="relative pl-12 md:pl-16 pb-8 last:pb-0">
@@ -15,7 +23,7 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
         initial={{ scale: 0, opacity: 0 }}
         animate={inView ? { scale: 1, opacity: 1 } : {}}
         transition={{ duration: 0.35, delay: 0.05 }}
-        className="absolute left-[14px] md:left-[22px] top-1.5 -translate-x-1/2 w-2.5 h-2.5 rotate-45 border border-cyber-tan bg-cyber-black"
+        className="absolute left-[14px] md:left-[22px] top-1.5 -translate-x-1/2 w-2.5 h-2.5 rotate-45 border border-cyber-tan bg-cyber-black transition-shadow duration-300"
       >
         <span className="absolute inset-[2px] bg-cyber-tan/70" />
       </motion.span>
@@ -29,21 +37,27 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
       />
 
       <motion.div
-        initial={{ opacity: 0, x: -12 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.45, delay: 0.14, ease: "easeOut" }}
-        className="border border-cyber-blue/10 bg-cyber-dark/30 hover:border-cyber-tan/30 transition-colors duration-300 p-4 group"
+        style={{ x: revealX, opacity: revealOpacity, scale: revealScale }}
+        whileHover={{
+          y: -3,
+          scale: 1.015,
+          borderColor: "rgba(212, 181, 132, 0.5)",
+          backgroundColor: "rgba(15, 20, 30, 0.55)",
+          boxShadow: "0 8px 24px -8px rgba(212, 181, 132, 0.25), 0 0 0 1px rgba(212, 181, 132, 0.15)",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        className="border border-cyber-blue/10 bg-cyber-dark/30 p-4 group cursor-default"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-3">
-            <span className="text-[12px] font-mono font-bold text-cyber-tan border border-cyber-tan/30 bg-cyber-tan/5 px-1.5 py-0.5">
+            <span className="text-[12px] font-mono font-bold text-cyber-tan border border-cyber-tan/30 bg-cyber-tan/5 px-1.5 py-0.5 transition-colors duration-300 group-hover:bg-cyber-tan/15 group-hover:border-cyber-tan/60">
               {gate.id}
             </span>
-            <h3 className="font-heading text-[14px] md:text-xs tracking-[0.15em] text-white uppercase">
+            <h3 className="font-heading text-[14px] md:text-xs tracking-[0.15em] text-white uppercase transition-colors duration-300 group-hover:text-cyber-tan">
               {gate.title}
             </h3>
           </div>
-          <span className="font-terminal text-xs font-bold tracking-[0.08em] text-cyber-blue/90 md:text-sm">
+          <span className="font-terminal text-xs font-bold tracking-[0.08em] text-cyber-blue/90 md:text-sm transition-colors duration-300 group-hover:text-cyber-blue">
             {gate.window}
           </span>
         </div>
@@ -54,7 +68,7 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
         <div className="mt-3 h-px w-full bg-gradient-to-r from-cyber-blue/20 via-cyber-blue/5 to-transparent" />
         <div className="mt-2 flex items-center justify-between font-mono text-[11px] text-cyber-gray/60">
           <span>SEQ_INDEX: {String(index + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}</span>
-          <span className="text-cyber-tan/50 group-hover:text-cyber-tan transition-colors">
+          <span className="text-cyber-tan/50 group-hover:text-cyber-tan transition-colors duration-300">
             GATEWAY_LOCKED_LINEAR
           </span>
         </div>

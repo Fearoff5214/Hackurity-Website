@@ -540,7 +540,7 @@ export default function Home() {
                 </span>
               </div>
               <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
-                REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY
+                REVA CYBERSECURITY CLUB <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY (SCHOOL OF CSE)
               </p>
               <HackurityCountdown />
               <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">

@@ -46,15 +46,6 @@ const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
   )
 });
 
-const CyberBreachConduit = dynamic(() => import("@/components/CyberBreachConduit"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-cyber-dark/40 border border-cyber-blue/10">
-      <span className="text-xs text-cyber-blue/50 tracking-widest animate-pulse font-mono">// BOOTING SHADER CONDUIT...</span>
-    </div>
-  )
-});
-
 
 // Navigation Links — also drive the scroll-spy that highlights the active section.
 const navLinks = [
@@ -612,59 +603,40 @@ export default function Home() {
         </section>
 
         {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
-        <section id="ctf_challenges" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/10 relative">
+        <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/10 relative">
           <CornerCrosshairs />
 
-          {/* Left Column: Category explanations */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-[13px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-1.5 py-0.5 font-bold">TRACKS</span>
-                <span className="text-[13px] text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
-              </div>
-              <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">
-                // HACKATHON TRACKS
-              </h2>
-              <p className="font-mono text-xs leading-relaxed text-cyber-gray">
-                There are three tracks to choose from, and each one comes with two problem statements released at the start. Pick the track that fits your team before the build window opens.
-              </p>
-
-              <ul className="list-none grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-[14px] text-cyber-gray pl-1 mt-2">
-                {DOMAINS.map((domain) => (
-                  <li key={domain.id} className="border border-cyber-blue/10 bg-cyber-black/30 p-2.5 hover:border-cyber-tan/40 transition-colors">
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-cyber-tan font-bold uppercase tracking-widest">◆ {domain.name}</span>
-                      <span className="text-[12px] text-cyber-blue/70">{domain.id}</span>
-                    </div>
-                    <span className="leading-relaxed">{domain.brief}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="flex flex-col gap-5 max-w-3xl">
+            <div className="flex items-center gap-2">
+              <span className="text-[13px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
+              <span className="text-[13px] text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
             </div>
-
-            {/* Simulated progress diagnostics */}
-            <div className="flex flex-col gap-3 mt-6">
-              <SimulatedLoadingBar value={92} label="INFILTRATION DECRYPTION MATRIX" />
-              <div className="flex items-center justify-between text-[12px] text-cyber-blue/80 font-mono">
-                <span>SECTOR: TRACK_FLOW_MATRIX</span>
-                <span>STATUS: STREAMS ONLINE</span>
-              </div>
-            </div>
+            <h2 className="font-heading text-2xl md:text-4xl tracking-tight leading-tight text-white uppercase">
+              // HACKATHON TRACKS
+            </h2>
+            <p className="font-mono text-[15px] md:text-base leading-relaxed text-cyber-gray">
+              There are three tracks to choose from, and each one comes with two problem statements released at the start. Pick the track that fits your team before the build window opens.
+            </p>
           </div>
 
-          {/* Right Column: WebGL Raymarched Conduits */}
-          <div className="lg:col-span-7 flex flex-col justify-center items-center relative py-4 bg-cyber-black/45 border border-cyber-blue/5">
-            <div className="absolute top-2 left-2 text-[11px] text-cyber-gray font-mono z-10">
-              SYS.MODEL: CYBER_BREACH_CONDUIT_3D
-            </div>
-            
-            <div className="w-full h-[320px] relative">
-              <CyberBreachConduit />
-            </div>
+          <ul className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray">
+            {DOMAINS.map((domain) => (
+              <li key={domain.id} className="flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/40 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-cyber-tan font-bold uppercase tracking-widest text-[15px] md:text-base leading-tight">◆ {domain.name}</span>
+                  <span className="shrink-0 text-[12px] text-cyber-blue/70">{domain.id}</span>
+                </div>
+                <span className="text-[14px] md:text-[15px] leading-relaxed">{domain.brief}</span>
+              </li>
+            ))}
+          </ul>
 
-            <div className="w-full flex items-center justify-between mt-2 px-2 text-[12px] text-cyber-gray">
-              <span>FLOW_VECTOR_MODULATION: DYNAMIC</span>
-              <span className="text-cyber-blue font-bold text-glow-dim">GLSL PACKETS: ONLINE</span>
+          {/* Simulated progress diagnostics */}
+          <div className="flex flex-col gap-3">
+            <SimulatedLoadingBar value={92} label="INFILTRATION DECRYPTION MATRIX" />
+            <div className="flex items-center justify-between text-[12px] text-cyber-blue/80 font-mono">
+              <span>SECTOR: TRACK_FLOW_MATRIX</span>
+              <span>STATUS: STREAMS ONLINE</span>
             </div>
           </div>
         </section>

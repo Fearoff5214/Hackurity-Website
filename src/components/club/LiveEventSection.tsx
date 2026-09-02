@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Reveal, SectionHeading } from "./Reveal";
 
-const TARGET = new Date("2026-10-15T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-10-14T09:00:00+05:30").getTime();
 
 const FACTS = [
-  { label: "Dates", value: "15 – 16 October 2026" },
+  { label: "Dates", value: "14 – 15 October 2026" },
   { label: "Venue", value: "REVA University, Bengaluru" },
   { label: "Team size", value: "3 – 4 members" },
   { label: "Entry", value: "₹800 per team" },

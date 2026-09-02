@@ -48,7 +48,7 @@ export default function LiveEventSection() {
       <SectionHeading
         tag="Happening now"
         title="Our current event"
-        description="One event is open at the moment. Registration is running and closes a week before the event day."
+        description="One event is open at the moment. Registration is running and closes on 3 October, ahead of the event day."
       />
 
       <Reveal>
@@ -165,7 +165,7 @@ export default function LiveEventSection() {
                   </li>
                   <li className="flex justify-between gap-3">
                     <span>Registration closes</span>
-                    <span className="text-white">16 October 2026</span>
+                    <span className="text-white">3 October 2026</span>
                   </li>
                 </ul>
               </div>

@@ -36,10 +36,10 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
       >
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-3">
-            <span className="text-[11px] font-mono font-bold text-cyber-tan border border-cyber-tan/30 bg-cyber-tan/5 px-1.5 py-0.5">
+            <span className="text-[12px] font-mono font-bold text-cyber-tan border border-cyber-tan/30 bg-cyber-tan/5 px-1.5 py-0.5">
               {gate.id}
             </span>
-            <h3 className="font-heading text-[13px] md:text-xs tracking-[0.15em] text-white uppercase">
+            <h3 className="font-heading text-[14px] md:text-xs tracking-[0.15em] text-white uppercase">
               {gate.title}
             </h3>
           </div>
@@ -47,12 +47,12 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
             {gate.window}
           </span>
         </div>
-        <p className="font-mono text-[13px] leading-relaxed text-cyber-gray">
+        <p className="font-mono text-[14px] leading-relaxed text-cyber-gray">
           <span className="text-cyber-tan/70 mr-1.5">{`>`}</span>
           {gate.brief}
         </p>
         <div className="mt-3 h-px w-full bg-gradient-to-r from-cyber-blue/20 via-cyber-blue/5 to-transparent" />
-        <div className="mt-2 flex items-center justify-between font-mono text-[10px] text-cyber-gray/60">
+        <div className="mt-2 flex items-center justify-between font-mono text-[11px] text-cyber-gray/60">
           <span>SEQ_INDEX: {String(index + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}</span>
           <span className="text-cyber-tan/50 group-hover:text-cyber-tan transition-colors">
             GATEWAY_LOCKED_LINEAR

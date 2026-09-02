@@ -32,7 +32,7 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-mono text-[12px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
+            className="font-mono text-[13px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
           >
             REVA University · Bengaluru · Since 2024
           </motion.span>
@@ -50,7 +50,7 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-7 max-w-xl font-mono text-[15px] leading-relaxed text-cyber-gray"
+            className="mt-7 max-w-xl font-mono text-[16px] leading-relaxed text-cyber-gray"
           >
             A student group that meets every week to learn how systems get broken into, and how to
             keep them safe. Open to anyone on campus, whatever year you are in and whatever you
@@ -65,7 +65,7 @@ export default function ClubHome() {
           >
             <a
               href="#about"
-              className="inline-flex items-center gap-2 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[13px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
+              className="inline-flex items-center gap-2 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[14px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
             >
               About the club
             </a>
@@ -91,7 +91,7 @@ export default function ClubHome() {
 
               <div className="relative flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:p-6">
                 <div className="min-w-0">
-                  <p className="flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
+                  <p className="flex items-center gap-2 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyber-tan opacity-75" />
                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyber-tan" />
@@ -105,7 +105,7 @@ export default function ClubHome() {
 
                   <div className="mt-3 h-px w-16 bg-gradient-to-r from-cyber-tan to-transparent transition-all duration-300 group-hover:w-28" />
 
-                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[12px] leading-none text-cyber-gray">
+                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[13px] leading-none text-cyber-gray">
                     <span className="flex items-center gap-2">
                       Powered by
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -121,7 +121,7 @@ export default function ClubHome() {
                   </div>
                 </div>
 
-                <span className="flex shrink-0 items-center justify-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3 font-mono text-[12px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
+                <span className="flex shrink-0 items-center justify-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3 font-mono text-[13px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
                   Explore
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
@@ -134,7 +134,7 @@ export default function ClubHome() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="mt-20 flex items-center gap-3 font-mono text-[12px] tracking-widest text-cyber-gray uppercase"
+            className="mt-20 flex items-center gap-3 font-mono text-[13px] tracking-widest text-cyber-gray uppercase"
           >
             <motion.span
               animate={{ y: [0, 6, 0] }}
@@ -170,17 +170,17 @@ export default function ClubHome() {
         <footer className="relative border-t border-cyber-blue/15 bg-black/70 px-5 py-12 md:px-8">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5">
             <div>
-              <p className="font-heading text-[13px] tracking-[0.22em] uppercase">
+              <p className="font-heading text-[14px] tracking-[0.22em] uppercase">
                 Cybersecurity Club <span className="text-cyber-tan">//</span> REVA University
               </p>
-              <p className="mt-2 font-mono text-[12px] text-cyber-gray">
+              <p className="mt-2 font-mono text-[13px] text-cyber-gray">
                 School of Computer Science and Engineering, Bengaluru, Karnataka
               </p>
             </div>
             <div className="flex items-center gap-5">
               <a
                 href="mailto:cyberclub@reva.edu.in"
-                className="font-mono text-[12px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
+                className="font-mono text-[13px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
               >
                 cyberclub@reva.edu.in ↗
               </a>

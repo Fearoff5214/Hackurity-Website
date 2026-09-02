@@ -33,12 +33,12 @@ type SectionHeadingProps = {
 export function SectionHeading({ tag, title, description }: SectionHeadingProps) {
   return (
     <Reveal className="mb-10">
-      <span className="font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan">
+      <span className="font-mono text-[13px] font-bold tracking-[0.3em] text-cyber-tan">
         {`// ${tag}`}
       </span>
       <h2 className="mt-3 font-heading text-xl leading-relaxed uppercase md:text-2xl">{title}</h2>
       {description && (
-        <p className="mt-4 max-w-2xl font-mono text-[14px] leading-relaxed text-cyber-gray">
+        <p className="mt-4 max-w-2xl font-mono text-[15px] leading-relaxed text-cyber-gray">
           {description}
         </p>
       )}

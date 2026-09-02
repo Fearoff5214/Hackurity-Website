@@ -7,10 +7,10 @@ import { motion, useInView } from "framer-motion";
 export function CornerCrosshairs() {
   return (
     <>
-      <span className="absolute top-2 left-2 text-[12px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[12px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[12px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[12px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 left-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute top-2 right-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 left-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
+      <span className="absolute bottom-2 right-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
     </>
   );
 }
@@ -74,7 +74,7 @@ export function TypewriterText({ text, delay = 0.03, startDelay = 0, className =
 // Flashing status dot (Tan color status dot)
 export function StatusDot({ statusText = "SYSTEM ACTIVE", active = true }: { statusText?: string; active?: boolean }) {
   return (
-    <div className="flex items-center gap-2 px-3 py-1 border border-cyber-tan/20 bg-cyber-dark/85 font-mono text-[12px] tracking-widest text-cyber-tan">
+    <div className="flex items-center gap-2 px-3 py-1 border border-cyber-tan/20 bg-cyber-dark/85 font-mono text-[13px] tracking-widest text-cyber-tan">
       <span className="relative flex h-2 w-2">
         {active && (
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-tan opacity-75"></span>
@@ -162,7 +162,7 @@ export function SineWaveLoader({ width = 120, height = 24 }: { width?: number; h
 // Simulated Loading Bar Component (Blue/Tan glow)
 export function SimulatedLoadingBar({ value = 75, label = "CORE TEMP" }: { value?: number; label?: string }) {
   return (
-    <div className="w-full font-mono text-[12px] text-cyber-gray">
+    <div className="w-full font-mono text-[13px] text-cyber-gray">
       <div className="flex justify-between mb-1">
         <span>{label}</span>
         <span className="text-cyber-tan font-bold">{value}%</span>
@@ -190,7 +190,7 @@ export function SimulatedLoadingBar({ value = 75, label = "CORE TEMP" }: { value
 export function TechTable({ title, headers, rows }: { title: string; headers: string[]; rows: string[][] }) {
   return (
     <div className="w-full border border-cyber-blue/10 bg-cyber-dark/40 overflow-hidden">
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-cyber-tan/25 bg-cyber-tan/5 text-[12px] tracking-wider text-cyber-tan font-bold font-mono">
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-cyber-tan/25 bg-cyber-tan/5 text-[13px] tracking-wider text-cyber-tan font-bold font-mono">
         <span>// {title}</span>
         <div className="flex gap-1">
           <span className="w-1.5 h-1.5 bg-cyber-tan/60 rounded-full" />
@@ -199,7 +199,7 @@ export function TechTable({ title, headers, rows }: { title: string; headers: st
       </div>
       <table className="w-full text-left font-mono text-xs select-none">
         <thead>
-          <tr className="border-b border-cyber-blue/10 bg-cyber-black text-cyber-gray/50 text-[12px] uppercase">
+          <tr className="border-b border-cyber-blue/10 bg-cyber-black text-cyber-gray/50 text-[13px] uppercase">
             {headers.map((h, i) => (
               <th key={i} className="px-3 py-2 font-medium">{h}</th>
             ))}

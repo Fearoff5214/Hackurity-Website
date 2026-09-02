@@ -37,7 +37,7 @@ export default function EventActivityStatus() {
       className="relative overflow-hidden border border-cyber-tan/30 bg-gradient-to-br from-cyber-tan/10 via-cyber-dark to-cyber-blue/10 p-5"
     >
       <motion.div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-cyber-tan" animate={{ x: ["-100%", "100%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
-      <div className="relative flex items-center justify-between gap-3 font-mono text-[12px] font-bold tracking-[0.16em]">
+      <div className="relative flex items-center justify-between gap-3 font-mono text-[13px] font-bold tracking-[0.16em]">
         <span className="text-cyber-tan">{"// CURRENT_ACTIVITY"}</span>
         <span className={activity.active ? "flex items-center gap-1.5 text-emerald-300" : "text-cyber-blue"}>
           <span className={`h-2 w-2 rounded-full ${activity.active ? "bg-emerald-300 animate-pulse" : "bg-cyber-blue"}`} />
@@ -50,7 +50,7 @@ export default function EventActivityStatus() {
         <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">{activity.item.brief}</p>
       </div>
       <div className="relative mt-7">
-        <div className="mb-2 flex justify-between font-mono text-[11px] tracking-widest text-cyber-gray/75"><span>EVENT SEQUENCE</span><span>{String(activity.index + 1).padStart(2, "0")}/08</span></div>
+        <div className="mb-2 flex justify-between font-mono text-[12px] tracking-widest text-cyber-gray/75"><span>EVENT SEQUENCE</span><span>{String(activity.index + 1).padStart(2, "0")}/08</span></div>
         <div className="h-1 overflow-hidden bg-cyber-blue/15"><motion.div className="h-full bg-gradient-to-r from-cyber-blue to-cyber-tan" animate={{ width: `${((activity.index + 1) / EVENT_SCHEDULE.length) * 100}%` }} transition={{ duration: 0.6 }} /></div>
       </div>
     </motion.aside>

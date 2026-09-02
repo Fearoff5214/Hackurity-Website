@@ -157,7 +157,7 @@ export default function CyberCursor() {
           animate={{ opacity: 0, scale: 0.55, y: -22 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           style={{ left: b.x, top: b.y, filter: halo }}
-          className="absolute -translate-x-1/2 -translate-y-1/2 font-mono text-[11px] font-bold text-cyber-blue"
+          className="absolute -translate-x-1/2 -translate-y-1/2 font-mono text-[12px] font-bold text-cyber-blue"
         >
           {b.char}
         </motion.span>
@@ -223,7 +223,7 @@ export default function CyberCursor() {
             <motion.span
               initial={{ opacity: 0, x: 3 }}
               animate={{ opacity: 1, x: 0 }}
-              className="absolute left-[26px] top-[6px] whitespace-nowrap font-mono text-[10px] font-bold tracking-[0.22em] text-cyber-blue"
+              className="absolute left-[26px] top-[6px] whitespace-nowrap font-mono text-[11px] font-bold tracking-[0.22em] text-cyber-blue"
               style={{ filter: halo }}
             >
               {"// LOCK"}

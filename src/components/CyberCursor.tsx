@@ -30,8 +30,8 @@ export default function CyberCursor() {
   const y = useMotionValue(-200);
 
   // The bracket ring trails with a spring for that "acquiring lock" feel.
-  const ringX = useSpring(x, { stiffness: 350, damping: 30, mass: 0.7 });
-  const ringY = useSpring(y, { stiffness: 350, damping: 30, mass: 0.7 });
+  const ringX = useSpring(x, { stiffness: 400, damping: 34, mass: 0.55 });
+  const ringY = useSpring(y, { stiffness: 400, damping: 34, mass: 0.55 });
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
@@ -43,56 +43,84 @@ export default function CyberCursor() {
     setEnabled(true);
     document.documentElement.classList.add("cyber-cursor-active");
 
+    const SELECTOR =
+      'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])';
+
+    let raf = 0;
+    let px = -200;
+    let py = -200;
+    let moved = false;
+    let target: HTMLElement | null = null;
+    let hoverState = false;
+    let shownState = false;
     let lastBit = 0;
-    const onMove = (e: MouseEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
-      setVisible(true);
 
-      const el = e.target as HTMLElement | null;
-      setHovering(
-        !!el?.closest(
-          'a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [tabindex]:not([tabindex="-1"])'
-        )
-      );
+    // All per-move work is coalesced into one rAF tick — no React state churn
+    // on the raw mousemove stream.
+    const frame = (t: number) => {
+      raf = 0;
+      if (!moved) return;
+      moved = false;
 
-      if (!rm.matches) {
-        const now = e.timeStamp;
-        if (now - lastBit > 85) {
-          lastBit = now;
-          const id = ++seed.current;
-          setBits((prev) => [
-            ...prev.slice(-16),
-            { id, x: e.clientX, y: e.clientY, char: Math.random() > 0.5 ? "1" : "0" },
-          ]);
-          window.setTimeout(
-            () => setBits((prev) => prev.filter((b) => b.id !== id)),
-            620
-          );
-        }
+      x.set(px);
+      y.set(py);
+
+      if (!shownState) {
+        shownState = true;
+        setVisible(true);
+      }
+
+      const nextHover = !!target?.closest(SELECTOR);
+      if (nextHover !== hoverState) {
+        hoverState = nextHover;
+        setHovering(nextHover);
+      }
+
+      if (!rm.matches && t - lastBit > 110) {
+        lastBit = t;
+        const id = ++seed.current;
+        setBits((prev) => [
+          ...(prev.length > 8 ? prev.slice(1) : prev),
+          { id, x: px, y: py, char: Math.random() > 0.5 ? "1" : "0" },
+        ]);
+        window.setTimeout(() => setBits((prev) => prev.filter((b) => b.id !== id)), 540);
       }
     };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
 
+    const onMove = (e: MouseEvent) => {
+      px = e.clientX;
+      py = e.clientY;
+      target = e.target as HTMLElement | null;
+      moved = true;
+      schedule();
+    };
     const onDown = (e: MouseEvent) => {
       setDown(true);
       const id = ++seed.current;
-      setRipples((prev) => [...prev.slice(-4), { id, x: e.clientX, y: e.clientY }]);
-      window.setTimeout(
-        () => setRipples((prev) => prev.filter((r) => r.id !== id)),
-        550
-      );
+      setRipples((prev) => [...prev.slice(-3), { id, x: e.clientX, y: e.clientY }]);
+      window.setTimeout(() => setRipples((prev) => prev.filter((r) => r.id !== id)), 520);
     };
     const onUp = () => setDown(false);
-    const onLeave = () => setVisible(false);
-    const onEnter = () => setVisible(true);
+    const onLeave = () => {
+      shownState = false;
+      setVisible(false);
+    };
+    const onEnter = () => {
+      shownState = true;
+      setVisible(true);
+    };
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    window.addEventListener("mousedown", onDown);
-    window.addEventListener("mouseup", onUp);
+    window.addEventListener("mousedown", onDown, { passive: true });
+    window.addEventListener("mouseup", onUp, { passive: true });
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
     return () => {
+      if (raf) cancelAnimationFrame(raf);
       rm.removeEventListener("change", onRm);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mousedown", onDown);
@@ -105,9 +133,8 @@ export default function CyberCursor() {
 
   if (!enabled) return null;
 
-  const accent = hovering ? "#6366f1" : "#d2b48c";
-  const ring = hovering ? 48 : 32;
-  const halo = "drop-shadow(0 0 2px rgba(0,0,0,0.95))";
+  const accent = hovering ? "#7a7cf6" : "#ddc6a2";
+  const halo = "drop-shadow(0 0 2px rgba(0,0,0,0.9))";
 
   const corners = [
     { k: "tl", css: { top: 0, left: 0, borderTop: "2px solid", borderLeft: "2px solid" } },
@@ -140,20 +167,20 @@ export default function CyberCursor() {
       {ripples.map((r) => (
         <motion.span
           key={r.id}
-          initial={{ opacity: 0.6, width: 10, height: 10 }}
-          animate={{ opacity: 0, width: 64, height: 64 }}
+          initial={{ opacity: 0.55, scale: 0.15 }}
+          animate={{ opacity: 0, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           style={{ left: r.x, top: r.y, borderColor: accent }}
-          className="absolute -translate-x-1/2 -translate-y-1/2 rotate-45 border"
+          className="absolute h-16 w-16 -translate-x-1/2 -translate-y-1/2 rotate-45 border"
         />
       ))}
 
-      {/* Lagged bracket ring */}
+      {/* Lagged bracket ring — fixed box, scaled (transform only) */}
       <motion.div style={{ x: ringX, y: ringY }} className="absolute left-0 top-0">
         <motion.div
-          animate={{ width: ring, height: ring, marginLeft: -ring / 2, marginTop: -ring / 2 }}
-          transition={{ type: "spring", stiffness: 260, damping: 22 }}
-          className="absolute left-0 top-0"
+          className="absolute left-0 top-0 -ml-5 -mt-5 h-10 w-10"
+          animate={{ scale: hovering ? 1.2 : 0.8 }}
+          transition={{ type: "spring", stiffness: 280, damping: 24 }}
         >
           <motion.div
             animate={reducedMotion ? { rotate: down ? 45 : 0 } : { rotate: 360 }}
@@ -199,7 +226,7 @@ export default function CyberCursor() {
               className="absolute left-[26px] top-[6px] whitespace-nowrap font-mono text-[9px] font-bold tracking-[0.22em] text-cyber-blue"
               style={{ filter: halo }}
             >
-              // LOCK
+              {"// LOCK"}
             </motion.span>
           )}
         </div>

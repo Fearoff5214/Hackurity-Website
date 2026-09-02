@@ -150,14 +150,8 @@ export default function Home() {
   const [navAttack, setNavAttack] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setNavAttack(window.scrollY > 90);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Scroll-spy: keep the navbar highlight in sync with the section in view.
+  // One rAF-throttled scroll pass drives both the "attack mode" navbar and the
+  // scroll-spy highlight — no layout reads on the raw scroll event.
   useEffect(() => {
     const sections = navLinks
       .map((link) => {
@@ -165,27 +159,35 @@ export default function Home() {
         return el instanceof HTMLElement ? { name: link.name, el } : null;
       })
       .filter((entry): entry is { name: string; el: HTMLElement } => entry !== null);
-    if (sections.length === 0) return;
 
-    const onSpy = () => {
-      const probe = window.scrollY + window.innerHeight * 0.3;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      setNavAttack(y > 90);
+      if (sections.length === 0) return;
+      const probe = y + window.innerHeight * 0.3;
       let nextName = sections[0].name;
       for (const section of sections) {
-        const top = section.el.getBoundingClientRect().top + window.scrollY;
-        if (top - 1 <= probe) nextName = section.name;
+        if (section.el.getBoundingClientRect().top + y - 1 <= probe) nextName = section.name;
       }
-      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+      if (y + window.innerHeight >= document.documentElement.scrollHeight - 4) {
         nextName = sections[sections.length - 1].name;
       }
       setCurrentSection((prev) => (prev === nextName ? prev : nextName));
     };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
 
-    onSpy();
-    window.addEventListener("scroll", onSpy, { passive: true });
-    window.addEventListener("resize", onSpy);
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      window.removeEventListener("scroll", onSpy);
-      window.removeEventListener("resize", onSpy);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -311,7 +313,7 @@ export default function Home() {
   const stepThreeReady = Boolean(acceptedTerms && acceptedConduct && user && !existingRegistration);
 
   return (
-    <div className="min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
+    <div className="hackurity-root min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
       {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
       <CyberCursor />
 
@@ -323,7 +325,7 @@ export default function Home() {
       <BinaryStarfield />
 
       {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.06)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.11)_0%,transparent_62%)] pointer-events-none" />
 
       {/* 1. NAVIGATION BAR — fixed to top, compacts on scroll */}
       <motion.header

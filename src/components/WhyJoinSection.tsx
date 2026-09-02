@@ -169,13 +169,20 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
       />
       {/* hover border wash */}
       <span className="pointer-events-none absolute inset-0 border border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan/45" />
-      {/* looping scan line, revealed on hover */}
+      {/* scan line — transform-only, runs just while hovered */}
       <motion.span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent opacity-0 group-hover:opacity-90"
-        initial={{ top: "-6%" }}
-        animate={reduce ? undefined : { top: ["-6%", "106%"] }}
-        transition={{ duration: 2.1, repeat: Infinity, ease: "linear", delay: index * 0.15 }}
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent opacity-0 group-hover:opacity-90"
+        variants={
+          reduce
+            ? undefined
+            : {
+                hover: {
+                  y: [0, 210],
+                  transition: { duration: 1.9, repeat: Infinity, ease: "linear" },
+                },
+              }
+        }
       />
       {/* corner tick */}
       <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r border-t border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />

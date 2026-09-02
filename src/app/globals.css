@@ -228,3 +228,27 @@ body {
     cursor: none !important;
   }
 }
+
+/* ── Hackurity page: same spectrum, lifted a few stops so it reads less "pinched" ── */
+.hackurity-root {
+  --color-cyber-blue: #7a7cf6;
+  --color-cyber-blue-glow: rgba(122, 124, 246, 0.24);
+  --color-cyber-blue-dim: rgba(122, 124, 246, 0.14);
+
+  --color-cyber-tan: #ddc6a2;
+  --color-cyber-tan-glow: rgba(221, 198, 162, 0.24);
+  --color-cyber-tan-dim: rgba(221, 198, 162, 0.14);
+
+  --color-cyber-black: #0b0b16;
+  --color-cyber-dark: #16161f;
+  --color-cyber-gray: #bfbfd4;
+  --color-cyber-border: rgba(122, 124, 246, 0.32);
+}
+
+/* Grid lines a touch more present on the lifted background */
+.hackurity-root.cyber-grid,
+.hackurity-root .cyber-grid {
+  background-image:
+    linear-gradient(to right, rgba(122, 124, 246, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 124, 246, 0.045) 1px, transparent 1px);
+}

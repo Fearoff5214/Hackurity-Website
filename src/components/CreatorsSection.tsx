@@ -6,8 +6,6 @@ type Creator = {
   name: string;
   role: string;
   quote?: string;
-  phone: string;
-  email?: string;
   github: string;
   linkedin: string;
 };
@@ -17,8 +15,6 @@ const CREATORS: Creator[] = [
     name: "Logaa Paramesh L T",
     role: "Lead Developer",
     quote: "Don't Touch it if it works, it will break.",
-    phone: "+91 88704 96955",
-    email: "parameshlogaa@gmail.com",
     github: "https://github.com/Fearoff5214",
     linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
   },
@@ -26,16 +22,12 @@ const CREATORS: Creator[] = [
     name: "Mohammad Omar",
     role: "Developer",
     quote: "If you find a bug in this site, DM me. If you don't, I did my job right.",
-    phone: "+91 74559 04156",
-    email: "omarofficial1054@gmail.com",
     github: "https://github.com/MohammadOmar1054",
     linkedin: "https://www.linkedin.com/in/mohammad-omar-a81b28388/",
   },
   {
     name: "Tanush Jain",
     role: "Developer",
-    phone: "+91 89707 90411",
-    email: "brandwopio76@gmail.com",
     github: "https://github.com/Tanush-Jain",
     linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
   },
@@ -92,23 +84,6 @@ export default function CreatorsSection() {
                 &ldquo;{person.quote}&rdquo;
               </p>
             )}
-
-            <div className="mt-4 space-y-1 font-mono text-[13px] text-cyber-gray">
-              <a
-                href={`tel:${person.phone.replace(/\s/g, "")}`}
-                className="block hover:text-white"
-              >
-                {person.phone}
-              </a>
-              {person.email && (
-                <a
-                  href={`mailto:${person.email}`}
-                  className="block truncate hover:text-white"
-                >
-                  {person.email}
-                </a>
-              )}
-            </div>
 
             <div className="mt-4 flex flex-wrap gap-2 pt-1">
               <a

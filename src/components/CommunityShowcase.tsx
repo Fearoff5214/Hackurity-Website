@@ -13,6 +13,8 @@ const PARTNERS: Partner[] = [
   { name: "Boston Institute of Analytics", url: "https://bostoninstituteofanalytics.org/", logo: "/sponsors/boston-institute-of-analytics.png" },
   { name: "EDWISE Overseas Education Consultants", url: "https://www.edwiseinternational.com/", logo: "/sponsors/edwise.png" },
   { name: "Indian Society for Technical Education", url: "https://www.isteonline.in/", logo: "/sponsors/iste.png" },
+  { name: "upGrad", url: "https://www.upgrad.com/study-abroad/", logo: "/sponsors/upgrad.png" },
+  { name: "Paramount Consulting", url: "https://paramountgroupuk.com/", logo: "/sponsors/paramount-consulting.png" },
 ];
 
 const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111126&color=d2b48c&bold=true&size=360&font-size=0.34`;
@@ -21,9 +23,9 @@ const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURICo
 const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 
 const CONTACTS: Person[] = [
-  { name: "Chetan", role: "Cybersecurity Club President", image: avatar("Chetan"), phone: "TBD" },
   { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280" },
-  { name: "Lavanya", role: "Cybersecurity Club Technical Head", image: avatar("Lavanya"), phone: "TBD" },
+  { name: "Chethan K", role: "Design Team Head", image: avatar("Chethan K"), phone: "+91733-78344158" },
+  { name: "Lavanya D", role: "Event Management", image: avatar("Lavanya D"), phone: "+91 80730 48671" },
 ];
 
 const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });
@@ -66,6 +68,35 @@ export function JudgesSection() {
           <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-cyber-dark"><span className="font-heading text-3xl text-cyber-tan/40">?</span><span className="absolute left-2 top-2 font-mono text-[11px] tracking-widest text-cyber-blue/60">JUDGE_{String(slot).padStart(2, "0")}</span></div>
           <div className="pt-3"><h3 className="font-heading text-[14px] leading-relaxed text-white uppercase">Judge details coming soon</h3><p className="mt-1 font-mono text-[12px] font-bold tracking-widest text-cyber-tan">TO BE ANNOUNCED</p><p className="mt-2 font-mono text-[13px] leading-relaxed text-cyber-gray">Profile, role and background will be published closer to the event.</p></div>
         </motion.div>)}
+      </div>
+    </section>
+  );
+}
+
+const ABOUT_STATS = [
+  { value: "24 HRS", label: "Non-stop hackathon" },
+  { value: "3 – 4", label: "Members per team" },
+  { value: "UG – PG", label: "All streams welcome" },
+];
+
+export function AboutUsSection() {
+  return (
+    <section id="about_us" className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 md:p-8">
+      <div className="mb-6 max-w-2xl">
+        <span className="font-mono text-[13px] font-bold tracking-widest text-cyber-tan">{"// ABOUT_HACKURITY"}</span>
+        <h2 className="mt-2 font-heading text-lg leading-relaxed text-white uppercase md:text-xl">About us</h2>
+        <p className="mt-3 font-mono text-[13px] leading-relaxed text-cyber-gray">
+          Hackurity is a national-level, 24-hour cybersecurity hackathon hosted at REVA University, Bengaluru,
+          and run end-to-end by the REVA Cybersecurity Club. It brings students together to pick a track, break
+          something on purpose, and build the fix — with guidance from faculty in the School of Computer Science
+          and Engineering.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 gap-px border border-cyber-blue/15 bg-cyber-blue/15 sm:grid-cols-3">
+        {ABOUT_STATS.map((stat) => <div key={stat.label} className="bg-black/70 px-4 py-5 text-center">
+          <div className="font-heading text-base text-cyber-tan">{stat.value}</div>
+          <div className="mt-2 font-mono text-[12px] tracking-widest text-cyber-gray uppercase">{stat.label}</div>
+        </div>)}
       </div>
     </section>
   );

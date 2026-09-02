@@ -25,7 +25,10 @@ import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import CyberCursor from "@/components/CyberCursor";
 import CampusLogo from "@/components/CampusLogo";
-import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
+import HackurityLenis from "@/components/HackurityLenis";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+import TrackCard from "@/components/TrackCard";
+import { AboutUsSection, ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
 import type { User } from "@supabase/supabase-js";
@@ -306,6 +309,7 @@ export default function Home() {
 
   return (
     <div className="hackurity-root min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
+     <HackurityLenis>
       {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
       <CyberCursor />
 
@@ -314,6 +318,9 @@ export default function Home() {
 
       {/* Site boot sequence */}
       <SiteLoader />
+
+      {/* Back-to-top affordance once the user has scrolled past the hero */}
+      <ScrollToTopButton />
 
       {/* Ambient animated background: gradient glows + binary starfield + magenta glitter */}
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 ambient-glow" />
@@ -596,19 +603,12 @@ export default function Home() {
             </p>
           </div>
 
-          <ul className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray">
-            {DOMAINS.map((domain) => (
-              <li key={domain.id} className="relative flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/70 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
-                <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-cyber-tan" />
-                <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-cyber-tan" />
-                <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan" />
-                <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan" />
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-cyber-tan font-bold uppercase tracking-widest text-[15px] md:text-base leading-tight">◆ {domain.name}</span>
-                  <span className="shrink-0 text-[12px] text-cyber-blue/70">{domain.id}</span>
-                </div>
-                <span className="text-[14px] md:text-[15px] leading-relaxed">{domain.brief}</span>
-              </li>
+          <ul
+            style={{ perspective: 1000 }}
+            className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray"
+          >
+            {DOMAINS.map((domain, i) => (
+              <TrackCard key={domain.id} domain={domain} index={i} />
             ))}
           </ul>
 
@@ -829,6 +829,8 @@ export default function Home() {
 
         <ContactSection />
 
+        <AboutUsSection />
+
         <CreatorsSection />
 
       </main>
@@ -991,6 +993,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
       )}
+     </HackurityLenis>
     </div>
   );
 }

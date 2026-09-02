@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useSpring, useTransform, useInView, useMotionValueEvent } from "framer-motion";
 import { EVENT_SCHEDULE, type EventScheduleItem } from "@/data/eventSchedule";
 
 function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number }) {
@@ -79,8 +79,101 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
   );
 }
 
+// Small bracket-corner badge that travels alongside the trunk-line progress,
+// showing whichever gate is currently active. Native `position: sticky`
+// silently breaks here — the page applies a CSS `zoom` to <main> for text
+// sizing, and Chromium miscalculates sticky's containing block under zoom
+// (confirmed live: the element reported a viewport `top` thousands of
+// pixels off-screen instead of holding near the fold). `position: absolute`
+// isn't affected — the trunk line below already relies on it successfully
+// under the same zoom — so this computes its own vertical offset from
+// scroll progress instead of leaning on the browser's sticky algorithm.
+//
+// Both the displayed gate AND the badge's vertical position are derived
+// from the same real per-row `offsetTop` measurements (rowOffsets), rather
+// than assuming rows are evenly sized — rows vary in height (some briefs
+// wrap to two lines), so an index picked by `floor(progress * 12)` doesn't
+// land on the same row a purely pixel-linear `progress * trackHeight` top
+// would — they visibly drifted apart before this fix.
+function CurrentStageReadout({
+  progress,
+  trackHeight,
+  rowOffsets,
+}: {
+  progress: ReturnType<typeof useSpring>;
+  trackHeight: number;
+  rowOffsets: number[];
+}) {
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const [badgeHeight, setBadgeHeight] = useState(0);
+
+  useEffect(() => {
+    const el = badgeRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => setBadgeHeight(entry.contentRect.height));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const indexMV = useTransform(progress, (p) => {
+    if (rowOffsets.length === 0) return 0;
+    const cursor = p * trackHeight;
+    let closest = 0;
+    for (let i = 0; i < rowOffsets.length; i++) {
+      if (rowOffsets[i] <= cursor) closest = i;
+    }
+    return closest;
+  });
+  const [index, setIndex] = useState(0);
+  useMotionValueEvent(indexMV, "change", (latest) => setIndex(latest));
+  const opacity = useTransform(progress, [0, 0.02, 1], [0, 1, 1]);
+  const top = useTransform(() => {
+    const target = rowOffsets[indexMV.get()] ?? 0;
+    return Math.min(target, Math.max(trackHeight - badgeHeight, 0));
+  });
+  const gate = EVENT_SCHEDULE[index];
+
+  return (
+    <motion.div ref={badgeRef} style={{ opacity, top }} className="relative md:absolute md:inset-x-0">
+      <div className="relative border border-cyber-tan/30 bg-cyber-black/70 px-4 py-3 backdrop-blur-sm">
+        <span className="pointer-events-none absolute left-0 top-0 h-2.5 w-2.5 border-l-2 border-t-2 border-cyber-tan" />
+        <span className="pointer-events-none absolute right-0 top-0 h-2.5 w-2.5 border-r-2 border-t-2 border-cyber-tan" />
+        <span className="pointer-events-none absolute bottom-0 left-0 h-2.5 w-2.5 border-b-2 border-l-2 border-cyber-tan" />
+        <span className="pointer-events-none absolute bottom-0 right-0 h-2.5 w-2.5 border-b-2 border-r-2 border-cyber-tan" />
+        <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-blue/70 uppercase">
+          // now_at
+        </p>
+        <p className="mt-1 font-mono text-[13px] font-bold text-cyber-tan">{gate.id}</p>
+        <h4 className="font-heading text-[13px] leading-snug text-white uppercase">{gate.title}</h4>
+        <p className="mt-2 font-mono text-[11px] tracking-widest text-cyber-gray/60">
+          {String(index + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function EventPathway() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const olRef = useRef<HTMLOListElement>(null);
+  const [trackHeight, setTrackHeight] = useState(0);
+  const [rowOffsets, setRowOffsets] = useState<number[]>([]);
+
+  useEffect(() => {
+    const trackEl = trackRef.current;
+    const olEl = olRef.current;
+    if (!trackEl || !olEl) return;
+    const measure = () => {
+      setTrackHeight(trackEl.offsetHeight);
+      setRowOffsets(Array.from(olEl.children).map((child) => (child as HTMLElement).offsetTop));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(trackEl);
+    return () => observer.disconnect();
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.85", "end 0.35"],
@@ -89,23 +182,29 @@ export default function EventPathway() {
   const glowY = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div ref={containerRef} className="relative w-full">
-      {/* Trunk conduit */}
-      <div className="absolute left-[14px] md:left-[22px] top-2 bottom-2 w-px bg-cyber-blue/12" />
-      <motion.div
-        style={{ scaleY: progress }}
-        className="absolute left-[14px] md:left-[22px] top-2 bottom-2 w-px origin-top bg-cyber-tan/60"
-      />
-      <motion.div
-        style={{ top: glowY }}
-        className="absolute left-[14px] md:left-[22px] w-px h-16 -translate-y-full bg-gradient-to-b from-transparent via-cyber-blue to-cyber-tan"
-      />
+    <div ref={containerRef} className="relative w-full md:grid md:grid-cols-[240px_1fr] md:gap-6">
+      <div className="relative mb-4 md:mb-0">
+        <CurrentStageReadout progress={progress} trackHeight={trackHeight} rowOffsets={rowOffsets} />
+      </div>
 
-      <ol className="flex flex-col">
-        {EVENT_SCHEDULE.map((gate, i) => (
-          <GatewayRow key={gate.id} gate={gate} index={i} />
-        ))}
-      </ol>
+      <div ref={trackRef} className="relative">
+        {/* Trunk conduit */}
+        <div className="absolute left-[14px] md:left-[22px] top-2 bottom-2 w-px bg-cyber-blue/12" />
+        <motion.div
+          style={{ scaleY: progress }}
+          className="absolute left-[14px] md:left-[22px] top-2 bottom-2 w-px origin-top bg-cyber-tan/60"
+        />
+        <motion.div
+          style={{ top: glowY }}
+          className="absolute left-[14px] md:left-[22px] w-px h-16 -translate-y-full bg-gradient-to-b from-transparent via-cyber-blue to-cyber-tan"
+        />
+
+        <ol ref={olRef} className="flex flex-col">
+          {EVENT_SCHEDULE.map((gate, i) => (
+            <GatewayRow key={gate.id} gate={gate} index={i} />
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }

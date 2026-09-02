@@ -166,10 +166,10 @@ export const DEPARTMENTS: Department[] = [
       ),
       dummy(
         "Lavanya D",
-        "Event Management Head",
+        "Event Management",
         "Bio coming soon.",
         "lavanya-d",
-        "+91 00000 00000",
+        "+91 80730 48671",
       ),
       dummy(
         "Ramya VK",

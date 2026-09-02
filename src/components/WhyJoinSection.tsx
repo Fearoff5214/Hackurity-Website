@@ -255,6 +255,31 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
 
 export default function WhyJoinSection() {
   const reduce = useReducedMotion();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToCard = (index: number) => {
+    const track = trackRef.current;
+    const card = track?.children[index] as HTMLElement | undefined;
+    if (!track || !card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  };
+
+  const handleTrackScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    let closest = 0;
+    let minDist = Infinity;
+    Array.from(track.children).forEach((child, i) => {
+      const el = child as HTMLElement;
+      const dist = Math.abs(el.offsetLeft - track.offsetLeft - track.scrollLeft);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    });
+    setActiveIndex(closest);
+  };
 
   return (
     <section
@@ -330,18 +355,52 @@ export default function WhyJoinSection() {
         </motion.div>
       </div>
 
-      {/* benefit grid */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.12 }}
-        className="relative mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4"
-      >
-        {BENEFITS.map((benefit, index) => (
-          <BenefitCard key={benefit.id} benefit={benefit} index={index} />
-        ))}
-      </motion.div>
+      {/* benefit carousel */}
+      <div className="relative mt-6">
+        <motion.div
+          ref={trackRef}
+          onScroll={handleTrackScroll}
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.12 }}
+          className="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {BENEFITS.map((benefit, index) => (
+            <div key={benefit.id} className="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+              <BenefitCard benefit={benefit} index={index} />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* carousel controls */}
+        <div className="mt-4 flex items-center justify-between">
+          <span className="font-mono text-[12px] tracking-widest text-cyber-gray/60">
+            <span className="font-bold text-cyber-tan">{String(activeIndex + 1).padStart(2, "0")}</span>
+            {` / ${String(BENEFITS.length).padStart(2, "0")}`}
+          </span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => scrollToCard(Math.max(0, activeIndex - 1))}
+              disabled={activeIndex === 0}
+              aria-label="Previous benefit"
+              className="border border-cyber-tan/30 px-3 py-2 font-mono text-cyber-tan transition-colors hover:border-cyber-tan hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToCard(Math.min(BENEFITS.length - 1, activeIndex + 1))}
+              disabled={activeIndex === BENEFITS.length - 1}
+              aria-label="Next benefit"
+              className="border border-cyber-tan/30 px-3 py-2 font-mono text-cyber-tan transition-colors hover:border-cyber-tan hover:bg-cyber-tan/10 disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* IBM strip + CTA */}
       <motion.a

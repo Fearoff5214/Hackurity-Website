@@ -11,7 +11,6 @@ import {
   SimulatedLoadingBar,
   ScrambleText,
   GradientUnderline,
-  ScrambleFontCycler,
   TwoRowInfoCard,
   CalendarGlyph,
   PinGlyph,
@@ -501,15 +500,18 @@ export default function Home() {
       />
 
       {/* HERO — centered headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
-      <section className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-6 px-4 py-14 text-center md:px-8 md:py-20">
+      <section id="mission_brief" className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-6 px-4 py-14 text-center md:px-8 md:py-20">
         <span className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
           <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
           CTF_NODE_CONNECTED
         </span>
 
         <div className="flex flex-col items-center gap-1">
-          <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-            <ScrambleFontCycler text="Hackurity" />
+          <h1
+            className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl"
+            style={{ fontFamily: '"Ethnocentric", Impact, sans-serif', fontWeight: 900 }}
+          >
+            <ScrambleText text="Hackurity" />
           </h1>
           <GradientUnderline className="max-w-[220px]" />
         </div>
@@ -570,52 +572,6 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop. */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8">
-          <CornerCrosshairs />
-
-          {/* Title & stats */}
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-3">
-              <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
-                REVA CYBERSECURITY CLUB <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY (SCHOOL OF CSE)
-              </p>
-              <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
-                <dl className="grid grid-cols-1 gap-x-8 gap-y-4 font-mono text-sm sm:grid-cols-2">
-                  {[
-                    { k: "FORMAT", v: "24-hour hackathon // on-site" },
-                    { k: "DATE", v: "14 – 15 October 2026" },
-                    { k: "BUILD WINDOW", v: "14 Oct 09:00 → 15 Oct 09:00 IST" },
-                    { k: "VENUE", v: "REVA University, Bengaluru" },
-                    { k: "TEAM SIZE", v: "3 – 4 members" },
-                    { k: "ENTRY", v: "₹800 per team" },
-                    { k: "REGISTRATION", v: "9 Sep – 3 Oct 2026" },
-                    { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
-                    { k: "PRIZES", v: "Ceremony 15 Oct, 18:00 IST" },
-                  ].map((row) => (
-                    <div key={row.k} className="flex flex-col gap-0.5">
-                      <dt className="text-[12px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">
-                        {row.k}
-                      </dt>
-                      <dd className="text-[15px] font-medium leading-relaxed text-white">{row.v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="mt-1">
-                <a
-                  href="#join_node"
-                  className="block w-full px-4 py-3 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[15px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
-                >
-                  [ REGISTER NOW]
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
         <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/30 backdrop-blur-md relative">

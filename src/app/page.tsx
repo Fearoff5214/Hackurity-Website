@@ -548,15 +548,6 @@ export default function Home() {
             <ScrambleText text="[ Register Now ]" />
           </a>
         </BracketFrame>
-
-        <BracketFrame className="mt-6 inline-flex">
-          <span className="flex items-center gap-2 px-3 py-1.5 font-mono text-[11px] tracking-[0.3em] text-cyber-gray/50 uppercase">
-            scroll
-            <motion.span animate={{ y: [0, 4, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
-              ↓
-            </motion.span>
-          </span>
-        </BracketFrame>
       </section>
 
       {/* MAIN CONTAINER */}

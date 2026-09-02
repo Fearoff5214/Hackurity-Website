@@ -534,22 +534,23 @@ export default function Home() {
           </span>
         </div>
 
-        <div className="w-full max-w-lg text-left">
-          <HackurityCountdown />
-        </div>
-
-        <div className="flex flex-col gap-4 sm:flex-row">
+        <div className="flex w-full max-w-5xl flex-col items-stretch gap-4 lg:flex-row lg:items-center">
           <TwoRowInfoCard
             tone="tan"
-            className="w-full max-w-xs text-left"
+            className="w-full text-left lg:max-w-xs"
             rows={[
               { icon: <CalendarGlyph />, label: "Date", lines: ["14 & 15", "Oct 2026"] },
               { icon: <PinGlyph />, label: "Venue", lines: ["REVA University", "Bengaluru, India"] },
             ]}
           />
+
+          <div className="w-full text-left lg:flex-1">
+            <HackurityCountdown />
+          </div>
+
           <TwoRowInfoCard
             tone="blue"
-            className="w-full max-w-xs text-left"
+            className="w-full text-left lg:max-w-xs"
             rows={[
               { icon: <PeopleGlyph />, label: "Team Size", lines: ["3 – 4", "Members"] },
               { icon: <CodeGlyph />, label: "Who Can Join", lines: ["UG – PG", "All Streams"] },

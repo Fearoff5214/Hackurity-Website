@@ -186,6 +186,26 @@ export function SimulatedLoadingBar({ value = 75, label = "CORE TEMP" }: { value
   );
 }
 
+// Cycles a headline's font-family through a fixed set on an interval —
+// a "corrupted terminal" flourish. Inherits size/color/spacing from its
+// parent, so just drop it in place of plain text.
+const DEFAULT_FONT_CYCLE = [
+  "var(--font-heading)",
+  '"JetBrains Mono", monospace',
+  "Georgia, serif",
+  '"Courier New", monospace',
+  "Impact, sans-serif",
+];
+
+export function FontCycler({ text, fonts = DEFAULT_FONT_CYCLE, interval = 1800 }: { text: string; fonts?: string[]; interval?: number }) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % fonts.length), interval);
+    return () => window.clearInterval(id);
+  }, [fonts.length, interval]);
+  return <span style={{ fontFamily: fonts[index] }}>{text}</span>;
+}
+
 // Scramble/decode text — hacker-terminal flourish, settles into the real
 // label after a brief character-shuffle. Trigger by hovering the wrapper.
 const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";

@@ -239,10 +239,20 @@ body {
   --color-cyber-tan-glow: rgba(221, 198, 162, 0.24);
   --color-cyber-tan-dim: rgba(221, 198, 162, 0.14);
 
-  --color-cyber-black: #0b0b16;
+  --color-cyber-black: #000000;
   --color-cyber-dark: #16161f;
   --color-cyber-gray: #d2d2e4;
   --color-cyber-border: rgba(122, 124, 246, 0.32);
+}
+
+/* Ambient glow, dialed way down for Hackurity so the page reads as black
+   with faint accent light, not a navy/purple wash. */
+.hackurity-root .ambient-glow {
+  background:
+    radial-gradient(60% 45% at 0% 25%, rgba(99, 102, 241, 0.05), transparent 70%),
+    radial-gradient(55% 45% at 100% 20%, rgba(210, 180, 140, 0.04), transparent 70%),
+    radial-gradient(70% 50% at 50% 100%, rgba(99, 102, 241, 0.04), transparent 72%),
+    radial-gradient(45% 35% at 85% 70%, rgba(217, 70, 239, 0.025), transparent 72%);
 }
 
 /* ── Legibility: lift small print and emphasise the words that carry meaning ── */

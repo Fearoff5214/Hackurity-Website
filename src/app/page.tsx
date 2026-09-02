@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   CornerCrosshairs,
@@ -13,6 +12,7 @@ import {
   ScrambleText,
   GradientUnderline,
   RotatingFactPanel,
+  FontCycler,
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
 import QueryTerminal from "@/components/QueryTerminal";
@@ -40,12 +40,6 @@ import { submitRegistration as submitRegistrationToSupabase } from "@/lib/submis
 //     url: "https://revacyberclub.tech/hackurity",
 //   },
 // };
-// Dynamically import WebGL elements to prevent SSR issues
-const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
-  ssr: false,
-  loading: () => null,
-});
-
 
 // Navigation Links — also drive the scroll-spy that highlights the active section.
 const navLinks = [
@@ -319,15 +313,8 @@ export default function Home() {
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 ambient-glow" />
       <BinaryStarfield />
 
-      {/* Interactive cognitive-face backdrop — follows the cursor across the whole page */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-        <div className="relative h-[92vh] w-full max-w-5xl opacity-95">
-          <BinaryFace background />
-        </div>
-      </div>
-
       {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.11)_0%,transparent_62%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.04)_0%,transparent_62%)] pointer-events-none" />
 
       {/* 1. NAVIGATION BAR — fixed to top, compacts on scroll */}
       <motion.header
@@ -509,71 +496,67 @@ export default function Home() {
         className={`transition-[height] duration-350 ease-out ${navAttack ? "h-[52px]" : "h-[60px]"}`}
       />
 
-      {/* HERO — headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
-      <section className="relative z-10 mx-auto max-w-[1280px] px-4 py-14 md:px-8 md:py-20">
-        <div className="flex flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
-          <RotatingFactPanel
-            facts={[
-              { k: "BUILD WINDOW", v: "24 hours // on-site" },
-              { k: "TEAM SIZE", v: "3 – 4 members" },
-              { k: "TRACKS", v: "3 tracks // 2 problems each" },
-              { k: "ENTRY", v: "₹800 per team" },
-              { k: "VENUE", v: "REVA University, Bengaluru" },
-            ]}
-            className="order-2 w-full max-w-xs md:order-1"
-          />
+      {/* HERO — centered headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
+      <section className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-6 px-4 py-14 text-center md:px-8 md:py-20">
+        <span className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
+          <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
+          CTF_NODE_CONNECTED
+        </span>
 
-          <div className="order-1 flex max-w-xl flex-col items-start gap-4 md:order-2">
-            <span className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
-              <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
-              CTF_NODE_CONNECTED
-            </span>
-            <div className="flex flex-col gap-1">
-              <h1 className="font-heading text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-                Hackurity
-              </h1>
-              <GradientUnderline className="max-w-[220px]" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <h1 className="font-heading text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-                2026
-              </h1>
-              <GradientUnderline className="max-w-[140px]" />
-            </div>
-            <p className="mt-2 font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
-              A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
-            </p>
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
-              <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">powered by</span>
-              <span className="inline-flex items-center gap-1.5">
-                <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain" />
-                <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
-              </span>
-            </div>
-            <div className="mt-2">
-              <BracketFrame className="inline-block">
-                <a
-                  href="#join_node"
-                  className="block px-6 py-3 font-mono text-sm font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:text-white"
-                >
-                  <ScrambleText text="[ Register Now ]" />
-                </a>
-              </BracketFrame>
-            </div>
-          </div>
+        <div className="flex flex-col items-center gap-1">
+          <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
+            <FontCycler text="Hackurity" />
+          </h1>
+          <GradientUnderline className="max-w-[220px]" />
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
+            <FontCycler text="2026" />
+          </h1>
+          <GradientUnderline className="max-w-[140px]" />
         </div>
 
-        <div className="order-3 mt-10 flex items-center justify-end gap-2 font-mono text-[11px] tracking-[0.3em] text-cyber-gray/50 uppercase">
-          <BracketFrame className="inline-flex">
-            <span className="flex items-center gap-2 px-3 py-1.5">
-              scroll
-              <motion.span animate={{ y: [0, 4, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
-                ↓
-              </motion.span>
-            </span>
-          </BracketFrame>
+        <p className="mt-2 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
+          A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
+          <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">powered by</span>
+          <span className="inline-flex items-center gap-1.5">
+            <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain" />
+            <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
+          </span>
         </div>
+
+        <RotatingFactPanel
+          facts={[
+            { k: "BUILD WINDOW", v: "24 hours // on-site" },
+            { k: "TEAM SIZE", v: "3 – 4 members" },
+            { k: "TRACKS", v: "3 tracks // 2 problems each" },
+            { k: "ENTRY", v: "₹800 per team" },
+            { k: "VENUE", v: "REVA University, Bengaluru" },
+          ]}
+          className="mt-2 w-full max-w-xs"
+        />
+
+        <BracketFrame className="mt-2 inline-block">
+          <a
+            href="#join_node"
+            className="block px-6 py-3 font-mono text-sm font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:text-white"
+          >
+            <ScrambleText text="[ Register Now ]" />
+          </a>
+        </BracketFrame>
+
+        <BracketFrame className="mt-6 inline-flex">
+          <span className="flex items-center gap-2 px-3 py-1.5 font-mono text-[11px] tracking-[0.3em] text-cyber-gray/50 uppercase">
+            scroll
+            <motion.span animate={{ y: [0, 4, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
+              ↓
+            </motion.span>
+          </span>
+        </BracketFrame>
       </section>
 
       {/* MAIN CONTAINER */}

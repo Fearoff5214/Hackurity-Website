@@ -145,10 +145,10 @@ export default function BinaryStarfield() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Base gradient wash: blue + tan, with a whisper of magenta */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(122,124,246,0.2)_0%,transparent_55%),radial-gradient(circle_at_85%_28%,rgba(221,198,162,0.15)_0%,transparent_52%),radial-gradient(circle_at_50%_105%,rgba(217,70,239,0.11)_0%,transparent_58%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(122,124,246,0.06)_0%,transparent_55%),radial-gradient(circle_at_85%_28%,rgba(221,198,162,0.05)_0%,transparent_52%),radial-gradient(circle_at_50%_105%,rgba(217,70,239,0.03)_0%,transparent_58%)]" />
       {/* Side glows */}
-      <div className="absolute left-0 top-0 h-full w-[22%] bg-gradient-to-r from-cyber-blue/15 to-transparent blur-2xl" />
-      <div className="absolute right-0 top-0 h-full w-[22%] bg-gradient-to-l from-cyber-tan/12 to-transparent blur-2xl" />
+      <div className="absolute left-0 top-0 h-full w-[22%] bg-gradient-to-r from-cyber-blue/6 to-transparent blur-2xl" />
+      <div className="absolute right-0 top-0 h-full w-[22%] bg-gradient-to-l from-cyber-tan/5 to-transparent blur-2xl" />
       {/* Animated binary starfield */}
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-90" />
       {/* Readability veil so text stays crisp */}

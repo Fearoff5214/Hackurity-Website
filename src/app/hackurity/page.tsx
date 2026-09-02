@@ -17,6 +17,7 @@ import SponsorZone from "@/components/SponsorZone";
 import SiteLoader from "@/components/SiteLoader";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import CyberCursor from "@/components/CyberCursor";
+import CampusLogo from "@/components/CampusLogo";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
@@ -316,6 +317,9 @@ export default function Home() {
     <div className="hackurity-root min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
       {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
       <CyberCursor />
+
+      {/* Campus emblem — top-right under the navbar, flips to the club shield on hover */}
+      <CampusLogo />
 
       {/* Site boot sequence */}
       <SiteLoader />

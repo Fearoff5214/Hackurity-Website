@@ -556,7 +556,7 @@ export default function Home() {
                 </span>
               </div>
               <p className="font-mono text-[11px] tracking-wider text-cyber-tan font-bold uppercase">
-                REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE
+                REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY
               </p>
               <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-2.5 font-mono text-xs sm:grid-cols-2">
@@ -565,7 +565,6 @@ export default function Home() {
                     { k: "DATE", v: "23 – 24 October 2026" },
                     { k: "BUILD WINDOW", v: "23 Oct 09:00 → 24 Oct 09:00 IST" },
                     { k: "VENUE", v: "REVA University, Bengaluru" },
-                    { k: "DEPARTMENT", v: "CSE (IoT, Cyber Security including Blockchain Technology)" },
                     { k: "TEAM SIZE", v: "3 – 4 members" },
                     { k: "ENTRY", v: "₹800 per team" },
                     { k: "REGISTRATION", v: "22 Sep – 12 Oct 2026" },

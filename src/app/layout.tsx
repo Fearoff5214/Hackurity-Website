@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "Cybersecurity Club — REVA University, Bengaluru",
     title: "Hackurity 2026 — REVA University, Bengaluru",
     description:
-      "A 24-hour cybersecurity hackathon on 23–24 October 2026, powered by IBM. Pick a track, build over the weekend, present to a panel.",
+      "A 24-hour cybersecurity hackathon on 15–16 October 2026, powered by IBM. Pick a track, build over the weekend, present to a panel.",
     url: "https://revacyberclub.tech",
   },
   twitter: {

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-// Build window opens 23 Oct 2026, 09:00 IST.
-const TARGET = new Date("2026-10-23T09:00:00+05:30").getTime();
+// Build window opens 15 Oct 2026, 09:00 IST.
+const TARGET = new Date("2026-10-15T09:00:00+05:30").getTime();
 
 function useCountdown() {
   const [remaining, setRemaining] = useState(() => Math.max(0, TARGET - Date.now()));
@@ -29,7 +29,7 @@ export default function HackurityCountdown() {
     <div className="border border-cyber-blue/20 bg-cyber-black/40 p-3">
       <div className="mb-2 flex items-center justify-between font-mono text-[12px] tracking-[0.2em] text-cyber-tan/80 uppercase">
         <span>// T-MINUS TO BUILD WINDOW</span>
-        <span className="hidden sm:inline text-cyber-blue/70">23 OCT 09:00 IST</span>
+        <span className="hidden sm:inline text-cyber-blue/70">15 OCT 09:00 IST</span>
       </div>
       <div className="grid grid-cols-4 gap-px bg-cyber-blue/15">
         {units.map((unit) => (

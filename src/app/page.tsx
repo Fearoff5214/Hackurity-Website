@@ -555,14 +555,14 @@ export default function Home() {
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-4 font-mono text-sm sm:grid-cols-2">
                   {[
                     { k: "FORMAT", v: "24-hour hackathon // on-site" },
-                    { k: "DATE", v: "23 – 24 October 2026" },
-                    { k: "BUILD WINDOW", v: "23 Oct 09:00 → 24 Oct 09:00 IST" },
+                    { k: "DATE", v: "15 – 16 October 2026" },
+                    { k: "BUILD WINDOW", v: "15 Oct 09:00 → 16 Oct 09:00 IST" },
                     { k: "VENUE", v: "REVA University, Bengaluru" },
                     { k: "TEAM SIZE", v: "3 – 4 members" },
                     { k: "ENTRY", v: "₹800 per team" },
                     { k: "REGISTRATION", v: "22 Sep – 12 Oct 2026" },
                     { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
-                    { k: "PRIZES", v: "Ceremony 24 Oct, 18:00 IST" },
+                    { k: "PRIZES", v: "Ceremony 16 Oct, 18:00 IST" },
                   ].map((row) => (
                     <div key={row.k} className="flex flex-col gap-0.5">
                       <dt className="text-[12px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">

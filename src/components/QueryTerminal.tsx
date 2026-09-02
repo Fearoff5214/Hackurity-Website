@@ -18,7 +18,7 @@ const RECORDS: QaRecord[] = [
     id: "02",
     question: "Is Hackurity online or offline?",
     answer:
-      "Hackurity is a fully offline hackathon. Everyone attends in person at the venue on the 23rd and 24th of October 2026.",
+      "Hackurity is a fully offline hackathon. Everyone attends in person at the venue on the 15th and 16th of October 2026.",
   },
   {
     id: "03",
@@ -102,7 +102,7 @@ const RECORDS: QaRecord[] = [
     id: "16",
     question: "When is Hackurity?",
     answer:
-      "Hackurity takes place on the 23rd and 24th of October 2026 and is run as an offline hackathon.",
+      "Hackurity takes place on the 15th and 16th of October 2026 and is run as an offline hackathon.",
   },
   {
     id: "17",

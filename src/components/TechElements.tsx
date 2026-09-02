@@ -249,6 +249,54 @@ export function ScrambleText({ text }: { text: string }) {
   );
 }
 
+// Headline flourish combining both: font-family cycles on an interval, AND
+// hovering it triggers the scramble/decode reveal — same character-shuffle
+// as ScrambleText, just merged with FontCycler's font rotation.
+export function ScrambleFontCycler({ text, fonts = DEFAULT_FONT_CYCLE, interval = 1800 }: { text: string; fonts?: string[]; interval?: number }) {
+  const [fontIndex, setFontIndex] = useState(0);
+  const [display, setDisplay] = useState(text);
+  const frame = useRef(0);
+  const raf = useRef<number | null>(null);
+
+  useEffect(() => {
+    const id = window.setInterval(() => setFontIndex((i) => (i + 1) % fonts.length), interval);
+    return () => window.clearInterval(id);
+  }, [fonts.length, interval]);
+
+  const scramble = () => {
+    frame.current = 0;
+    const totalFrames = text.length * 3;
+    const step = () => {
+      const progress = frame.current / totalFrames;
+      const revealCount = Math.floor(progress * text.length);
+      const next = text
+        .split("")
+        .map((ch, i) => {
+          if (ch === " ") return " ";
+          if (i < revealCount) return text[i];
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        })
+        .join("");
+      setDisplay(next);
+      frame.current += 1;
+      if (frame.current <= totalFrames) {
+        raf.current = requestAnimationFrame(step);
+      } else {
+        setDisplay(text);
+      }
+    };
+    step();
+  };
+
+  useEffect(() => () => { if (raf.current) cancelAnimationFrame(raf.current); }, []);
+
+  return (
+    <span onMouseEnter={scramble} style={{ fontFamily: fonts[fontIndex] }}>
+      {display}
+    </span>
+  );
+}
+
 // Self-drawing gradient underline (tan -> blue) beneath a headline — strokes
 // itself in once when it scrolls into view.
 export function GradientUnderline({ className = "" }: { className?: string }) {

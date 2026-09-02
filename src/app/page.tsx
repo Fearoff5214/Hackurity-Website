@@ -11,8 +11,7 @@ import {
   SimulatedLoadingBar,
   ScrambleText,
   GradientUnderline,
-  RotatingFactPanel,
-  FontCycler,
+  ScrambleFontCycler,
   TwoRowInfoCard,
   CalendarGlyph,
   PinGlyph,
@@ -510,20 +509,10 @@ export default function Home() {
 
         <div className="flex flex-col items-center gap-1">
           <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-            <FontCycler text="Hackurity" />
+            <ScrambleFontCycler text="Hackurity" />
           </h1>
           <GradientUnderline className="max-w-[220px]" />
         </div>
-        <div className="flex flex-col items-center gap-1">
-          <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-            <FontCycler text="2k26" />
-          </h1>
-          <GradientUnderline className="max-w-[140px]" />
-        </div>
-
-        <p className="mt-2 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
-          A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
-        </p>
 
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
@@ -534,16 +523,9 @@ export default function Home() {
           </span>
         </div>
 
-        <RotatingFactPanel
-          facts={[
-            { k: "BUILD WINDOW", v: "24 hours // on-site" },
-            { k: "TEAM SIZE", v: "3 – 4 members" },
-            { k: "TRACKS", v: "3 tracks // 2 problems each" },
-            { k: "ENTRY", v: "₹800 per team" },
-            { k: "VENUE", v: "REVA University, Bengaluru" },
-          ]}
-          className="w-full max-w-xs"
-        />
+        <p className="mt-2 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
+          A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
+        </p>
 
         <div className="flex w-full max-w-5xl flex-col items-stretch gap-4 lg:flex-row lg:items-center">
           <TwoRowInfoCard

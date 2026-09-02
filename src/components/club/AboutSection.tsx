@@ -19,10 +19,10 @@ export default function AboutSection() {
       <Reveal delay={0.05}>
         <div className="bracket-container glass-panel p-6 md:p-8">
           <p className="font-mono text-[15.5px] leading-relaxed text-cyber-gray">
-            Today we are a student-run club of a few hundred members across every year of study.
-            We meet every week to run hands-on sessions, practice on safe lab setups and work
-            through real problems together. Beginners are welcome — most of our members joined
-            knowing nothing about the subject.
+            Today we are a student-run club with 30+ active members across every year of study,
+            plus alumni who still stay connected to what we're building. We meet every week to run
+            hands-on sessions, practice on safe lab setups and work through real problems together.
+            Beginners are welcome — most of our members joined knowing nothing about the subject.
           </p>
           <p className="mt-4 font-mono text-[15.5px] leading-relaxed text-cyber-gray">
             Alongside the weekly sessions we organise talks, competitions and one large annual

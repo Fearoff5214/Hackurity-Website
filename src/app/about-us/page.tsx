@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { motion, useScroll, useSpring } from "framer-motion";
+import SiteNav from "@/components/SiteNav";
+import CyberCursor from "@/components/CyberCursor";
+import CampusLogo from "@/components/CampusLogo";
 import BinaryFlowField from "@/components/club/BinaryFlowField";
 import AboutSection from "@/components/club/AboutSection";
-import LiveEventSection from "@/components/club/LiveEventSection";
 import MembersSection from "@/components/club/MembersSection";
 import FacultySection from "@/components/club/FacultySection";
 
@@ -14,6 +15,8 @@ export default function ClubHome() {
 
   return (
     <div id="top" className="club-root club-scroll relative min-h-screen overflow-x-hidden">
+      <CyberCursor />
+      <CampusLogo primary="club" />
       <BinaryFlowField />
 
       <motion.div
@@ -22,143 +25,36 @@ export default function ClubHome() {
         aria-hidden="true"
       />
 
+      <SiteNav
+        basePath="/"
+        initialSection="ABOUT US"
+        backLink={{ href: "/", label: "Back to Hackurity" }}
+        showBrand={false}
+        showRegister={false}
+        centerNav
+      />
+
       <main className="relative z-10">
         {/* Hero */}
-        <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-5 py-16 md:px-8">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr] md:items-center md:gap-12">
-            {/* Left: identity */}
-            <div>
-              <motion.span
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="font-mono text-[13px] font-bold tracking-[0.35em] text-cyber-tan uppercase"
-              >
-                About.
-              </motion.span>
+        <section className="mx-auto flex min-h-[65vh] max-w-6xl flex-col items-center justify-center px-5 py-16 text-center md:px-8">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mt-6 whitespace-nowrap font-heading text-lg uppercase sm:text-2xl md:text-3xl"
+          >
+            REVA Cybersecurity Club
+          </motion.h1>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="mt-6 max-w-xl font-heading text-2xl leading-[1.35] uppercase sm:text-3xl md:text-4xl md:leading-[1.3] lg:text-5xl"
-              >
-                REVA Cybersecurity Club
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="mt-3 font-mono text-[13px] font-bold tracking-wider text-cyber-tan uppercase"
-              >
-                B.Tech IoT &amp; Cybersecurity <span className="text-white">//</span> School of CSE
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="mt-7 max-w-xl font-mono text-[16px] leading-relaxed text-cyber-gray"
-              >
-                A student group that meets every week to learn how systems get broken into, and how to
-                keep them safe. Open to anyone on campus, whatever year you are in and whatever you
-                already know.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="mt-10 flex flex-wrap items-center gap-3"
-              >
-                <a
-                  href="#about"
-                  className="inline-flex items-center gap-2 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[14px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
-                >
-                  About the club
-                </a>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.7 }}
-                className="mt-14 flex items-center gap-3 font-mono text-[13px] tracking-widest text-cyber-gray uppercase"
-              >
-                <motion.span
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  className="inline-block"
-                >
-                  ↓
-                </motion.span>
-                Scroll to explore
-              </motion.div>
-            </div>
-
-            {/* Right: current event */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="w-full"
-            >
-              <Link
-                href="/"
-                className="group relative block overflow-hidden border border-cyber-tan/30 bg-black/40 backdrop-blur-sm transition-all duration-300 hover:border-cyber-tan/80 hover:shadow-tan"
-              >
-                {/* top scan line */}
-                <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyber-tan to-transparent opacity-70" />
-                {/* soft glow that grows on hover */}
-                <span className="pointer-events-none absolute -left-24 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-cyber-tan/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-60" />
-                {/* corner ticks */}
-                <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l border-t border-cyber-tan/70" />
-                <span className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b border-cyber-tan/70" />
-
-                <div className="relative flex flex-col gap-5 p-5 sm:p-6">
-                  <div className="min-w-0">
-                    <p className="flex items-center gap-2 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyber-tan opacity-75" />
-                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyber-tan" />
-                      </span>
-                      {"// Current event"}
-                    </p>
-
-                    <p className="mt-3 font-heading text-2xl leading-none uppercase tracking-wide text-white sm:text-3xl">
-                      Hackurity <span className="text-cyber-tan">2026</span>
-                    </p>
-
-                    <div className="mt-3 h-px w-16 bg-gradient-to-r from-cyber-tan to-transparent transition-all duration-300 group-hover:w-28" />
-
-                    <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[13px] leading-none text-cyber-gray">
-                      <span className="flex items-center gap-2">
-                        Powered by
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src="/sponsors/IBMBOB.jpg"
-                          alt="IBM Bob"
-                          className="h-6 w-auto object-contain opacity-90 transition-opacity group-hover:opacity-100"
-                        />
-                        <span className="font-sans text-xs font-bold text-white">IBM Bob</span>
-                      </span>
-                      <span className="hidden h-3 w-px bg-cyber-blue/30 sm:inline-block" />
-                      <span>a 24-hour cybersecurity hackathon</span>
-                    </div>
-                  </div>
-
-                  <span className="flex w-full shrink-0 items-center justify-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3 font-mono text-[13px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/25">
-                    Explore
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </span>
-                </div>
-              </Link>
-            </motion.div>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="mt-3 flex flex-wrap items-center justify-center gap-2 font-heading text-lg uppercase text-cyber-tan sm:text-2xl md:text-3xl"
+          >
+            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> B.Tech in IoT &amp; Cybersecurity (School of CSE)
+          </motion.p>
         </section>
-
-        <LiveEventSection />
         <AboutSection />
         <FacultySection />
         <MembersSection />
@@ -167,7 +63,7 @@ export default function ClubHome() {
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5">
             <div>
               <p className="font-heading text-[14px] tracking-[0.22em] uppercase">
-                Cybersecurity Club <span className="text-cyber-tan">//</span> REVA University
+                REVA Cybersecurity Club <span className="text-cyber-tan">//</span> REVA University
               </p>
               <p className="mt-2 font-mono text-[13px] text-cyber-gray">
                 School of Computer Science and Engineering, Bengaluru, Karnataka

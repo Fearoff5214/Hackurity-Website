@@ -4,20 +4,26 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+type CampusLogoProps = {
+  /** Which mark faces forward before any hover/tap. Defaults to the REVA University emblem. */
+  primary?: "reva" | "club";
+};
+
 /**
- * Small REVA University emblem pinned to the top-right, just under the navbar.
- * Hovering (or tapping, on touch) flips it over to the Cybersecurity Club shield.
- * No plate, border or glow — the mark sits directly on the page.
+ * Small emblem pinned to the top-right, just under the navbar. Hovering (or
+ * tapping, on touch) flips it over to the other mark. No plate, border or
+ * glow — the mark sits directly on the page.
  */
-export default function CampusLogo() {
+export default function CampusLogo({ primary = "reva" }: CampusLogoProps) {
   const [hovered, setHovered] = useState(false);
   const [tapped, setTapped] = useState(false);
   const showBack = hovered !== tapped;
+  const frontIsClub = primary === "club";
 
   return (
     <motion.button
       type="button"
-      aria-label={showBack ? "REVA Cybersecurity Club" : "REVA University"}
+      aria-label={showBack !== frontIsClub ? "REVA Cybersecurity Club" : "REVA University"}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       onClick={() => setTapped((value) => !value)}
@@ -33,12 +39,12 @@ export default function CampusLogo() {
         transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
       >
         <img
-          src="/brand/logo-icon.png"
+          src={frontIsClub ? "/brand/club-logo-icon.png" : "/brand/logo-icon.png"}
           alt=""
           className="absolute inset-0 h-full w-full object-contain [backface-visibility:hidden] drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]"
         />
         <img
-          src="/brand/club-logo-icon.png"
+          src={frontIsClub ? "/brand/logo-icon.png" : "/brand/club-logo-icon.png"}
           alt=""
           className="absolute inset-0 h-full w-full object-contain [transform:rotateY(180deg)] [backface-visibility:hidden] drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]"
         />

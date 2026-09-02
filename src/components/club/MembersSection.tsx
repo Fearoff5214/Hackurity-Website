@@ -83,15 +83,6 @@ export default function MembersSection() {
                 &ldquo;{person.saying}&rdquo;
               </p>
 
-              <div className="mt-4 space-y-1 font-mono text-[13px] text-cyber-gray">
-                <a href={`tel:${person.phone.replace(/\s/g, "")}`} className="block hover:text-white">
-                  {person.phone}
-                </a>
-                <a href={`mailto:${person.email}`} className="block truncate hover:text-white">
-                  {person.email}
-                </a>
-              </div>
-
               <div className="mt-auto flex flex-wrap gap-2 pt-5">
                 <a
                   href={person.github}
@@ -108,12 +99,6 @@ export default function MembersSection() {
                   className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[12px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
                 >
                   LINKEDIN ↗
-                </a>
-                <a
-                  href={`mailto:${person.email}`}
-                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[12px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
-                >
-                  EMAIL ↗
                 </a>
               </div>
             </motion.article>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 // Build window opens 14 Oct 2026, 09:00 IST.
 const TARGET = new Date("2026-10-14T09:00:00+05:30").getTime();
@@ -46,13 +47,17 @@ export default function HackurityCountdown() {
                 tone === "tan" ? "border-cyber-tan/70" : "border-cyber-blue/70"
               }`}
             >
-              <span
+              <motion.span
+                key={unit.value}
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
                 className={`font-heading text-xl md:text-2xl tabular-nums ${
                   tone === "tan" ? "text-cyber-tan" : "text-cyber-blue"
                 }`}
               >
                 {String(unit.value).padStart(2, "0")}
-              </span>
+              </motion.span>
               <span className="font-mono text-[11px] tracking-widest text-cyber-gray">{unit.label}</span>
             </div>
           );

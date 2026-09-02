@@ -68,36 +68,67 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
   );
 }
 
-function PortraitGroup({ label, people }: { label: string; people: TeamPortrait[] }) {
-  return (
-    <div>
-      <Reveal>
-        <span className="font-mono text-[13px] font-bold tracking-[0.3em] text-cyber-tan">
-          {`// ${label}`}
-        </span>
-      </Reveal>
-      <div className="mt-4 flex flex-wrap gap-4">
-        {people.map((person, index) => (
-          <PortraitCard key={person.name} person={person} index={index} />
-        ))}
-      </div>
-    </div>
-  );
+function findByName(people: TeamPortrait[], match: string) {
+  const person = people.find((p) => p.name.includes(match));
+  if (!person) throw new Error(`Could not find team member matching "${match}"`);
+  return person;
 }
+
+// Display order, left to right: Nethravathi, Ashwin, Sathish, Syed, Kiran —
+// mixes the convenor/faculty-in-charge lists on purpose, so the two source
+// arrays are combined rather than shown as separate groups.
+const TEAM_DISPLAY_ORDER = [
+  findByName(CONVENORS, "Nethravathi"),
+  findByName(CONVENORS, "Ashwin"),
+  findByName(FACULTY_IN_CHARGE, "Sathish"),
+  findByName(CONVENORS, "Syed"),
+  findByName(FACULTY_IN_CHARGE, "Kiran"),
+];
 
 export default function FacultySection() {
   return (
     <section id="faculty" className="relative mx-auto max-w-6xl px-5 py-24 md:px-8">
-      <SectionHeading
-        tag="Guidance"
-        title="Meet our convenors & faculty in-charge"
-        description="The teaching staff who support the club, approve our events and help members connect their coursework with what we do here."
-      />
+      <div className="w-fit max-w-full">
+        <SectionHeading
+          tag="Guidance"
+          title="Meet our convenors & faculty in-charge"
+          description="The teaching staff who support the club, approve our events and help members connect their coursework with what we do here."
+        />
 
-      <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
-        <PortraitGroup label="CONVENORS" people={CONVENORS} />
-        <div aria-hidden="true" className="hidden self-stretch border-l border-cyber-blue/15 lg:block" />
-        <PortraitGroup label="FACULTY IN-CHARGE" people={FACULTY_IN_CHARGE} />
+        {/* Mobile: simple wrapping grid — the space-between row below only makes sense once the row is at least as wide as the heading. */}
+        <div className="grid grid-cols-2 gap-4 sm:hidden">
+          {TEAM_DISPLAY_ORDER.map((person, index) => (
+            <PortraitCard key={person.name} person={person} index={index} />
+          ))}
+        </div>
+
+        {/*
+          sm+: 5 evenly-spaced columns spread across the same width as the heading above.
+          Nethravathi/Sathish/Kiran sit on row 1 (columns 1/3/5) under "FACULTY IN-CHARGE";
+          Ashwin/Syed drop straight down to row 2 in their own columns (2/4), under "DIRECTORS".
+        */}
+        <div
+          className="hidden sm:grid sm:gap-x-4"
+          style={{ gridTemplateColumns: "repeat(5, max-content)", justifyContent: "space-between" }}
+        >
+          <div style={{ gridColumn: "1 / -1", gridRow: 1 }} className="mb-4 text-center">
+            <span className="font-mono text-xl font-bold tracking-[0.3em] text-cyber-tan md:text-2xl">
+              {"// FACULTY IN-CHARGE"}
+            </span>
+          </div>
+
+          <div style={{ gridColumn: "2 / 5", gridRow: 3 }} className="mt-8 mb-4 text-center">
+            <span className="font-mono text-xl font-bold tracking-[0.3em] text-cyber-tan md:text-2xl">
+              {"// DIRECTORS"}
+            </span>
+          </div>
+
+          {TEAM_DISPLAY_ORDER.map((person, index) => (
+            <div key={person.name} style={{ gridColumn: index + 1, gridRow: index % 2 === 0 ? 2 : 4 }}>
+              <PortraitCard person={person} index={index} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

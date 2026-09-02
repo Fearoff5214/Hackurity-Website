@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import BinaryStarfield from "@/components/BinaryStarfield";
 import { useTypingPlaceholder } from "@/components/useTypingPlaceholder";
-import { submitSponsorInquiry } from "@/lib/submissions";
+
+const SPONSOR_INQUIRY_EMAIL = "contact@revacyberclub.tech";
 
 const PHONE_SAMPLES = ["+91 xxxxxxxxxx"];
 const EMAIL_SAMPLES = ["xxxxx", "your.name", "partnerships"];
@@ -23,8 +24,6 @@ export default function SponsorInquiryPage() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
 
   const phonePlaceholder = useTypingPlaceholder(PHONE_SAMPLES, 110);
   const emailPlaceholder = useTypingPlaceholder(EMAIL_SAMPLES, 100);
@@ -83,10 +82,10 @@ export default function SponsorInquiryPage() {
 
           {sent ? (
             <div className="p-8 text-center">
-              <h2 className="font-heading text-sm text-white uppercase">Enquiry sent</h2>
+              <h2 className="font-heading text-sm text-white uppercase">Mail app opened</h2>
               <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">
-                Thanks {name.split(" ")[0] || "there"} — we have your details and will get back to you
-                shortly.
+                We've opened your email client with a message addressed to {SPONSOR_INQUIRY_EMAIL} and
+                your details filled in — just hit send from there.
               </p>
               <button
                 type="button"
@@ -99,24 +98,20 @@ export default function SponsorInquiryPage() {
           ) : (
             <form
               className="space-y-5 p-5 md:p-7"
-              onSubmit={async (event) => {
+              onSubmit={(event) => {
                 event.preventDefault();
-                setSubmitError("");
-                setSubmitting(true);
-                try {
-                  await submitSponsorInquiry({
-                    company,
-                    phone,
-                    email: `${emailUser}${emailDomain}`,
-                    name,
-                    message,
-                  });
-                  setSent(true);
-                } catch (error) {
-                  setSubmitError(error instanceof Error ? error.message : "Submission failed. Please try again.");
-                } finally {
-                  setSubmitting(false);
-                }
+                const subject = `Sponsorship enquiry — ${company}`;
+                const body = [
+                  `Company: ${company}`,
+                  `Name: ${name}`,
+                  `Phone: ${phone}`,
+                  `Email: ${emailUser}${emailDomain}`,
+                  "",
+                  "Enquiry:",
+                  message,
+                ].join("\n");
+                window.location.href = `mailto:${SPONSOR_INQUIRY_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                setSent(true);
               }}
             >
               <label className="block space-y-1.5">
@@ -195,18 +190,14 @@ export default function SponsorInquiryPage() {
                 />
               </label>
 
-              {submitError && (
-                <p className="font-mono text-[12px] tracking-wider text-red-400">{submitError}</p>
-              )}
-
               <motion.button
                 type="submit"
-                disabled={!ready || submitting}
-                whileHover={ready && !submitting ? { scale: 1.01 } : {}}
-                whileTap={ready && !submitting ? { scale: 0.98 } : {}}
+                disabled={!ready}
+                whileHover={ready ? { scale: 1.01 } : {}}
+                whileTap={ready ? { scale: 0.98 } : {}}
                 className="relative w-full overflow-hidden border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-3.5 font-mono text-[13px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 disabled:cursor-not-allowed disabled:opacity-30"
               >
-                {ready && !submitting && (
+                {ready && (
                   <motion.span
                     aria-hidden="true"
                     className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent"
@@ -214,7 +205,7 @@ export default function SponsorInquiryPage() {
                     transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                   />
                 )}
-                <span className="relative">{submitting ? "[ SENDING... ]" : "[ SEND_ENQUIRY ]"}</span>
+                <span className="relative">[ SEND_ENQUIRY ]</span>
               </motion.button>
             </form>
           )}

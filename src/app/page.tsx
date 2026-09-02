@@ -527,7 +527,7 @@ export default function Home() {
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
         {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 lg:mx-auto lg:max-w-[46rem]">
+        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 lg:mx-auto lg:max-w-[60rem]">
           <CornerCrosshairs />
 
           {/* Title & stats */}

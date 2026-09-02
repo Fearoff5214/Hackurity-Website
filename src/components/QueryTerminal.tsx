@@ -24,19 +24,19 @@ const RECORDS: QaRecord[] = [
     id: "03",
     question: "Is there a registration fee?",
     answer:
-      "No. Registration for Hackurity is completely free. Participants attending the offline hackathon only need to opt for the event food package, which costs ₹300 per person.",
+      "Yes. Entry is ₹800 per team. That single payment covers your whole team for the hackathon — there are no other charges.",
   },
   {
     id: "04",
-    question: "What does the ₹300 food package cover?",
+    question: "Is the ₹800 fee per person or per team?",
     answer:
-      "The ₹300 package covers breakfast, lunch, snacks and dinner across the event. It is compulsory for every participant attending the hackathon in person.",
+      "Per team. One payment of ₹800 covers your entire team of 3 or 4 members.",
   },
   {
     id: "05",
-    question: "Is the food package optional?",
+    question: "What does the ₹800 entry fee cover?",
     answer:
-      "No. Anyone attending the offline hackathon is required to opt for the ₹300 per-person food package.",
+      "It covers your team's participation in Hackurity — venue access, mentorship and event infrastructure across the full 24 hours.",
   },
   {
     id: "06",

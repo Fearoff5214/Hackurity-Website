@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 // Corner Crosshairs Component (Tan color)
 export function CornerCrosshairs() {
@@ -183,6 +183,107 @@ export function SimulatedLoadingBar({ value = 75, label = "CORE TEMP" }: { value
         </div>
       </div>
     </div>
+  );
+}
+
+// Scramble/decode text — hacker-terminal flourish, settles into the real
+// label after a brief character-shuffle. Trigger by hovering the wrapper.
+const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
+
+export function ScrambleText({ text }: { text: string }) {
+  const [display, setDisplay] = useState(text);
+  const frame = useRef(0);
+  const raf = useRef<number | null>(null);
+
+  const scramble = () => {
+    frame.current = 0;
+    const totalFrames = text.length * 3;
+    const step = () => {
+      const progress = frame.current / totalFrames;
+      const revealCount = Math.floor(progress * text.length);
+      const next = text
+        .split("")
+        .map((ch, i) => {
+          if (ch === " ") return " ";
+          if (i < revealCount) return text[i];
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        })
+        .join("");
+      setDisplay(next);
+      frame.current += 1;
+      if (frame.current <= totalFrames) {
+        raf.current = requestAnimationFrame(step);
+      } else {
+        setDisplay(text);
+      }
+    };
+    step();
+  };
+
+  useEffect(() => () => { if (raf.current) cancelAnimationFrame(raf.current); }, []);
+
+  return (
+    <span onMouseEnter={scramble} className="inline-block tabular-nums">
+      {display}
+    </span>
+  );
+}
+
+// Self-drawing gradient underline (tan -> blue) beneath a headline — strokes
+// itself in once when it scrolls into view.
+export function GradientUnderline({ className = "" }: { className?: string }) {
+  const ref = useRef<SVGSVGElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const uid = React.useId().replace(/:/g, "");
+  return (
+    <svg ref={ref} viewBox="0 0 300 14" className={`h-3 w-full ${className}`} preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id={`underline-${uid}`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="var(--color-cyber-tan)" />
+          <stop offset="100%" stopColor="var(--color-cyber-blue)" />
+        </linearGradient>
+      </defs>
+      <motion.path
+        d="M2 8 C 60 2, 120 12, 160 6 S 260 2, 298 9"
+        fill="none"
+        stroke={`url(#underline-${uid})`}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={inView ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 1.1, ease: "easeInOut", delay: 0.25 }}
+      />
+    </svg>
+  );
+}
+
+// Rotating fact panel, corner-bracket framed — cycles through short
+// key/value readouts (e.g. event stats) at a fixed interval.
+export function RotatingFactPanel({ facts, className = "" }: { facts: { k: string; v: string }[]; className?: string }) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setIndex((i) => (i + 1) % facts.length), 2600);
+    return () => window.clearInterval(id);
+  }, [facts.length]);
+  const fact = facts[index];
+  return (
+    <BracketFrame className={className}>
+      <div className="flex h-24 flex-col justify-center gap-1 font-mono">
+        <span className="text-[11px] font-bold tracking-[0.3em] text-cyber-blue/70 uppercase">// live_readout</span>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={fact.k}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <p className="text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase">{fact.k}</p>
+            <p className="text-base text-white">{fact.v}</p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </BracketFrame>
   );
 }
 

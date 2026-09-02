@@ -10,6 +10,9 @@ import {
   BracketFrame,
   SineWaveLoader,
   SimulatedLoadingBar,
+  ScrambleText,
+  GradientUnderline,
+  RotatingFactPanel,
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
 import QueryTerminal from "@/components/QueryTerminal";
@@ -506,32 +509,72 @@ export default function Home() {
         className={`transition-[height] duration-350 ease-out ${navAttack ? "h-[52px]" : "h-[60px]"}`}
       />
 
-      {/* Eyebrow banner — sits in the gap between the navbar and the hero card, above the face backdrop's eyes. Boxed to match the hero card below. */}
-      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pt-4 md:px-8">
-        <div className="crosshair-corner relative flex flex-col items-center gap-3 border border-cyber-blue/15 bg-cyber-dark/30 p-6 text-center backdrop-blur-md md:p-8">
-          <CornerCrosshairs />
-          <h2 className="font-heading text-lg tracking-tight text-white uppercase md:text-xl lg:text-2xl">
-            National Level <span className="text-cyber-tan">Cybersecurity</span> Hackathon
-          </h2>
-          <span className="flex items-center justify-center gap-1.5 text-[14px] font-bold tracking-[0.3em] text-cyber-tan">
-            <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
-            <span>CTF_NODE_CONNECTED</span>
-          </span>
-          <h1 className="font-heading text-2xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-3xl lg:text-4xl">
-            HACKURITY 2026
-          </h1>
-          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-            <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
-            <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">
-              powered by
+      {/* HERO — headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
+      <section className="relative z-10 mx-auto max-w-[1280px] px-4 py-14 md:px-8 md:py-20">
+        <div className="flex flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
+          <RotatingFactPanel
+            facts={[
+              { k: "BUILD WINDOW", v: "24 hours // on-site" },
+              { k: "TEAM SIZE", v: "3 – 4 members" },
+              { k: "TRACKS", v: "3 tracks // 2 problems each" },
+              { k: "ENTRY", v: "₹800 per team" },
+              { k: "VENUE", v: "REVA University, Bengaluru" },
+            ]}
+            className="order-2 w-full max-w-xs md:order-1"
+          />
+
+          <div className="order-1 flex max-w-xl flex-col items-start gap-4 md:order-2">
+            <span className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
+              <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
+              CTF_NODE_CONNECTED
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain md:h-10 lg:h-11" />
-              <span className="font-sans text-lg font-bold text-white md:text-xl">IBM Bob</span>
-            </span>
+            <div className="flex flex-col gap-1">
+              <h1 className="font-heading text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
+                Hackurity
+              </h1>
+              <GradientUnderline className="max-w-[220px]" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h1 className="font-heading text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
+                2026
+              </h1>
+              <GradientUnderline className="max-w-[140px]" />
+            </div>
+            <p className="mt-2 font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
+              A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
+              <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">powered by</span>
+              <span className="inline-flex items-center gap-1.5">
+                <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain" />
+                <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
+              </span>
+            </div>
+            <div className="mt-2">
+              <BracketFrame className="inline-block">
+                <a
+                  href="#join_node"
+                  className="block px-6 py-3 font-mono text-sm font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:text-white"
+                >
+                  <ScrambleText text="[ Register Now ]" />
+                </a>
+              </BracketFrame>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div className="order-3 mt-10 flex items-center justify-end gap-2 font-mono text-[11px] tracking-[0.3em] text-cyber-gray/50 uppercase">
+          <BracketFrame className="inline-flex">
+            <span className="flex items-center gap-2 px-3 py-1.5">
+              scroll
+              <motion.span animate={{ y: [0, 4, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
+                ↓
+              </motion.span>
+            </span>
+          </BracketFrame>
+        </div>
+      </section>
 
       {/* MAIN CONTAINER */}
       <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10">

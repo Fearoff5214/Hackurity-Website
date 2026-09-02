@@ -1,79 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { BracketFrame } from "@/components/TechElements";
+import { BracketFrame, ScrambleText, GradientUnderline, RotatingFactPanel } from "@/components/TechElements";
 
-// ── Scramble/decode CTA text — hacker-terminal flourish on hover ──────────
-const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
-
-function ScrambleText({ text }: { text: string }) {
-  const [display, setDisplay] = useState(text);
-  const frame = useRef(0);
-  const raf = useRef<number | null>(null);
-
-  const scramble = () => {
-    frame.current = 0;
-    const totalFrames = text.length * 3;
-    const step = () => {
-      const progress = frame.current / totalFrames;
-      const revealCount = Math.floor(progress * text.length);
-      const next = text
-        .split("")
-        .map((ch, i) => {
-          if (ch === " ") return " ";
-          if (i < revealCount) return text[i];
-          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-        })
-        .join("");
-      setDisplay(next);
-      frame.current += 1;
-      if (frame.current <= totalFrames) {
-        raf.current = requestAnimationFrame(step);
-      } else {
-        setDisplay(text);
-      }
-    };
-    step();
-  };
-
-  useEffect(() => () => { if (raf.current) cancelAnimationFrame(raf.current); }, []);
-
-  return (
-    <span onMouseEnter={scramble} className="inline-block tabular-nums">
-      {display}
-    </span>
-  );
-}
-
-// ── Self-drawing gradient underline beneath a headline ─────────────────────
-function GradientUnderline({ className = "" }: { className?: string }) {
-  const ref = useRef<SVGSVGElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
-  return (
-    <svg ref={ref} viewBox="0 0 300 14" className={`h-3 w-full ${className}`} preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="conceptUnderline" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#ddc6a2" />
-          <stop offset="100%" stopColor="#7a7cf6" />
-        </linearGradient>
-      </defs>
-      <motion.path
-        d="M2 8 C 60 2, 120 12, 160 6 S 260 2, 298 9"
-        fill="none"
-        stroke="url(#conceptUnderline)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={inView ? { pathLength: 1, opacity: 1 } : {}}
-        transition={{ duration: 1.1, ease: "easeInOut", delay: 0.25 }}
-      />
-    </svg>
-  );
-}
-
-// ── Rotating fact panel, corner-bracket framed ─────────────────────────────
 const FACTS = [
   { k: "BUILD WINDOW", v: "24 hours // on-site" },
   { k: "TEAM SIZE", v: "3 – 4 members" },
@@ -81,34 +12,6 @@ const FACTS = [
   { k: "ENTRY", v: "₹800 per team" },
   { k: "VENUE", v: "REVA University, Bengaluru" },
 ];
-
-function RotatingFactPanel() {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % FACTS.length), 2600);
-    return () => window.clearInterval(id);
-  }, []);
-  const fact = FACTS[index];
-  return (
-    <BracketFrame className="w-full max-w-xs">
-      <div className="flex h-24 flex-col justify-center gap-1 font-mono">
-        <span className="text-[11px] font-bold tracking-[0.3em] text-cyber-blue/70 uppercase">// live_readout</span>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={fact.k}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase">{fact.k}</p>
-            <p className="text-base text-white">{fact.v}</p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </BracketFrame>
-  );
-}
 
 const MARQUEE = [
   "24H BUILD", "3 TRACKS", "CASH PRIZES", "IBM MENTORS", "OPEN SOURCE",
@@ -138,7 +41,7 @@ export default function ConceptPage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(122,124,246,0.14),transparent_70%)]" />
 
         <div className="relative z-[1] mx-auto flex w-full max-w-5xl flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
-          <RotatingFactPanel />
+          <RotatingFactPanel facts={FACTS} className="w-full max-w-xs" />
 
           <div className="flex max-w-xl flex-col items-start gap-4">
             <span className="font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">// unleash the power of</span>

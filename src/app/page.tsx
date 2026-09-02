@@ -506,6 +506,33 @@ export default function Home() {
         className={`transition-[height] duration-350 ease-out ${navAttack ? "h-[52px]" : "h-[60px]"}`}
       />
 
+      {/* Eyebrow banner — sits in the gap between the navbar and the hero card, above the face backdrop's eyes. Boxed to match the hero card below. */}
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pt-4 md:px-8">
+        <div className="crosshair-corner relative flex flex-col items-center gap-3 border border-cyber-blue/15 bg-cyber-dark/30 p-6 text-center backdrop-blur-md md:p-8">
+          <CornerCrosshairs />
+          <h2 className="font-heading text-lg tracking-tight text-white uppercase md:text-xl lg:text-2xl">
+            National Level <span className="text-cyber-tan">Cybersecurity</span> Hackathon
+          </h2>
+          <span className="flex items-center justify-center gap-1.5 text-[14px] font-bold tracking-[0.3em] text-cyber-tan">
+            <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
+            <span>CTF_NODE_CONNECTED</span>
+          </span>
+          <h1 className="font-heading text-2xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-3xl lg:text-4xl">
+            HACKURITY 2026
+          </h1>
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
+            <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">
+              powered by
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain md:h-10 lg:h-11" />
+              <span className="font-sans text-lg font-bold text-white md:text-xl">IBM Bob</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* MAIN CONTAINER */}
       <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10">
         
@@ -515,30 +542,13 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop. Pushed down so the face's eyes clear the top of the card on first load. */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 mt-[28vh]">
+        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop. */}
+        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8">
           <CornerCrosshairs />
 
           {/* Title & stats */}
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <span className="text-[14px] tracking-[0.3em] text-cyber-tan font-bold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-ping" />
-                <span>CTF_NODE_CONNECTED</span>
-              </span>
-              <h1 className="font-heading text-2xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-3xl lg:text-4xl">
-                HACKURITY 2026
-              </h1>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
-                <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">
-                  powered by
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain md:h-10 lg:h-11" />
-                  <span className="font-sans text-lg font-bold text-white md:text-xl">IBM Bob</span>
-                </span>
-              </div>
               <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY (SCHOOL OF CSE)
               </p>
@@ -565,7 +575,6 @@ export default function Home() {
                   ))}
                 </dl>
               </div>
-
             </div>
 
             <div className="flex flex-col gap-4">

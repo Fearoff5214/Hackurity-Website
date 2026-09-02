@@ -307,6 +307,79 @@ export function RotatingFactPanel({ facts, className = "" }: { facts: { k: strin
   );
 }
 
+const glyphProps = {
+  viewBox: "0 0 24 24",
+  fill: "none" as const,
+  stroke: "currentColor",
+  strokeWidth: 1.6,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+export const CalendarGlyph = () => (
+  <svg {...glyphProps} className="h-7 w-7">
+    <rect x="3.5" y="5" width="17" height="16" rx="1.5" />
+    <path d="M3.5 10h17M8 3v4M16 3v4" />
+    <circle cx="15" cy="15.5" r="3.2" />
+    <path d="M15 14v1.6l1.2 1" />
+  </svg>
+);
+
+export const PinGlyph = () => (
+  <svg {...glyphProps} className="h-7 w-7">
+    <path d="M12 21s7-6.5 7-11.5a7 7 0 1 0-14 0C5 14.5 12 21 12 21z" />
+    <circle cx="12" cy="9.5" r="2.4" />
+  </svg>
+);
+
+export const PeopleGlyph = () => (
+  <svg {...glyphProps} className="h-7 w-7">
+    <circle cx="9" cy="8" r="3" />
+    <circle cx="17" cy="10" r="2.2" />
+    <path d="M3.5 20c0-3 2.4-5.2 5.5-5.2S14.5 17 14.5 20" />
+    <path d="M14.8 20c.2-2.4 1.7-4.1 3.6-4.1S21.8 17.6 22 20" />
+  </svg>
+);
+
+export const CodeGlyph = () => (
+  <svg {...glyphProps} className="h-7 w-7">
+    <path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14" />
+  </svg>
+);
+
+// Two-row info card, corner-bracket framed and split by a hairline — used
+// for DATE/VENUE, TEAM SIZE/WHO CAN JOIN, etc.
+export function TwoRowInfoCard({
+  rows,
+  tone = "tan",
+  className = "",
+}: {
+  rows: { icon: React.ReactNode; label: string; lines: string[] }[];
+  tone?: "tan" | "blue";
+  className?: string;
+}) {
+  const accent = tone === "tan" ? "text-cyber-tan" : "text-cyber-blue";
+  const divider = tone === "tan" ? "border-cyber-tan/20" : "border-cyber-blue/20";
+  return (
+    <BracketFrame className={className}>
+      {rows.map((row, i) => (
+        <div
+          key={row.label}
+          className={`flex items-start gap-4 ${i === 0 ? "pb-4" : `border-t pt-4 ${divider}`}`}
+        >
+          <span className={accent}>{row.icon}</span>
+          <div>
+            <p className={`font-mono text-sm font-bold tracking-[0.2em] uppercase ${accent}`}>{row.label}</p>
+            {row.lines.map((line) => (
+              <p key={line} className="font-mono text-base text-white">{line}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </BracketFrame>
+  );
+}
+
 // Technical Data Table Rows (Tan/Blue headers and highlights)
 export function TechTable({ title, headers, rows }: { title: string; headers: string[]; rows: string[][] }) {
   return (

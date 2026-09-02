@@ -13,7 +13,13 @@ import {
   GradientUnderline,
   RotatingFactPanel,
   FontCycler,
+  TwoRowInfoCard,
+  CalendarGlyph,
+  PinGlyph,
+  PeopleGlyph,
+  CodeGlyph,
 } from "@/components/TechElements";
+import HackurityCountdown from "@/components/HackurityCountdown";
 import EventPathway from "@/components/EventPathway";
 import QueryTerminal from "@/components/QueryTerminal";
 import SponsorZone from "@/components/SponsorZone";
@@ -24,7 +30,6 @@ import CampusLogo from "@/components/CampusLogo";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
-import HackurityCountdown from "@/components/HackurityCountdown";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
 import { submitRegistration as submitRegistrationToSupabase } from "@/lib/submissions";
@@ -529,6 +534,29 @@ export default function Home() {
           </span>
         </div>
 
+        <div className="w-full max-w-lg text-left">
+          <HackurityCountdown />
+        </div>
+
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <TwoRowInfoCard
+            tone="tan"
+            className="w-full max-w-xs text-left"
+            rows={[
+              { icon: <CalendarGlyph />, label: "Date", lines: ["14 & 15", "Oct 2026"] },
+              { icon: <PinGlyph />, label: "Venue", lines: ["REVA University", "Bengaluru, India"] },
+            ]}
+          />
+          <TwoRowInfoCard
+            tone="blue"
+            className="w-full max-w-xs text-left"
+            rows={[
+              { icon: <PeopleGlyph />, label: "Team Size", lines: ["3 – 4", "Members"] },
+              { icon: <CodeGlyph />, label: "Who Can Join", lines: ["UG – PG", "All Streams"] },
+            ]}
+          />
+        </div>
+
         <RotatingFactPanel
           facts={[
             { k: "BUILD WINDOW", v: "24 hours // on-site" },
@@ -569,7 +597,6 @@ export default function Home() {
               <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY (SCHOOL OF CSE)
               </p>
-              <HackurityCountdown />
               <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
                 <dl className="grid grid-cols-1 gap-x-8 gap-y-4 font-mono text-sm sm:grid-cols-2">
                   {[

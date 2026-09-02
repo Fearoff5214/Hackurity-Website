@@ -4,7 +4,7 @@
 import { motion } from "framer-motion";
 
 type Partner = { name: string; url: string; logo?: string };
-type Person = { name: string; role: string; url: string; image: string; bio?: string; phone?: string; email?: string };
+type Person = { name: string; role: string; image: string; bio?: string; phone?: string };
 
 // Swap the `url` values here when partnerships are confirmed, and add a
 // `logo` once you have the real asset.
@@ -21,9 +21,9 @@ const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURICo
 const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 
 const CONTACTS: Person[] = [
-  { name: "Chetan", role: "Cybersecurity Club President", url: "#", image: avatar("Chetan"), phone: "TBD", email: "TBD" },
-  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280", email: "rcdt009@gmail.com" },
-  { name: "Lavanya", role: "Cybersecurity Club Technical Head", url: "#", image: avatar("Lavanya"), phone: "TBD", email: "TBD" },
+  { name: "Chetan", role: "Cybersecurity Club President", image: avatar("Chetan"), phone: "TBD" },
+  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280" },
+  { name: "Lavanya", role: "Cybersecurity Club Technical Head", image: avatar("Lavanya"), phone: "TBD" },
 ];
 
 const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });
@@ -82,7 +82,7 @@ export function ContactSection() {
           <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan" />
           <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan" />
           <img src={person.image} alt={`${person.name} profile placeholder`} className="h-16 w-16 shrink-0 border border-cyber-tan/30 object-cover" />
-          <div className="min-w-0"><h3 className="font-heading text-[14px] leading-relaxed text-white uppercase">{person.name}</h3><p className="font-mono text-[12px] font-bold tracking-wide text-cyber-tan">{person.role}</p><div className="mt-2 space-y-1 font-mono text-[13px] text-cyber-gray"><a href={`tel:${person.phone?.replace(/\s/g, "")}`} className="block hover:text-white">{person.phone}</a><a href={`mailto:${person.email}`} className="block truncate hover:text-white">{person.email}</a><a href={person.url} target="_blank" rel="noreferrer" className="block text-cyber-blue hover:text-cyber-tan">LinkedIn ↗</a></div></div>
+          <div className="min-w-0"><h3 className="font-heading text-[14px] leading-relaxed text-white uppercase">{person.name}</h3><p className="font-mono text-[12px] font-bold tracking-wide text-cyber-tan">{person.role}</p><div className="mt-2 space-y-1 font-mono text-[13px] text-cyber-gray"><a href={`tel:${person.phone?.replace(/\s/g, "")}`} className="block hover:text-white">{person.phone}</a></div></div>
         </motion.article>)}
       </div>
     </section>

@@ -129,7 +129,7 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Chethan K",
-          "Design Lead",
+          "Design Team Head",
           "One-man army — owns every pixel the club puts out.",
           "chethan-k",
           "+91733-78344158",
@@ -166,7 +166,7 @@ export const DEPARTMENTS: Department[] = [
       ),
       dummy(
         "Lavanya D",
-        "Member",
+        "Event Management Head",
         "Bio coming soon.",
         "lavanya-d",
         "+91 00000 00000",

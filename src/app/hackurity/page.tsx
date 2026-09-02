@@ -19,6 +19,7 @@ import BinaryStarfield from "@/components/BinaryStarfield";
 import CyberCursor from "@/components/CyberCursor";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
+import WhyJoinSection from "@/components/WhyJoinSection";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
 import { submitRegistration as submitRegistrationToSupabase } from "@/lib/submissions";
@@ -59,6 +60,7 @@ const navLinks = [
   { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
   { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
   { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
+  { name: "REWARDS", label: "OPERATOR_REWARDS", href: "#why_join" },
   { name: "FAQ", label: "QUERY_TERMINAL", href: "#query_terminal" },
   { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
   // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" },
@@ -687,6 +689,9 @@ export default function Home() {
             <EventPathway />
           </div>
         </section>
+
+        {/* 5. SECTION FOUR: "04. WHY JOIN // OPERATOR REWARDS" */}
+        <WhyJoinSection />
 
         {/* 6. SECTION FIVE: "05. JOIN NODE // REGISTRATION CONSOLE" */}
         <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">

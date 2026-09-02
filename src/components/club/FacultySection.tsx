@@ -60,7 +60,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
         </div>
 
         <h3 className="mt-3 font-heading text-[15px] leading-relaxed uppercase">{person.name}</h3>
-        <p className="mt-1 line-clamp-2 font-mono text-[13px] leading-relaxed text-cyber-gray" title={person.role}>
+        <p className="mt-1 font-mono text-[13px] leading-relaxed text-cyber-gray" title={person.role}>
           {person.role}
         </p>
       </motion.article>

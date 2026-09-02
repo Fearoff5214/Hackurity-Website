@@ -586,10 +586,10 @@ export default function Home() {
               TRACKS
             </h2>
             <p className="font-mono text-[15px] md:text-base leading-relaxed text-cyber-gray">
-              There are three tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the build window opens.
+              There are three tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
             </p>
             <p className="font-mono text-[13px] md:text-sm font-bold tracking-wide text-cyber-tan">
-              // Problem statements will be announced 1 week before the build window.
+              // Problem statements will be announced 1 week before the hackathon.
             </p>
           </div>
 

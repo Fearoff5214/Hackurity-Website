@@ -583,13 +583,13 @@ export default function Home() {
               <span className="text-[15px] md:text-base text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
             </div>
             <h2 className="font-heading text-2xl md:text-4xl tracking-tight leading-tight text-white uppercase">
-              HACKATHON TRACKS
+              TRACKS
             </h2>
             <p className="font-mono text-[15px] md:text-base leading-relaxed text-cyber-gray">
-              There are three tracks to choose from, and each one comes with two problem statements released at the start. Pick the track that fits your team before the build window opens.
+              There are three tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the build window opens.
             </p>
             <p className="font-mono text-[13px] md:text-sm font-bold tracking-wide text-cyber-tan">
-              // Problem statements will be announced soon.
+              // Problem statements will be announced 1 week before the build window.
             </p>
           </div>
 

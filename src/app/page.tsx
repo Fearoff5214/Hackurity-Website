@@ -550,6 +550,7 @@ export default function Home() {
               <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
                 REVA CYBERSECURITY CLUB <span className="text-white">//</span> SCHOOL OF CSE <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY
               </p>
+              <HackurityCountdown />
               <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-4 font-mono text-sm sm:grid-cols-2">
                   {[
@@ -576,7 +577,6 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <HackurityCountdown />
               <div className="mt-1">
                 <a
                   href="#join_node"

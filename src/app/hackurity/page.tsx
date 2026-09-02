@@ -706,7 +706,7 @@ export default function Home() {
             <span className="text-[10px] tracking-widest text-cyber-tan font-bold font-mono">//REGISTER NOW // SECURE REGISTRY</span>
             <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-none text-white uppercase">REGISTRATION TERMINAL</h2>
             <p className="font-mono text-xs text-cyber-gray leading-relaxed">
-              Fill in your team details, add each member, and confirm your entry. It takes about two minutes and registration is completely free.
+              Fill in your team details, add each member, and confirm your entry. It takes about two minutes. Entry is ₹800 per team.
             </p>
             <motion.button
               type="button"

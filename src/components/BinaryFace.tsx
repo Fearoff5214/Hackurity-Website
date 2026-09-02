@@ -10,8 +10,8 @@ const BinaryFaceMaterial = shaderMaterial(
   {
     u_time: 0.0,
     u_texture: null,
-    u_colorBlue: new THREE.Color("#6366f1"),
-    u_colorTan: new THREE.Color("#d2b48c"),
+    u_colorBlue: new THREE.Color("#8f91ff"),
+    u_colorTan: new THREE.Color("#f2ddba"),
     u_mousePos: new THREE.Vector2(0, 0),
   },
   // Vertex Shader
@@ -76,8 +76,8 @@ const BinaryFaceMaterial = shaderMaterial(
     
     // Color morphing based on cursor distance
     float colorMix = sin(vDist * 2.0 - u_time * 1.8 + vOffset) * 0.5 + 0.5;
-    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix);
-    
+    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix) * 1.35;
+
     gl_FragColor = vec4(finalColor, texColor.a);
   }
   `

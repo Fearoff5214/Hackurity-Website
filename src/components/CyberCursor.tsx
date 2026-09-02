@@ -133,7 +133,7 @@ export default function CyberCursor() {
 
   if (!enabled) return null;
 
-  const accent = hovering ? "#7a7cf6" : "#ddc6a2";
+  const accent = hovering ? "#ff6b78" : "#5eeb96";
   const halo = "drop-shadow(0 0 2px rgba(0,0,0,0.9))";
 
   const corners = [

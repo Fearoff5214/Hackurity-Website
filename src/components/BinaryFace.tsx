@@ -10,8 +10,8 @@ const BinaryFaceMaterial = shaderMaterial(
   {
     u_time: 0.0,
     u_texture: null,
-    u_colorBlue: new THREE.Color("#8f91ff"),
-    u_colorTan: new THREE.Color("#f2ddba"),
+    u_colorBlue: new THREE.Color("#ff6b78"),
+    u_colorTan: new THREE.Color("#5eeb96"),
     u_mousePos: new THREE.Vector2(0, 0),
   },
   // Vertex Shader
@@ -231,7 +231,7 @@ function FaceScene({ texture, globalMouse }: { texture: THREE.Texture; globalMou
   return (
     <>
       <ambientLight intensity={0.15} />
-      <pointLight position={[0, 0, 3]} intensity={2.0} color="#6366f1" />
+      <pointLight position={[0, 0, 3]} intensity={2.0} color="#ff4757" />
       <FaceParticles texture={texture} globalMouse={globalMouse} />
     </>
   );

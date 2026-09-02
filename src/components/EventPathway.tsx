@@ -41,12 +41,10 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
         whileHover={{
           y: -3,
           scale: 1.015,
-          borderColor: "rgba(212, 181, 132, 0.5)",
-          backgroundColor: "rgba(15, 20, 30, 0.55)",
-          boxShadow: "0 8px 24px -8px rgba(212, 181, 132, 0.25), 0 0 0 1px rgba(212, 181, 132, 0.15)",
+          boxShadow: "0 8px 24px -8px rgba(46, 204, 113, 0.25), 0 0 0 1px rgba(46, 204, 113, 0.15)",
         }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="border border-cyber-blue/10 bg-cyber-dark/30 p-4 group cursor-default"
+        className="border border-cyber-blue/10 bg-cyber-dark/30 p-4 group cursor-default transition-colors duration-300 hover:border-cyber-tan/50 hover:bg-[rgba(15,20,30,0.55)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-3">

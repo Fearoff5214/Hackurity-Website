@@ -111,12 +111,12 @@ const container: Variants = {
 
 const cardV: Variants = {
   hidden: { opacity: 0, y: 42, scale: 0.92 },
-  show: { opacity: 1, y: 0, scale: 1, z: 0, boxShadow: "0 0px 0px 0px rgba(210,180,140,0)", transition: { type: "spring", stiffness: 120, damping: 15 } },
+  show: { opacity: 1, y: 0, scale: 1, z: 0, boxShadow: "0 0px 0px 0px rgba(46, 204, 113,0)", transition: { type: "spring", stiffness: 120, damping: 15 } },
   hover: {
     scale: 1.06,
     y: -10,
     z: 40,
-    boxShadow: "0 26px 45px -14px rgba(210,180,140,0.4), 0 0 0 1px rgba(210,180,140,0.35)",
+    boxShadow: "0 26px 45px -14px rgba(46, 204, 113,0.4), 0 0 0 1px rgba(46, 204, 113,0.35)",
     transition: { type: "spring", stiffness: 320, damping: 16 },
   },
 };
@@ -130,7 +130,7 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
   const py = useMotionValue(50);
   const rotateX = useSpring(useTransform(py, [0, 100], [7, -7]), { stiffness: 150, damping: 14 });
   const rotateY = useSpring(useTransform(px, [0, 100], [-7, 7]), { stiffness: 150, damping: 14 });
-  const spotlight = useMotionTemplate`radial-gradient(200px circle at ${px}% ${py}%, rgba(210,180,140,0.16), transparent 62%)`;
+  const spotlight = useMotionTemplate`radial-gradient(200px circle at ${px}% ${py}%, rgba(46, 204, 113,0.16), transparent 62%)`;
 
   const onMove = (event: React.MouseEvent) => {
     const rect = ref.current?.getBoundingClientRect();

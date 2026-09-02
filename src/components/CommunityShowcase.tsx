@@ -15,7 +15,7 @@ const PARTNERS: Partner[] = [
   { name: "Indian Society for Technical Education", url: "https://www.isteonline.in/", logo: "/sponsors/iste.png" },
 ];
 
-const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111126&color=d2b48c&bold=true&size=360&font-size=0.34`;
+const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=111126&color=2ecc71&bold=true&size=360&font-size=0.34`;
 
 // Judging panel is still being confirmed — every slot is a placeholder for now.
 const JUDGE_SLOTS = [1, 2, 3, 4, 5];
@@ -33,7 +33,7 @@ export function PartnersSection() {
     <section id="meet_our_sponsors" className="crosshair-corner relative overflow-hidden border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 md:p-8">
       <div className="mb-8 max-w-2xl"><span className="font-mono text-[13px] font-bold tracking-widest text-cyber-tan">{"// PARTNERSHIP_NETWORK"}</span><h2 className="mt-2 font-heading text-xl leading-relaxed text-white uppercase md:text-2xl">Meet our sponsors</h2><p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">A showcase of the organisations helping the next generation of defenders explore, build and lead. These are dummy partners for now; each card is ready to be replaced with a confirmed logo and website.</p></div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {PARTNERS.map((partner, index) => <motion.a key={partner.name} href={partner.url} target="_blank" rel="noreferrer" initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} whileHover={{ y: -5, borderColor: "rgba(210,180,140,0.7)" }} transition={{ duration: 0.45, ease: "easeOut" }} className="group relative flex min-h-28 flex-col items-center justify-center overflow-hidden border border-cyber-blue/20 bg-white/[0.035] p-5 text-center shadow-[0_8px_25px_rgba(0,0,0,0.18)]">
+        {PARTNERS.map((partner, index) => <motion.a key={partner.name} href={partner.url} target="_blank" rel="noreferrer" initial={reveal(index)} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: 0.2 }} whileHover={{ y: -5 }} transition={{ duration: 0.45, ease: "easeOut" }} className="group relative flex min-h-28 flex-col items-center justify-center overflow-hidden border border-cyber-blue/20 bg-white/[0.035] p-5 text-center shadow-[0_8px_25px_rgba(0,0,0,0.18)] transition-colors duration-300 hover:border-cyber-tan/70">
           <span className="absolute inset-x-0 top-0 h-px origin-left bg-cyber-tan scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
           {partner.logo ? (
             <img src={partner.logo} alt={`${partner.name} logo`} className="h-full max-h-16 w-full max-w-[85%] object-contain opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100" />

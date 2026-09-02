@@ -54,10 +54,10 @@ export default function SponsorZone() {
           whileTap={{ scale: 0.98 }}
           animate={{
             boxShadow: [
-              "0 0 0 rgba(99,102,241,0)",
-              "0 0 26px rgba(99,102,241,0.55)",
+              "0 0 0 rgba(255, 71, 87,0)",
+              "0 0 26px rgba(255, 71, 87,0.55)",
               "0 0 18px rgba(217,70,239,0.4)",
-              "0 0 0 rgba(99,102,241,0)",
+              "0 0 0 rgba(255, 71, 87,0)",
             ],
           }}
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
@@ -94,7 +94,7 @@ export default function SponsorZone() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16 }}
               onMouseDown={(event) => event.stopPropagation()}
-              className="max-h-[92dvh] w-full max-w-2xl overflow-y-auto border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(99,102,241,0.3)] md:p-8"
+              className="max-h-[92dvh] w-full max-w-2xl overflow-y-auto border border-cyber-blue/40 bg-cyber-dark p-6 shadow-[0_0_35px_rgba(255, 71, 87,0.3)] md:p-8"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -150,7 +150,7 @@ export default function SponsorZone() {
                     boxShadow: [
                       "0 0 6px rgba(217,70,239,0.25)",
                       "0 0 26px rgba(217,70,239,0.6)",
-                      "0 0 6px rgba(99,102,241,0.3)",
+                      "0 0 6px rgba(255, 71, 87,0.3)",
                     ],
                   }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
@@ -189,7 +189,7 @@ export default function SponsorZone() {
               exit={{ opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 260, damping: 26 }}
               onMouseDown={(event) => event.stopPropagation()}
-              className="flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden border border-cyber-blue/40 bg-cyber-black shadow-[0_0_35px_rgba(99,102,241,0.28)]"
+              className="flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden border border-cyber-blue/40 bg-cyber-black shadow-[0_0_35px_rgba(255, 71, 87,0.28)]"
             >
               <div className="flex items-start justify-between gap-4 border-b border-cyber-blue/15 bg-cyber-dark/80 px-5 py-4">
                 <div>

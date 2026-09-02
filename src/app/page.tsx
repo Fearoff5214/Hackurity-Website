@@ -10,6 +10,16 @@ import {
   BracketFrame,
   SineWaveLoader,
   SimulatedLoadingBar,
+  CircuitField,
+  ShieldLockEmblem,
+  IconBadge,
+  BugGlyph,
+  LockGlyph,
+  TerminalGlyph,
+  CalendarGlyph,
+  PinGlyph,
+  PeopleGlyph,
+  CodeGlyph,
 } from "@/components/TechElements";
 import EventPathway from "@/components/EventPathway";
 import QueryTerminal from "@/components/QueryTerminal";
@@ -46,7 +56,7 @@ const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
 
 // Navigation Links — also drive the scroll-spy that highlights the active section.
 const navLinks = [
-  { name: "MISSION", label: "MISSION_BRIEF", href: "#mission_brief" },
+  { name: "OVERVIEW", label: "MISSION_BRIEF", href: "#mission_brief" },
   { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
   { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
   { name: "REWARDS", label: "OPERATOR_REWARDS", href: "#why_join" },
@@ -55,10 +65,11 @@ const navLinks = [
   // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" },
   { name: "CONTACT US", label: "CONTACT_US", href: "#contact_us" },
   { name: "CREATORS", label: "MEET_THE_CREATORS", href: "#meet_the_creators" },
+  { name: "ABOUT US", label: "ABOUT_US", href: "/about-us" },
 ];
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState("MISSION");
+  const [currentSection, setCurrentSection] = useState("OVERVIEW");
 
   // Registration states
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
@@ -143,6 +154,7 @@ export default function Home() {
   // scroll-spy highlight — no layout reads on the raw scroll event.
   useEffect(() => {
     const sections = navLinks
+      .filter((link) => link.href.startsWith("#"))
       .map((link) => {
         const el = document.querySelector(link.href);
         return el instanceof HTMLElement ? { name: link.name, el } : null;
@@ -324,7 +336,7 @@ export default function Home() {
       </div>
 
       {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.11)_0%,transparent_62%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255, 107, 120,0.11)_0%,transparent_62%)] pointer-events-none" />
 
       {/* 1. NAVIGATION BAR — fixed to top, compacts on scroll */}
       <motion.header
@@ -365,7 +377,7 @@ export default function Home() {
               viewBox="0 0 100 100"
               animate={navAttack ? { rotate: [0, -4, 4, 0] } : { rotate: 0 }}
               transition={{ duration: navAttack ? 3 : 0.35, repeat: navAttack ? Infinity : 0, ease: "easeInOut" }}
-              className={`fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_4px_rgba(99,102,241,0.8)] transition-all duration-350 ease-out ${
+              className={`fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_4px_rgba(255, 71, 87,0.8)] transition-all duration-350 ease-out ${
                 navAttack ? "h-7 w-7" : "h-8 w-8"
               }`}
             >
@@ -394,25 +406,29 @@ export default function Home() {
             aria-label="Primary navigation"
             className="hidden items-center gap-6 lg:flex xl:gap-8"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setCurrentSection(link.name)}
-                className={`relative shrink-0 py-1 font-mono text-[13px] tracking-widest transition-colors duration-300 hover:text-cyber-tan ${
-                  currentSection === link.name ? "font-bold text-cyber-tan" : "text-cyber-gray"
-                }`}
-              >
-                {`[${link.name}]`}
-                {currentSection === link.name && (
-                  <motion.span
-                    layoutId="activeNavLine"
-                    className="absolute bottom-0 left-0 h-[1.5px] w-full bg-cyber-tan"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isRoute = !link.href.startsWith("#");
+              const NavTag = isRoute ? Link : "a";
+              return (
+                <NavTag
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setCurrentSection(link.name)}
+                  className={`relative shrink-0 py-1 font-mono text-[13px] tracking-widest transition-colors duration-300 hover:text-cyber-tan ${
+                    currentSection === link.name ? "font-bold text-cyber-tan" : "text-cyber-gray"
+                  }`}
+                >
+                  {`[${link.name}]`}
+                  {currentSection === link.name && (
+                    <motion.span
+                      layoutId="activeNavLine"
+                      className="absolute bottom-0 left-0 h-[1.5px] w-full bg-cyber-tan"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </NavTag>
+              );
+            })}
           </nav>
 
           {/* Right: register shortcut + mobile menu trigger */}
@@ -460,23 +476,27 @@ export default function Home() {
               className="overflow-hidden lg:hidden"
             >
               <div className="mt-3 grid grid-cols-2 gap-2 border-t border-cyber-blue/15 pt-3">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => {
-                      setCurrentSection(link.name);
-                      setNavOpen(false);
-                    }}
-                    className={`border px-3 py-3 font-mono text-[14px] tracking-widest transition-colors ${
-                      currentSection === link.name
-                        ? "border-cyber-tan/60 bg-cyber-tan/10 font-bold text-cyber-tan"
-                        : "border-cyber-blue/20 bg-cyber-dark/70 text-cyber-gray"
-                    }`}
-                  >
-                    {`[${link.name}]`}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const isRoute = !link.href.startsWith("#");
+                  const NavTag = isRoute ? Link : "a";
+                  return (
+                    <NavTag
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => {
+                        setCurrentSection(link.name);
+                        setNavOpen(false);
+                      }}
+                      className={`border px-3 py-3 font-mono text-[14px] tracking-widest transition-colors ${
+                        currentSection === link.name
+                          ? "border-cyber-tan/60 bg-cyber-tan/10 font-bold text-cyber-tan"
+                          : "border-cyber-blue/20 bg-cyber-dark/70 text-cyber-gray"
+                      }`}
+                    >
+                      {`[${link.name}]`}
+                    </NavTag>
+                  );
+                })}
                 <a
                   href="#join_node"
                   onClick={() => {
@@ -515,69 +535,126 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop. Pushed down so the face's eyes clear the top of the card on first load. */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 mt-[28vh]">
+        {/* 2. HERO SECTION: "HACKURITY" — split green (defend) / red (attack) theme, sits over the interactive face backdrop. Pushed down so the face's eyes clear the top of the card on first load. */}
+        <section id="mission_brief" className="relative flex flex-col overflow-hidden crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 lg:p-10 mt-[28vh]">
           <CornerCrosshairs />
+          <CircuitField />
 
-          {/* Title & stats */}
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col gap-3">
-              <span className="text-[14px] tracking-[0.3em] text-cyber-tan font-bold flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-ping" />
+          <div className="relative z-[1] flex flex-col gap-10 lg:grid lg:grid-cols-[260px_1fr_260px] lg:grid-rows-[auto_auto_auto_auto] lg:items-start lg:gap-x-8 lg:gap-y-6">
+            {/* Eyebrow */}
+            <div className="flex flex-col gap-2 lg:col-start-1 lg:row-start-1">
+              <span className="flex items-center gap-1.5 text-[14px] font-bold tracking-[0.3em] text-cyber-tan">
+                <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
                 <span>CTF_NODE_CONNECTED</span>
               </span>
-              <h1 className="font-heading text-2xl leading-relaxed tracking-tight text-white uppercase text-glow-tan md:text-3xl lg:text-4xl">
-                HACKURITY 2026
-              </h1>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="font-heading text-xl text-cyber-tan md:text-2xl">—</span>
-                <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase md:text-base">
-                  powered by
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-9 w-auto object-contain md:h-10 lg:h-11" />
-                  <span className="font-sans text-lg font-bold text-white md:text-xl">IBM Bob</span>
-                </span>
-              </div>
-              <p className="font-mono text-[15px] tracking-wider text-cyber-tan font-bold uppercase leading-relaxed">
-                REVA CYBERSECURITY CLUB <span className="text-white">//</span> B.TECH IoT &amp; CYBERSECURITY (SCHOOL OF CSE)
+              <p className="font-heading text-xl leading-tight tracking-tight text-white uppercase md:text-2xl">
+                National level
+                <br />
+                <span className="text-cyber-tan">Cybersecurity</span>
+                <br />
+                Hackathon
               </p>
-              <HackurityCountdown />
-              <div className="mt-2 border-l-2 border-cyber-tan/45 pl-4">
-                <dl className="grid grid-cols-1 gap-x-8 gap-y-4 font-mono text-sm sm:grid-cols-2">
-                  {[
-                    { k: "FORMAT", v: "24-hour hackathon // on-site" },
-                    { k: "DATE", v: "14 – 15 October 2026" },
-                    { k: "BUILD WINDOW", v: "14 Oct 09:00 → 15 Oct 09:00 IST" },
-                    { k: "VENUE", v: "REVA University, Bengaluru" },
-                    { k: "TEAM SIZE", v: "3 – 4 members" },
-                    { k: "ENTRY", v: "₹800 per team" },
-                    { k: "REGISTRATION", v: "9 Sep – 3 Oct 2026" },
-                    { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
-                    { k: "PRIZES", v: "Ceremony 15 Oct, 18:00 IST" },
-                  ].map((row) => (
-                    <div key={row.k} className="flex flex-col gap-0.5">
-                      <dt className="text-[12px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">
-                        {row.k}
-                      </dt>
-                      <dd className="text-[15px] font-medium leading-relaxed text-white">{row.v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="mt-1">
-                <a
-                  href="#join_node"
-                  className="block w-full px-4 py-3 border border-cyber-tan/45 bg-cyber-tan/5 text-cyber-tan font-mono text-[15px] tracking-widest text-center uppercase cursor-pointer hover:bg-cyber-tan/10 hover:shadow-tan transition-all"
-                >
-                  [ REGISTER NOW]
-                </a>
+            {/* Center: split wordmark, tagline, shield */}
+            <div className="order-first flex flex-col items-center gap-4 text-center lg:order-none lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:self-center">
+              <h1 className="font-heading text-4xl leading-none tracking-tight uppercase sm:text-5xl md:text-6xl lg:text-7xl">
+                <span className="text-cyber-tan">HACK</span>
+                <span className="text-cyber-blue">URITY</span>
+              </h1>
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 font-mono text-sm font-bold tracking-[0.35em] uppercase md:text-base">
+                <span className="text-cyber-tan">Decode</span>
+                <span className="text-white/70">Defend</span>
+                <span className="text-cyber-blue">Discover</span>
+              </div>
+              <ShieldLockEmblem className="mt-2 h-32 w-32 md:h-44 md:w-44" />
+            </div>
+
+            {/* Left column: icon badges + date/venue */}
+            <div className="flex items-center gap-3 lg:col-start-1 lg:row-start-2">
+              <IconBadge tone="tan"><BugGlyph /></IconBadge>
+              <IconBadge tone="tan"><LockGlyph /></IconBadge>
+              <IconBadge tone="tan"><TerminalGlyph /></IconBadge>
+            </div>
+            <div className="flex items-start gap-3 border border-cyber-tan/30 bg-cyber-black/40 p-3 lg:col-start-1 lg:row-start-3">
+              <span className="text-cyber-tan"><CalendarGlyph /></span>
+              <div>
+                <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-tan uppercase">Date</p>
+                <p className="font-mono text-sm text-white">14 &amp; 15 Oct 2026</p>
               </div>
             </div>
+            <div className="flex items-start gap-3 border border-cyber-tan/30 bg-cyber-black/40 p-3 lg:col-start-1 lg:row-start-4">
+              <span className="text-cyber-tan"><PinGlyph /></span>
+              <div>
+                <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-tan uppercase">Venue</p>
+                <p className="font-mono text-sm text-white">REVA University, Bengaluru</p>
+              </div>
+            </div>
+
+            {/* Right column: team size / who can join */}
+            <div className="flex items-start gap-3 border border-cyber-blue/30 bg-cyber-black/40 p-3 lg:col-start-3 lg:row-start-3">
+              <span className="text-cyber-blue"><PeopleGlyph /></span>
+              <div>
+                <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-blue uppercase">Team Size</p>
+                <p className="font-mono text-sm text-white">3 – 4 members</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 border border-cyber-blue/30 bg-cyber-black/40 p-3 lg:col-start-3 lg:row-start-4">
+              <span className="text-cyber-blue"><CodeGlyph /></span>
+              <div>
+                <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-blue uppercase">Who Can Join</p>
+                <p className="font-mono text-sm text-white">UG – PG, all streams</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Powered-by / club credit */}
+          <div className="relative z-[1] mt-8 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
+            <span className="font-heading text-lg text-cyber-tan">—</span>
+            <span className="font-mono text-sm tracking-[0.25em] text-cyber-gray lowercase">powered by</span>
+            <span className="inline-flex items-center gap-1.5">
+              <img src="/sponsors/IBMBOB.png" alt="IBM Bob" className="h-8 w-auto object-contain" />
+              <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
+            </span>
+            <span className="mx-1 text-white/40">//</span>
+            <span className="font-mono text-[13px] tracking-wider text-cyber-tan font-bold uppercase">
+              REVA Cybersecurity Club // B.Tech IoT &amp; Cybersecurity (School of CSE)
+            </span>
+          </div>
+
+          <div className="relative z-[1] mt-6">
+            <HackurityCountdown />
+          </div>
+
+          <div className="relative z-[1] mt-6 flex justify-center">
+            <a
+              href="#join_node"
+              className="group relative inline-flex items-center gap-2 border border-cyber-tan/60 border-r-cyber-blue/60 bg-white/[0.03] px-8 py-3 font-mono text-[15px] font-bold tracking-widest text-white uppercase transition-colors hover:bg-white/[0.06]"
+            >
+              Register Now
+              <span className="text-cyber-blue transition-transform group-hover:translate-x-1">»</span>
+            </a>
+          </div>
+
+          {/* Supplementary run details */}
+          <div className="relative z-[1] mt-8 border-t border-white/10 pt-6">
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-4 font-mono text-sm sm:grid-cols-3">
+              {[
+                { k: "FORMAT", v: "24-hour hackathon // on-site" },
+                { k: "BUILD WINDOW", v: "14 Oct 09:00 → 15 Oct 09:00 IST" },
+                { k: "ENTRY", v: "₹800 per team" },
+                { k: "REGISTRATION", v: "9 Sep – 3 Oct 2026" },
+                { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
+                { k: "PRIZES", v: "Ceremony 15 Oct, 18:00 IST" },
+              ].map((row) => (
+                <div key={row.k} className="flex flex-col gap-0.5">
+                  <dt className="text-[11px] font-bold tracking-[0.2em] text-cyber-gray/70 uppercase">
+                    {row.k}
+                  </dt>
+                  <dd className="text-[13px] font-medium leading-relaxed text-white/90">{row.v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
@@ -663,7 +740,7 @@ export default function Home() {
               onClick={() => { resetRegistration(); setIsRegistrationOpen(true); }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              animate={{ boxShadow: ["0 0 8px rgba(210,180,140,0.35)", "0 0 28px rgba(210,180,140,0.75)", "0 0 8px rgba(99,102,241,0.4)"] }}
+              animate={{ boxShadow: ["0 0 8px rgba(46, 204, 113,0.35)", "0 0 28px rgba(46, 204, 113,0.75)", "0 0 8px rgba(255, 71, 87,0.4)"] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               className="relative overflow-hidden w-full md:w-fit px-6 py-3.5 border-2 border-cyber-tan/70 bg-cyber-tan/15 text-white font-mono text-xs font-bold tracking-[0.2em] text-center uppercase cursor-pointer hover:bg-cyber-tan/25 transition-colors"
             >
@@ -877,7 +954,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 270, damping: 28 }}
             onMouseDown={(event) => event.stopPropagation()}
-            className="relative flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden border border-cyber-tan/35 bg-cyber-black shadow-[0_0_35px_rgba(99,102,241,0.22)] md:max-h-[88vh]"
+            className="relative flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden border border-cyber-tan/35 bg-cyber-black shadow-[0_0_35px_rgba(255, 71, 87,0.22)] md:max-h-[88vh]"
           >
             <div className="flex items-start justify-between gap-4 border-b border-cyber-blue/15 bg-cyber-dark/80 px-5 py-4">
               <div>
@@ -900,7 +977,7 @@ export default function Home() {
             <div className="overflow-y-auto p-5 md:p-7">
               {registrationComplete ? (
                 <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="border border-cyber-tan/45 bg-cyber-tan/5 p-6 text-center">
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center border border-cyber-tan text-cyber-tan shadow-[0_0_18px_rgba(210,180,140,0.25)]">✓</div>
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center border border-cyber-tan text-cyber-tan shadow-[0_0_18px_rgba(46, 204, 113,0.25)]">✓</div>
                   <h3 className="font-heading text-base text-white">PAYLOAD VERIFIED</h3>
                   <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">Your team registration has been received. Our organisers will reach out with next steps.</p>
                   <button type="button" onClick={() => { setIsRegistrationOpen(false); resetRegistration(); }} className="mt-6 border border-cyber-tan/45 bg-cyber-tan/5 px-4 py-2 font-mono text-[13px] tracking-widest text-cyber-tan transition-colors hover:bg-cyber-tan/10">[ CLOSE_CONSOLE ]</button>
@@ -914,7 +991,7 @@ export default function Home() {
                     <label className="space-y-1.5 sm:col-span-2"><span className="text-[13px] font-mono font-bold text-cyber-tan">--university</span><input value={university} onChange={(event) => setUniversity(event.target.value)} placeholder={`${universityPlaceholder || "University node"} |`} className={`${inputClass} placeholder:text-cyber-blue/55`} /></label>
                     <label className="space-y-1.5 sm:col-span-2"><span className="text-[13px] font-mono font-bold text-cyber-tan">--choose-track</span><select value={selectedDomain} onChange={(event) => setSelectedDomain(event.target.value)} className={`${inputClass} cursor-pointer`}><option value="" disabled>SELECT A TRACK...</option>{DOMAINS.map((domain) => <option key={domain.id} value={domain.name}>{`${domain.id} // ${domain.name.toUpperCase()}`}</option>)}</select></label>
                   </div>
-                  <div><div className="mb-2 text-[13px] font-mono font-bold text-cyber-tan">--experience-level</div><div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"].map((level, index) => <motion.button key={level} type="button" onClick={() => setExperienceLevel(level)} whileTap={{ scale: 0.97 }} animate={experienceLevel === level ? { boxShadow: ["0 0 4px rgba(99,102,241,0.2)", "0 0 16px rgba(210,180,140,0.45)", "0 0 4px rgba(99,102,241,0.2)"] } : {}} transition={{ duration: 1.8, repeat: Infinity }} className={`relative overflow-hidden border px-2 py-3 font-mono text-[12px] tracking-wider transition-colors ${experienceLevel === level ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" : "border-cyber-blue/20 bg-cyber-dark text-cyber-gray hover:border-cyber-blue/50"}`}><span className="relative">{level}</span><span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-cyber-blue" style={{ width: `${35 + index * 18}%` }} /></motion.button>)}</div></div>
+                  <div><div className="mb-2 text-[13px] font-mono font-bold text-cyber-tan">--experience-level</div><div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"].map((level, index) => <motion.button key={level} type="button" onClick={() => setExperienceLevel(level)} whileTap={{ scale: 0.97 }} animate={experienceLevel === level ? { boxShadow: ["0 0 4px rgba(255, 71, 87,0.2)", "0 0 16px rgba(46, 204, 113,0.45)", "0 0 4px rgba(255, 71, 87,0.2)"] } : {}} transition={{ duration: 1.8, repeat: Infinity }} className={`relative overflow-hidden border px-2 py-3 font-mono text-[12px] tracking-wider transition-colors ${experienceLevel === level ? "border-cyber-tan bg-cyber-tan/10 text-cyber-tan" : "border-cyber-blue/20 bg-cyber-dark text-cyber-gray hover:border-cyber-blue/50"}`}><span className="relative">{level}</span><span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-cyber-blue" style={{ width: `${35 + index * 18}%` }} /></motion.button>)}</div></div>
                 </motion.div>
               ) : registrationStep === 2 ? (
                 <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">

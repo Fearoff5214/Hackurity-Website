@@ -96,7 +96,7 @@ body {
 
 @keyframes terminal-cursor {
   from, to { border-color: transparent }
-  50% { border-color: #6366f1 }
+  50% { border-color: #ff4757 }
 }
 
 @keyframes grid-pulse {
@@ -115,7 +115,7 @@ body {
 .crosshair-corner::before {
   content: "+";
   position: absolute;
-  color: rgba(210, 180, 140, 0.4);
+  color: rgba(46, 204, 113, 0.4);
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 300;
@@ -141,8 +141,8 @@ body {
 
 /* Navbar "attack mode" edge pulse once it locks to the top of the viewport */
 @keyframes nav-attack {
-  0%, 100% { box-shadow: 0 1px 0 rgba(99, 102, 241, 0.35), 0 8px 26px rgba(0, 0, 0, 0.75); }
-  50% { box-shadow: 0 1px 0 rgba(210, 180, 140, 0.6), 0 10px 34px rgba(99, 102, 241, 0.28); }
+  0%, 100% { box-shadow: 0 1px 0 rgba(255, 71, 87, 0.35), 0 8px 26px rgba(0, 0, 0, 0.75); }
+  50% { box-shadow: 0 1px 0 rgba(46, 204, 113, 0.6), 0 10px 34px rgba(255, 71, 87, 0.28); }
 }
 
 .nav-attack {
@@ -229,20 +229,35 @@ body {
   }
 }
 
-/* ── Hackurity page: same spectrum, lifted a few stops so it reads less "pinched" ── */
+/* ── Hackurity page: green/defend vs red/attack theme ── */
 .hackurity-root {
-  --color-cyber-blue: #7a7cf6;
-  --color-cyber-blue-glow: rgba(122, 124, 246, 0.24);
-  --color-cyber-blue-dim: rgba(122, 124, 246, 0.14);
+  --color-cyber-blue: #ff4757;
+  --color-cyber-blue-glow: rgba(255, 71, 87, 0.24);
+  --color-cyber-blue-dim: rgba(255, 71, 87, 0.14);
 
-  --color-cyber-tan: #ddc6a2;
-  --color-cyber-tan-glow: rgba(221, 198, 162, 0.24);
-  --color-cyber-tan-dim: rgba(221, 198, 162, 0.14);
+  --color-cyber-tan: #2ecc71;
+  --color-cyber-tan-glow: rgba(46, 204, 113, 0.24);
+  --color-cyber-tan-dim: rgba(46, 204, 113, 0.14);
 
-  --color-cyber-black: #0b0b16;
-  --color-cyber-dark: #16161f;
-  --color-cyber-gray: #d2d2e4;
-  --color-cyber-border: rgba(122, 124, 246, 0.32);
+  --color-cyber-black: #070b09;
+  --color-cyber-dark: #0d1712;
+  --color-cyber-gray: #c7d1cb;
+  --color-cyber-border: rgba(46, 204, 113, 0.32);
+}
+
+/* Shared hardcoded-color helper classes, re-scoped to the green/red palette
+   only inside the Hackurity page — the club microsite keeps its own colors. */
+.hackurity-root .ambient-glow {
+  background:
+    radial-gradient(60% 45% at 0% 25%, rgba(255, 71, 87, 0.16), transparent 70%),
+    radial-gradient(55% 45% at 100% 20%, rgba(46, 204, 113, 0.12), transparent 70%),
+    radial-gradient(70% 50% at 50% 100%, rgba(255, 71, 87, 0.12), transparent 72%),
+    radial-gradient(45% 35% at 85% 70%, rgba(46, 204, 113, 0.08), transparent 72%);
+}
+
+.hackurity-root .bracket-container::before,
+.hackurity-root .bracket-container::after {
+  border-color: #2ecc71;
 }
 
 /* ── Legibility: lift small print and emphasise the words that carry meaning ── */
@@ -265,6 +280,6 @@ b {
 .hackurity-root.cyber-grid,
 .hackurity-root .cyber-grid {
   background-image:
-    linear-gradient(to right, rgba(122, 124, 246, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(122, 124, 246, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(46, 204, 113, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 204, 113, 0.045) 1px, transparent 1px);
 }

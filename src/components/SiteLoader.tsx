@@ -69,7 +69,7 @@ export default function SiteLoader() {
           <div className="relative flex w-full max-w-md flex-col items-center gap-6">
             <svg
               viewBox="0 0 100 100"
-              className="h-14 w-14 fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_10px_rgba(210,180,140,0.5)]"
+              className="h-14 w-14 fill-none stroke-cyber-tan stroke-[6] drop-shadow-[0_0_10px_rgba(46, 204, 113,0.5)]"
             >
               <motion.polygon
                 points="50,15 85,80 15,80"

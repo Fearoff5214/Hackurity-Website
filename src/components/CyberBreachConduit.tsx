@@ -10,8 +10,8 @@ const BinaryPointMaterial = shaderMaterial(
   {
     u_time: 0.0,
     u_texture: null,
-    u_colorBlue: new THREE.Color("#6366f1"),
-    u_colorTan: new THREE.Color("#d2b48c"),
+    u_colorBlue: new THREE.Color("#ff4757"),
+    u_colorTan: new THREE.Color("#2ecc71"),
   },
   // Vertex Shader
   `
@@ -206,38 +206,38 @@ function CableBundle({ texture }: { texture: THREE.Texture }) {
 
   return (
     <group ref={groupRef}>
-      {/* Central Cable (Cyber Blue) */}
+      {/* Central Cable (Cyber Red) */}
       <FiberCable 
         position={[0, 0, 0]} 
         rotation={[0, 0, 0]} 
-        color="#6366f1" 
+        color="#ff4757" 
         speed={0.45} 
         texture={texture}
         scale={[1.0, 1.0, 1.0]} 
       />
-      {/* Orbiting Cable 1 (Tan) */}
+      {/* Orbiting Cable 1 (Green) */}
       <FiberCable 
         position={[-0.8, 0, 0.3]} 
         rotation={[0.1, 0, 0.1]} 
-        color="#d2b48c" 
+        color="#2ecc71" 
         speed={0.35} 
         texture={texture}
         scale={[0.7, 0.95, 0.7]} 
       />
-      {/* Orbiting Cable 2 (Deep Indigo) */}
-      <FiberCable 
-        position={[0.8, 0.1, -0.4]} 
-        rotation={[-0.15, 0.1, -0.1]} 
-        color="#4f46e5" 
+      {/* Orbiting Cable 2 (Deep Red) */}
+      <FiberCable
+        position={[0.8, 0.1, -0.4]}
+        rotation={[-0.15, 0.1, -0.1]}
+        color="#b91c1c"
         speed={0.55} 
         texture={texture}
         scale={[0.6, 1.05, 0.6]} 
       />
-      {/* Diagonal feeder Cable 3 (Deep Tan) */}
-      <FiberCable 
-        position={[-0.2, 0.2, -0.8]} 
-        rotation={[0.0, 0.15, 0.15]} 
-        color="#c5a880" 
+      {/* Diagonal feeder Cable 3 (Deep Green) */}
+      <FiberCable
+        position={[-0.2, 0.2, -0.8]}
+        rotation={[0.0, 0.15, 0.15]}
+        color="#1f8a4c"
         speed={0.4} 
         texture={texture}
         scale={[0.55, 0.9, 0.55]} 
@@ -252,7 +252,7 @@ function ConduitScene({ texture }: { texture: THREE.Texture }) {
     <>
       <Environment preset="city" />
       <ambientLight intensity={0.15} />
-      <pointLight position={[5, 5, 5]} intensity={2.5} color="#6366f1" />
+      <pointLight position={[5, 5, 5]} intensity={2.5} color="#ff4757" />
       
       <CableBundle texture={texture} />
     </>

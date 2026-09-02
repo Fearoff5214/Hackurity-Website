@@ -24,7 +24,7 @@ export default function MembersSection() {
               key={item.id}
               type="button"
               onClick={() => setActive(item.id)}
-              className={`relative border px-4 py-2.5 font-mono text-[11px] tracking-widest uppercase transition-colors ${
+              className={`relative border px-4 py-2.5 font-mono text-[12px] tracking-widest uppercase transition-colors ${
                 isActive
                   ? "border-cyber-tan text-cyber-tan"
                   : "border-cyber-blue/20 text-cyber-gray hover:border-cyber-blue/50 hover:text-white"
@@ -43,7 +43,7 @@ export default function MembersSection() {
         })}
       </div>
 
-      <p className="mt-5 font-mono text-[12px] leading-relaxed text-cyber-gray">
+      <p className="mt-5 font-mono text-[13px] leading-relaxed text-cyber-gray">
         {department.blurb}
       </p>
 
@@ -67,23 +67,23 @@ export default function MembersSection() {
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="font-heading text-[13px] leading-relaxed uppercase">
+                  <h3 className="font-heading text-[14px] leading-relaxed uppercase">
                     {person.name}
                   </h3>
-                  <p className="mt-1.5 font-mono text-[10.5px] font-bold tracking-widest text-cyber-tan uppercase">
+                  <p className="mt-1.5 font-mono text-[11.5px] font-bold tracking-widest text-cyber-tan uppercase">
                     {person.role}
                   </p>
                 </div>
-                <span className="font-mono text-[10px] tracking-widest text-cyber-blue/60">
+                <span className="font-mono text-[11px] tracking-widest text-cyber-blue/60">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
 
-              <p className="mt-4 border-l border-cyber-tan/40 pl-3 font-mono text-[11.5px] leading-relaxed text-cyber-gray italic">
+              <p className="mt-4 border-l border-cyber-tan/40 pl-3 font-mono text-[12.5px] leading-relaxed text-cyber-gray italic">
                 &ldquo;{person.saying}&rdquo;
               </p>
 
-              <div className="mt-4 space-y-1 font-mono text-[11px] text-cyber-gray">
+              <div className="mt-4 space-y-1 font-mono text-[12px] text-cyber-gray">
                 <a href={`tel:${person.phone.replace(/\s/g, "")}`} className="block hover:text-white">
                   {person.phone}
                 </a>
@@ -97,7 +97,7 @@ export default function MembersSection() {
                   href={person.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[11px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
                 >
                   GITHUB ↗
                 </a>
@@ -105,13 +105,13 @@ export default function MembersSection() {
                   href={person.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[11px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
                 >
                   LINKEDIN ↗
                 </a>
                 <a
                   href={`mailto:${person.email}`}
-                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[11px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
                 >
                   EMAIL ↗
                 </a>

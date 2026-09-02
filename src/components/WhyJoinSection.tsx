@@ -207,16 +207,16 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
             </svg>
           </span>
         </motion.div>
-        <span className="font-mono text-[10px] font-bold tracking-[0.28em] text-cyber-blue/50">{benefit.id}</span>
+        <span className="font-mono text-[11px] font-bold tracking-[0.28em] text-cyber-blue/50">{benefit.id}</span>
       </div>
 
       <div className="relative z-[1] flex flex-col gap-1.5">
-        <span className="font-mono text-[9px] font-bold tracking-[0.3em] text-cyber-tan/70">{`// ${benefit.tag}`}</span>
-        <h3 className="font-heading text-[13px] leading-snug text-white uppercase">{benefit.title}</h3>
-        <p className="font-mono text-[11.5px] leading-relaxed text-cyber-gray">{benefit.blurb}</p>
+        <span className="font-mono text-[10px] font-bold tracking-[0.3em] text-cyber-tan/70">{`// ${benefit.tag}`}</span>
+        <h3 className="font-heading text-[14px] leading-snug text-white uppercase">{benefit.title}</h3>
+        <p className="font-mono text-[12.5px] leading-relaxed text-cyber-gray">{benefit.blurb}</p>
       </div>
 
-      <div className="relative z-[1] mt-auto flex items-center gap-2 pt-2 font-mono text-[9px] tracking-widest text-cyber-gray/50">
+      <div className="relative z-[1] mt-auto flex items-center gap-2 pt-2 font-mono text-[10px] tracking-widest text-cyber-gray/50">
         <motion.span
           className="h-1.5 w-1.5 rounded-full bg-cyber-tan"
           animate={reduce ? undefined : { opacity: [1, 0.2, 1], scale: [1, 0.7, 1] }}
@@ -233,7 +233,7 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.08 }}
             transition={{ duration: 0.22 }}
-            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center border-2 border-cyber-tan bg-cyber-black/75 font-mono text-[11px] font-bold tracking-[0.28em] text-cyber-tan"
+            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center border-2 border-cyber-tan bg-cyber-black/75 font-mono text-[12px] font-bold tracking-[0.28em] text-cyber-tan"
           >
             ✓ ACCESS GRANTED
           </motion.span>
@@ -261,7 +261,7 @@ export default function WhyJoinSection() {
         ].map((b, i) => (
           <motion.span
             key={i}
-            className="absolute -bottom-6 font-mono text-[11px] text-cyber-blue/15"
+            className="absolute -bottom-6 font-mono text-[12px] text-cyber-blue/15"
             style={{ left: b.l }}
             animate={reduce ? undefined : { y: ["0%", "-1200%"], opacity: [0, 1, 1, 0] }}
             transition={{ duration: parseFloat(b.s), repeat: Infinity, ease: "linear", delay: b.d }}
@@ -279,7 +279,7 @@ export default function WhyJoinSection() {
         transition={{ duration: 0.5 }}
         className="relative flex max-w-2xl flex-col gap-2"
       >
-        <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-widest text-cyber-tan uppercase">
+        <span className="flex items-center gap-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase">
           {"// SYSTEM_SEQUENCE_NODE_04"}
           <motion.span
             className="inline-block h-3 w-1.5 bg-cyber-tan"
@@ -307,7 +307,7 @@ export default function WhyJoinSection() {
       {/* keyword marquee */}
       <div className="relative mt-5 overflow-hidden border-y border-cyber-blue/10 bg-cyber-black/40 py-2">
         <motion.div
-          className="flex w-max gap-6 whitespace-nowrap font-mono text-[10px] tracking-[0.3em] text-cyber-tan/55"
+          className="flex w-max gap-6 whitespace-nowrap font-mono text-[11px] tracking-[0.3em] text-cyber-tan/55"
           animate={reduce ? undefined : { x: ["0%", "-50%"] }}
           transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
         >
@@ -358,7 +358,7 @@ export default function WhyJoinSection() {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
           <div>
-            <p className="font-mono text-[10px] font-bold tracking-[0.25em] text-cyber-tan uppercase">
+            <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-tan uppercase">
               Powered by IBM
             </p>
             <p className="mt-1 font-mono text-xs leading-relaxed text-cyber-gray">
@@ -366,7 +366,7 @@ export default function WhyJoinSection() {
             </p>
           </div>
         </div>
-        <span className="relative flex shrink-0 items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-4 py-2.5 font-mono text-[11px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/20">
+        <span className="relative flex shrink-0 items-center gap-2 border border-cyber-tan/50 bg-cyber-tan/10 px-4 py-2.5 font-mono text-[12px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors group-hover:bg-cyber-tan/20">
           Lock in your team
           <motion.span
             animate={reduce ? undefined : { x: [0, 5, 0] }}

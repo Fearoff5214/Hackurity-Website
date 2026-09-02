@@ -77,7 +77,7 @@ export default function ClubNav() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/club-logo-icon.png" alt="" className="h-full w-full object-contain" />
           </motion.div>
-          <span className="truncate font-heading text-[10px] font-bold tracking-[0.14em] sm:text-xs sm:tracking-[0.22em]">
+          <span className="truncate font-heading text-[11px] font-bold tracking-[0.14em] sm:text-xs sm:tracking-[0.22em]">
             CYBERSECURITY CLUB REVA
           </span>
         </a>
@@ -88,7 +88,7 @@ export default function ClubNav() {
               key={link.href}
               href={link.href}
               aria-current={active === link.href ? "true" : undefined}
-              className={`font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-cyber-tan ${
+              className={`font-mono text-[12px] tracking-widest uppercase transition-colors hover:text-cyber-tan ${
                 active === link.href ? "font-bold text-cyber-tan" : "text-cyber-gray"
               }`}
             >
@@ -124,7 +124,7 @@ export default function ClubNav() {
           </a>
           <Link
             href="/hackurity"
-            className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
+            className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[12px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
           >
             Hackurity 2026
           </Link>
@@ -160,7 +160,7 @@ export default function ClubNav() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   aria-current={active === link.href ? "true" : undefined}
-                  className={`border px-3 py-2.5 font-mono text-[12px] tracking-widest uppercase transition-colors ${
+                  className={`border px-3 py-2.5 font-mono text-[13px] tracking-widest uppercase transition-colors ${
                     active === link.href
                       ? "border-cyber-tan/50 bg-cyber-tan/10 font-bold text-cyber-tan"
                       : "border-cyber-blue/10 text-cyber-gray hover:border-cyber-tan/40 hover:text-cyber-tan"
@@ -172,7 +172,7 @@ export default function ClubNav() {
               <Link
                 href="/hackurity"
                 onClick={() => setOpen(false)}
-                className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2.5 font-mono text-[12px] font-bold tracking-widest text-cyber-tan uppercase"
+                className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2.5 font-mono text-[13px] font-bold tracking-widest text-cyber-tan uppercase"
               >
                 Hackurity 2026
               </Link>
@@ -181,7 +181,7 @@ export default function ClubNav() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[13px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
               >
                 <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current">
                   <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
@@ -193,7 +193,7 @@ export default function ClubNav() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
+                className="flex items-center gap-2 border border-cyber-blue/10 px-3 py-2.5 font-mono text-[13px] tracking-widest text-cyber-gray uppercase hover:border-cyber-tan/40 hover:text-cyber-tan"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-3.5 w-3.5">
                   <rect x="3" y="3" width="18" height="18" rx="5" />

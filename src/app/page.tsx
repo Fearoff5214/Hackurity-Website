@@ -21,6 +21,7 @@ import CampusLogo from "@/components/CampusLogo";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
+import HackurityCountdown from "@/components/HackurityCountdown";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
 import { submitRegistration as submitRegistrationToSupabase } from "@/lib/submissions";
@@ -575,6 +576,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4">
+              <HackurityCountdown />
               <div className="mt-1">
                 <a
                   href="#join_node"

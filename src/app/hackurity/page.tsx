@@ -195,8 +195,8 @@ export default function Home() {
 
   const DOMAINS = [
     { id: "TRK-A", name: "AI + Security Crossover", brief: "Secure AI systems or use AI to secure things — stop model theft, prompt injection, data poisoning, or build smarter defenses." },
-    { id: "TRK-B", name: "Broad Cybersecurity", brief: "Classic security ground: networks, web apps, systems and the everyday attacks that target them." },
-    { id: "TRK-C", name: "Cybersecurity in IoT", brief: "Secure connected devices, sensors and embedded systems — from firmware and wireless protocols to the networks that tie them together." },
+    { id: "TRK-B", name: "Cybersecurity in IoT", brief: "Secure connected devices, sensors and embedded systems — from firmware and wireless protocols to the networks that tie them together." },
+    { id: "TRK-C", name: "Web3 / Blockchain Security", brief: "Break or defend smart contracts, wallets and decentralized systems where a single bug can move real money." },
   ];
 
   const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];

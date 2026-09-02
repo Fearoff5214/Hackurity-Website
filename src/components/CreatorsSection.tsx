@@ -14,13 +14,13 @@ type Creator = {
 
 const CREATORS: Creator[] = [
   {
-    name: "Logaa Paramesh L T",
+    name: "Lavanya",
     role: "Lead Developer",
-    quote:"Don't Touch it if it works, it will break.",
-    phone: "+91 88704 96955",
-    email: "parameshlogaa@gmail.com",
-    github: "https://github.com/Fearoff5214",
-    linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
+    quote: "Details pending.",
+    phone: "TBD",
+    email: "",
+    github: "#",
+    linkedin: "#",
   },
   {
     name: "Mohammad Omar",

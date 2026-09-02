@@ -33,14 +33,12 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Verril Vaz",
+          "Chetan",
           "President",
-          "Ask questions early. Most problems are easier to fix before they grow.",
-          "verril-vaaz",
-          "+91 8971889830",
+          "Details pending.",
+          "chetan",
+          "TBD",
         ),
-        email: "verrilvaz404@gmail.com",
-        linkedin: "https://www.linkedin.com/in/verrilvaz",
       },
       {
         ...dummy(
@@ -62,15 +60,12 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Logaa Paramesh L T",
+          "Lavanya",
           "Technical Head",
-          "Break it in a lab first, so you never learn it the hard way later.",
-          "logaa-paramesh",
-          "+91 88704 96955",
+          "Details pending.",
+          "lavanya",
+          "TBD",
         ),
-        email: "parameshlogaa@gmail.com",
-        github: "https://github.com/Fearoff5214",
-        linkedin: "https://www.linkedin.com/in/logaa-paramesh-l-t/",
       },
       {
         ...dummy(

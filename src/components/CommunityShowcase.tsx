@@ -21,9 +21,9 @@ const avatar = (name: string) => `https://ui-avatars.com/api/?name=${encodeURICo
 const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 
 const CONTACTS: Person[] = [
-  { name: "Verril Vaz", role: "Cybersecurity Club President", url: "https://www.linkedin.com/in/verrilvaz", image: avatar("Verril Vaz"), phone: "+91 8971889830", email: "verrilvaz404@gmail.com" },
+  { name: "Chetan", role: "Cybersecurity Club President", url: "#", image: avatar("Chetan"), phone: "TBD", email: "TBD" },
   { name: "Dharma Teja", role: "Cybersecurity Club Vice President", url: "https://www.linkedin.com/in/dharmatejarc06/", image: avatar("Dharma Teja"), phone: "+91 79 7565 0280", email: "rcdt009@gmail.com" },
-  { name: "Logaa Paramesh L T", role: "Cybersecurity Club Technical Head", url: "https://www.linkedin.com/in/logaa-paramesh-l-t/", image: avatar("Logaa Paramesh L T"), phone: "+91 88704 96955", email: "parameshlogaa@gmail.com" },
+  { name: "Lavanya", role: "Cybersecurity Club Technical Head", url: "#", image: avatar("Lavanya"), phone: "TBD", email: "TBD" },
 ];
 
 const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });

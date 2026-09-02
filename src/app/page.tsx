@@ -515,8 +515,8 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8">
+        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop. Pushed down so the face's eyes clear the top of the card on first load. */}
+        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/15 bg-cyber-dark/30 p-6 backdrop-blur-md md:p-8 mt-[28vh]">
           <CornerCrosshairs />
 
           {/* Title & stats */}

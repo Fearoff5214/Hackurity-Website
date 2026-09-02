@@ -28,7 +28,7 @@ import CampusLogo from "@/components/CampusLogo";
 import HackurityLenis from "@/components/HackurityLenis";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import TrackCard from "@/components/TrackCard";
-import { AboutUsSection, ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
+import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
 import type { User } from "@supabase/supabase-js";
@@ -57,7 +57,7 @@ const navLinks = [
   { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
   // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" },
   { name: "CONTACT US", label: "CONTACT_US", href: "#contact_us" },
-  { name: "ABOUT US", label: "ABOUT_HACKURITY", href: "#about_us" },
+  { name: "ABOUT US", label: "ABOUT_HACKURITY", href: "/about-us" },
 ];
 
 export default function Home() {
@@ -146,6 +146,7 @@ export default function Home() {
   // scroll-spy highlight — no layout reads on the raw scroll event.
   useEffect(() => {
     const sections = navLinks
+      .filter((link) => link.href.startsWith("#"))
       .map((link) => {
         const el = document.querySelector(link.href);
         return el instanceof HTMLElement ? { name: link.name, el } : null;
@@ -828,8 +829,6 @@ export default function Home() {
         </section> */}
 
         <ContactSection />
-
-        <AboutUsSection />
 
         <CreatorsSection />
 

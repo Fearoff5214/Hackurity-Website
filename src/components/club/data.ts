@@ -246,6 +246,12 @@ export const CONVENORS: TeamPortrait[] = [
     linkedin: "",
     photo: "/team/np-nethravathi.jpg",
   },
+  {
+    name: "TBD",
+    role: "Details pending",
+    linkedin: "",
+    photo: "/team/convenor-new.png",
+  },
 ];
 
 export const FACULTY_IN_CHARGE: TeamPortrait[] = [

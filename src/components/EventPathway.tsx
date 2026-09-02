@@ -41,13 +41,15 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
         whileHover={{
           y: -3,
           scale: 1.015,
-          borderColor: "rgba(212, 181, 132, 0.5)",
-          backgroundColor: "rgba(15, 20, 30, 0.55)",
           boxShadow: "0 8px 24px -8px rgba(212, 181, 132, 0.25), 0 0 0 1px rgba(212, 181, 132, 0.15)",
         }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="border border-cyber-blue/10 bg-cyber-dark/30 p-4 group cursor-default"
+        className="relative border border-cyber-blue/10 bg-cyber-dark/30 p-4 group cursor-default transition-colors duration-300 hover:border-cyber-tan/50 hover:bg-[rgba(15,20,30,0.55)]"
       >
+        <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+        <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+        <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+        <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-3">
             <span className="text-[12px] font-mono font-bold text-cyber-tan border border-cyber-tan/30 bg-cyber-tan/5 px-1.5 py-0.5 transition-colors duration-300 group-hover:bg-cyber-tan/15 group-hover:border-cyber-tan/60">

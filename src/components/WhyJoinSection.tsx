@@ -191,8 +191,11 @@ function BenefitCard({ benefit, index }: { benefit: Benefit; index: number }) {
               }
         }
       />
-      {/* corner tick */}
-      <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r border-t border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />
+      {/* corner brackets */}
+      <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />
+      <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />
+      <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />
+      <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan/40 transition-all duration-300 group-hover:h-4 group-hover:w-4 group-hover:border-cyber-tan" />
 
       <div className="relative z-[1] flex items-start justify-between">
         <motion.div

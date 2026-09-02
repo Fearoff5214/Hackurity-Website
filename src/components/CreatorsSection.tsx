@@ -67,8 +67,12 @@ export default function CreatorsSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.4, delay: index * 0.08 }}
-            className="flex flex-col border border-cyber-blue/15 bg-cyber-black/40 p-5 transition-colors hover:border-cyber-tan/40"
+            className="group relative flex flex-col border border-cyber-blue/15 bg-cyber-black/40 p-5 transition-colors hover:border-cyber-tan/40"
           >
+            <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+            <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+            <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
+            <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan/0 transition-colors duration-300 group-hover:border-cyber-tan" />
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="font-heading text-[15px] leading-relaxed text-white uppercase">

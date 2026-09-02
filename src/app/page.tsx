@@ -508,12 +508,12 @@ export default function Home() {
 
         <div className="flex flex-col items-center gap-1">
           <h1
-            className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl"
+            className="text-5xl leading-tight tracking-widest text-white uppercase md:text-7xl"
             style={{ fontFamily: '"Ethnocentric", Impact, sans-serif', fontWeight: 900 }}
           >
             <ScrambleText text="Hackurity" />
           </h1>
-          <GradientUnderline className="max-w-[220px]" />
+          <GradientUnderline className="max-w-[320px] md:max-w-[420px]" />
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
@@ -592,7 +592,11 @@ export default function Home() {
 
           <ul className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray">
             {DOMAINS.map((domain) => (
-              <li key={domain.id} className="flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/70 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
+              <li key={domain.id} className="relative flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/70 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
+                <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-cyber-tan" />
+                <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-cyber-tan" />
+                <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-cyber-tan" />
+                <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-cyber-tan" />
                 <div className="flex items-start justify-between gap-3">
                   <span className="text-cyber-tan font-bold uppercase tracking-widest text-[15px] md:text-base leading-tight">◆ {domain.name}</span>
                   <span className="shrink-0 text-[12px] text-cyber-blue/70">{domain.id}</span>

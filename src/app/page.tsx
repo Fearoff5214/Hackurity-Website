@@ -580,13 +580,16 @@ export default function Home() {
           <div className="flex flex-col gap-5 max-w-3xl">
             <div className="flex items-center gap-2">
               <span className="text-[13px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
-              <span className="text-[13px] text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
+              <span className="text-[15px] md:text-base text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
             </div>
             <h2 className="font-heading text-2xl md:text-4xl tracking-tight leading-tight text-white uppercase">
-              // HACKATHON TRACKS
+              HACKATHON TRACKS
             </h2>
             <p className="font-mono text-[15px] md:text-base leading-relaxed text-cyber-gray">
               There are three tracks to choose from, and each one comes with two problem statements released at the start. Pick the track that fits your team before the build window opens.
+            </p>
+            <p className="font-mono text-[13px] md:text-sm font-bold tracking-wide text-cyber-tan">
+              // Problem statements will be announced soon.
             </p>
           </div>
 

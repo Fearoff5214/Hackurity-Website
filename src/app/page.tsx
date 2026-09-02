@@ -360,17 +360,6 @@ export default function Home() {
         </AnimatePresence>
 
         <div className="flex items-center justify-between gap-3">
-          {/* Left: back to club site + Stylized Geometric Logo — compacts to logo-only on scroll */}
-          <Link
-            href="/about-us"
-            aria-label="Back to the REVA Cybersecurity Club site"
-            className="hidden shrink-0 items-center gap-2 border border-cyber-blue/25 px-2.5 py-1.5 font-mono text-[12px] tracking-widest text-cyber-gray uppercase transition-colors hover:border-cyber-tan hover:text-cyber-tan sm:flex"
-          >
-            <span aria-hidden="true">←</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/club-logo-icon.png" alt="REVA Cybersecurity Club" className="h-4 w-4 object-contain" />
-            
-          </Link>
           <a href="#mission_brief" className="flex shrink-0 items-center gap-2.5">
             <motion.svg
               viewBox="0 0 100 100"
@@ -593,7 +582,7 @@ export default function Home() {
         </section>
 
         {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
-        <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/10 relative">
+        <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
 
           <div className="flex flex-col gap-5 max-w-3xl">
@@ -611,7 +600,7 @@ export default function Home() {
 
           <ul className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray">
             {DOMAINS.map((domain) => (
-              <li key={domain.id} className="flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/40 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
+              <li key={domain.id} className="flex flex-col gap-3 border border-cyber-blue/15 bg-cyber-black/70 p-5 md:p-6 hover:border-cyber-tan/50 transition-colors">
                 <div className="flex items-start justify-between gap-3">
                   <span className="text-cyber-tan font-bold uppercase tracking-widest text-[15px] md:text-base leading-tight">◆ {domain.name}</span>
                   <span className="shrink-0 text-[12px] text-cyber-blue/70">{domain.id}</span>
@@ -632,7 +621,7 @@ export default function Home() {
         </section>
 
         {/* 4. SECTION THREE: "03. EVENT EXECUTION TIMELINE" */}
-        <section id="event_flow" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative overflow-hidden">
+        <section id="event_flow" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/30 backdrop-blur-md relative overflow-hidden">
           <CornerCrosshairs />
 
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b border-cyber-blue/15 pb-4">
@@ -661,7 +650,7 @@ export default function Home() {
         <WhyJoinSection />
 
         {/* 6. SECTION FIVE: "05. JOIN NODE // REGISTRATION CONSOLE" */}
-        <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+        <section id="join_node" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
           <div className="lg:col-span-5 flex flex-col justify-center gap-5">
             <span className="text-[12px] tracking-widest text-cyber-tan font-bold font-mono">//REGISTER NOW // SECURE REGISTRY</span>
@@ -699,7 +688,7 @@ export default function Home() {
         </section>
 
         {/* 7. SECTION SIX: QUERY TERMINAL */}
-        <section id="query_terminal" className="flex flex-col gap-6 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+        <section id="query_terminal" className="flex flex-col gap-6 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
           <div className="flex flex-col gap-2 border-b border-cyber-blue/15 pb-4 md:flex-row md:items-end md:justify-between">
             <div className="flex max-w-2xl flex-col gap-2">
@@ -743,7 +732,7 @@ export default function Home() {
         <JudgesSection/>
         <PartnersSection />
  {/* 8. SECTION SEVEN: SPONSOR NOW */}
-        <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+        <section id="sponsor_now" className="grid grid-cols-1 lg:grid-cols-12 gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
           <div className="lg:col-span-6 flex flex-col justify-center gap-5">
             <span className="text-[12px] font-bold tracking-widest text-cyber-tan uppercase font-mono">// SYSTEM_SEQUENCE_NODE_07</span>

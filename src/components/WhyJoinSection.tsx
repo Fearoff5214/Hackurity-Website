@@ -249,7 +249,7 @@ export default function WhyJoinSection() {
   return (
     <section
       id="why_join"
-      className="crosshair-corner relative overflow-hidden border border-cyber-blue/10 bg-cyber-dark/20 p-6 md:p-8"
+      className="crosshair-corner relative overflow-hidden border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 md:p-8"
     >
       <CornerCrosshairs />
 

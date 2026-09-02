@@ -45,7 +45,7 @@ export default function CreatorsSection() {
   return (
     <section
       id="meet_the_creators"
-      className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/20 p-6 md:p-8"
+      className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 md:p-8"
     >
       <div className="mb-6">
         <span className="font-mono text-[13px] font-bold tracking-widest text-cyber-tan">

@@ -57,7 +57,7 @@ const navLinks = [
   { name: "SPONSORS", label: "SPONSOR_NOW", href: "#sponsor_now" },
   // { name: "REGISTER", label: "REGISTER_NOW", href: "#join_node" },
   { name: "CONTACT US", label: "CONTACT_US", href: "#contact_us" },
-  { name: "CREATORS", label: "MEET_THE_CREATORS", href: "#meet_the_creators" },
+  { name: "ABOUT US", label: "ABOUT_HACKURITY", href: "#about_us" },
 ];
 
 export default function Home() {

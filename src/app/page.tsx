@@ -155,13 +155,16 @@ export default function Home() {
       const y = window.scrollY;
       setNavAttack(y > 90);
       if (sections.length === 0) return;
+      // Whichever section's top has scrolled past the probe line (30% down
+      // the viewport) last is the active one — this alone correctly lands
+      // on the final section once you actually reach it, so no separate
+      // "near the bottom of the page" special case is needed (that used to
+      // fire early whenever trailing footer content pushed the document's
+      // true end well past the last section itself).
       const probe = y + window.innerHeight * 0.3;
       let nextName = sections[0].name;
       for (const section of sections) {
         if (section.el.getBoundingClientRect().top + y - 1 <= probe) nextName = section.name;
-      }
-      if (y + window.innerHeight >= document.documentElement.scrollHeight - 4) {
-        nextName = sections[sections.length - 1].name;
       }
       setCurrentSection((prev) => (prev === nextName ? prev : nextName));
     };

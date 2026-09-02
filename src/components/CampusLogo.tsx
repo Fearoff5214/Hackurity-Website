@@ -25,7 +25,7 @@ export default function CampusLogo() {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed right-3 top-[64px] z-40 h-14 w-14 bg-transparent [perspective:700px] md:right-6 md:top-[68px] md:h-16 md:w-16"
+      className="fixed right-[50px] top-[102px] z-40 h-14 w-14 bg-transparent [perspective:700px] md:right-[62px] md:top-[106px] md:h-16 md:w-16"
     >
       <motion.span
         className="relative block h-full w-full [transform-style:preserve-3d]"

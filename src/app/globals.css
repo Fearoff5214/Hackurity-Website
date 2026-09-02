@@ -27,7 +27,7 @@
 
   --color-cyber-black: #000000;
   --color-cyber-dark: #060614;
-  --color-cyber-gray: #a0a0b8;
+  --color-cyber-gray: #b6b6cc;
   --color-cyber-border: rgba(99, 102, 241, 0.25);
 
   --animate-terminal-cursor: terminal-cursor 1s step-end infinite;
@@ -241,8 +241,24 @@ body {
 
   --color-cyber-black: #0b0b16;
   --color-cyber-dark: #16161f;
-  --color-cyber-gray: #bfbfd4;
+  --color-cyber-gray: #d2d2e4;
   --color-cyber-border: rgba(122, 124, 246, 0.32);
+}
+
+/* ── Legibility: lift small print and emphasise the words that carry meaning ── */
+
+/* Body copy sits a touch heavier so long paragraphs hold their line */
+body,
+.club-root {
+  font-weight: 420;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inline emphasis inside prose reads as "important", not just italic-grey */
+strong,
+b {
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* Grid lines a touch more present on the lifted background */

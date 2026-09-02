@@ -92,7 +92,7 @@ export default function LiveEventSection() {
 
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/hackurity"
+                  href="/"
                   className="group relative inline-flex items-center gap-3 border border-cyber-tan bg-cyber-tan/15 px-6 py-3.5 font-mono text-[14px] font-bold tracking-[0.2em] text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/25"
                 >
                   Join Hackurity

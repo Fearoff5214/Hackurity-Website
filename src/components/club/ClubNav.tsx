@@ -123,7 +123,7 @@ export default function ClubNav() {
             </svg>
           </a>
           <Link
-            href="/hackurity"
+            href="/"
             className="hidden border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2 font-mono text-[13px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20 sm:inline-block"
           >
             Hackurity 2026
@@ -170,7 +170,7 @@ export default function ClubNav() {
                 </a>
               ))}
               <Link
-                href="/hackurity"
+                href="/"
                 onClick={() => setOpen(false)}
                 className="border border-cyber-tan/50 bg-cyber-tan/10 px-3 py-2.5 font-mono text-[14px] font-bold tracking-widest text-cyber-tan uppercase"
               >

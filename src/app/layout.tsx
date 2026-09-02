@@ -14,21 +14,19 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // title: "HACKURITY 2026 — POWERED BY IBM",
-  // description: "HACKURITY 2026, powered by IBM — a cybersecurity hackathon for the next generation of defenders.",
   metadataBase: new URL("https://revacyberclub.tech"),
   title:{
-    default: "Cybersecurity Club — REVA University, Bengaluru",
+    default: "Hackurity 2026 — REVA University, Bengaluru",
     template: "%s — Cybersecurity Club, REVA University",
   },
   description:
-    "The student-run Cybersecurity Club at REVA University, Bengaluru. Founded in 2024. See our current event, our members and our faculty in charge.",
+    "Hackurity 2026, powered by IBM — a 24-hour cybersecurity hackathon at REVA University, Bengaluru, run by the student Cybersecurity Club. AI security, broad cybersecurity and IoT tracks.",
   openGraph: {
     type : "website",
     siteName: "Cybersecurity Club — REVA University, Bengaluru",
-    title: "Cybersecurity Club — REVA University, Bengaluru",
+    title: "Hackurity 2026 — REVA University, Bengaluru",
     description:
-      "Weekly hands-on security sessions, competitions and our annual hackathon. Meet the team behind the club.",
+      "A 24-hour cybersecurity hackathon on 14–15 October 2026, powered by IBM. Pick a track, build over the weekend, present to a panel.",
     url: "https://revacyberclub.tech",
   },
   twitter: {

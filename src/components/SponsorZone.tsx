@@ -71,7 +71,7 @@ export default function SponsorZone() {
           />
           <span className="relative">Explore Sponsorship</span>
         </motion.button>
-        <p className="font-mono text-[10px] tracking-widest text-cyber-blue/50 uppercase">
+        <p className="font-mono text-[12px] tracking-widest text-cyber-blue/50 uppercase">
           Brochure // enquiry // partnership tiers
         </p>
       </div>
@@ -98,7 +98,7 @@ export default function SponsorZone() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="font-mono text-[10px] font-bold tracking-widest text-cyber-blue">
+                  <div className="font-mono text-[12px] font-bold tracking-widest text-cyber-blue">
                     // PARTNERSHIP CHANNEL
                   </div>
                   <h3 className="mt-2 font-heading text-base leading-relaxed text-white uppercase md:text-lg">Partner with Hackurity 2026</h3>
@@ -193,7 +193,7 @@ export default function SponsorZone() {
             >
               <div className="flex items-start justify-between gap-4 border-b border-cyber-blue/15 bg-cyber-dark/80 px-5 py-4">
                 <div>
-                  <div className="font-mono text-[10px] font-bold tracking-widest text-cyber-blue">
+                  <div className="font-mono text-[12px] font-bold tracking-widest text-cyber-blue">
                     // HACKURITY // SPONSOR REGISTRY
                   </div>
                   <h3 className="mt-2 font-heading text-base leading-relaxed text-white uppercase md:text-lg">Choose your partnership tier</h3>
@@ -222,7 +222,7 @@ export default function SponsorZone() {
                     <button
                       type="button"
                       onClick={() => setSponsorFormOpen(false)}
-                      className="mt-5 border border-cyber-blue/40 bg-cyber-blue/10 px-4 py-2 font-mono text-[11px] tracking-widest text-cyber-blue hover:bg-cyber-blue/20"
+                      className="mt-5 border border-cyber-blue/40 bg-cyber-blue/10 px-4 py-2 font-mono text-[13px] tracking-widest text-cyber-blue hover:bg-cyber-blue/20"
                     >
                       [ CLOSE ]
                     </button>
@@ -235,7 +235,7 @@ export default function SponsorZone() {
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <label className="space-y-1.5">
-                        <span className="font-mono text-[11px] font-bold text-cyber-blue">--email</span>
+                        <span className="font-mono text-[13px] font-bold text-cyber-blue">--email</span>
                         <input
                           type="email"
                           value={email}
@@ -245,7 +245,7 @@ export default function SponsorZone() {
                         />
                       </label>
                       <label className="space-y-1.5">
-                        <span className="font-mono text-[11px] font-bold text-cyber-blue">--phone</span>
+                        <span className="font-mono text-[13px] font-bold text-cyber-blue">--phone</span>
                         <input
                           type="tel"
                           value={phone}
@@ -257,7 +257,7 @@ export default function SponsorZone() {
                     </div>
 
                     <label className="block space-y-1.5">
-                      <span className="font-mono text-[11px] font-bold text-cyber-blue">
+                      <span className="font-mono text-[13px] font-bold text-cyber-blue">
                         --previous-or-current-sponsorships (optional)
                       </span>
                       <textarea
@@ -270,7 +270,7 @@ export default function SponsorZone() {
                     </label>
 
                     <div>
-                      <div className="mb-2 font-mono text-[11px] font-bold text-cyber-blue">
+                      <div className="mb-2 font-mono text-[13px] font-bold text-cyber-blue">
                         --sponsorship-tier
                       </div>
                       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -295,7 +295,7 @@ export default function SponsorZone() {
                             >
                               <span className="absolute right-3 top-3 font-heading text-2xl opacity-15">0{index + 1}</span>
                               <span className="relative text-xs font-bold">{option.name}</span>
-                              <span className="relative text-[11px] normal-case text-cyber-gray">{option.note} · {option.benefit}</span>
+                              <span className="relative text-[13px] normal-case text-cyber-gray">{option.note} · {option.benefit}</span>
                               {selected && <motion.span layoutId="tier-selected" className="absolute inset-x-0 bottom-0 h-1 bg-current" />}
                             </motion.button>
                           );
@@ -304,14 +304,14 @@ export default function SponsorZone() {
                     </div>
 
                     {submitError && (
-                      <p className="font-mono text-[10px] tracking-wider text-red-400">{submitError}</p>
+                      <p className="font-mono text-[12px] tracking-wider text-red-400">{submitError}</p>
                     )}
 
                     <button
                       type="button"
                       disabled={!formReady || submitting}
                       onClick={handleSponsorSubmit}
-                      className="w-full border border-cyber-blue/50 bg-cyber-blue/10 px-4 py-3 font-mono text-[11px] font-bold tracking-widest text-white uppercase transition-colors hover:bg-cyber-blue/20 disabled:cursor-not-allowed disabled:opacity-30"
+                      className="w-full border border-cyber-blue/50 bg-cyber-blue/10 px-4 py-3 font-mono text-[13px] font-bold tracking-widest text-white uppercase transition-colors hover:bg-cyber-blue/20 disabled:cursor-not-allowed disabled:opacity-30"
                     >
                       {submitting ? "[ SUBMITTING... ]" : "[ SUBMIT_SPONSORSHIP_REQUEST ]"}
                     </button>

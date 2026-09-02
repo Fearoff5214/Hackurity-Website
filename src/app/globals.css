@@ -5,16 +5,16 @@
   --font-mono: var(--font-jetbrains-mono), monospace;
   --font-terminal: Consolas, "Consolas", "Lucida Console", "JetBrains Mono", monospace;
 
-  /* Bumped ~10% larger than Tailwind's defaults, keeping the same relative scale */
-  --text-xs: 0.825rem;
-  --text-sm: 0.9625rem;
-  --text-base: 1.1rem;
-  --text-lg: 1.2375rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.65rem;
-  --text-3xl: 2.0625rem;
-  --text-4xl: 2.475rem;
-  --text-5xl: 3.3rem;
+  /* Bumped ~30% larger than Tailwind's defaults, keeping the same relative scale */
+  --text-xs: 0.975rem;
+  --text-sm: 1.1375rem;
+  --text-base: 1.3rem;
+  --text-lg: 1.4625rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 1.95rem;
+  --text-3xl: 2.4375rem;
+  --text-4xl: 2.925rem;
+  --text-5xl: 3.9rem;
 
 
   --color-cyber-blue: #6366f1;
@@ -27,7 +27,7 @@
 
   --color-cyber-black: #000000;
   --color-cyber-dark: #060614;
-  --color-cyber-gray: #a0a0b8;
+  --color-cyber-gray: #b6b6cc;
   --color-cyber-border: rgba(99, 102, 241, 0.25);
 
   --animate-terminal-cursor: terminal-cursor 1s step-end infinite;
@@ -220,3 +220,51 @@ body {
 .club-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
 .club-scroll::-webkit-scrollbar-track { background: #000; }
 .club-scroll::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.4); }
+
+/* Hide the native pointer while the custom CyberCursor is mounted (fine pointers only) */
+@media (pointer: fine) {
+  .cyber-cursor-active,
+  .cyber-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* ── Hackurity page: same spectrum, lifted a few stops so it reads less "pinched" ── */
+.hackurity-root {
+  --color-cyber-blue: #7a7cf6;
+  --color-cyber-blue-glow: rgba(122, 124, 246, 0.24);
+  --color-cyber-blue-dim: rgba(122, 124, 246, 0.14);
+
+  --color-cyber-tan: #ddc6a2;
+  --color-cyber-tan-glow: rgba(221, 198, 162, 0.24);
+  --color-cyber-tan-dim: rgba(221, 198, 162, 0.14);
+
+  --color-cyber-black: #0b0b16;
+  --color-cyber-dark: #16161f;
+  --color-cyber-gray: #d2d2e4;
+  --color-cyber-border: rgba(122, 124, 246, 0.32);
+}
+
+/* ── Legibility: lift small print and emphasise the words that carry meaning ── */
+
+/* Body copy sits a touch heavier so long paragraphs hold their line */
+body,
+.club-root {
+  font-weight: 420;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inline emphasis inside prose reads as "important", not just italic-grey */
+strong,
+b {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Grid lines a touch more present on the lifted background */
+.hackurity-root.cyber-grid,
+.hackurity-root .cyber-grid {
+  background-image:
+    linear-gradient(to right, rgba(122, 124, 246, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 124, 246, 0.045) 1px, transparent 1px);
+}

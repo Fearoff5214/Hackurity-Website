@@ -10,8 +10,8 @@ const BinaryFaceMaterial = shaderMaterial(
   {
     u_time: 0.0,
     u_texture: null,
-    u_colorBlue: new THREE.Color("#6366f1"),
-    u_colorTan: new THREE.Color("#d2b48c"),
+    u_colorBlue: new THREE.Color("#8f91ff"),
+    u_colorTan: new THREE.Color("#f2ddba"),
     u_mousePos: new THREE.Vector2(0, 0),
   },
   // Vertex Shader
@@ -47,7 +47,7 @@ const BinaryFaceMaterial = shaderMaterial(
     
     // Attenuate point size - made smaller for maximum sharpness and readability
     float pulse = 1.0 + sin(u_time * 3.5 + a_offset * 12.0) * 0.25;
-    gl_PointSize = (26.0 / -mvPosition.z) * pulse;
+    gl_PointSize = (30.0 / -mvPosition.z) * pulse;
     
     vDist = length(pos - vec3(u_mousePos.x, u_mousePos.y, 0.2));
   }
@@ -76,8 +76,8 @@ const BinaryFaceMaterial = shaderMaterial(
     
     // Color morphing based on cursor distance
     float colorMix = sin(vDist * 2.0 - u_time * 1.8 + vOffset) * 0.5 + 0.5;
-    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix);
-    
+    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix) * 1.7;
+
     gl_FragColor = vec4(finalColor, texColor.a);
   }
   `
@@ -238,7 +238,7 @@ function FaceScene({ texture, globalMouse }: { texture: THREE.Texture; globalMou
 }
 
 // Main component container
-export default function BinaryFace() {
+export default function BinaryFace({ background = false }: { background?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const [binaryTexture, setBinaryTexture] = useState<THREE.Texture | null>(null);
   // Bumped to force a full Canvas remount if the GPU drops the WebGL context
@@ -284,6 +284,7 @@ export default function BinaryFace() {
   }, []);
 
   if (!mounted || !binaryTexture) {
+    if (background) return null;
     return (
       <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-cyber-dark/40 border border-cyber-blue/10">
         <span className="text-xs text-cyber-blue/50 tracking-widest animate-pulse font-mono">// INITIALIZING COGNITIVE CORE...</span>
@@ -292,16 +293,20 @@ export default function BinaryFace() {
   }
 
   return (
-    <div className="w-full h-full min-h-[350px] relative">
-      <span className="absolute top-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[11px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      
-      <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-cyber-blue/60 tracking-wider">
-        <div>SYS.MODEL: COGNITIVE_EYE_TRACKING_3D</div>
-        <div>STATUS: GLOBAL_LOOK_ACTIVE</div>
-      </div>
+    <div className={background ? "w-full h-full" : "w-full h-full min-h-[350px] relative"}>
+      {!background && (
+        <>
+          <span className="absolute top-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute top-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute bottom-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute bottom-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+
+          <div className="absolute top-4 left-4 z-10 font-mono text-[12px] text-cyber-blue/60 tracking-wider">
+            <div>SYS.MODEL: COGNITIVE_EYE_TRACKING_3D</div>
+            <div>STATUS: GLOBAL_LOOK_ACTIVE</div>
+          </div>
+        </>
+      )}
 
       <Canvas
         key={canvasKey}
@@ -314,7 +319,9 @@ export default function BinaryFace() {
         }}
       >
         <FaceScene texture={binaryTexture} globalMouse={globalMouse} />
-        <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+        {!background && (
+          <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+        )}
       </Canvas>
     </div>
   );

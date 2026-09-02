@@ -48,7 +48,7 @@ export default function BinaryStarfield() {
     let frame = 0;
 
     const build = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = Math.floor(width * dpr);
@@ -57,12 +57,12 @@ export default function BinaryStarfield() {
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const density = width < 640 ? 5500 : 3600;
+      const density = width < 640 ? 9000 : 6800;
       const starCount = Math.round((width * height) / density);
       stars = Array.from({ length: starCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: 8 + Math.random() * 7,
+        size: 7 + Math.random() * 6,
         speed: 0.08 + Math.random() * 0.35,
         phase: Math.random() * Math.PI * 2,
         twinkle: 0.006 + Math.random() * 0.02,
@@ -70,7 +70,7 @@ export default function BinaryStarfield() {
         hue: Math.random() > 0.32 ? "blue" : "tan",
       }));
 
-      const sparkCount = width < 640 ? 22 : 44;
+      const sparkCount = width < 640 ? 12 : 24;
       sparks = Array.from({ length: sparkCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -85,10 +85,12 @@ export default function BinaryStarfield() {
       frame += 1;
       ctx.clearRect(0, 0, width, height);
 
-      // Binary stars
+      // Binary stars — no per-glyph shadow blur (that was the main frame cost);
+      // the twinkle + brighter palette keep them lively and readable.
+      ctx.textBaseline = "alphabetic";
       for (const star of stars) {
         star.phase += star.twinkle;
-        const alpha = 0.14 + (Math.sin(star.phase) * 0.5 + 0.5) * 0.5;
+        const alpha = 0.2 + (Math.sin(star.phase) * 0.5 + 0.5) * 0.55;
         star.y -= star.speed;
         if (star.y < -20) {
           star.y = height + 20;
@@ -96,15 +98,14 @@ export default function BinaryStarfield() {
           star.bit = Math.random() > 0.5 ? "1" : "0";
         }
 
-        const color = star.hue === "blue" ? "99,102,241" : "210,180,140";
+        const color = star.hue === "blue" ? "132,135,248" : "224,201,166";
         ctx.font = `${star.size}px "JetBrains Mono", Consolas, monospace`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `rgba(${color},${alpha * 0.85})`;
         ctx.fillStyle = `rgba(${color},${alpha})`;
         ctx.fillText(star.bit, star.x, star.y);
       }
 
-      // Magenta glitter
+      // Magenta glitter — few enough to keep a small glow
+      ctx.shadowBlur = 8;
       for (const spark of sparks) {
         spark.phase += 0.035;
         spark.x += spark.vx;
@@ -114,16 +115,15 @@ export default function BinaryStarfield() {
         if (spark.y < -10) spark.y = height + 10;
         if (spark.y > height + 10) spark.y = -10;
 
-        const alpha = 0.2 + (Math.sin(spark.phase) * 0.5 + 0.5) * 0.6;
+        const alpha = 0.22 + (Math.sin(spark.phase) * 0.5 + 0.5) * 0.6;
         ctx.beginPath();
-        ctx.shadowBlur = 14;
         ctx.shadowColor = `rgba(217,70,239,${alpha})`;
         ctx.fillStyle = `rgba(240,120,255,${alpha})`;
         ctx.arc(spark.x, spark.y, spark.r, 0, Math.PI * 2);
         ctx.fill();
       }
-
       ctx.shadowBlur = 0;
+
       if (!reduceMotion || frame < 2) {
         animationId = requestAnimationFrame(draw);
       }
@@ -145,14 +145,14 @@ export default function BinaryStarfield() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Base gradient wash: blue + tan, with a whisper of magenta */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(99,102,241,0.16)_0%,transparent_55%),radial-gradient(circle_at_85%_28%,rgba(210,180,140,0.12)_0%,transparent_52%),radial-gradient(circle_at_50%_105%,rgba(217,70,239,0.10)_0%,transparent_58%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(122,124,246,0.2)_0%,transparent_55%),radial-gradient(circle_at_85%_28%,rgba(221,198,162,0.15)_0%,transparent_52%),radial-gradient(circle_at_50%_105%,rgba(217,70,239,0.11)_0%,transparent_58%)]" />
       {/* Side glows */}
-      <div className="absolute left-0 top-0 h-full w-[22%] bg-gradient-to-r from-cyber-blue/12 to-transparent blur-2xl" />
-      <div className="absolute right-0 top-0 h-full w-[22%] bg-gradient-to-l from-cyber-tan/10 to-transparent blur-2xl" />
+      <div className="absolute left-0 top-0 h-full w-[22%] bg-gradient-to-r from-cyber-blue/15 to-transparent blur-2xl" />
+      <div className="absolute right-0 top-0 h-full w-[22%] bg-gradient-to-l from-cyber-tan/12 to-transparent blur-2xl" />
       {/* Animated binary starfield */}
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-80" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-90" />
       {/* Readability veil so text stays crisp */}
-      <div className="absolute inset-0 bg-cyber-black/45" />
+      <div className="absolute inset-0 bg-cyber-black/30" />
     </div>
   );
 }

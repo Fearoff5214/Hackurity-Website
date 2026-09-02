@@ -238,7 +238,7 @@ function FaceScene({ texture, globalMouse }: { texture: THREE.Texture; globalMou
 }
 
 // Main component container
-export default function BinaryFace() {
+export default function BinaryFace({ background = false }: { background?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const [binaryTexture, setBinaryTexture] = useState<THREE.Texture | null>(null);
   // Bumped to force a full Canvas remount if the GPU drops the WebGL context
@@ -284,6 +284,7 @@ export default function BinaryFace() {
   }, []);
 
   if (!mounted || !binaryTexture) {
+    if (background) return null;
     return (
       <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-cyber-dark/40 border border-cyber-blue/10">
         <span className="text-xs text-cyber-blue/50 tracking-widest animate-pulse font-mono">// INITIALIZING COGNITIVE CORE...</span>
@@ -292,16 +293,20 @@ export default function BinaryFace() {
   }
 
   return (
-    <div className="w-full h-full min-h-[350px] relative">
-      <span className="absolute top-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
-      
-      <div className="absolute top-4 left-4 z-10 font-mono text-[12px] text-cyber-blue/60 tracking-wider">
-        <div>SYS.MODEL: COGNITIVE_EYE_TRACKING_3D</div>
-        <div>STATUS: GLOBAL_LOOK_ACTIVE</div>
-      </div>
+    <div className={background ? "w-full h-full" : "w-full h-full min-h-[350px] relative"}>
+      {!background && (
+        <>
+          <span className="absolute top-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute top-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute bottom-2 left-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+          <span className="absolute bottom-2 right-2 text-[13px] text-cyber-tan/45 select-none pointer-events-none font-mono">+</span>
+
+          <div className="absolute top-4 left-4 z-10 font-mono text-[12px] text-cyber-blue/60 tracking-wider">
+            <div>SYS.MODEL: COGNITIVE_EYE_TRACKING_3D</div>
+            <div>STATUS: GLOBAL_LOOK_ACTIVE</div>
+          </div>
+        </>
+      )}
 
       <Canvas
         key={canvasKey}
@@ -314,7 +319,9 @@ export default function BinaryFace() {
         }}
       >
         <FaceScene texture={binaryTexture} globalMouse={globalMouse} />
-        <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+        {!background && (
+          <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+        )}
       </Canvas>
     </div>
   );

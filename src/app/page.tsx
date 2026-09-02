@@ -40,11 +40,7 @@ import { submitRegistration as submitRegistrationToSupabase } from "@/lib/submis
 // Dynamically import WebGL elements to prevent SSR issues
 const BinaryFace = dynamic(() => import("@/components/BinaryFace"), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[350px] flex items-center justify-center bg-cyber-dark/40 border border-cyber-blue/10">
-      <span className="text-xs text-cyber-blue/50 tracking-widest animate-pulse font-mono">// BOOTING WebGL ENGINE...</span>
-    </div>
-  )
+  loading: () => null,
 });
 
 
@@ -320,6 +316,13 @@ export default function Home() {
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 ambient-glow" />
       <BinaryStarfield />
 
+      {/* Interactive cognitive-face backdrop — follows the cursor across the whole page */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
+        <div className="relative h-[80vh] w-full max-w-4xl opacity-40">
+          <BinaryFace background />
+        </div>
+      </div>
+
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.11)_0%,transparent_62%)] pointer-events-none" />
 
@@ -523,12 +526,12 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-        {/* 2. HERO SECTION: "HACKURITY" */}
-        <section id="mission_brief" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/20 relative">
+        {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop */}
+        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/10 bg-cyber-dark/40 p-6 backdrop-blur-[2px] md:p-10 lg:max-w-2xl">
           <CornerCrosshairs />
 
-          {/* Left Column: Title & stats */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* Title & stats */}
+          <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <span className="text-[14px] tracking-[0.3em] text-cyber-tan font-bold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 bg-cyber-tan rounded-full animate-ping" />
@@ -555,14 +558,14 @@ export default function Home() {
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-4 font-mono text-sm sm:grid-cols-2">
                   {[
                     { k: "FORMAT", v: "24-hour hackathon // on-site" },
-                    { k: "DATE", v: "15 – 16 October 2026" },
-                    { k: "BUILD WINDOW", v: "15 Oct 09:00 → 16 Oct 09:00 IST" },
+                    { k: "DATE", v: "14 – 15 October 2026" },
+                    { k: "BUILD WINDOW", v: "14 Oct 09:00 → 15 Oct 09:00 IST" },
                     { k: "VENUE", v: "REVA University, Bengaluru" },
                     { k: "TEAM SIZE", v: "3 – 4 members" },
                     { k: "ENTRY", v: "₹800 per team" },
                     { k: "REGISTRATION", v: "9 Sep – 3 Oct 2026" },
                     { k: "TRACKS", v: "3 tracks // 2 problem statements each" },
-                    { k: "PRIZES", v: "Ceremony 16 Oct, 18:00 IST" },
+                    { k: "PRIZES", v: "Ceremony 15 Oct, 18:00 IST" },
                   ].map((row) => (
                     <div key={row.k} className="flex flex-col gap-0.5">
                       <dt className="text-[12px] font-bold tracking-[0.24em] text-cyber-tan/80 uppercase">
@@ -585,21 +588,6 @@ export default function Home() {
                   [ REGISTER NOW]
                 </a>
               </div>
-            </div>
-          </div>
-
-          {/* Right Column: 3D Binary Face Centerpiece — desktop only, skipped on mobile */}
-          <div className="hidden lg:col-span-7 lg:flex flex-col justify-center items-center relative overflow-hidden bg-transparent p-4 h-[420px]">
-            <div className="w-full h-full relative">
-              <BinaryFace />
-            </div>
-
-            <div className="w-full flex items-center justify-between mt-2 px-2 text-[12px] text-cyber-gray font-mono">
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 bg-cyber-blue rounded-full animate-pulse" />
-                <span>COGNITIVE FOCUS: CURSOR</span>
-              </div>
-              <span className="text-cyber-tan font-bold">EYE_TRACK: LOOKING</span>
             </div>
           </div>
         </section>

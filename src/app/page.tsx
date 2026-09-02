@@ -516,7 +516,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center gap-1">
           <h1 className="text-4xl leading-tight tracking-tight text-white uppercase md:text-5xl">
-            <FontCycler text="2026" />
+            <FontCycler text="2k26" />
           </h1>
           <GradientUnderline className="max-w-[140px]" />
         </div>
@@ -533,6 +533,17 @@ export default function Home() {
             <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
           </span>
         </div>
+
+        <RotatingFactPanel
+          facts={[
+            { k: "BUILD WINDOW", v: "24 hours // on-site" },
+            { k: "TEAM SIZE", v: "3 – 4 members" },
+            { k: "TRACKS", v: "3 tracks // 2 problems each" },
+            { k: "ENTRY", v: "₹800 per team" },
+            { k: "VENUE", v: "REVA University, Bengaluru" },
+          ]}
+          className="w-full max-w-xs"
+        />
 
         <div className="flex w-full max-w-5xl flex-col items-stretch gap-4 lg:flex-row lg:items-center">
           <TwoRowInfoCard
@@ -558,17 +569,6 @@ export default function Home() {
           />
         </div>
 
-        <RotatingFactPanel
-          facts={[
-            { k: "BUILD WINDOW", v: "24 hours // on-site" },
-            { k: "TEAM SIZE", v: "3 – 4 members" },
-            { k: "TRACKS", v: "3 tracks // 2 problems each" },
-            { k: "ENTRY", v: "₹800 per team" },
-            { k: "VENUE", v: "REVA University, Bengaluru" },
-          ]}
-          className="mt-2 w-full max-w-xs"
-        />
-
         <BracketFrame className="mt-2 inline-block">
           <a
             href="#join_node"
@@ -580,7 +580,7 @@ export default function Home() {
       </section>
 
       {/* MAIN CONTAINER */}
-      <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10">
+      <main className="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-16 md:gap-24 relative z-10 [zoom:1.12]">
         
         {/* Decorative corner markers */}
         <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-cyber-blue/20 pointer-events-none" />

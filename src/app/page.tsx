@@ -318,7 +318,7 @@ export default function Home() {
 
       {/* Interactive cognitive-face backdrop — follows the cursor across the whole page */}
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
-        <div className="relative h-[88vh] w-full max-w-4xl opacity-80">
+        <div className="relative h-[92vh] w-full max-w-5xl opacity-95">
           <BinaryFace background />
         </div>
       </div>
@@ -527,7 +527,7 @@ export default function Home() {
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
         {/* 2. HERO SECTION: "HACKURITY" — sits over the interactive face backdrop */}
-        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/10 bg-cyber-dark/70 p-6 backdrop-blur-sm md:p-8 lg:max-w-[46rem]">
+        <section id="mission_brief" className="relative flex flex-col crosshair-corner border border-cyber-blue/10 bg-cyber-dark/70 p-6 backdrop-blur-sm md:p-8 lg:mx-auto lg:max-w-[46rem]">
           <CornerCrosshairs />
 
           {/* Title & stats */}

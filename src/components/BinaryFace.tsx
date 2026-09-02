@@ -47,7 +47,7 @@ const BinaryFaceMaterial = shaderMaterial(
     
     // Attenuate point size - made smaller for maximum sharpness and readability
     float pulse = 1.0 + sin(u_time * 3.5 + a_offset * 12.0) * 0.25;
-    gl_PointSize = (26.0 / -mvPosition.z) * pulse;
+    gl_PointSize = (30.0 / -mvPosition.z) * pulse;
     
     vDist = length(pos - vec3(u_mousePos.x, u_mousePos.y, 0.2));
   }
@@ -76,7 +76,7 @@ const BinaryFaceMaterial = shaderMaterial(
     
     // Color morphing based on cursor distance
     float colorMix = sin(vDist * 2.0 - u_time * 1.8 + vOffset) * 0.5 + 0.5;
-    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix) * 1.35;
+    vec3 finalColor = mix(u_colorBlue, u_colorTan, colorMix) * 1.7;
 
     gl_FragColor = vec4(finalColor, texColor.a);
   }

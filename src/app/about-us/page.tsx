@@ -8,6 +8,7 @@ import BinaryFlowField from "@/components/club/BinaryFlowField";
 import AboutSection from "@/components/club/AboutSection";
 import MembersSection from "@/components/club/MembersSection";
 import FacultySection from "@/components/club/FacultySection";
+import GallerySection from "@/components/club/GallerySection";
 
 export default function ClubHome() {
   const { scrollYProgress } = useScroll();
@@ -57,6 +58,7 @@ export default function ClubHome() {
         </section>
         <AboutSection />
         <FacultySection />
+        <GallerySection />
         <MembersSection />
 
         <footer className="relative border-t border-cyber-blue/15 bg-black/70 px-5 py-12 md:px-8">

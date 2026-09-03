@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 
 type QaRecord = { id: string; question: string; answer: string };
 
-const PAGE_SIZE = 6;
-
 const RECORDS: QaRecord[] = [
   {
     id: "01",
@@ -188,7 +186,6 @@ function wordsMatch(a: string, b: string): boolean {
 export default function QueryTerminal() {
   const [activeId, setActiveId] = useState(RECORDS[0].id);
   const [query, setQuery] = useState("");
-  const [page, setPage] = useState(0);
   const [typed, setTyped] = useState("");
 
   // Pre-index the keywords for every record once.
@@ -235,19 +232,10 @@ export default function QueryTerminal() {
       .map((entry) => RECORDS.find((record) => record.id === entry.id)!);
   }, [query, parsedKeys, recordWords]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages - 1);
-  const pageItems = filtered.slice(safePage * PAGE_SIZE, safePage * PAGE_SIZE + PAGE_SIZE);
-
   const active = useMemo(
     () => RECORDS.find((record) => record.id === activeId) ?? RECORDS[0],
     [activeId]
   );
-
-  // Reset to the first page whenever the query changes.
-  useEffect(() => {
-    setPage(0);
-  }, [query]);
 
   // Keep the active record inside the current result set.
   useEffect(() => {
@@ -302,8 +290,8 @@ export default function QueryTerminal() {
           )}
         </div>
 
-        <ul className="flex flex-col divide-y divide-cyber-blue/10 border border-cyber-blue/10 bg-cyber-dark/30">
-          {pageItems.map((record) => (
+        <ul className="flex max-h-[420px] flex-col divide-y divide-cyber-blue/10 overflow-y-auto border border-cyber-blue/10 bg-cyber-dark/30 [scrollbar-color:rgba(212,181,132,0.4)_transparent] [scrollbar-width:thin]">
+          {filtered.map((record) => (
             <li key={record.id}>
               <button
                 type="button"
@@ -326,49 +314,6 @@ export default function QueryTerminal() {
           )}
         </ul>
 
-        {/* Pagination */}
-        {filtered.length > 0 && (
-          <div className="flex items-center justify-between border border-cyber-blue/15 bg-cyber-black/50 px-2 py-1.5 font-mono text-[12px] tracking-widest">
-            <button
-              type="button"
-              onClick={() => setPage((current) => Math.max(0, current - 1))}
-              disabled={safePage === 0}
-              className="border border-cyber-blue/20 px-2 py-1 text-cyber-gray transition-colors hover:border-cyber-tan hover:text-cyber-tan disabled:cursor-not-allowed disabled:opacity-25"
-            >
-              [ PREV ]
-            </button>
-
-            <div className="flex items-center gap-2">
-              <span className="text-cyber-tan">
-                PAGE {String(safePage + 1).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}
-              </span>
-              <span className="hidden items-center gap-1 sm:flex">
-                {Array.from({ length: totalPages }).map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    aria-label={`Go to page ${index + 1}`}
-                    onClick={() => setPage(index)}
-                    className={`h-1.5 w-1.5 rotate-45 border transition-colors ${
-                      index === safePage
-                        ? "border-cyber-tan bg-cyber-tan"
-                        : "border-cyber-blue/40 hover:border-cyber-tan"
-                    }`}
-                  />
-                ))}
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setPage((current) => Math.min(totalPages - 1, current + 1))}
-              disabled={safePage >= totalPages - 1}
-              className="border border-cyber-blue/20 px-2 py-1 text-cyber-gray transition-colors hover:border-cyber-tan hover:text-cyber-tan disabled:cursor-not-allowed disabled:opacity-25"
-            >
-              [ NEXT ]
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Terminal output */}

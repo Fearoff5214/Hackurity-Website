@@ -183,7 +183,9 @@ export default function EventPathway() {
 
   return (
     <div ref={containerRef} className="relative w-full md:grid md:grid-cols-[240px_1fr] md:gap-6">
-      <div className="relative mb-4 md:mb-0">
+      {/* Traveling readout is desktop-only — on mobile it has no gutter to live
+          in and overlaps the timeline cards. */}
+      <div className="relative hidden md:block md:mb-0">
         <CurrentStageReadout progress={progress} trackHeight={trackHeight} rowOffsets={rowOffsets} />
       </div>
 

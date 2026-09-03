@@ -298,6 +298,12 @@ b {
   width: var(--hc-w);
   height: var(--hc-h);
   margin: 0 calc(var(--hc-gap) / 2);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+  will-change: transform;
+}
+.hc-cell-clip {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: var(--color-cyber-dark, #16161f);
@@ -309,7 +315,7 @@ b {
   height: 100%;
   object-fit: cover;
   filter: grayscale(35%) brightness(0.82);
-  transition: transform 0.5s ease, filter 0.5s ease;
+  transition: filter 0.4s ease;
 }
 .hc-cell::after {
   content: "";
@@ -320,8 +326,12 @@ b {
   transition: border-color 0.3s ease;
   pointer-events: none;
 }
+.hc-cell:hover {
+  transform: scale(1.22);
+  z-index: 5;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px var(--color-cyber-tan-glow, rgba(210, 180, 140, 0.3)));
+}
 .hc-cell:hover img {
-  transform: scale(1.14);
   filter: grayscale(0%) brightness(1);
 }
 .hc-cell:hover::after {

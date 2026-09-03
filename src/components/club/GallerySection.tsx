@@ -32,7 +32,9 @@ export default function GallerySection() {
             <div key={rowIndex} className={`hc-row ${rowIndex % 2 === 1 ? "hc-row--offset" : ""}`}>
               {row.map((image, imgIndex) => (
                 <div key={image.src} className="hc-cell">
-                  <img src={image.src} alt={image.alt} loading="lazy" />
+                  <div className="hc-cell-clip">
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                  </div>
                 </div>
               ))}
             </div>

@@ -23,7 +23,7 @@ type SiteNavProps = {
   basePath?: string;
   /** Nav item highlighted before the scroll-spy takes over (a no-op on pages without those sections). */
   initialSection?: string;
-  /** Extra shortcut shown only in the mobile menu. */
+  /** Extra shortcut shown only in the mobile menu. Omitted → no back link is rendered. */
   backLink?: { href: string; label: string };
   /** Show the Hackurity icon + "HACKURITY // 2026" wordmark on the left. */
   showBrand?: boolean;
@@ -36,7 +36,7 @@ type SiteNavProps = {
 export default function SiteNav({
   basePath = "",
   initialSection = "HOME",
-  backLink = { href: "/about-us", label: "Back to Cyber Club" },
+  backLink,
   showBrand = true,
   showRegister = true,
   centerNav = false,
@@ -263,13 +263,15 @@ export default function SiteNav({
                     Register Now
                   </a>
                 )}
-                <Link
-                  href={backLink.href}
-                  onClick={() => setNavOpen(false)}
-                  className="col-span-2 flex items-center justify-center gap-1.5 border border-cyber-blue/20 bg-cyber-dark/70 px-3 py-3 text-center font-mono text-[14px] tracking-widest text-cyber-gray uppercase"
-                >
-                  <span aria-hidden="true">←</span> {backLink.label}
-                </Link>
+                {backLink && (
+                  <Link
+                    href={backLink.href}
+                    onClick={() => setNavOpen(false)}
+                    className="col-span-2 flex items-center justify-center gap-1.5 border border-cyber-blue/20 bg-cyber-dark/70 px-3 py-3 text-center font-mono text-[14px] tracking-widest text-cyber-gray uppercase"
+                  >
+                    <span aria-hidden="true">←</span> {backLink.label}
+                  </Link>
+                )}
               </div>
             </motion.nav>
           )}

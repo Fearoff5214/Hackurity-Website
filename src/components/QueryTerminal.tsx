@@ -290,7 +290,10 @@ export default function QueryTerminal() {
           )}
         </div>
 
-        <ul className="flex max-h-[420px] flex-col divide-y divide-cyber-blue/10 overflow-y-auto border border-cyber-blue/10 bg-cyber-dark/30 [scrollbar-color:rgba(212,181,132,0.4)_transparent] [scrollbar-width:thin]">
+        <ul
+          data-lenis-prevent
+          className="flex max-h-[420px] flex-col divide-y divide-cyber-blue/10 overflow-y-auto overscroll-contain border border-cyber-blue/10 bg-cyber-dark/30 [scrollbar-color:rgba(212,181,132,0.4)_transparent] [scrollbar-width:thin]"
+        >
           {filtered.map((record) => (
             <li key={record.id}>
               <button

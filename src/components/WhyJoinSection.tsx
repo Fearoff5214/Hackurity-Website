@@ -259,7 +259,6 @@ export default function WhyJoinSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(activeIndex);
   activeIndexRef.current = activeIndex;
-  const [paused, setPaused] = useState(false);
 
   // Sets `activeIndex` directly rather than waiting for the `onScroll`
   // handler below to infer it — a programmatic `track.scrollTo(...)` does
@@ -275,16 +274,18 @@ export default function WhyJoinSection() {
     setActiveIndex(index);
   };
 
-  // Auto-advance the carousel — paused on hover/focus/touch so it never
-  // fights someone actually browsing the cards, and skipped entirely under
-  // prefers-reduced-motion like every other looping animation on this page.
+  // Auto-advance the carousel — runs continuously (no pause-on-hover: your
+  // cursor is right next to the cards any time you're actually looking at
+  // this, which made a hover-pause read as "it's just stuck"), skipped
+  // entirely under prefers-reduced-motion like every other looping
+  // animation on this page.
   useEffect(() => {
-    if (reduce || paused) return;
+    if (reduce) return;
     const id = window.setInterval(() => {
       scrollToCard((activeIndexRef.current + 1) % BENEFITS.length);
     }, 4000);
     return () => window.clearInterval(id);
-  }, [reduce, paused]);
+  }, [reduce]);
 
   const handleTrackScroll = () => {
     const track = trackRef.current;
@@ -377,13 +378,7 @@ export default function WhyJoinSection() {
       </div>
 
       {/* benefit carousel */}
-      <div
-        className="relative mt-6"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-      >
+      <div className="relative mt-6">
         <motion.div
           ref={trackRef}
           onScroll={handleTrackScroll}

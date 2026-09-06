@@ -261,11 +261,18 @@ export default function WhyJoinSection() {
   activeIndexRef.current = activeIndex;
   const [paused, setPaused] = useState(false);
 
+  // Sets `activeIndex` directly rather than waiting for the `onScroll`
+  // handler below to infer it — a programmatic `track.scrollTo(...)` does
+  // move the track (confirmed: scrollLeft changes), but the resulting
+  // native 'scroll' event never reaches this component's onScroll handler,
+  // so activeIndex silently never advanced past 0 when this fired only
+  // from a scroll-position readback.
   const scrollToCard = (index: number) => {
     const track = trackRef.current;
     const card = track?.children[index] as HTMLElement | undefined;
     if (!track || !card) return;
     track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+    setActiveIndex(index);
   };
 
   // Auto-advance the carousel — paused on hover/focus/touch so it never

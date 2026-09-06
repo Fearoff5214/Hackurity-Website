@@ -4,7 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import SiteNav from "@/components/SiteNav";
 import CyberCursor from "@/components/CyberCursor";
 import CampusLogo from "@/components/CampusLogo";
-import BinaryFlowField from "@/components/club/BinaryFlowField";
+import ThreatGlobeField from "@/components/club/ThreatGlobeField";
 import AboutSection from "@/components/club/AboutSection";
 import MembersSection from "@/components/club/MembersSection";
 import FacultySection from "@/components/club/FacultySection";
@@ -18,7 +18,9 @@ export default function ClubHome() {
     <div id="top" className="club-root club-scroll relative min-h-screen overflow-x-hidden">
       <CyberCursor />
       <CampusLogo primary="club" />
-      <BinaryFlowField />
+      {/* Threat globe + binary rain in one canvas: the globe owns its disc, the
+          binary fills the rest and gets disturbed as it crosses the globe. */}
+      <ThreatGlobeField />
 
       <motion.div
         style={{ scaleX: progress }}
@@ -86,20 +88,7 @@ export default function ClubHome() {
                 className="flex h-8 w-8 items-center justify-center border border-cyber-blue/30 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.instagram.com/reva_cybersecurity_official?igsi=ZmM2MDIzNDR2dHN1"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="REVA Cybersecurity Club on Instagram"
-                className="flex h-8 w-8 items-center justify-center border border-cyber-blue/30 text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
                 </svg>
               </a>
             </div>

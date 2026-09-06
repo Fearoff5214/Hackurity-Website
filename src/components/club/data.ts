@@ -6,6 +6,8 @@ export type Person = {
   phone: string;
   github: string;
   linkedin: string;
+  /** Optional headshot. Local file in /public wins, Drive link is the fallback. */
+  photo?: string;
 };
 
 export type Department = {
@@ -14,6 +16,9 @@ export type Department = {
   blurb: string;
   people: Person[];
 };
+
+/** Google Drive "anyone with the link" images, served as direct image URLs. */
+const drive = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
 
 const dummy = (name: string, role: string, saying: string, handle: string, phone: string): Person => ({
   name,
@@ -101,24 +106,26 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Sharmily",
+          "Sharmily H",
           "Marketing Head",
-          "There is nothing called a SUCCESS or FAILURE, Everything is a different experience! ",
+          "There is nothing called a SUCCESS or FAILURE, Everything is a different experience!",
           "sharmily",
           "+91 9008897013",
         ),
         email: "sharmi16605@gmail.com",
         github: "https://github.com/Sharmily-cloud",
         linkedin: "https://www.linkedin.com/in/sharmily-h-46873b293",
+        photo: drive("1JhYm7ur6_71Xj93MM_D6VfeB9DRwpaki"),
       },
       {
         ...dummy(
-          "Rachana",
+          "Rachana Panibathe",
           "Member",
           "The best defense starts with awareness — that's the story we're here to tell.",
           "rachana",
           "+91 00000 00000",
         ),
+        photo: drive("1VYM5RodLP8r1UbDrrcKIKDyUdqoW-dBs"),
       },
     ],
   },
@@ -129,7 +136,7 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Chethan K",
+          "Chetan Kumar H M",
           "Design Team Head",
           "If it looks sharp, it gets trusted — design is security's first impression.",
           "chethan-k",
@@ -138,6 +145,7 @@ export const DEPARTMENTS: Department[] = [
         email: "chethankumar23.2005@gmail.com",
         github: "https://github.com/chetank23",
         linkedin: "https://www.linkedin.com/in/chetank23/",
+        photo: drive("1qj1SWxMYHvBUAppbJgLBu7HeGqgwacnz"),
       },
       dummy(
         "Harshitha M Raj",
@@ -167,13 +175,16 @@ export const DEPARTMENTS: Department[] = [
         "lavanya-d",
         "+91 80730 48671",
       ),
-      dummy(
-        "Ramya VK",
-        "Event Management",
-        "Details make the difference between a good event and a great one.",
-        "ramya-vk",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Ramya VK",
+          "Event Management",
+          "Details make the difference between a good event and a great one.",
+          "ramya-vk",
+          "+91 00000 00000",
+        ),
+        photo: drive("11wZ2Uxbh_uOXaS-YUmnmh28Sh-KoCSj5"),
+      },
       dummy(
         "Adithi Bisappa Gowda",
         "Event Management",
@@ -188,13 +199,16 @@ export const DEPARTMENTS: Department[] = [
     label: "Social Media",
     blurb: "Runs the club's presence online.",
     people: [
-      dummy(
-        "TBD",
-        "Social Media Head",
-        "We don't just post updates, we build the community that shows up.",
-        "social-media-head",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "KP Yogesh",
+          "Social Media Head",
+          "We don't just post updates, we build the community that shows up.",
+          "kp-yogesh",
+          "+91 00000 00000",
+        ),
+        photo: drive("1P5pLJTVCotnTjMo-PxYJcXn_oNsDwikQ"),
+      },
       {
         name: "Shreya Hiremath",
         role: "Social Media Associate",
@@ -202,11 +216,13 @@ export const DEPARTMENTS: Department[] = [
         email: "shreya-hiremath@revacyberclub.in",
         phone: "+91 00000 00000",
         github: "https://github.com/NinjaCoder03",
-        linkedin: "https://www.linkedin.com/in/shreya-hiremath-86a853331?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+        linkedin:
+          "https://www.linkedin.com/in/shreya-hiremath-86a853331?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+        photo: drive("10Y4i5E4GFrRzMeEfph7jWy-00fczaMpo"),
       },
       {
         ...dummy(
-          "Shrishail Biradar",
+          "Shrishail G Biradar",
           "Social Media Member",
           "All power is within you",
           "shrishail-biradar",
@@ -215,10 +231,14 @@ export const DEPARTMENTS: Department[] = [
         email: "shrishailbiradar2004@gmail.com",
         github: "https://github.com/Shrishailgb24",
         linkedin: "https://www.linkedin.com/in/shrishail-biradar-761833296",
+        photo: drive("1OtDtc9Peeqfg3k3PU05rEbLadTpTWDlQ"),
       },
     ],
   },
 ];
+
+/** Departments whose members keep a public GitHub button. */
+export const TECHNICAL_DEPARTMENT_IDS = ["technical"];
 
 export type TeamPortrait = {
   name: string;

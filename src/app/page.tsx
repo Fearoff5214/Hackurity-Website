@@ -17,6 +17,7 @@ import {
   CodeGlyph,
 } from "@/components/TechElements";
 import SiteNav from "@/components/SiteNav";
+import SideDotNav from "@/components/SideDotNav";
 import HackurityCountdown from "@/components/HackurityCountdown";
 import EventPathway from "@/components/EventPathway";
 import QueryTerminal from "@/components/QueryTerminal";
@@ -30,6 +31,8 @@ import ScrollToTopButton from "@/components/ScrollToTopButton";
 import TrackCard from "@/components/TrackCard";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
+import MissionParameters from "@/components/MissionParameters";
+import HackerRoomBackground from "@/components/HackerRoomBackground";
 import WhyJoinSection from "@/components/WhyJoinSection";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
@@ -261,12 +264,16 @@ export default function Home() {
       {/* Ambient animated background: gradient glows + binary starfield + magenta glitter */}
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 ambient-glow" />
       <BinaryStarfield />
+      <HackerRoomBackground />
 
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(122,124,246,0.04)_0%,transparent_62%)] pointer-events-none" />
 
       {/* 1. NAVIGATION BAR — fixed to top, compacts on scroll */}
       <SiteNav />
+
+      {/* Side dot-nav rail — desktop only, tracks the active section */}
+      <SideDotNav />
 
       {/* HERO — centered headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
       <section id="mission_brief" className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-6 px-4 py-14 text-center md:px-8 md:py-20">
@@ -341,7 +348,6 @@ export default function Home() {
         <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyber-blue/20 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
-
         {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
         <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
@@ -386,6 +392,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 3B. MISSION PARAMETERS — pinned scroll-driven readout beside a scanning spec list */}
+        <MissionParameters />
 
         {/* 4. SECTION THREE: "03. EVENT EXECUTION TIMELINE" */}
         <section id="event_flow" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 bg-cyber-dark/30 backdrop-blur-md relative overflow-hidden">

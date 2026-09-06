@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, shaderMaterial, Environment } from "@react-three/drei";
+import { OrbitControls, shaderMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 // 1. Define custom shader material for binary stream particles
@@ -172,17 +172,22 @@ interface FiberCableProps {
 function FiberCable({ position, rotation, scale, color, speed, texture }: FiberCableProps) {
   return (
     <group position={position} rotation={rotation} scale={scale}>
-      {/* 1. Outer Glass Cylinder */}
+      {/* 1. Outer glass cylinder — plain transparent material, not `transmission`.
+          `transmission` forces an extra full-scene offscreen render pass PER
+          transmissive object; with 4 of these on screen at once it was
+          bringing the GPU to its knees (dropped frames, WebGL context loss on
+          weaker GPUs). This fakes the glassy look with cheap alpha + specular
+          instead — visually close, a fraction of the cost. */}
       <mesh>
-        <cylinderGeometry args={[0.4, 0.4, 10, 32, 1, true]} />
+        <cylinderGeometry args={[0.4, 0.4, 10, 20, 1, true]} />
         <meshPhysicalMaterial
           color={color}
-          transmission={0.9} // highly transmissive clear glass
-          roughness={0.1}
+          roughness={0.15}
           metalness={0.1}
           transparent
-          clearcoat={1.0}
-          clearcoatRoughness={0.05}
+          opacity={0.3}
+          clearcoat={0.6}
+          clearcoatRoughness={0.15}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
@@ -246,14 +251,16 @@ function CableBundle({ texture }: { texture: THREE.Texture }) {
   );
 }
 
-// Scene setup with preset studio reflections
+// Scene setup — lit with plain lights instead of an Environment HDRI. The
+// preset environments still look decent on clearcoat without one; skipping
+// it also drops a remote HDRI fetch + extra reflection-probe cost per frame.
 function ConduitScene({ texture }: { texture: THREE.Texture }) {
   return (
     <>
-      <Environment preset="city" />
-      <ambientLight intensity={0.15} />
+      <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={2.5} color="#6366f1" />
-      
+      <pointLight position={[-4, -3, 4]} intensity={1.4} color="#d2b48c" />
+
       <CableBundle texture={texture} />
     </>
   );
@@ -312,6 +319,8 @@ export default function CyberBreachConduit() {
 
       <Canvas
         key={canvasKey}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 8], fov: 45 }}
         onCreated={({ gl }) => {
           gl.domElement.addEventListener("webglcontextlost", (event) => {

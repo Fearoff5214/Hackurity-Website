@@ -3,14 +3,66 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
-// Corner Crosshairs Component (Tan color)
-export function CornerCrosshairs() {
+// Self-drawing corner brackets — one L-shaped path per corner, strokes itself
+// in (pathLength 0 -> 1) the first time it scrolls into view, staggered
+// corner-by-corner. Same technique as GradientUnderline below, just applied
+// four times per instance. A single path is reused for all four corners by
+// mirroring it with a CSS transform, so only one shape needs maintaining.
+export function AnimatedCorners({ size = 12, tone = "tan" }: { size?: number; tone?: "tan" | "blue" }) {
+  const stroke = tone === "tan" ? "var(--color-cyber-tan)" : "var(--color-cyber-blue)";
+  const corners = [
+    { cls: "top-0 left-0", transform: "none" },
+    { cls: "top-0 right-0", transform: "scaleX(-1)" },
+    { cls: "bottom-0 left-0", transform: "scaleY(-1)" },
+    { cls: "bottom-0 right-0", transform: "scale(-1, -1)" },
+  ];
   return (
     <>
-      <span className="absolute top-2 left-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute top-2 right-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 left-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
-      <span className="absolute bottom-2 right-2 text-[13px] text-cyber-tan/40 select-none pointer-events-none font-mono">+</span>
+      {corners.map((corner, i) => (
+        <svg
+          key={corner.cls}
+          viewBox={`0 0 ${size} ${size}`}
+          width={size}
+          height={size}
+          aria-hidden="true"
+          className={`pointer-events-none absolute ${corner.cls}`}
+          style={{ transform: corner.transform }}
+        >
+          <motion.path
+            d={`M0 ${size} L0 0 L${size} 0`}
+            fill="none"
+            stroke={stroke}
+            strokeWidth={2}
+            strokeLinecap="square"
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: "easeInOut" }}
+          />
+        </svg>
+      ))}
+    </>
+  );
+}
+
+// Corner Crosshairs Component (Tan color) — the four "+" marks fade/scale in
+// with a stagger the first time the section scrolls into view.
+export function CornerCrosshairs() {
+  const positions = ["top-2 left-2", "top-2 right-2", "bottom-2 left-2", "bottom-2 right-2"];
+  return (
+    <>
+      {positions.map((pos, i) => (
+        <motion.span
+          key={pos}
+          initial={{ opacity: 0, scale: 0.4 }}
+          whileInView={{ opacity: 0.4, scale: 1 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.35, delay: i * 0.08, ease: "easeOut" }}
+          className={`absolute ${pos} text-[13px] text-cyber-tan select-none pointer-events-none font-mono`}
+        >
+          +
+        </motion.span>
+      ))}
     </>
   );
 }
@@ -19,11 +71,7 @@ export function CornerCrosshairs() {
 export function BracketFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={`relative p-4 border border-cyber-blue/10 bg-cyber-black/80 bracket-container ${className}`}>
-      {/* Corner angle brackets in Tan */}
-      <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-cyber-tan pointer-events-none" />
-      <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-cyber-tan pointer-events-none" />
-      <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-cyber-tan pointer-events-none" />
-      <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-cyber-tan pointer-events-none" />
+      <AnimatedCorners size={12} tone="tan" />
       {children}
     </div>
   );

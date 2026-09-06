@@ -28,6 +28,7 @@ const CREATORS: Creator[] = [
   {
     name: "Tanush Jain",
     role: "Developer",
+    quote: "I didn't write the bug, I just wrote the code next to it.",
     github: "https://github.com/Tanush-Jain",
     linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
   },

@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useScrollSpy } from "@/components/useScrollSpy";
 
 // Navigation links — also drive the scroll-spy that highlights the active section.
 // Hash links are resolved against `basePath` so this same list works both on the
 // home page (where the sections live) and on other routes (which link back to them).
-const navLinks = [
+// Exported so SideDotNav can share the exact same section list.
+export const navLinks = [
   { name: "HOME", label: "MISSION_BRIEF", href: "#mission_brief" },
   { name: "TRACKS", label: "CHALLENGE_TRACKS", href: "#ctf_challenges" },
   { name: "TIMELINE", label: "EVENT_TIMELINE", href: "#event_flow" },
@@ -41,7 +43,7 @@ export default function SiteNav({
   showRegister = true,
   centerNav = false,
 }: SiteNavProps) {
-  const [currentSection, setCurrentSection] = useState(initialSection);
+  const [currentSection, setCurrentSection] = useScrollSpy(navLinks, initialSection);
 
   // Navbar behaviour: locks into "attack mode" once the user scrolls past the hero fold.
   const [navAttack, setNavAttack] = useState(false);
@@ -49,43 +51,20 @@ export default function SiteNav({
 
   const resolveHref = (href: string) => (href.startsWith("#") ? `${basePath}${href}` : href);
 
-  // One rAF-throttled scroll pass drives both the "attack mode" navbar and the
-  // scroll-spy highlight — no layout reads on the raw scroll event.
   useEffect(() => {
-    const sections = navLinks
-      .filter((link) => link.href.startsWith("#"))
-      .map((link) => {
-        const el = document.querySelector(link.href);
-        return el instanceof HTMLElement ? { name: link.name, el } : null;
-      })
-      .filter((entry): entry is { name: string; el: HTMLElement } => entry !== null);
-
     let ticking = false;
     const update = () => {
       ticking = false;
-      const y = window.scrollY;
-      setNavAttack(y > 90);
-      if (sections.length === 0) return;
-      const probe = y + window.innerHeight * 0.3;
-      let nextName = sections[0].name;
-      for (const section of sections) {
-        if (section.el.getBoundingClientRect().top + y - 1 <= probe) nextName = section.name;
-      }
-      setCurrentSection((prev) => (prev === nextName ? prev : nextName));
+      setNavAttack(window.scrollY > 90);
     };
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(update);
     };
-
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

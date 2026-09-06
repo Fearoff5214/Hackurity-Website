@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useSpring, useTransform, useInView, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { EVENT_SCHEDULE, type EventScheduleItem } from "@/data/eventSchedule";
+import { useRowScrollProgress } from "@/components/useRowScrollProgress";
 
 function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number }) {
   const ref = useRef<HTMLLIElement>(null);
@@ -86,21 +87,21 @@ function GatewayRow({ gate, index }: { gate: EventScheduleItem; index: number })
 // (confirmed live: the element reported a viewport `top` thousands of
 // pixels off-screen instead of holding near the fold). `position: absolute`
 // isn't affected — the trunk line below already relies on it successfully
-// under the same zoom — so this computes its own vertical offset from
-// scroll progress instead of leaning on the browser's sticky algorithm.
+// under the same zoom — so this computes its own vertical offset instead of
+// leaning on the browser's sticky algorithm.
 //
-// Both the displayed gate AND the badge's vertical position are derived
-// from the same real per-row `offsetTop` measurements (rowOffsets), rather
-// than assuming rows are evenly sized — rows vary in height (some briefs
-// wrap to two lines), so an index picked by `floor(progress * 12)` doesn't
-// land on the same row a purely pixel-linear `progress * trackHeight` top
-// would — they visibly drifted apart before this fix.
+// `activeIndex` comes from useRowScrollProgress, which measures each row's
+// real position on screen every scroll tick — it can't drift out of sync
+// with the row actually in view the way a `scrollYProgress * trackHeight`
+// estimate can. The badge's own vertical position is derived from that same
+// row's real `offsetTop` (rowOffsets), rather than assuming rows are evenly
+// sized — rows vary in height (some briefs wrap to two lines).
 function CurrentStageReadout({
-  progress,
+  activeIndex,
   trackHeight,
   rowOffsets,
 }: {
-  progress: ReturnType<typeof useSpring>;
+  activeIndex: number;
   trackHeight: number;
   rowOffsets: number[];
 }) {
@@ -115,26 +116,17 @@ function CurrentStageReadout({
     return () => observer.disconnect();
   }, []);
 
-  const indexMV = useTransform(progress, (p) => {
-    if (rowOffsets.length === 0) return 0;
-    const cursor = p * trackHeight;
-    let closest = 0;
-    for (let i = 0; i < rowOffsets.length; i++) {
-      if (rowOffsets[i] <= cursor) closest = i;
-    }
-    return closest;
-  });
-  const [index, setIndex] = useState(0);
-  useMotionValueEvent(indexMV, "change", (latest) => setIndex(latest));
-  const opacity = useTransform(progress, [0, 0.02, 1], [0, 1, 1]);
-  const top = useTransform(() => {
-    const target = rowOffsets[indexMV.get()] ?? 0;
-    return Math.min(target, Math.max(trackHeight - badgeHeight, 0));
-  });
-  const gate = EVENT_SCHEDULE[index];
+  const top = Math.min(rowOffsets[activeIndex] ?? 0, Math.max(trackHeight - badgeHeight, 0));
+  const gate = EVENT_SCHEDULE[activeIndex];
 
   return (
-    <motion.div ref={badgeRef} style={{ opacity, top }} className="relative md:absolute md:inset-x-0">
+    <motion.div
+      ref={badgeRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, top }}
+      transition={{ opacity: { duration: 0.4 }, top: { type: "spring", stiffness: 220, damping: 28 } }}
+      className="relative md:absolute md:inset-x-0"
+    >
       <div className="relative border border-cyber-tan/30 bg-cyber-black/70 px-4 py-3 backdrop-blur-sm">
         <span className="pointer-events-none absolute left-0 top-0 h-2.5 w-2.5 border-l-2 border-t-2 border-cyber-tan" />
         <span className="pointer-events-none absolute right-0 top-0 h-2.5 w-2.5 border-r-2 border-t-2 border-cyber-tan" />
@@ -146,7 +138,7 @@ function CurrentStageReadout({
         <p className="mt-1 font-mono text-[13px] font-bold text-cyber-tan">{gate.id}</p>
         <h4 className="font-heading text-[13px] leading-snug text-white uppercase">{gate.title}</h4>
         <p className="mt-2 font-mono text-[11px] tracking-widest text-cyber-gray/60">
-          {String(index + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}
+          {String(activeIndex + 1).padStart(2, "0")}/{String(EVENT_SCHEDULE.length).padStart(2, "0")}
         </p>
       </div>
     </motion.div>
@@ -174,11 +166,7 @@ export default function EventPathway() {
     return () => observer.disconnect();
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.85", "end 0.35"],
-  });
-  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, restDelta: 0.001 });
+  const { progress, activeIndex } = useRowScrollProgress(olRef, EVENT_SCHEDULE.length);
   const glowY = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
@@ -186,7 +174,7 @@ export default function EventPathway() {
       {/* Traveling readout is desktop-only — on mobile it has no gutter to live
           in and overlaps the timeline cards. */}
       <div className="relative hidden md:block md:mb-0">
-        <CurrentStageReadout progress={progress} trackHeight={trackHeight} rowOffsets={rowOffsets} />
+        <CurrentStageReadout activeIndex={activeIndex} trackHeight={trackHeight} rowOffsets={rowOffsets} />
       </div>
 
       <div ref={trackRef} className="relative">

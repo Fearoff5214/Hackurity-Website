@@ -1,9 +1,9 @@
 "use client";
 import { Reveal, SectionHeading } from "./Reveal";
 
-const GALLERY_ROW_SIZES = [5, 4, 5, 4] as const;
+const GALLERY_ROW_SIZES = [4, 4, 4, 4] as const;
 
-const GALLERY_IMAGES = Array.from({ length: 18 }, (_, i) => ({
+const GALLERY_IMAGES = Array.from({ length: 16 }, (_, i) => ({
   src: `/images/gallery/club-${String(i + 1).padStart(2, "0")}.jpg`,
   alt: "REVA Cybersecurity Club event moment",
 }));

@@ -282,7 +282,16 @@ b {
   --hc-gap: clamp(3px, 0.8vw, 8px);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* flex-start, not center: with `align-items: center`, each row is
+     centered independently based on its OWN margin-box width, so a
+     `margin-left` offset only lines rows up into a honeycomb by
+     coincidence when adjacent rows have different cell counts (their
+     centering shifts cancel out at different rates). flex-start pins every
+     row to the same left edge, so `.hc-row--offset`'s margin is the only
+     thing moving a row — it stays correct for any row sizes, including
+     equal-sized rows. The whole grid is still centered on the page via
+     `mx-auto` on its wrapper. */
+  align-items: flex-start;
 }
 .hc-row {
   display: flex;

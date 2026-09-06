@@ -310,6 +310,8 @@ export default function BinaryFace({ background = false }: { background?: boolea
 
       <Canvas
         key={canvasKey}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 2.2], fov: 45 }}
         onCreated={({ gl }) => {
           gl.domElement.addEventListener("webglcontextlost", (event) => {

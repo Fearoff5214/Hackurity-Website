@@ -305,7 +305,7 @@ export default function Home() {
           A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
         </p>
 
-        <div className="flex w-full max-w-5xl flex-col items-stretch gap-4 lg:flex-row lg:items-center">
+        <div className="flex w-full max-w-5xl flex-col items-stretch gap-4 lg:flex-row">
           <TwoRowInfoCard
             tone="tan"
             className="w-full text-left lg:max-w-xs"
@@ -349,7 +349,7 @@ export default function Home() {
         <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyber-blue/20 pointer-events-none" />
 
         {/* 3. SECTION TWO: "02. HACKATHON TRACKS" */}
-        <section id="ctf_challenges" className="flex flex-col gap-8 crosshair-corner border border-cyber-blue/10 p-6 md:p-10 bg-cyber-dark/30 backdrop-blur-md relative">
+        <section id="ctf_challenges" className="flex flex-col gap-6 crosshair-corner border border-cyber-blue/10 p-6 md:p-8 bg-cyber-dark/30 backdrop-blur-md relative">
           <CornerCrosshairs />
 
           <motion.div
@@ -357,19 +357,19 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col gap-5 max-w-3xl"
+            className="flex flex-col gap-4 max-w-3xl"
           >
             <div className="flex items-center gap-2">
-              <span className="text-[13px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
-              <span className="text-[15px] md:text-base text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
+              <span className="text-[12px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
+              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
             </div>
-            <h2 className="font-heading text-2xl md:text-4xl tracking-tight leading-tight text-white uppercase">
+            <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-tight text-white uppercase">
               TRACKS
             </h2>
-            <p className="font-mono text-[15px] md:text-base leading-relaxed text-cyber-gray">
+            <p className="font-mono text-xs md:text-sm leading-relaxed text-cyber-gray">
               There are three tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
             </p>
-            <p className="font-mono text-[13px] md:text-sm font-bold tracking-wide text-cyber-tan">
+            <p className="font-mono text-[11px] md:text-xs font-bold tracking-wide text-cyber-tan">
               // Problem statements will be announced 1 week before the hackathon.
             </p>
           </motion.div>

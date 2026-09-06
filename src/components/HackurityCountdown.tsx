@@ -32,7 +32,7 @@ export default function HackurityCountdown() {
   const units = useCountdown();
 
   return (
-    <div className="border border-cyber-tan/25 bg-cyber-black/40 p-3">
+    <div className="flex h-full flex-col justify-center border border-cyber-tan/25 bg-cyber-black/40 p-3">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-cyber-tan/25 pb-2 font-mono text-[13px] tracking-[0.2em] uppercase">
         <span className="font-bold text-cyber-tan">// T-MINUS TO BUILD WINDOW</span>
         <span className="border border-cyber-tan/40 bg-cyber-tan/10 px-2 py-0.5 font-bold text-white">14 OCT · 09:00 IST</span>

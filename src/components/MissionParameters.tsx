@@ -46,25 +46,25 @@ function SpecRow({ spec, index }: { spec: Spec; index: number }) {
   return (
     <div
       ref={ref}
-      className="relative flex items-start gap-4 border border-cyber-blue/10 bg-cyber-dark/30 p-4 transition-colors duration-300 hover:border-cyber-tan/40"
+      className="relative flex items-start gap-3 border border-cyber-blue/10 bg-cyber-dark/30 p-3 transition-colors duration-300 hover:border-cyber-tan/40"
     >
       <AnimatedCorners size={10} tone="tan" />
       <motion.span
         initial={{ opacity: 0, scale: 0.7 }}
         animate={inView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.35, delay: 0.05 + index * 0.03 }}
-        className="flex h-11 w-11 shrink-0 items-center justify-center border border-cyber-tan/30 bg-cyber-tan/5 text-cyber-tan"
+        className="flex h-9 w-9 shrink-0 items-center justify-center border border-cyber-tan/30 bg-cyber-tan/5 text-cyber-tan"
       >
         {spec.icon}
       </motion.span>
       <div className="min-w-0">
         <div className="flex items-baseline gap-2">
-          <span className="font-heading text-lg text-white">{spec.value}</span>
-          <span className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-tan/70">{spec.label}</span>
+          <span className="font-heading text-base text-white">{spec.value}</span>
+          <span className="font-mono text-[10px] font-bold tracking-[0.25em] text-cyber-tan/70">{spec.label}</span>
         </div>
-        <p className="mt-1 font-mono text-[13px] leading-relaxed text-cyber-gray">{spec.blurb}</p>
+        <p className="mt-1 font-mono text-[12px] leading-relaxed text-cyber-gray">{spec.blurb}</p>
       </div>
-      <span className="ml-auto shrink-0 font-mono text-[11px] tracking-widest text-cyber-blue/40">{spec.id}</span>
+      <span className="ml-auto shrink-0 font-mono text-[10px] tracking-widest text-cyber-blue/40">{spec.id}</span>
     </div>
   );
 }
@@ -106,16 +106,16 @@ function ActiveSpecReadout({
       transition={{ opacity: { duration: 0.4 }, top: { type: "spring", stiffness: 220, damping: 28 } }}
       className="relative md:absolute md:inset-x-0"
     >
-      <div className="relative border border-cyber-tan/30 bg-cyber-black/70 p-5 backdrop-blur-sm">
+      <div className="relative border border-cyber-tan/30 bg-cyber-black/70 p-4 backdrop-blur-sm">
         <AnimatedCorners size={14} tone="tan" />
-        <p className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-blue/70 uppercase">// active_spec</p>
-        <span className="mt-3 flex h-12 w-12 items-center justify-center border border-cyber-tan/40 bg-cyber-tan/10 text-cyber-tan">
+        <p className="font-mono text-[10px] font-bold tracking-[0.25em] text-cyber-blue/70 uppercase">// active_spec</p>
+        <span className="mt-3 flex h-10 w-10 items-center justify-center border border-cyber-tan/40 bg-cyber-tan/10 text-cyber-tan">
           {spec.icon}
         </span>
-        <p className="mt-3 font-heading text-2xl text-white">{spec.value}</p>
-        <h4 className="font-mono text-[12px] font-bold tracking-[0.25em] text-cyber-tan uppercase">{spec.label}</h4>
-        <p className="mt-2 font-mono text-[12px] leading-relaxed text-cyber-gray">{spec.blurb}</p>
-        <p className="mt-3 font-mono text-[11px] tracking-widest text-cyber-gray/50">
+        <p className="mt-3 font-heading text-xl text-white">{spec.value}</p>
+        <h4 className="font-mono text-[11px] font-bold tracking-[0.25em] text-cyber-tan uppercase">{spec.label}</h4>
+        <p className="mt-2 font-mono text-[11px] leading-relaxed text-cyber-gray">{spec.blurb}</p>
+        <p className="mt-3 font-mono text-[10px] tracking-widest text-cyber-gray/50">
           {String(activeIndex + 1).padStart(2, "0")}/{String(SPECS.length).padStart(2, "0")}
         </p>
       </div>
@@ -146,7 +146,7 @@ export default function MissionParameters() {
   return (
     <section
       id="mission_parameters"
-      className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 md:p-8"
+      className="crosshair-corner relative border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-5 md:p-7"
     >
       <CornerCrosshairs />
 
@@ -157,19 +157,22 @@ export default function MissionParameters() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="flex flex-col gap-2 max-w-2xl"
       >
-        <span className="text-[12px] font-bold tracking-widest text-cyber-tan uppercase">// SYSTEM_SEQUENCE_NODE_PARAMS</span>
-        <h2 className="font-heading text-xl md:text-2xl tracking-tight text-white uppercase">MISSION PARAMETERS</h2>
-        <p className="font-mono text-xs leading-relaxed text-cyber-gray">
+        <span className="text-[11px] font-bold tracking-widest text-cyber-tan uppercase">// SYSTEM_SEQUENCE_NODE_PARAMS</span>
+        <h2 className="font-heading text-lg md:text-xl tracking-tight text-white uppercase">MISSION PARAMETERS</h2>
+        <p className="font-mono text-[11px] leading-relaxed text-cyber-gray">
           Everything you need to know at a glance. Scroll and the readout tracks whichever spec is in frame.
         </p>
       </motion.div>
 
-      <div className="relative mt-6 w-full md:grid md:grid-cols-[280px_1fr] md:gap-6">
+      <div
+        className="relative mt-5 w-full md:grid md:gap-5"
+        style={{ gridTemplateColumns: "260px 1fr" }}
+      >
         <div className="relative hidden md:block">
           <ActiveSpecReadout activeIndex={activeIndex} trackHeight={trackHeight} rowOffsets={rowOffsets} />
         </div>
 
-        <div ref={listRef} className="flex flex-col gap-4">
+        <div ref={listRef} className="flex flex-col gap-3">
           {SPECS.map((spec, i) => (
             <SpecRow key={spec.id} spec={spec} index={i} />
           ))}

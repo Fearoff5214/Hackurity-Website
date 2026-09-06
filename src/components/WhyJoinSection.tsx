@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -257,6 +257,9 @@ export default function WhyJoinSection() {
   const reduce = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(activeIndex);
+  activeIndexRef.current = activeIndex;
+  const [paused, setPaused] = useState(false);
 
   const scrollToCard = (index: number) => {
     const track = trackRef.current;
@@ -264,6 +267,17 @@ export default function WhyJoinSection() {
     if (!track || !card) return;
     track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
   };
+
+  // Auto-advance the carousel — paused on hover/focus/touch so it never
+  // fights someone actually browsing the cards, and skipped entirely under
+  // prefers-reduced-motion like every other looping animation on this page.
+  useEffect(() => {
+    if (reduce || paused) return;
+    const id = window.setInterval(() => {
+      scrollToCard((activeIndexRef.current + 1) % BENEFITS.length);
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, [reduce, paused]);
 
   const handleTrackScroll = () => {
     const track = trackRef.current;
@@ -356,7 +370,13 @@ export default function WhyJoinSection() {
       </div>
 
       {/* benefit carousel */}
-      <div className="relative mt-6">
+      <div
+        className="relative mt-6"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+      >
         <motion.div
           ref={trackRef}
           onScroll={handleTrackScroll}
@@ -364,7 +384,7 @@ export default function WhyJoinSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.12 }}
-          className="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_6%,black_94%,transparent_100%)]"
         >
           {BENEFITS.map((benefit, index) => (
             <div key={benefit.id} className="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">

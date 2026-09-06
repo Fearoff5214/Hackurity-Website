@@ -283,7 +283,7 @@ export default function WhyJoinSection() {
     if (reduce) return;
     const id = window.setInterval(() => {
       scrollToCard((activeIndexRef.current + 1) % BENEFITS.length);
-    }, 4000);
+    }, 2200);
     return () => window.clearInterval(id);
   }, [reduce]);
 

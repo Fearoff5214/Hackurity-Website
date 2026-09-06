@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedCorners } from "@/components/TechElements";
 
 type Domain = { id: string; name: string; brief: string; sponsor?: string };
 
@@ -26,9 +27,24 @@ export default function TrackCard({ domain, index }: { domain: Domain; index: nu
   );
 }
 
+// IBM Carbon design-token blues — deliberately not this site's `cyber-blue`
+// token, so the fill reads as unambiguously "IBM" rather than matching the
+// rest of the page's indigo accent.
+const IBM_BLUE_90 = "#001d6c";
+const IBM_BLUE_100 = "#001141";
+const IBM_BLUE_50 = "#4589ff";
+const IBM_BLUE_20 = "#82cfff";
+const IBM_BLUE_10 = "#d0e2ff";
+
 // Sponsor-backed bonus track — pulled out of the regular grid and given its
 // own full-width, solid-fill treatment so it reads as an add-on from the
 // sponsor rather than just a fourth tile identical to the other three.
+// Colors are set via inline `style` rather than Tailwind arbitrary-value
+// classes (`bg-[#...]`) — those weren't being picked up by this project's
+// Tailwind v4 build (every other arbitrary-value class in the codebase is a
+// bare number like `text-[13px]`; this was the first arbitrary *color*, and
+// it silently never made it into the generated stylesheet). Inline style
+// sidesteps whatever's going on there entirely.
 export function SponsoredTrackBanner({ domain, index }: { domain: Domain; index: number }) {
   const trackLabel = domain.id.replace(/^TRK-/, "TRACK ");
   return (
@@ -37,14 +53,24 @@ export function SponsoredTrackBanner({ domain, index }: { domain: Domain; index:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
       transition={{ type: "spring", stiffness: 120, damping: 16, delay: index * 0.12 }}
-      className="border border-cyber-blue/40 bg-cyber-blue/90 p-4 md:p-5 text-white"
+      className="relative overflow-hidden p-4 md:p-5 text-white"
+      style={{
+        border: `1px solid ${IBM_BLUE_50}80`,
+        background: `linear-gradient(to bottom right, ${IBM_BLUE_100}, ${IBM_BLUE_90})`,
+      }}
     >
-      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/80">
+      <AnimatedCorners size={12} tone="blue" />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{ background: `linear-gradient(to right, transparent, ${IBM_BLUE_50}, transparent)` }}
+      />
+      <span className="font-mono text-[11px] font-bold uppercase tracking-widest" style={{ color: IBM_BLUE_20 }}>
         {trackLabel}
         {domain.sponsor ? ` · SPONSORED BY ${domain.sponsor.toUpperCase()}` : ""}
       </span>
-      <h3 className="mt-1 font-heading text-lg md:text-xl uppercase leading-tight">{domain.name}</h3>
-      <p className="mt-1 font-mono text-[12.5px] md:text-[13.5px] italic leading-relaxed text-white/85">
+      <h3 className="mt-1 font-heading text-lg md:text-xl uppercase leading-tight text-white">{domain.name}</h3>
+      <p className="mt-1 font-mono text-[12.5px] md:text-[13.5px] italic leading-relaxed" style={{ color: IBM_BLUE_10 }}>
         {domain.brief}
       </p>
     </motion.div>

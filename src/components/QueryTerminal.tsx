@@ -34,7 +34,7 @@ const RECORDS: QaRecord[] = [
     id: "05",
     question: "What does the ₹800 entry fee cover?",
     answer:
-      "It covers your team's participation in Hackurity — venue access, mentorship and event infrastructure across the full 24 hours, along with meals provided throughout the event: lunch, snacks and dinner on 14 October, and breakfast on 15 October.",
+      "Every team is provided meals across both days of the build — lunch, snacks and dinner on 14 October, and breakfast on 15 October — alongside full venue access, mentorship and event infrastructure for the entire 24-hour run.",
   },
   {
     id: "06",

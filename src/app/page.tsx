@@ -278,11 +278,6 @@ export default function Home() {
 
       {/* HERO — centered headline treatment with self-drawing gradient underlines, a rotating fact readout, and a scramble-text CTA */}
       <section id="mission_brief" className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center gap-6 px-4 py-14 text-center md:px-8 md:py-20">
-        <span className="flex items-center gap-1.5 font-mono text-[12px] font-bold tracking-[0.3em] text-cyber-tan uppercase">
-          <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyber-tan" />
-          CTF_NODE_CONNECTED
-        </span>
-
         <div className="flex flex-col items-center gap-1">
           <h1
             className="text-5xl leading-tight tracking-widest text-white uppercase md:text-7xl"

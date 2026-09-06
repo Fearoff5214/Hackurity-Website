@@ -28,7 +28,7 @@ import CyberCursor from "@/components/CyberCursor";
 import CampusLogo from "@/components/CampusLogo";
 import HackurityLenis from "@/components/HackurityLenis";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import TrackCard from "@/components/TrackCard";
+import TrackCard, { SponsoredTrackBanner } from "@/components/TrackCard";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
 import MissionParameters from "@/components/MissionParameters";
@@ -130,6 +130,7 @@ export default function Home() {
     { id: "TRK-A", name: "AI + Security Crossover", brief: "Secure AI systems or use AI to secure things — stop model theft, prompt injection, data poisoning, or build smarter defenses." },
     { id: "TRK-B", name: "Cybersecurity in IoT", brief: "Secure connected devices, sensors and embedded systems — from firmware and wireless protocols to the networks that tie them together." },
     { id: "TRK-C", name: "Web3 / Blockchain Security", brief: "Break or defend smart contracts, wallets and decentralized systems where a single bug can move real money." },
+    { id: "TRK-D", name: "Digital Inclusion & Public Access", brief: "Building technology for the citizens, public services, and everyday digital tasks that inclusion efforts often leave behind.", sponsor: "IBM" },
   ];
 
   const roleOptions = ["Developer", "Presentator", "Researcher", "Designer", "Here for food 😂"];
@@ -361,13 +362,13 @@ export default function Home() {
           >
             <div className="flex items-center gap-2">
               <span className="text-[12px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
-              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">03 TRACKS // 2 PROBLEMS EACH</span>
+              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">04 TRACKS // 2 PROBLEMS EACH</span>
             </div>
             <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-tight text-white uppercase">
               TRACKS
             </h2>
             <p className="font-mono text-xs md:text-sm leading-relaxed text-cyber-gray">
-              There are three tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
+              There are four tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
             </p>
             <p className="font-mono text-[11px] md:text-xs font-bold tracking-wide text-cyber-tan">
               // Problem statements will be announced 1 week before the hackathon.
@@ -378,10 +379,14 @@ export default function Home() {
             style={{ perspective: 1000 }}
             className="list-none grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-cyber-gray"
           >
-            {DOMAINS.map((domain, i) => (
+            {DOMAINS.filter((domain) => !domain.sponsor).map((domain, i) => (
               <TrackCard key={domain.id} domain={domain} index={i} />
             ))}
           </ul>
+
+          {DOMAINS.filter((domain) => domain.sponsor).map((domain, i) => (
+            <SponsoredTrackBanner key={domain.id} domain={domain} index={i} />
+          ))}
 
           {/* Simulated progress diagnostics */}
           <div className="flex flex-col gap-3">

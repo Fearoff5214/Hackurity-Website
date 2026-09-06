@@ -90,7 +90,7 @@ type Benefit = { id: string; tag: string; title: string; blurb: string; icon: Re
 
 const BENEFITS: Benefit[] = [
   { id: "01", tag: "CREDENTIAL", title: "Certificate of Participation", blurb: "Every operator who runs the full 24-hour window gets a verifiable certificate for the profile.", icon: CERT },
-  { id: "02", tag: "PAYLOAD", title: "Exciting Cash Prizes", blurb: "A prize pool split across the top teams in all three tracks — the sharper the defence, the bigger the cut.", icon: CASH },
+  { id: "02", tag: "PAYLOAD", title: "Exciting Cash Prizes", blurb: "A prize pool split across the top teams in all four tracks — the sharper the defence, the bigger the cut.", icon: CASH },
   { id: "03", tag: "LOOT", title: "Hackurity Merchandise", blurb: "Official event merch handed to standout teams during the build.", icon: MERCH },
   { id: "04", tag: "DROP", title: "Spot Gifts & Giveaways", blurb: "Surprise rewards and mini-challenges running through the night for anyone on the floor.", icon: GIFT },
   { id: "05", tag: "UPLINK", title: "Meet IBM Engineers", blurb: "Talk shop directly with IBM personnel and mentors — architecture, careers, and how they would break your build.", icon: PEOPLE },

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-type Domain = { id: string; name: string; brief: string };
+type Domain = { id: string; name: string; brief: string; sponsor?: string };
 
 export default function TrackCard({ domain, index }: { domain: Domain; index: number }) {
   return (
@@ -23,5 +23,30 @@ export default function TrackCard({ domain, index }: { domain: Domain; index: nu
       </div>
       <span className="text-[12.5px] md:text-[13.5px] leading-relaxed">{domain.brief}</span>
     </motion.li>
+  );
+}
+
+// Sponsor-backed bonus track — pulled out of the regular grid and given its
+// own full-width, solid-fill treatment so it reads as an add-on from the
+// sponsor rather than just a fourth tile identical to the other three.
+export function SponsoredTrackBanner({ domain, index }: { domain: Domain; index: number }) {
+  const trackLabel = domain.id.replace(/^TRK-/, "TRACK ");
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      transition={{ type: "spring", stiffness: 120, damping: 16, delay: index * 0.12 }}
+      className="border border-cyber-blue/40 bg-cyber-blue/90 p-4 md:p-5 text-white"
+    >
+      <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-white/80">
+        {trackLabel}
+        {domain.sponsor ? ` · SPONSORED BY ${domain.sponsor.toUpperCase()}` : ""}
+      </span>
+      <h3 className="mt-1 font-heading text-lg md:text-xl uppercase leading-tight">{domain.name}</h3>
+      <p className="mt-1 font-mono text-[12.5px] md:text-[13.5px] italic leading-relaxed text-white/85">
+        {domain.brief}
+      </p>
+    </motion.div>
   );
 }

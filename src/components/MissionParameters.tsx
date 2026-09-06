@@ -35,7 +35,7 @@ type Spec = { id: string; icon: React.ReactNode; value: string; label: string; b
 const SPECS: Spec[] = [
   { id: "P-01", icon: <ClockGlyph />, value: "24 HRS", label: "DURATION", blurb: "One continuous overnight build window — no pausing the clock." },
   { id: "P-02", icon: <SquadGlyph />, value: "3–4", label: "TEAM SIZE", blurb: "Operators per squad. Everyone on the roster has to pull weight." },
-  { id: "P-03", icon: <TracksGlyph />, value: "03", label: "TRACKS", blurb: "Problem domains to pick from — AI security, IoT, and Web3." },
+  { id: "P-03", icon: <TracksGlyph />, value: "04", label: "TRACKS", blurb: "Problem domains to pick from — AI security, IoT, Web3, and an IBM-sponsored digital inclusion track." },
   { id: "P-04", icon: <CashGlyph />, value: "₹800", label: "ENTRY", blurb: "Per team, all-inclusive. Covers the full 24-hour run." },
   { id: "P-05", icon: <PinGlyphSmall />, value: "14–15 OCT", label: "DATE", blurb: "REVA University, Bengaluru. Mark the calendar now." },
 ];

@@ -45,7 +45,7 @@ export const DEPARTMENTS: Department[] = [
         ...dummy(
           "Verril Vaz",
           "President",
-          "Security isn't a checkbox â€” it's a culture you build one person at a time.",
+          "Security isn't a checkbox — it's a culture you build one person at a time.",
           "verril-vaz",
           "TBD",
         ),
@@ -61,7 +61,7 @@ export const DEPARTMENTS: Department[] = [
         ),
         email: "rcdt009@gmail.com",
         linkedin: "https://www.linkedin.com/in/dharmatejarc06/",
-        photo: "/members/LeadershipRole/dharma.jpg",
+        photo: "/members/LeadershipRole/dharma.png",
       },
     ],
   },
@@ -84,7 +84,7 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Mohammad Omar",
-          "Core Technical Associate",
+          "Technical Member",
           "Immense knowledge is fetched by having an intersection of many interests.",
           "mohammad-omar",
           "+91 74559 04156",
@@ -97,7 +97,7 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Tanush Jain",
-          "Technical Associate",
+          "Technical Member",
           "Start small, finish it, then make it better.",
           "tanush-jain",
           "+91 89707 90411",
@@ -105,6 +105,7 @@ export const DEPARTMENTS: Department[] = [
         email: "brandwopio76@gmail.com",
         github: "https://github.com/Tanush-Jain",
         linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
+        photo: "/members/Technical_department/tanush.png",
       },
     ],
   },
@@ -129,8 +130,8 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Rachana Panibathe",
-          "Member",
-          "The best defense starts with awareness â€” that's the story we're here to tell.",
+          "Marketing Member",
+          "The best defense starts with awareness — that's the story we're here to tell.",
           "rachana",
           "+91 00000 00000",
         ),
@@ -159,7 +160,7 @@ export const DEPARTMENTS: Department[] = [
       //   ...dummy(
       //     "Chetan Kumar H M",
       //     "Design Associate",
-      //     "If it looks sharp, it gets trusted â€” design is security's first impression.",
+      //     "If it looks sharp, it gets trusted — design is security's first impression.",
       //     "chethan-k",
       //     "+91733-78344158",
       //   ),
@@ -171,8 +172,8 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Harshitha M Raj",
-          "Design Associate",
-          "Good design doesn't shout â€” it just makes people trust what they're looking at.",
+          "Design Member",
+          "Good design doesn't shout — it just makes people trust what they're looking at.",
           "harshitha-m-raj",
           "+91 00000 00000",
         ),
@@ -185,17 +186,20 @@ export const DEPARTMENTS: Department[] = [
     label: "Event Management",
     blurb: "Plans the schedule, the venue and the hundred small things on event day.",
     people: [
-      dummy(
-        "Rohit L",
-        "Lead Manager â€” Events",
-        "A great CTF isn't won at the keyboard â€” it's won in the planning.",
-        "rohith-l",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Rohit L",
+          "Lead Manager — Events",
+          "A great CTF isn't won at the keyboard — it's won in the planning.",
+          "rohith-l",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/rohit.png",
+      },
       {
       ...dummy(
         "Lavanya D",
-        "Associate Event Manager",
+        "Event Management Member",
         "Behind every smooth hackathon is a hundred things that almost went wrong.",
         "lavanya-d",
         "+91 80730 48671",
@@ -207,20 +211,43 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Ramya VK",
-          "Associate Event Manager",
+          "Event Management Member",
           "Details make the difference between a good event and a great one.",
           "ramya-vk",
           "+91 00000 00000",
         ),
         photo: drive("11wZ2Uxbh_uOXaS-YUmnmh28Sh-KoCSj5"),
       },
-      dummy(
-        "Adithi Bisappa Gowda",
-        "Associate Event Manager",
-        "Security is a team sport â€” so is pulling off a 24-hour hackathon.",
-        "adithi-bisappa-gowda",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Adithi Bisappa Gowda",
+          "Event Management Member",
+          "Security is a team sport — so is pulling off a 24-hour hackathon.",
+          "adithi-bisappa-gowda",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/adithi.png",
+      },
+      {
+        ...dummy(
+          "K P Yogesh",
+          "Event Management Member",
+          "Go where you grow — all is possible.",
+          "kp-yogesh",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/yogesh.png",
+      },
+      {
+        ...dummy(
+          "Gagana V",
+          "Event Management Member",
+          "The little details are what make an event feel put together.",
+          "gagana-v",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/gagana.png",
+      },
     ],
   },
   {
@@ -243,7 +270,7 @@ export const DEPARTMENTS: Department[] = [
       },
       {
         name: "Shreya Hiremath",
-        role: "Social Media Associate",
+        role: "Social Media Member",
         saying: "A good post won't patch a vulnerability, but it'll get the right people talking about one.",
         email: "shreya-hiremath@revacyberclub.in",
         phone: "+91 00000 00000",
@@ -255,8 +282,6 @@ export const DEPARTMENTS: Department[] = [
     ],
   },
 ];
-
-export const TECHNICAL_DEPARTMENT_IDS = ["technical"];
 
 export type TeamPortrait = {
   name: string;
@@ -295,7 +320,7 @@ export const FACULTY_IN_CHARGE: TeamPortrait[] = [
   },
   {
     name: "Prof. Kiran M",
-    role: "Assistant Professor & Head of B.Tech â€” Artificial Intelligence and Data Science",
+    role: "Assistant Professor & Head of B.Tech — Artificial Intelligence and Data Science",
     linkedin: "",
     photo: "/team/kiran-m.jpg",
   },

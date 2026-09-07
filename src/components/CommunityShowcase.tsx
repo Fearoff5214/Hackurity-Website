@@ -24,7 +24,7 @@ const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 
 // Photos are pulled from the same /public/members library used by the club page.
 const CONTACTS: Person[] = [
-  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: "/members/LeadershipRole/dharma.jpg", phone: "+91 79 7565 0280" },
+  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: "/members/LeadershipRole/dharma.png", phone: "+91 79 7565 0280" },
   { name: "Chethan K", role: "Design Team Head", image: "/members/DesignTeam/DesignChetan.jpeg", phone: "+91733-78344158" },
   { name: "Lavanya D", role: "Event Management", image: "/members/EventManagers/lavanya.jpeg", phone: "+91 80730 48671" },
 ];

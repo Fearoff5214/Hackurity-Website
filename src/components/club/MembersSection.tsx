@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { DEPARTMENTS, TECHNICAL_DEPARTMENT_IDS, type Person } from "./data";
+import { DEPARTMENTS, type Person } from "./data";
 import { SectionHeading } from "./Reveal";
 
 function initials(name: string) {
@@ -17,11 +17,9 @@ function initials(name: string) {
 function MemberCard({
   person,
   index,
-  showGithub,
 }: {
   person: Person;
   index: number;
-  showGithub: boolean;
 }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: false, amount: 0.18 });
@@ -109,7 +107,7 @@ function MemberCard({
       </div>
 
       <div className="relative z-10 mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
-        {showGithub && (
+        {person.github && (
           <motion.a
             href={person.github}
             target="_blank"
@@ -141,7 +139,6 @@ export default function MembersSection() {
   const department =
     DEPARTMENTS.find((item) => item.id === active) ?? DEPARTMENTS[0];
   const gridRef = useRef<HTMLDivElement>(null);
-  const showGithub = TECHNICAL_DEPARTMENT_IDS.includes(active);
 
   if (!department) return null;
 
@@ -212,7 +209,6 @@ export default function MembersSection() {
                 key={`${department.id}-${person.name}`}
                 person={person}
                 index={index}
-                showGithub={showGithub}
               />
             ))}
           </motion.div>

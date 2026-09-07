@@ -36,8 +36,7 @@ const CREATORS: Creator[] = [
     quote: "I didn't write the bug, I just wrote the code next to it.",
     github: "https://github.com/Tanush-Jain",
     linkedin: "https://www.linkedin.com/in/tanush-jain-17601321a/",
-    // No photo in /public/members yet — the initials tile is shown instead.
-    // Drop the file in and set: image: "/members/Technical_department/<file>"
+    image: "/members/Technical_department/tanush.png",
   },
 ];
 

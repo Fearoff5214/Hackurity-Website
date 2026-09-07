@@ -86,13 +86,28 @@ function findByName(people: TeamPortrait[], match: string) {
   return person;
 }
 
-const TEAM_DISPLAY_ORDER = [
+const FACULTY_IN_CHARGE_GROUP = [
   findByName(CONVENORS, "Nethravathi"),
-  findByName(CONVENORS, "Ashwin"),
   findByName(FACULTY_IN_CHARGE, "Sathish"),
-  findByName(CONVENORS, "Syed"),
   findByName(FACULTY_IN_CHARGE, "Kiran"),
 ];
+
+const DIRECTORS_GROUP = [findByName(CONVENORS, "Ashwin"), findByName(CONVENORS, "Syed")];
+
+function TeamGroup({ tag, people, startIndex }: { tag: string; people: TeamPortrait[]; startIndex: number }) {
+  return (
+    <div>
+      <span className="font-mono text-[13px] font-bold tracking-[0.3em] text-cyber-tan">
+        {`// ${tag}`}
+      </span>
+      <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {people.map((person, index) => (
+          <PortraitCard key={person.name} person={person} index={startIndex + index} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function FacultySection() {
   return (
@@ -106,10 +121,9 @@ export default function FacultySection() {
         description="The teaching staff who support the club, approve our events and help members connect their coursework with what we dohere."
       />
 
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
-        {TEAM_DISPLAY_ORDER.map((person, index) => (
-          <PortraitCard key={person.name} person={person} index={index} />
-        ))}
+      <div className="mt-10 space-y-12">
+        <TeamGroup tag="Faculty in-charge" people={FACULTY_IN_CHARGE_GROUP} startIndex={0} />
+        <TeamGroup tag="Directors" people={DIRECTORS_GROUP} startIndex={FACULTY_IN_CHARGE_GROUP.length} />
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ export type Person = {
   phone: string;
   github: string;
   linkedin: string;
-  /** Optional headshot. Local file in /public wins, Drive link is the fallback. */
+  /** Optional headshot. Local file in /public wins; Drive URL can be used as fallback. */
   photo?: string;
 };
 
@@ -17,10 +17,15 @@ export type Department = {
   people: Person[];
 };
 
-/** Google Drive "anyone with the link" images, served as direct image URLs. */
 const drive = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
 
-const dummy = (name: string, role: string, saying: string, handle: string, phone: string): Person => ({
+const dummy = (
+  name: string,
+  role: string,
+  saying: string,
+  handle: string,
+  phone: string,
+): Person => ({
   name,
   role,
   saying,
@@ -40,10 +45,11 @@ export const DEPARTMENTS: Department[] = [
         ...dummy(
           "Verril Vaz",
           "President",
-          "Security isn't a checkbox — it's a culture you build one person at a time.",
+          "Security isn't a checkbox â€” it's a culture you build one person at a time.",
           "verril-vaz",
           "TBD",
         ),
+        photo: "/members/LeadershipRole/Verrilvaaz.png",
       },
       {
         ...dummy(
@@ -55,6 +61,7 @@ export const DEPARTMENTS: Department[] = [
         ),
         email: "rcdt009@gmail.com",
         linkedin: "https://www.linkedin.com/in/dharmatejarc06/",
+        photo: "/members/LeadershipRole/dharma.jpg",
       },
     ],
   },
@@ -72,6 +79,7 @@ export const DEPARTMENTS: Department[] = [
           "TBD",
         ),
         github: "https://github.com/Fearoff5214",
+        photo: "/members/Technical_department/logaa.png",
       },
       {
         ...dummy(
@@ -84,6 +92,7 @@ export const DEPARTMENTS: Department[] = [
         email: "omarofficial1054@gmail.com",
         github: "https://github.com/MohammadOmar1054",
         linkedin: "https://www.linkedin.com/in/mohammad-omar-a81b28388/",
+        photo: "/members/Technical_department/Omer.jpg",
       },
       {
         ...dummy(
@@ -121,7 +130,7 @@ export const DEPARTMENTS: Department[] = [
         ...dummy(
           "Rachana Panibathe",
           "Member",
-          "The best defense starts with awareness — that's the story we're here to tell.",
+          "The best defense starts with awareness â€” that's the story we're here to tell.",
           "rachana",
           "+91 00000 00000",
         ),
@@ -136,9 +145,21 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
+          "Chetan K",
+          "Design Team Lead",
+          "Good design makes complex ideas feel effortless.",
+          "chetan-k",
+          "+91 00000 00000",
+        ),
+        photo: "/members/DesignTeam/DesignChetan.jpeg",
+        linkedin: "https://www.linkedin.com/in/chetank23/",
+        github: "https://github.com/chetank23",
+      },
+      {
+        ...dummy(
           "Chetan Kumar H M",
-          "Design Team Head",
-          "If it looks sharp, it gets trusted — design is security's first impression.",
+          "Design Associate",
+          "If it looks sharp, it gets trusted â€” design is security's first impression.",
           "chethan-k",
           "+91733-78344158",
         ),
@@ -147,13 +168,16 @@ export const DEPARTMENTS: Department[] = [
         linkedin: "https://www.linkedin.com/in/chetank23/",
         photo: drive("1qj1SWxMYHvBUAppbJgLBu7HeGqgwacnz"),
       },
-      dummy(
-        "Harshitha M Raj",
-        "Design Member",
-        "Good design doesn't shout — it just makes people trust what they're looking at.",
-        "harshitha-m-raj",
-        "+91 00000 00000",
-      ),
+      {
+        ...dummy(
+          "Harshitha M Raj",
+          "Design Associate",
+          "Good design doesn't shout â€” it just makes people trust what they're looking at.",
+          "harshitha-m-raj",
+          "+91 00000 00000",
+        ),
+        photo: "/members/DesignTeam/harshitaRaj.jpeg",
+      },
     ],
   },
   {
@@ -162,15 +186,15 @@ export const DEPARTMENTS: Department[] = [
     blurb: "Plans the schedule, the venue and the hundred small things on event day.",
     people: [
       dummy(
-        "Rohith L",
-        "Event Management",
-        "A great CTF isn't won at the keyboard — it's won in the planning.",
+        "Rohit L",
+        "Lead Manager â€” Events",
+        "A great CTF isn't won at the keyboard â€” it's won in the planning.",
         "rohith-l",
         "+91 00000 00000",
       ),
       dummy(
         "Lavanya D",
-        "Event Management",
+        "Associate Event Manager",
         "Behind every smooth hackathon is a hundred things that almost went wrong.",
         "lavanya-d",
         "+91 80730 48671",
@@ -178,7 +202,7 @@ export const DEPARTMENTS: Department[] = [
       {
         ...dummy(
           "Ramya VK",
-          "Event Management",
+          "Associate Event Manager",
           "Details make the difference between a good event and a great one.",
           "ramya-vk",
           "+91 00000 00000",
@@ -187,8 +211,8 @@ export const DEPARTMENTS: Department[] = [
       },
       dummy(
         "Adithi Bisappa Gowda",
-        "Event Management",
-        "Security is a team sport — so is pulling off a 24-hour hackathon.",
+        "Associate Event Manager",
+        "Security is a team sport â€” so is pulling off a 24-hour hackathon.",
         "adithi-bisappa-gowda",
         "+91 00000 00000",
       ),
@@ -201,13 +225,16 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "KP Yogesh",
-          "Social Media Head",
-          "We don't just post updates, we build the community that shows up.",
-          "kp-yogesh",
-          "+91 00000 00000",
+          "Shrishail G Biradar",
+          "Social Media Lead",
+          "All power is within you.",
+          "shrishail-biradar",
+          "+91 9880221935",
         ),
-        photo: drive("1P5pLJTVCotnTjMo-PxYJcXn_oNsDwikQ"),
+        email: "shrishailbiradar2004@gmail.com",
+        github: "https://github.com/Shrishailgb24",
+        linkedin: "https://www.linkedin.com/in/shrishail-biradar-761833296",
+        photo: drive("1OtDtc9Peeqfg3k3PU05rEbLadTpTWDlQ"),
       },
       {
         name: "Shreya Hiremath",
@@ -220,24 +247,10 @@ export const DEPARTMENTS: Department[] = [
           "https://www.linkedin.com/in/shreya-hiremath-86a853331?utm_source=share_via&utm_content=profile&utm_medium=member_android",
         photo: drive("10Y4i5E4GFrRzMeEfph7jWy-00fczaMpo"),
       },
-      {
-        ...dummy(
-          "Shrishail G Biradar",
-          "Social Media Member",
-          "All power is within you",
-          "shrishail-biradar",
-          "+91 9880221935",
-        ),
-        email: "shrishailbiradar2004@gmail.com",
-        github: "https://github.com/Shrishailgb24",
-        linkedin: "https://www.linkedin.com/in/shrishail-biradar-761833296",
-        photo: drive("1OtDtc9Peeqfg3k3PU05rEbLadTpTWDlQ"),
-      },
     ],
   },
 ];
 
-/** Departments whose members keep a public GitHub button. */
 export const TECHNICAL_DEPARTMENT_IDS = ["technical"];
 
 export type TeamPortrait = {
@@ -247,8 +260,6 @@ export type TeamPortrait = {
   photo: string;
 };
 
-// Photos and LinkedIn URLs land here as they're provided; until then the
-// card falls back to initials and a disabled LinkedIn icon.
 export const CONVENORS: TeamPortrait[] = [
   {
     name: "Dr. Ashwin Kumar U M",
@@ -279,7 +290,7 @@ export const FACULTY_IN_CHARGE: TeamPortrait[] = [
   },
   {
     name: "Prof. Kiran M",
-    role: "Assistant Professor & Head of B.Tech — Artificial Intelligence and Data Science",
+    role: "Assistant Professor & Head of B.Tech â€” Artificial Intelligence and Data Science",
     linkedin: "",
     photo: "/team/kiran-m.jpg",
   },

@@ -44,7 +44,7 @@ function MemberCard({
       ref={ref}
       style={{ opacity, x }}
       whileHover={{ y: -8 }}
-      className="group relative flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-6 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:max-w-2xl sm:p-8"
+      className="group relative flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:max-w-xl sm:p-6"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
       <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/[0.035]" />
@@ -63,8 +63,8 @@ function MemberCard({
         </span>
       </div>
 
-      <div className="relative z-10 mt-6 flex flex-1 flex-col items-center">
-        <div className="relative h-72 w-72 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-96 sm:w-96">
+      <div className="relative z-10 mt-4 flex flex-1 flex-col items-center">
+        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-64 sm:w-64">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
             <img
@@ -88,14 +88,14 @@ function MemberCard({
           />
         </div>
 
-        <p className="mt-5 w-full max-w-[34rem] text-center font-mono text-[12.5px] leading-relaxed text-white/80">
+        <p className="mt-3 w-full max-w-[34rem] text-center font-mono text-[12.5px] leading-relaxed text-white/80">
           <span className="mr-1 text-cyber-tan">“</span>
           {person.saying}
           <span className="ml-1 text-cyber-tan">”</span>
         </p>
       </div>
 
-      <div className="relative z-10 mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+      <div className="relative z-10 mt-4 flex flex-wrap gap-2 border-t border-white/10 pt-3">
         {person.github && (
           <motion.a
             href={person.github}
@@ -123,28 +123,17 @@ function MemberCard({
   );
 }
 
-function DepartmentBlock({
-  department,
-  deptIndex,
-}: {
-  department: Department;
-  deptIndex: number;
-}) {
+function DepartmentBlock({ department }: { department: Department }) {
   const headingRef = useRef<HTMLDivElement>(null);
   const { opacity, x } = useScrollSlide(headingRef);
 
   return (
     <div>
-      <motion.div ref={headingRef} style={{ opacity, x }} className="flex items-end gap-4">
-        <span className="font-heading text-3xl text-cyber-tan/30 md:text-4xl">
-          {String(deptIndex + 1).padStart(2, "0")}
-        </span>
-        <div className="min-w-0">
-          <h3 className="font-heading text-xl leading-tight text-white uppercase md:text-2xl">
-            {department.label}
-          </h3>
-          <span className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent" />
-        </div>
+      <motion.div ref={headingRef} style={{ opacity, x }} className="min-w-0">
+        <h3 className="font-heading text-xl leading-tight text-white uppercase md:text-2xl">
+          {department.label}
+        </h3>
+        <span className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent" />
       </motion.div>
 
       <motion.p
@@ -178,15 +167,12 @@ export default function MembersSection() {
         tag="The team"
         title="Club members"
         description="Scroll through to meet every department. Each one is happy to be contacted if you want to know more about what they do."
+        size="lg"
       />
 
       <div className="mt-4 space-y-24 md:space-y-28">
-        {DEPARTMENTS.map((department, deptIndex) => (
-          <DepartmentBlock
-            key={department.id}
-            department={department}
-            deptIndex={deptIndex}
-          />
+        {DEPARTMENTS.map((department) => (
+          <DepartmentBlock key={department.id} department={department} />
         ))}
       </div>
     </section>

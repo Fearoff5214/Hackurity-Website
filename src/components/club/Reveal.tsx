@@ -28,15 +28,25 @@ type SectionHeadingProps = {
   tag: string;
   title: string;
   description?: string;
+  /** "lg" bumps the title size for sections that want to stand out more. */
+  size?: "default" | "lg";
 };
 
-export function SectionHeading({ tag, title, description }: SectionHeadingProps) {
+export function SectionHeading({ tag, title, description, size = "default" }: SectionHeadingProps) {
   return (
     <Reveal className="mb-10">
       <span className="font-mono text-[13px] font-bold tracking-[0.3em] text-cyber-tan">
         {`// ${tag}`}
       </span>
-      <h2 className="mt-3 font-heading text-xl leading-relaxed uppercase md:text-2xl">{title}</h2>
+      <h2
+        className={
+          size === "lg"
+            ? "mt-3 font-heading text-3xl leading-relaxed uppercase md:text-5xl"
+            : "mt-3 font-heading text-xl leading-relaxed uppercase md:text-2xl"
+        }
+      >
+        {title}
+      </h2>
       {description && (
         <p className="mt-4 max-w-2xl font-mono text-[15px] leading-relaxed text-cyber-gray">
           {description}

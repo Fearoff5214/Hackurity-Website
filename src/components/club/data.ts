@@ -8,6 +8,10 @@ export type Person = {
   linkedin: string;
   /** Optional headshot. Local file in /public wins; Drive URL can be used as fallback. */
   photo?: string;
+  /** CSS transform scale for the photo — use to crop in on a specific photo. Defaults to 1. */
+  photoZoom?: number;
+  /** CSS object-position for the photo, e.g. "70% 35%". Defaults to "50% 50%". */
+  photoPosition?: string;
 };
 
 export type Department = {
@@ -178,6 +182,8 @@ export const DEPARTMENTS: Department[] = [
           "+91 00000 00000",
         ),
         photo: "/members/DesignTeam/harshitaRaj.jpeg",
+        photoZoom: 3.2,
+        photoPosition: "78% 30%",
       },
     ],
   },

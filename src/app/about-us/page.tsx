@@ -42,7 +42,7 @@ export default function ClubHome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-6 whitespace-nowrap font-heading text-lg uppercase sm:text-2xl md:text-3xl"
+            className="mt-6 font-heading text-base uppercase sm:text-2xl md:text-3xl"
           >
             REVA Cybersecurity Club
           </motion.h1>

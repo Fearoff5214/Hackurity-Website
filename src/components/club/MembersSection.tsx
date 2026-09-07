@@ -67,14 +67,21 @@ function MemberCard({
         <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-64 sm:w-64">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
-            <img
-              src={person.photo}
-              alt={`${person.name} — ${person.role}`}
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              onError={() => setImgFailed(true)}
-              className="h-full w-full object-cover grayscale-[15%] transition-[transform,filter] duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            />
+            <div className="h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">
+              <img
+                src={person.photo}
+                alt={`${person.name} — ${person.role}`}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={() => setImgFailed(true)}
+                style={{
+                  objectPosition: person.photoPosition ?? "50% 50%",
+                  transform: `scale(${person.photoZoom ?? 1})`,
+                  transformOrigin: person.photoPosition ?? "50% 50%",
+                }}
+                className="h-full w-full object-cover grayscale-[15%] transition-[filter] duration-700 group-hover:grayscale-0"
+              />
+            </div>
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-white/[0.025] font-heading text-4xl text-cyber-tan/80">
               {initials(person.name)}

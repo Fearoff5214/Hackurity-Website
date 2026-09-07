@@ -56,11 +56,11 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
         </motion.div>
       </div>
 
-      <h3 className="relative mt-2 font-heading text-[12px] leading-snug tracking-wide text-white uppercase">
+      <h3 className="relative mt-3 font-heading text-[15px] leading-snug tracking-wide text-white uppercase">
         {person.name}
       </h3>
       <p
-        className="relative mt-1 font-mono text-[9.5px] leading-relaxed text-white/55"
+        className="relative mt-1.5 font-mono text-[12px] leading-relaxed text-white/65"
         title={person.role}
       >
         {person.role}
@@ -72,7 +72,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
           target="_blank"
           rel="noreferrer"
           aria-label={`${person.name} on LinkedIn`}
-          className="relative mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.03] px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white/75 transition hover:border-cyber-tan/60 hover:bg-cyber-tan/10 hover:text-cyber-tan"
+          className="relative mt-3 inline-flex items-center gap-1.5 rounded-md border border-cyber-tan/45 bg-cyber-tan/10 px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-widest text-cyber-tan transition hover:border-cyber-tan hover:bg-cyber-tan/20"
         >
           <LinkedInIcon />
           LINKEDIN ↗
@@ -80,7 +80,7 @@ function PortraitCard({ person, index }: { person: TeamPortrait; index: number }
       ) : (
         <span
           aria-hidden="true"
-          className="relative mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.02] px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white/25"
+          className="relative mt-3 inline-flex items-center gap-1.5 rounded-md border border-white/20 bg-white/[0.05] px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-widest text-white/45"
         >
           <LinkedInIcon />
           LINKEDIN

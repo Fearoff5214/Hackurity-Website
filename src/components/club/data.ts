@@ -200,7 +200,7 @@ export const DEPARTMENTS: Department[] = [
         "lavanya-d",
         "+91 80730 48671",
       ),
-      photo: "members/EventManagement/lavanya-d.jpg",
+      photo: "members/EventManagers/lavanya.jpeg",
 
     },
       

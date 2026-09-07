@@ -24,6 +24,11 @@ function MemberCard({
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: false, amount: 0.18 });
   const [imgFailed, setImgFailed] = useState(false);
+  // Deliberately wide per-card stagger — within a row, cards all cross the
+  // viewport threshold at once, so the only thing that makes them read as
+  // "one, then the next" instead of a single simultaneous pop is a delay
+  // big enough to see.
+  const stagger = index * 0.22;
 
   return (
     <motion.article
@@ -36,7 +41,7 @@ function MemberCard({
       }
       transition={{
         duration: 0.55,
-        delay: index * 0.07,
+        delay: stagger,
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -8 }}
@@ -65,7 +70,7 @@ function MemberCard({
           animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.84 }}
           transition={{
             duration: 0.6,
-            delay: index * 0.07 + 0.08,
+            delay: stagger + 0.1,
             ease: [0.22, 1, 0.36, 1],
           }}
           whileHover={{ scale: 1.045, rotate: 1 }}
@@ -97,7 +102,7 @@ function MemberCard({
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-          transition={{ duration: 0.45, delay: index * 0.07 + 0.3 }}
+          transition={{ duration: 0.45, delay: stagger + 0.35 }}
           className="mt-5 w-full max-w-[34rem] text-center font-mono text-[12.5px] leading-relaxed text-white/80"
         >
           <span className="mr-1 text-cyber-tan">“</span>

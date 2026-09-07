@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import type { RefObject } from "react";
 import { DEPARTMENTS, type Department, type Person } from "./data";
 import { SectionHeading } from "./Reveal";
 
@@ -14,6 +15,19 @@ function initials(name: string) {
     .join("");
 }
 
+// Continuous scroll-linked slide: fades/slides in as an element enters the
+// viewport, holds while it's the one in focus, then slides back out as it
+// leaves — rather than a one-shot reveal that only ever plays once.
+function useScrollSlide<T extends HTMLElement>(ref: RefObject<T | null>) {
+  const { scrollYProgress } = useScroll({
+    target: ref as RefObject<HTMLElement>,
+    offset: ["start end", "end start"],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
+  const x = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [-70, 0, 0, 70]);
+  return { opacity, x };
+}
+
 function MemberCard({
   person,
   index,
@@ -22,30 +36,15 @@ function MemberCard({
   index: number;
 }) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: false, amount: 0.18 });
+  const { opacity, x } = useScrollSlide(ref);
   const [imgFailed, setImgFailed] = useState(false);
-  // Deliberately wide per-card stagger — within a row, cards all cross the
-  // viewport threshold at once, so the only thing that makes them read as
-  // "one, then the next" instead of a single simultaneous pop is a delay
-  // big enough to see.
-  const stagger = index * 0.22;
 
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 35, scale: 0.97 }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, scale: 1 }
-          : { opacity: 0, y: 35, scale: 0.97 }
-      }
-      transition={{
-        duration: 0.55,
-        delay: stagger,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      style={{ opacity, x }}
       whileHover={{ y: -8 }}
-      className="group relative flex h-full min-h-[475px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-6"
+      className="group relative flex w-full max-w-md flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:max-w-lg sm:p-6"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
       <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/[0.035]" />
@@ -65,17 +64,7 @@ function MemberCard({
       </div>
 
       <div className="relative z-10 mt-6 flex flex-1 flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.84 }}
-          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.84 }}
-          transition={{
-            duration: 0.6,
-            delay: stagger + 0.1,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          whileHover={{ scale: 1.045, rotate: 1 }}
-          className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-52 sm:w-52"
-        >
+        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-52 sm:w-52">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
             <img
@@ -97,18 +86,13 @@ function MemberCard({
             animate={{ y: [0, 185, 0], opacity: [0, 1, 0] }}
             transition={{ duration: 3.2, repeat: Infinity, repeatDelay: 2.2, ease: "easeInOut" }}
           />
-        </motion.div>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-          transition={{ duration: 0.45, delay: stagger + 0.35 }}
-          className="mt-5 w-full max-w-[34rem] text-center font-mono text-[12.5px] leading-relaxed text-white/80"
-        >
+        <p className="mt-5 w-full max-w-[34rem] text-center font-mono text-[12.5px] leading-relaxed text-white/80">
           <span className="mr-1 text-cyber-tan">“</span>
           {person.saying}
           <span className="ml-1 text-cyber-tan">”</span>
-        </motion.p>
+        </p>
       </div>
 
       <div className="relative z-10 mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
@@ -147,54 +131,37 @@ function DepartmentBlock({
   deptIndex: number;
 }) {
   const headingRef = useRef<HTMLDivElement>(null);
-  const headingInView = useInView(headingRef, { once: true, amount: 0.5 });
+  const { opacity, x } = useScrollSlide(headingRef);
 
   return (
     <div>
-      <div ref={headingRef} className="flex items-end gap-4">
-        <motion.span
-          initial={{ opacity: 0, y: 14 }}
-          animate={headingInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="font-heading text-3xl text-cyber-tan/30 md:text-4xl"
-        >
+      <motion.div ref={headingRef} style={{ opacity, x }} className="flex items-end gap-4">
+        <span className="font-heading text-3xl text-cyber-tan/30 md:text-4xl">
           {String(deptIndex + 1).padStart(2, "0")}
-        </motion.span>
+        </span>
         <div className="min-w-0">
-          <motion.h3
-            initial={{ opacity: 0, x: -24 }}
-            animate={headingInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="font-heading text-xl leading-tight text-white uppercase md:text-2xl"
-          >
+          <h3 className="font-heading text-xl leading-tight text-white uppercase md:text-2xl">
             {department.label}
-          </motion.h3>
-          <motion.span
-            initial={{ scaleX: 0 }}
-            animate={headingInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformOrigin: "left" }}
-            className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent"
-          />
+          </h3>
+          <span className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent" />
         </div>
-      </div>
+      </motion.div>
 
       <motion.p
-        initial={{ opacity: 0 }}
-        animate={headingInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.15 }}
+        style={{ opacity }}
         className="mt-4 max-w-2xl font-mono text-[13px] leading-relaxed text-white/55 sm:text-[14px]"
       >
         {department.blurb}
       </motion.p>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 flex flex-col items-center">
         {department.people.map((person, index) => (
-          <MemberCard
+          <div
             key={`${department.id}-${person.name}`}
-            person={person}
-            index={index}
-          />
+            className="flex min-h-[85vh] w-full items-center justify-center"
+          >
+            <MemberCard person={person} index={index} />
+          </div>
         ))}
       </div>
     </div>

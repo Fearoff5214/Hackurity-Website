@@ -277,7 +277,7 @@ b {
    every other row is shifted right by half a cell and pulled up so its
    points nest into the flat sides of the row above — the honeycomb look. */
 .hc-grid {
-  --hc-w: clamp(64px, 15vw, 176px);
+  --hc-w: clamp(72px, 18vw, 224px);
   --hc-h: calc(var(--hc-w) * 1.1547);
   --hc-gap: clamp(3px, 0.8vw, 8px);
   display: flex;
@@ -289,9 +289,12 @@ b {
      centering shifts cancel out at different rates). flex-start pins every
      row to the same left edge, so `.hc-row--offset`'s margin is the only
      thing moving a row — it stays correct for any row sizes, including
-     equal-sized rows. The whole grid is still centered on the page via
-     `mx-auto` on its wrapper. */
+     equal-sized rows. `width: fit-content` is what makes the whole grid
+     center on the page via `mx-auto` on its wrapper — a flex container is
+     block-level and fills its parent by default, so without this the grid
+     box is already as wide as the page and centering it is a no-op. */
   align-items: flex-start;
+  width: fit-content;
 }
 .hc-row {
   display: flex;
@@ -300,7 +303,13 @@ b {
   margin-top: calc(var(--hc-h) * -0.25);
 }
 .hc-row--offset {
-  margin-left: calc((var(--hc-w) + var(--hc-gap)) / 2);
+  /* `position: relative; left:` instead of margin-left — a margin here
+     would count toward this row's contribution to the grid's fit-content
+     width, making the whole grid wider (and therefore off-center) than the
+     unshifted rows. A relative offset shifts the row visually without
+     touching layout sizing. */
+  position: relative;
+  left: calc((var(--hc-w) + var(--hc-gap)) / 2);
 }
 .hc-cell {
   position: relative;

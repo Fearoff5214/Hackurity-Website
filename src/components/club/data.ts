@@ -155,19 +155,19 @@ export const DEPARTMENTS: Department[] = [
         linkedin: "https://www.linkedin.com/in/chetank23/",
         github: "https://github.com/chetank23",
       },
-      {
-        ...dummy(
-          "Chetan Kumar H M",
-          "Design Associate",
-          "If it looks sharp, it gets trusted â€” design is security's first impression.",
-          "chethan-k",
-          "+91733-78344158",
-        ),
-        email: "chethankumar23.2005@gmail.com",
-        github: "https://github.com/chetank23",
-        linkedin: "https://www.linkedin.com/in/chetank23/",
-        photo: drive("1qj1SWxMYHvBUAppbJgLBu7HeGqgwacnz"),
-      },
+      // {
+      //   ...dummy(
+      //     "Chetan Kumar H M",
+      //     "Design Associate",
+      //     "If it looks sharp, it gets trusted â€” design is security's first impression.",
+      //     "chethan-k",
+      //     "+91733-78344158",
+      //   ),
+      //   email: "chethankumar23.2005@gmail.com",
+      //   github: "https://github.com/chetank23",
+      //   linkedin: "https://www.linkedin.com/in/chetank23/",
+      //   photo: drive("1qj1SWxMYHvBUAppbJgLBu7HeGqgwacnz"),
+      // },
       {
         ...dummy(
           "Harshitha M Raj",

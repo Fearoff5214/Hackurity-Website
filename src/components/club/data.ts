@@ -192,13 +192,18 @@ export const DEPARTMENTS: Department[] = [
         "rohith-l",
         "+91 00000 00000",
       ),
-      dummy(
+      {
+      ...dummy(
         "Lavanya D",
         "Associate Event Manager",
         "Behind every smooth hackathon is a hundred things that almost went wrong.",
         "lavanya-d",
         "+91 80730 48671",
       ),
+      photo: "members/EventManagement/lavanya-d.jpg",
+
+    },
+      
       {
         ...dummy(
           "Ramya VK",

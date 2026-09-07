@@ -64,7 +64,7 @@ function MemberCard({
       </div>
 
       <div className="relative z-10 mt-6 flex flex-1 flex-col items-center">
-        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-52 sm:w-52">
+        <div className="relative h-64 w-64 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-80 sm:w-80">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
             <img

@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { DEPARTMENTS, type Person } from "./data";
+import { DEPARTMENTS, type Department, type Person } from "./data";
 import { SectionHeading } from "./Reveal";
 
 function initials(name: string) {
@@ -134,24 +134,69 @@ function MemberCard({
   );
 }
 
+function DepartmentBlock({
+  department,
+  deptIndex,
+}: {
+  department: Department;
+  deptIndex: number;
+}) {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const headingInView = useInView(headingRef, { once: true, amount: 0.5 });
+
+  return (
+    <div>
+      <div ref={headingRef} className="flex items-end gap-4">
+        <motion.span
+          initial={{ opacity: 0, y: 14 }}
+          animate={headingInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="font-heading text-3xl text-cyber-tan/30 md:text-4xl"
+        >
+          {String(deptIndex + 1).padStart(2, "0")}
+        </motion.span>
+        <div className="min-w-0">
+          <motion.h3
+            initial={{ opacity: 0, x: -24 }}
+            animate={headingInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="font-heading text-xl leading-tight text-white uppercase md:text-2xl"
+          >
+            {department.label}
+          </motion.h3>
+          <motion.span
+            initial={{ scaleX: 0 }}
+            animate={headingInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: "left" }}
+            className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent"
+          />
+        </div>
+      </div>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={headingInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        className="mt-4 max-w-2xl font-mono text-[13px] leading-relaxed text-white/55 sm:text-[14px]"
+      >
+        {department.blurb}
+      </motion.p>
+
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {department.people.map((person, index) => (
+          <MemberCard
+            key={`${department.id}-${person.name}`}
+            person={person}
+            index={index}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function MembersSection() {
-  const [active, setActive] = useState(DEPARTMENTS[0]?.id ?? "leadership");
-  const department =
-    DEPARTMENTS.find((item) => item.id === active) ?? DEPARTMENTS[0];
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  if (!department) return null;
-
-  const pick = (id: string) => {
-    setActive(id);
-    requestAnimationFrame(() => {
-      const node = gridRef.current;
-      if (!node) return;
-      const top = node.getBoundingClientRect().top + window.scrollY - 120;
-      window.scrollTo({ top, behavior: "smooth" });
-    });
-  };
-
   return (
     <section
       id="members"
@@ -160,59 +205,17 @@ export default function MembersSection() {
       <SectionHeading
         tag="The team"
         title="Club members"
-        description="Pick a department to see the people who run it. Every member is happy to be contacted if you want to know more about what they do."
+        description="Scroll through to meet every department. Each one is happy to be contacted if you want to know more about what they do."
       />
 
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {DEPARTMENTS.map((item) => {
-          const isActive = item.id === active;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => pick(item.id)}
-              className={`relative shrink-0 overflow-hidden rounded-full border px-4 py-2.5 font-mono text-[11px] font-semibold tracking-[0.12em] uppercase transition ${
-                isActive
-                  ? "border-cyber-tan/70 text-cyber-tan"
-                  : "border-white/10 bg-white/[0.02] text-white/50 hover:border-white/25 hover:text-white"
-              }`}
-            >
-              {isActive && (
-                <motion.span
-                  layoutId="deptHighlight"
-                  className="absolute inset-0 bg-cyber-tan/10"
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                />
-              )}
-              <span className="relative">{item.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <p className="mt-4 max-w-3xl font-mono text-[13px] leading-relaxed text-white/55 sm:text-[14px]">
-        {department.blurb}
-      </p>
-
-      <div ref={gridRef}>
-        <AnimatePresence mode="wait">
-          <motion.div
+      <div className="mt-4 space-y-24 md:space-y-28">
+        {DEPARTMENTS.map((department, deptIndex) => (
+          <DepartmentBlock
             key={department.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-            className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {department.people.map((person, index) => (
-              <MemberCard
-                key={`${department.id}-${person.name}`}
-                person={person}
-                index={index}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+            department={department}
+            deptIndex={deptIndex}
+          />
+        ))}
       </div>
     </section>
   );

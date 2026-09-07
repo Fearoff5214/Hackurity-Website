@@ -2,6 +2,7 @@
 // import type {Metadata} from "next";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   CornerCrosshairs,
@@ -296,6 +297,10 @@ export default function Home() {
             <span className="font-sans text-lg font-bold text-white">IBM Bob</span>
           </span>
         </div>
+
+        <p className="mt-1 font-mono text-sm font-bold tracking-[0.2em] text-cyber-tan uppercase md:text-base">
+          On October 14–15, 2026
+        </p>
 
         <p className="mt-2 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
           A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
@@ -638,6 +643,18 @@ export default function Home() {
         <ContactSection />
 
         <CreatorsSection />
+
+        <section className="crosshair-corner relative flex flex-col items-center gap-4 border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 text-center md:p-8">
+          <p className="font-mono text-[13px] tracking-widest text-cyber-gray">
+            Want the full story behind Hackurity and the club running it?
+          </p>
+          <Link
+            href="/about-us"
+            className="border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-2.5 font-mono text-[13px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20"
+          >
+            About Us ↗
+          </Link>
+        </section>
 
       </main>
 

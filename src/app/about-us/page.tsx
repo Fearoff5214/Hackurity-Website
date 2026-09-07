@@ -32,8 +32,6 @@ export default function ClubHome() {
         basePath="/"
         initialSection="ABOUT US"
         backLink={{ href: "/", label: "Back to Hackurity" }}
-        showBrand={false}
-        showRegister={false}
         centerNav
       />
 

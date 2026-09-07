@@ -74,7 +74,7 @@ export default function CreatorsSection() {
             <AnimatedCorners size={12} tone="blue" />
 
             <div className="relative z-10 flex items-start gap-4">
-              <HudThumb src={person.image} name={person.name} />
+              <HudThumb name={person.name} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-heading text-[15px] leading-snug text-white uppercase">

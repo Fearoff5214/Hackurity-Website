@@ -217,7 +217,7 @@ export function ContactSection() {
             <CardGlow />
             <AnimatedCorners size={12} tone="tan" />
             <div className="relative z-10 flex items-center gap-4">
-              <HudThumb src={person.image} name={person.name} />
+              <HudThumb name={person.name} />
               <div className="min-w-0">
                 <h3 className="font-heading text-[14px] leading-snug text-white uppercase">{person.name}</h3>
                 <p className="mt-1 font-mono text-[11px] font-bold tracking-[0.14em] text-cyber-tan uppercase">{person.role}</p>

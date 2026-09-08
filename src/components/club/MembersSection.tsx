@@ -25,7 +25,10 @@ function useScrollSlide<T extends HTMLElement>(ref: RefObject<T | null>) {
   });
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
   const x = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [-70, 0, 0, 70]);
-  return { opacity, x };
+  // Inverse of `opacity` — a dark scrim that's fully opaque while the card is
+  // still entering/leaving, and clears away once it's the one in focus.
+  const overlay = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [1, 0, 0, 1]);
+  return { opacity, x, overlay };
 }
 
 function MemberCard({
@@ -36,7 +39,7 @@ function MemberCard({
   index: number;
 }) {
   const ref = useRef<HTMLElement>(null);
-  const { opacity, x } = useScrollSlide(ref);
+  const { opacity, x, overlay } = useScrollSlide(ref);
   const [imgFailed, setImgFailed] = useState(false);
 
   return (
@@ -46,6 +49,11 @@ function MemberCard({
       whileHover={{ y: -8 }}
       className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-lg transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-10 md:p-12"
     >
+      <motion.div
+        aria-hidden="true"
+        style={{ opacity: overlay }}
+        className="pointer-events-none absolute inset-0 z-30 bg-cyber-black"
+      />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.08] to-transparent" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
       <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/10" />

@@ -675,6 +675,12 @@ export default function Home() {
               </span>
             </span>
             <span className="text-[13px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
+            <a
+              href="mailto:contact@revacyberclub.tech"
+              className="font-mono text-[13px] tracking-widest text-cyber-blue uppercase transition-colors hover:text-cyber-tan"
+            >
+              contact@revacyberclub.tech ↗
+            </a>
           </div>
 
           {/* Quick diagnostic outputs */}

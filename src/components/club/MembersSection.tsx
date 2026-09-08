@@ -76,15 +76,6 @@ function MemberCard({
         <div className="relative h-[clamp(11rem,28vh,20rem)] w-full max-w-[56rem] overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)]">
           {person.photo && !imgFailed ? (
             <>
-              {/* Blurred, cropped fill behind the uncropped photo — the source
-                  photos are square but this box is wide, so this avoids both
-                  cropping the real photo and leaving bare letterbox bars. */}
-              <img
-                aria-hidden="true"
-                src={person.photo}
-                alt=""
-                className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl"
-              />
               <div className="absolute inset-0 h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">
                 <img
                   src={person.photo}

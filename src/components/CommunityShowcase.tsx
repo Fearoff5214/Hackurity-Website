@@ -19,8 +19,9 @@ const PARTNERS: Partner[] = [
   { name: "Paramount Consulting", tier: "STRATEGIC PARTNER", url: "https://paramountgroupuk.com/", logo: "/sponsors/paramount-consulting.png" },
 ];
 
-// Judging panel is still being confirmed — every slot is a placeholder for now.
-const JUDGE_SLOTS = [1, 2, 3, 4, 5];
+// Judging panel is still being confirmed — each slot represents one of the
+// sponsors below (excluding the community partner), whose judge is TBD.
+const JUDGE_SPONSORS = PARTNERS.filter((partner) => partner.tier !== "COMMUNITY PARTNER");
 
 // Photos are pulled from the same /public/members library used by the club page.
 const CONTACTS: Person[] = [
@@ -132,12 +133,12 @@ export function JudgesSection() {
       <div className="mb-8 max-w-2xl">
         <span className="font-mono text-[13px] font-bold tracking-widest text-cyber-tan">{"// EVALUATION_PANEL"}</span>
         <h2 className="mt-2 font-heading text-xl leading-relaxed text-white uppercase md:text-2xl">Meet your judges</h2>
-        <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">The panel that scores the final defence. Profiles are being confirmed — full details land here soon.</p>
+        <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">The panel that scores the final defence. Each judge is drawn from one of our sponsors below — individual profiles are being confirmed and land here soon.</p>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {JUDGE_SLOTS.map((slot, index) => (
+        {JUDGE_SPONSORS.map((sponsor, index) => (
           <motion.div
-            key={slot}
+            key={sponsor.name}
             initial={reveal(index)}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -148,18 +149,22 @@ export function JudgesSection() {
             <CardGlow />
             <AnimatedCorners size={12} tone="tan" />
             <div className="relative z-10 flex items-center gap-4">
-              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyber-blue/25 bg-cyber-dark/80">
-                <span className="font-heading text-3xl text-cyber-tan/45">?</span>
+              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyber-blue/25 bg-white/[0.04] p-2">
+                {sponsor.logo ? (
+                  <img src={sponsor.logo} alt={`${sponsor.name} logo`} className="h-full w-full object-contain" />
+                ) : (
+                  <span className="font-heading text-3xl text-cyber-tan/45">?</span>
+                )}
                 <span className="pointer-events-none absolute inset-x-0 -top-full h-full bg-[linear-gradient(180deg,transparent,rgba(99,102,241,0.35),transparent)] transition-transform duration-[900ms] ease-out group-hover:translate-y-[200%]" />
               </div>
               <div className="min-w-0">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-cyber-blue/70">JUDGE_{String(slot).padStart(2, "0")}</span>
-                <h3 className="mt-1 font-heading text-[14px] leading-snug text-white uppercase">Judge details coming soon</h3>
+                <span className="font-mono text-[10px] tracking-[0.2em] text-cyber-blue/70">JUDGE_{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="mt-1 font-heading text-[14px] leading-snug text-white uppercase">Judge from {sponsor.name}</h3>
                 <p className="mt-1 font-mono text-[11px] font-bold tracking-[0.16em] text-cyber-tan">TO BE ANNOUNCED</p>
               </div>
             </div>
             <p className="relative z-10 mt-4 border-t border-white/10 pt-3 font-mono text-[12px] leading-relaxed text-cyber-gray">
-              Profile, role and background will be published closer to the event.
+              Representing {sponsor.name} on the judging panel. Individual profile will be published closer to the event.
             </p>
           </motion.div>
         ))}

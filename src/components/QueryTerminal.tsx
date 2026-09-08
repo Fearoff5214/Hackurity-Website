@@ -22,7 +22,7 @@ const RECORDS: QaRecord[] = [
     id: "03",
     question: "Is there a registration fee?",
     answer:
-      "Yes. Entry is ₹800 per team. That single payment covers your whole team for the hackathon — there are no other charges.",
+      "No registration fee. The only charge is ₹800 per team, which covers food for your whole team across the hackathon — there are no other charges.",
   },
   {
     id: "04",

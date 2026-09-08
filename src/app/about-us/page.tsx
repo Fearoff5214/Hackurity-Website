@@ -47,13 +47,23 @@ export default function ClubHome() {
             B.Tech in Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)
           </motion.p>
 
+          <motion.span
+            aria-hidden="true"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.13 }}
+            className="order-2 mt-3 font-heading text-3xl text-white sm:text-4xl md:text-5xl"
+          >
+            X
+          </motion.span>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="order-2 mt-3 flex flex-wrap items-center justify-center gap-2 font-heading text-base uppercase sm:text-2xl md:text-3xl"
+            className="order-3 mt-3 font-heading text-base uppercase sm:text-2xl md:text-3xl"
           >
-            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> REVA Cybersecurity Club
+            REVA Cybersecurity Club
           </motion.h1>
         </section>
         <AboutSection />

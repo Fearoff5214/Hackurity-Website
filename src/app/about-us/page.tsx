@@ -83,10 +83,10 @@ export default function ClubHome() {
             </div>
             <div className="flex items-center gap-5">
               <a
-                href="mailto:cyberclub@reva.edu.in"
+                href="mailto:contact@revacyberclub.tech"
                 className="font-mono text-[13px] tracking-widest text-cyber-blue uppercase hover:text-cyber-tan"
               >
-                cyberclub@reva.edu.in ↗
+                contact@revacyberclub.tech ↗
               </a>
               <a
                 href="https://www.linkedin.com/company/cybersecurity-club-reva/posts/?feedView=all"

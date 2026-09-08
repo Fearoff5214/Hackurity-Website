@@ -25,8 +25,8 @@ const JUDGE_SPONSORS = PARTNERS.filter((partner) => partner.tier !== "COMMUNITY 
 
 // Photos are pulled from the same /public/members library used by the club page.
 const CONTACTS: Person[] = [
-  { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: "/members/LeadershipRole/dharma.png", phone: "+91 79 7565 0280" },
-  { name: "Chethan K", role: "Design Team Head", image: "/members/DesignTeam/DesignChetan.jpeg", phone: "+91733-78344158" },
+  { name: "Dharma Teja RC", role: "Cybersecurity Club Vice President", image: "/members/LeadershipRole/dharma.png", phone: "+91 79756 50280" },
+  { name: "Chethan K", role: "Design Team Head", image: "/members/DesignTeam/DesignChetan.jpeg", phone: "+91 73378 34158" },
   { name: "Rohith L", role: "Event Management Lead", image: "/members/EventManagers/rohit.png", phone: "+91 86606 69138" },
   { name: "Lavanya D", role: "Event Management", image: "/members/EventManagers/lavanya.jpeg", phone: "+91 80730 48671" },
 ];
@@ -231,7 +231,7 @@ export function ContactSection() {
             <div className="relative z-10 mt-4 border-t border-white/10 pt-3">
               <a
                 href={`tel:${person.phone?.replace(/\s/g, "")}`}
-                className="inline-flex items-center gap-2 rounded-md border border-cyber-blue/25 px-3 py-1.5 font-mono text-[12px] tracking-wider text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                className="inline-flex items-center gap-2 rounded-md border border-cyber-blue/40 bg-cyber-blue/10 px-3 py-1.5 font-mono text-[13px] font-bold tracking-wider text-white transition-colors hover:border-cyber-tan hover:bg-cyber-tan/10 hover:text-cyber-tan"
               >
                 {person.phone}
               </a>

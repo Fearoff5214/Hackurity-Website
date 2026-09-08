@@ -8,7 +8,7 @@ import { BracketFrame, ScrambleText, GradientUnderline, RotatingFactPanel } from
 const FACTS = [
   { k: "BUILD WINDOW", v: "24 hours // on-site" },
   { k: "TEAM SIZE", v: "3 – 4 members" },
-  { k: "TRACKS", v: "3 tracks // 2 problems each" },
+  { k: "TRACKS", v: "3 tracks // 1 problem each" },
   { k: "ENTRY", v: "₹800 per team" },
   { k: "VENUE", v: "REVA University, Bengaluru" },
 ];

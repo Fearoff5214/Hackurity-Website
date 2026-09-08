@@ -58,7 +58,7 @@ const RECORDS: QaRecord[] = [
     id: "09",
     question: "Can we change our track after registration?",
     answer:
-      "Yes. Teams can change their selected track after registering, including after the problem statements are released, so you can pick the statement that best matches your interests and skills.",
+      "Yes. Teams can change their selected track after registering, including after the problem statements are released, so you can move to the track whose problem best matches your interests and skills.",
   },
   {
     id: "10",

@@ -362,13 +362,13 @@ export default function Home() {
           >
             <div className="flex items-center gap-2">
               <span className="text-[12px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
-              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">04 TRACKS // 2 PROBLEMS EACH</span>
+              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">04 TRACKS // 1 PROBLEM EACH</span>
             </div>
             <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-tight text-white uppercase">
               TRACKS
             </h2>
             <p className="font-mono text-xs md:text-sm leading-relaxed text-cyber-gray">
-              There are four tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
+              There are four tracks to choose from, and each one comes with one problem statement. Pick the track that fits your team before the hackathon opens.
             </p>
             <p className="font-mono text-[11px] md:text-xs font-bold tracking-wide text-cyber-tan">
               // Problem statements will be announced 1 week before the hackathon.

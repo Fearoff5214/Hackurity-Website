@@ -93,7 +93,7 @@ export function PartnersSection() {
         <h2 className="mt-2 font-heading text-xl leading-relaxed text-white uppercase md:text-2xl">Meet our sponsors</h2>
         <p className="mt-3 font-mono text-xs leading-relaxed text-cyber-gray">A showcase of the organisations helping the next generation of defenders explore, build and lead. These are dummy partners for now; each card is ready to be replaced with a confirmed logo and website.</p>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {PARTNERS.map((partner, index) => (
           <motion.a
             key={partner.name}
@@ -148,7 +148,7 @@ export function JudgesSection() {
           >
             <CardGlow />
             <AnimatedCorners size={12} tone="tan" />
-            <div className="relative z-10 flex items-center gap-4">
+            <div className="relative z-10 flex flex-col">
               <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-cyber-blue/25 bg-white/[0.04] p-2">
                 {sponsor.logo ? (
                   <img src={sponsor.logo} alt={`${sponsor.name} logo`} className="h-full w-full object-contain" />
@@ -157,10 +157,9 @@ export function JudgesSection() {
                 )}
                 <span className="pointer-events-none absolute inset-x-0 -top-full h-full bg-[linear-gradient(180deg,transparent,rgba(99,102,241,0.35),transparent)] transition-transform duration-[900ms] ease-out group-hover:translate-y-[200%]" />
               </div>
-              <div className="min-w-0">
+              <div className="mt-4 min-w-0">
                 <span className="font-mono text-[10px] tracking-[0.2em] text-cyber-blue/70">JUDGE_{String(index + 1).padStart(2, "0")}</span>
                 <h3 className="mt-1 font-heading text-[14px] leading-snug text-white uppercase">Judge from {sponsor.name}</h3>
-                <p className="mt-1 font-mono text-[11px] font-bold tracking-[0.16em] text-cyber-tan">TO BE ANNOUNCED</p>
               </div>
             </div>
             <p className="relative z-10 mt-4 border-t border-white/10 pt-3 font-mono text-[12px] leading-relaxed text-cyber-gray">
@@ -209,7 +208,7 @@ export function ContactSection() {
         <span className="font-mono text-[13px] font-bold tracking-widest text-cyber-tan">{"// DIRECT_CONTACTS"}</span>
         <h2 className="mt-2 font-heading text-lg leading-relaxed text-white uppercase md:text-xl">Contact us</h2>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {CONTACTS.map((person, index) => (
           <motion.article
             key={person.name}

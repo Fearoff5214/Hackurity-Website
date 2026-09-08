@@ -330,6 +330,11 @@ export default function Home() {
           />
         </div>
 
+        <div className="mt-2 max-w-2xl border border-cyber-tan/30 bg-cyber-tan/5 px-4 py-3 text-left font-mono text-xs leading-relaxed text-cyber-gray md:text-sm">
+          <span className="font-bold tracking-widest text-cyber-tan uppercase">Paid Internships:</span>{" "}
+          Top-performing teams may receive paid internship opportunities from participating companies, subject to their individual selection criteria and standards.
+        </div>
+
         <BracketFrame className="mt-2 inline-block">
           <a
             href="#join_node"

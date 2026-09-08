@@ -53,7 +53,7 @@ export default function ClubHome() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-3 flex flex-wrap items-center justify-center gap-2 font-heading text-lg uppercase text-cyber-tan sm:text-2xl md:text-3xl"
           >
-            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> B.Tech in IoT &amp; Cybersecurity (School of CSE)
+            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> B.Tech in Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)
           </motion.p>
         </section>
         <AboutSection />

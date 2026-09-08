@@ -26,8 +26,8 @@ const JUDGE_SLOTS = [1, 2, 3, 4, 5];
 const CONTACTS: Person[] = [
   { name: "Dharma Teja", role: "Cybersecurity Club Vice President", image: "/members/LeadershipRole/dharma.png", phone: "+91 79 7565 0280" },
   { name: "Chethan K", role: "Design Team Head", image: "/members/DesignTeam/DesignChetan.jpeg", phone: "+91733-78344158" },
+  { name: "Rohith L", role: "Event Management Lead", image: "/members/EventManagers/rohit.png", phone: "+91 86606 69138" },
   { name: "Lavanya D", role: "Event Management", image: "/members/EventManagers/lavanya.jpeg", phone: "+91 80730 48671" },
-  { name: "Rohith L", role: "Lead Manager — Events", image: "/members/EventManagers/rohit.png", phone: "+91 86606 69138" },
 ];
 
 export const reveal = (index: number) => ({ opacity: 0, y: 20, scale: 0.97, transition: { delay: index * 0.045 } });

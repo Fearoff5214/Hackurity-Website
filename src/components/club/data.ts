@@ -114,6 +114,73 @@ export const DEPARTMENTS: Department[] = [
     ],
   },
   {
+    id: "events",
+    label: "Event Management",
+    blurb: "Plans the schedule, the venue and the hundred small things on event day.",
+    people: [
+      {
+        ...dummy(
+          "Rohit L",
+          "Lead Manager — Events",
+          "A great CTF isn't won at the keyboard — it's won in the planning.",
+          "rohith-l",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/rohit.png",
+      },
+      {
+        ...dummy(
+          "Lavanya D",
+          "Event Management Member",
+          "Behind every smooth hackathon is a hundred things that almost went wrong.",
+          "lavanya-d",
+          "+91 80730 48671",
+        ),
+        photo: "/members/EventManagers/lavanya.jpeg",
+      },
+      {
+        ...dummy(
+          "Ramya VK",
+          "Event Management Member",
+          "Details make the difference between a good event and a great one.",
+          "ramya-vk",
+          "+91 00000 00000",
+        ),
+        photo: drive("11wZ2Uxbh_uOXaS-YUmnmh28Sh-KoCSj5"),
+      },
+      {
+        ...dummy(
+          "Adithi Bisappa Gowda",
+          "Event Management Member",
+          "Security is a team sport — so is pulling off a 24-hour hackathon.",
+          "adithi-bisappa-gowda",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/adithi.png",
+      },
+      {
+        ...dummy(
+          "K P Yogesh",
+          "Event Management Member",
+          "Go where you grow — all is possible.",
+          "kp-yogesh",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/yogesh.png",
+      },
+      {
+        ...dummy(
+          "Gagana V",
+          "Event Management Member",
+          "The little details are what make an event feel put together.",
+          "gagana-v",
+          "+91 00000 00000",
+        ),
+        photo: "/members/EventManagers/gagana.png",
+      },
+    ],
+  },
+  {
     id: "marketing",
     label: "Marketing Department",
     blurb: "Tells the club's story on campus and brings new people through the door.",
@@ -184,75 +251,6 @@ export const DEPARTMENTS: Department[] = [
         photo: "/members/DesignTeam/harshitaRaj.jpeg",
         photoZoom: 1.6,
         photoPosition: "62% 45%",
-      },
-    ],
-  },
-  {
-    id: "events",
-    label: "Event Management",
-    blurb: "Plans the schedule, the venue and the hundred small things on event day.",
-    people: [
-      {
-        ...dummy(
-          "Rohit L",
-          "Lead Manager — Events",
-          "A great CTF isn't won at the keyboard — it's won in the planning.",
-          "rohith-l",
-          "+91 00000 00000",
-        ),
-        photo: "/members/EventManagers/rohit.png",
-      },
-      {
-      ...dummy(
-        "Lavanya D",
-        "Event Management Member",
-        "Behind every smooth hackathon is a hundred things that almost went wrong.",
-        "lavanya-d",
-        "+91 80730 48671",
-      ),
-      photo: "/members/EventManagers/lavanya.jpeg",
-
-    },
-      
-      {
-        ...dummy(
-          "Ramya VK",
-          "Event Management Member",
-          "Details make the difference between a good event and a great one.",
-          "ramya-vk",
-          "+91 00000 00000",
-        ),
-        photo: drive("11wZ2Uxbh_uOXaS-YUmnmh28Sh-KoCSj5"),
-      },
-      {
-        ...dummy(
-          "Adithi Bisappa Gowda",
-          "Event Management Member",
-          "Security is a team sport — so is pulling off a 24-hour hackathon.",
-          "adithi-bisappa-gowda",
-          "+91 00000 00000",
-        ),
-        photo: "/members/EventManagers/adithi.png",
-      },
-      {
-        ...dummy(
-          "K P Yogesh",
-          "Event Management Member",
-          "Go where you grow — all is possible.",
-          "kp-yogesh",
-          "+91 00000 00000",
-        ),
-        photo: "/members/EventManagers/yogesh.png",
-      },
-      {
-        ...dummy(
-          "Gagana V",
-          "Event Management Member",
-          "The little details are what make an event feel put together.",
-          "gagana-v",
-          "+91 00000 00000",
-        ),
-        photo: "/members/EventManagers/gagana.png",
       },
     ],
   },

@@ -44,7 +44,7 @@ function MemberCard({
       ref={ref}
       style={{ opacity, x }}
       whileHover={{ y: -8 }}
-      className="group relative flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:max-w-xl sm:p-6"
+      className="group relative flex w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(145deg,rgba(13,20,28,0.96),rgba(3,7,11,0.98))] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:max-w-xl sm:p-6 md:max-w-2xl"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
       <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/[0.035]" />
@@ -64,7 +64,7 @@ function MemberCard({
       </div>
 
       <div className="relative z-10 mt-4 flex flex-1 flex-col items-center">
-        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-64 sm:w-64">
+        <div className="relative h-[clamp(11rem,28vh,22rem)] w-[clamp(11rem,28vh,22rem)] overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)]">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
             <div className="h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">

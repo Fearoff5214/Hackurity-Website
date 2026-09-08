@@ -120,8 +120,8 @@ export const DEPARTMENTS: Department[] = [
     people: [
       {
         ...dummy(
-          "Rohit L",
-          "Lead Manager — Events",
+          "Rohith L",
+          "Event Management Lead",
           "A great CTF isn't won at the keyboard — it's won in the planning.",
           "rohith-l",
           "+91 00000 00000",

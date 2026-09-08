@@ -10,7 +10,7 @@ type CampusLogoProps = {
 };
 
 /**
- * Small emblem pinned to the top-right, just under the navbar. Spins
+ * Small emblem pinned to the top-left, just under the navbar. Spins
  * continuously, alternating between the two marks. No plate, border or
  * glow — the mark sits directly on the page.
  */
@@ -24,7 +24,7 @@ export default function CampusLogo({ primary = "reva" }: CampusLogoProps) {
       initial={{ opacity: 0, y: -8, scale: 0.7 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
-      className="fixed right-[62px] top-[106px] z-40 hidden h-16 w-16 bg-transparent [perspective:700px] md:block"
+      className="fixed left-[62px] top-[106px] z-40 hidden h-16 w-16 bg-transparent [perspective:700px] md:block"
     >
       <motion.span
         className="relative block h-full w-full [transform-style:preserve-3d]"

@@ -254,8 +254,13 @@ export default function Home() {
       {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
       <CyberCursor />
 
-      {/* Campus emblem — top-right under the navbar, flips to the club shield on hover */}
+      {/* Campus emblem — top-left under the navbar, flips to the club shield on hover */}
       <CampusLogo />
+
+      {/* Paid internships badge — sits where the campus emblem used to, top-right under the navbar */}
+      <div className="fixed right-[62px] top-[100px] z-40 hidden border border-cyber-tan/50 bg-cyber-tan/5 px-3 py-2 shadow-[0_0_25px_-6px_rgba(214,180,120,0.7)] md:block">
+        <span className="font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase">Paid Internships</span>
+      </div>
 
       {/* Site boot sequence */}
       <SiteLoader />
@@ -682,18 +687,10 @@ export default function Home() {
             <span className="text-[13px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
             <a
               href="mailto:contact@revacyberclub.tech"
-              className="font-mono text-[13px] tracking-widest text-cyber-blue uppercase transition-colors hover:text-cyber-tan"
+              className="whitespace-nowrap font-mono text-[13px] tracking-widest text-cyber-blue uppercase transition-colors hover:text-cyber-tan"
             >
               contact@revacyberclub.tech ↗
             </a>
-          </div>
-
-          {/* Quick diagnostic outputs */}
-          <div className="flex items-center gap-6 font-mono text-[12px] text-cyber-blue/60">
-            <div>PING: 14MS</div>
-            <div>FPS: 60.0</div>
-            <div>MEM: 44.82MB</div>
-            <div>STATION: NODE_HACKURITY_045</div>
           </div>
         </div>
       </footer>

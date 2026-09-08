@@ -44,10 +44,11 @@ function MemberCard({
       ref={ref}
       style={{ opacity, x }}
       whileHover={{ y: -8 }}
-      className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[0.06] p-6 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-md transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-10 md:p-12"
+      className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-lg transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-10 md:p-12"
     >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.08] to-transparent" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
-      <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/[0.035]" />
+      <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/10" />
 
       <div className="relative z-10 flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -64,7 +65,7 @@ function MemberCard({
       </div>
 
       <div className="relative z-10 mt-8 flex flex-1 flex-col items-center">
-        <div className="relative h-[clamp(14rem,40vh,32rem)] w-[clamp(14rem,40vh,32rem)] overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)]">
+        <div className="relative h-[clamp(14rem,40vh,30rem)] w-full max-w-[48rem] overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)]">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
           {person.photo && !imgFailed ? (
             <div className="h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">

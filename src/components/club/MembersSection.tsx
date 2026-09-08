@@ -1,192 +1,111 @@
 "use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import type { RefObject } from "react";
-import { DEPARTMENTS, type Department, type Person } from "./data";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { DEPARTMENTS } from "./data";
 import { SectionHeading } from "./Reveal";
 
-function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
-// Continuous scroll-linked slide: fades/slides in as an element enters the
-// viewport, holds while it's the one in focus, then slides back out as it
-// leaves — rather than a one-shot reveal that only ever plays once.
-function useScrollSlide<T extends HTMLElement>(ref: RefObject<T | null>) {
-  const { scrollYProgress } = useScroll({
-    target: ref as RefObject<HTMLElement>,
-    offset: ["start end", "end start"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 0]);
-  const x = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [-70, 0, 0, 70]);
-  // Inverse of `opacity` — a dark scrim that's fully opaque while the card is
-  // still entering/leaving, and clears away once it's the one in focus.
-  const overlay = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [1, 0, 0, 1]);
-  return { opacity, x, overlay };
-}
-
-function MemberCard({
-  person,
-  index,
-}: {
-  person: Person;
-  index: number;
-}) {
-  const [imgFailed, setImgFailed] = useState(false);
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-lg transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-6"
-    >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.08] to-transparent" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
-      <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/10" />
-
-      <div className="relative z-10 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="font-heading text-[17px] leading-tight tracking-wide text-white">
-            {person.name}
-          </h3>
-          <p className="mt-2 font-mono text-[11px] font-bold tracking-[0.18em] text-cyber-tan uppercase">
-            {person.role}
-          </p>
-        </div>
-        <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[10px] tracking-widest text-white/40">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div className="relative z-10 mt-6 flex flex-1 flex-col items-center">
-        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-56 sm:w-56">
-          {person.photo && !imgFailed ? (
-            <>
-              <div className="absolute inset-0 h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">
-                <img
-                  src={person.photo}
-                  alt={`${person.name} — ${person.role}`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  onError={() => setImgFailed(true)}
-                  style={{
-                    objectPosition: person.photoPosition ?? "50% 50%",
-                    transform: `scale(${person.photoZoom ?? 1})`,
-                    transformOrigin: person.photoPosition ?? "50% 50%",
-                  }}
-                  className="relative h-full w-full object-contain grayscale-[15%] transition-[filter] duration-700 group-hover:grayscale-0"
-                />
-              </div>
-              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-            </>
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-white/[0.025] font-heading text-4xl text-cyber-tan/80">
-              {initials(person.name)}
-            </div>
-          )}
-
-          <motion.span
-            className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px bg-cyber-tan/80"
-            animate={{ y: [0, 185, 0], opacity: [0, 1, 0] }}
-            transition={{ duration: 3.2, repeat: Infinity, repeatDelay: 2.2, ease: "easeInOut" }}
-          />
-        </div>
-
-        <p className="mt-5 w-full text-center font-mono text-[12.5px] leading-relaxed text-white/80">
-          <span className="mr-1 text-cyber-tan">“</span>
-          {person.saying}
-          <span className="ml-1 text-cyber-tan">”</span>
-        </p>
-      </div>
-
-      <div className="relative z-10 mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
-        {person.github && (
-          <motion.a
-            href={person.github}
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.15em] text-white/70 transition hover:border-cyber-tan/50 hover:bg-cyber-tan/10 hover:text-cyber-tan"
-          >
-            GITHUB ↗
-          </motion.a>
-        )}
-        <motion.a
-          href={person.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.15em] text-white/70 transition hover:border-cyber-tan/50 hover:bg-cyber-tan/10 hover:text-cyber-tan"
-        >
-          LINKEDIN ↗
-        </motion.a>
-      </div>
-    </motion.article>
-  );
-}
-
-function DepartmentBlock({ department }: { department: Department }) {
-  const headingRef = useRef<HTMLDivElement>(null);
-  const { opacity, x } = useScrollSlide(headingRef);
-
-  return (
-    <div>
-      <motion.div ref={headingRef} style={{ opacity, x }} className="min-w-0">
-        <h3 className="font-heading text-xl leading-tight text-white uppercase md:text-2xl">
-          {department.label}
-        </h3>
-        <span className="mt-2 block h-px w-24 bg-gradient-to-r from-cyber-tan to-transparent" />
-      </motion.div>
-
-      <motion.p
-        style={{ opacity }}
-        className="mt-4 max-w-2xl font-mono text-[13px] leading-relaxed text-white/55 sm:text-[14px]"
-      >
-        {department.blurb}
-      </motion.p>
-
-      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {department.people.map((person, index) => (
-          <MemberCard
-            key={`${department.id}-${person.name}`}
-            person={person}
-            index={index}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function MembersSection() {
+  const [active, setActive] = useState(DEPARTMENTS[0]!.id);
+  const department = DEPARTMENTS.find((item) => item.id === active) ?? DEPARTMENTS[0]!;
+
   return (
-    <section
-      id="members"
-      className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-5 md:px-8 md:py-24"
-    >
+    <section id="members" className="relative mx-auto max-w-6xl px-5 py-24 md:px-8">
       <SectionHeading
         tag="The team"
         title="Club members"
-        description="Scroll through to meet every department. Each one is happy to be contacted if you want to know more about what they do."
+        description="Pick a department to see the people who run it. Every member is happy to be contacted if you want to know more about what they do."
         size="lg"
       />
 
-      <div className="mt-4 space-y-16 md:space-y-20">
-        {DEPARTMENTS.map((department) => (
-          <DepartmentBlock key={department.id} department={department} />
-        ))}
+      <div className="flex flex-wrap gap-2">
+        {DEPARTMENTS.map((item) => {
+          const isActive = item.id === active;
+          return (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setActive(item.id)}
+              className={`relative border px-4 py-2.5 font-mono text-[11px] tracking-widest uppercase transition-colors ${
+                isActive
+                  ? "border-cyber-tan text-cyber-tan"
+                  : "border-cyber-blue/20 text-cyber-gray hover:border-cyber-blue/50 hover:text-white"
+              }`}
+            >
+              {isActive && (
+                <motion.span
+                  layoutId="deptHighlight"
+                  className="absolute inset-0 bg-cyber-tan/10"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative">{item.label}</span>
+            </button>
+          );
+        })}
       </div>
+
+      <p className="mt-5 font-mono text-[12px] leading-relaxed text-cyber-gray">
+        {department.blurb}
+      </p>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={department.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {department.people.map((person, index) => (
+            <motion.article
+              key={person.name}
+              initial={{ opacity: 0, rotateX: -8, y: 24 }}
+              animate={{ opacity: 1, rotateX: 0, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -6 }}
+              className="group flex flex-col border border-cyber-blue/15 bg-black/55 p-5 transition-colors hover:border-cyber-tan/45"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-heading text-[13px] leading-relaxed uppercase">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1.5 font-mono text-[10.5px] font-bold tracking-widest text-cyber-tan uppercase">
+                    {person.role}
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] tracking-widest text-cyber-blue/60">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <p className="mt-4 font-mono text-[11.5px] leading-relaxed text-cyber-gray italic">
+                &ldquo;{person.saying}&rdquo;
+              </p>
+
+              <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                <a
+                  href={person.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                >
+                  GITHUB ↗
+                </a>
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border border-cyber-blue/25 px-3 py-1.5 font-mono text-[10px] tracking-widest text-cyber-blue transition-colors hover:border-cyber-tan hover:text-cyber-tan"
+                >
+                  LINKEDIN ↗
+                </a>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

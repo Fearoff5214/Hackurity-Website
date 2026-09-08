@@ -183,7 +183,7 @@ export const DEPARTMENTS: Department[] = [
         ),
         photo: "/members/DesignTeam/harshitaRaj.jpeg",
         photoZoom: 1.6,
-        photoPosition: "68% 35%",
+        photoPosition: "62% 45%",
       },
     ],
   },

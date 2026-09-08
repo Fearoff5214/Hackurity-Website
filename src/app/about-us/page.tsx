@@ -38,23 +38,23 @@ export default function ClubHome() {
       <main className="relative z-10">
         {/* Hero */}
         <section className="mx-auto flex min-h-[65vh] max-w-6xl flex-col items-center justify-center px-5 py-16 text-center md:px-8">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-6 font-heading text-base uppercase sm:text-2xl md:text-3xl"
-          >
-            REVA Cybersecurity Club
-          </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-3 flex flex-wrap items-center justify-center gap-2 font-heading text-lg uppercase text-cyber-tan sm:text-2xl md:text-3xl"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="order-1 mt-6 font-heading text-lg uppercase text-cyber-tan sm:text-2xl md:text-3xl"
           >
-            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> B.Tech in Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)
+            B.Tech in Computer Science and Engineering (Internet of Things and Cyber Security including Block Chain Technology)
           </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="order-2 mt-3 flex flex-wrap items-center justify-center gap-2 font-heading text-base uppercase sm:text-2xl md:text-3xl"
+          >
+            <span className="text-3xl text-white sm:text-4xl md:text-5xl" aria-hidden="true">X</span> REVA Cybersecurity Club
+          </motion.h1>
         </section>
         <AboutSection />
         <FacultySection />

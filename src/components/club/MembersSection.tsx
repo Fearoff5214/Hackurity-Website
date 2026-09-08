@@ -38,22 +38,17 @@ function MemberCard({
   person: Person;
   index: number;
 }) {
-  const ref = useRef<HTMLElement>(null);
-  const { opacity, x, overlay } = useScrollSlide(ref);
   const [imgFailed, setImgFailed] = useState(false);
 
   return (
     <motion.article
-      ref={ref}
-      style={{ opacity, x }}
-      whileHover={{ y: -8 }}
-      className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-lg transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-10 md:p-12"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-5 shadow-[0_18px_60px_-35px_rgba(0,0,0,0.9)] backdrop-blur-lg transition-[border-color,box-shadow] duration-500 hover:border-cyber-tan/50 hover:shadow-[0_24px_80px_-38px_rgba(0,0,0,0.95)] sm:p-6"
     >
-      <motion.div
-        aria-hidden="true"
-        style={{ opacity: overlay }}
-        className="pointer-events-none absolute inset-0 z-30 bg-cyber-black"
-      />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.08] to-transparent" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(210,180,120,0.10),transparent_42%)] opacity-70" />
       <div className="pointer-events-none absolute inset-[1px] rounded-[15px] border border-white/10" />
@@ -72,8 +67,8 @@ function MemberCard({
         </span>
       </div>
 
-      <div className="relative z-10 mt-8 flex flex-1 flex-col items-center">
-        <div className="relative h-[clamp(11rem,28vh,20rem)] w-full max-w-[56rem] overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)]">
+      <div className="relative z-10 mt-6 flex flex-1 flex-col items-center">
+        <div className="relative h-48 w-48 overflow-hidden rounded-[22px] border border-cyber-tan/35 bg-cyber-blue/[0.04] shadow-[0_0_50px_-22px_rgba(214,180,120,0.7)] sm:h-56 sm:w-56">
           {person.photo && !imgFailed ? (
             <>
               <div className="absolute inset-0 h-full w-full overflow-hidden transition-transform duration-700 group-hover:scale-105">
@@ -106,14 +101,14 @@ function MemberCard({
           />
         </div>
 
-        <p className="mt-6 w-full max-w-[34rem] text-center font-mono text-[13.5px] leading-relaxed text-white/80">
+        <p className="mt-5 w-full text-center font-mono text-[12.5px] leading-relaxed text-white/80">
           <span className="mr-1 text-cyber-tan">“</span>
           {person.saying}
           <span className="ml-1 text-cyber-tan">”</span>
         </p>
       </div>
 
-      <div className="relative z-10 mt-8 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+      <div className="relative z-10 mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
         {person.github && (
           <motion.a
             href={person.github}
@@ -161,14 +156,13 @@ function DepartmentBlock({ department }: { department: Department }) {
         {department.blurb}
       </motion.p>
 
-      <div className="mt-10 flex flex-col items-center">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {department.people.map((person, index) => (
-          <div
+          <MemberCard
             key={`${department.id}-${person.name}`}
-            className="flex min-h-[85vh] w-full items-center justify-center"
-          >
-            <MemberCard person={person} index={index} />
-          </div>
+            person={person}
+            index={index}
+          />
         ))}
       </div>
     </div>
@@ -179,7 +173,7 @@ export default function MembersSection() {
   return (
     <section
       id="members"
-      className="relative mx-auto w-full max-w-[1800px] px-4 py-20 sm:px-6 md:px-10 md:py-24"
+      className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-5 md:px-8 md:py-24"
     >
       <SectionHeading
         tag="The team"
@@ -188,7 +182,7 @@ export default function MembersSection() {
         size="lg"
       />
 
-      <div className="mt-4 space-y-24 md:space-y-28">
+      <div className="mt-4 space-y-16 md:space-y-20">
         {DEPARTMENTS.map((department) => (
           <DepartmentBlock key={department.id} department={department} />
         ))}

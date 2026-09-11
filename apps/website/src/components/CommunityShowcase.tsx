@@ -11,6 +11,7 @@ type Person = { name: string; role: string; image: string; bio?: string; phone?:
 // Swap the `url` values here when partnerships are confirmed, and add a
 // `logo` once you have the real asset.
 const PARTNERS: Partner[] = [
+  { name: "Devfolio", tier: "REGISTRATION PARTNER", url: "https://devfolio.co/", logo: "/sponsors/devfolio.svg" },
   { name: "IBM Bob", tier: "KNOWLEDGE PARTNER", url: "https://www.ibm.com/", logo: "/sponsors/ibm-bob.png" },
   { name: "Boston Institute of Analytics", tier: "EDUCATION PARTNER", url: "https://bostoninstituteofanalytics.org/", logo: "/sponsors/boston-institute-of-analytics.png" },
   { name: "Indian Society for Technical Education", tier: "COMMUNITY PARTNER", url: "https://www.isteonline.in/", logo: "/sponsors/iste.png" },
@@ -20,8 +21,9 @@ const PARTNERS: Partner[] = [
 ];
 
 // Judging panel is still being confirmed — each slot represents one of the
-// sponsors below (excluding the community partner), whose judge is TBD.
-const JUDGE_SPONSORS = PARTNERS.filter((partner) => partner.tier !== "COMMUNITY PARTNER");
+// sponsors below (excluding the community and registration partners), whose judge is TBD.
+const NON_JUDGING_TIERS = ["COMMUNITY PARTNER", "REGISTRATION PARTNER"];
+const JUDGE_SPONSORS = PARTNERS.filter((partner) => !NON_JUDGING_TIERS.includes(partner.tier));
 
 // Photos are pulled from the same /public/members library used by the club page.
 const CONTACTS: Person[] = [

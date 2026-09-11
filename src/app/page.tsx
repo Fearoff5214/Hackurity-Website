@@ -337,9 +337,11 @@ export default function Home() {
           />
         </div>
 
-        <BracketFrame className="mt-2 inline-block">
-        <DevfolioButton />
-        </BracketFrame>
+        <div className="flex justify-center">
+              <BracketFrame>
+                <DevfolioButton />
+               </BracketFrame>
+            </div>
       </section>
 
       {/* MAIN CONTAINER */}

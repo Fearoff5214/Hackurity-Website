@@ -2,7 +2,6 @@
 // import type {Metadata} from "next";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   CornerCrosshairs,
@@ -32,6 +31,7 @@ import ScrollToTopButton from "@/components/ScrollToTopButton";
 import TrackCard, { SponsoredTrackBanner } from "@/components/TrackCard";
 import { ContactSection, JudgesSection, PartnersSection } from "@/components/CommunityShowcase";
 import CreatorsSection from "@/components/CreatorsSection";
+import DevfolioButton from "@/components/DevfolioButton";
 import MissionParameters from "@/components/MissionParameters";
 import HackerRoomBackground from "@/components/HackerRoomBackground";
 import WhyJoinSection from "@/components/WhyJoinSection";
@@ -243,24 +243,30 @@ export default function Home() {
       setIsSubmittingRegistration(false);
     }
   };
+  React.useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://apply.devfolio.co/v2/sdk.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    }
+}, []);
 
   const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
   const stepOneReady = Boolean(teamName.trim() && university.trim() && selectedDomain && experienceLevel);
   const stepThreeReady = Boolean(acceptedTerms && acceptedConduct && user && !existingRegistration);
 
   return (
+    <body> 
     <div className="hackurity-root min-h-screen bg-cyber-black text-white relative font-mono cyber-grid">
      <HackurityLenis>
       {/* Custom targeting-reticle cursor (desktop / fine pointers only) */}
       <CyberCursor />
 
-      {/* Campus emblem — top-left under the navbar, flips to the club shield on hover */}
+      {/* Campus emblem — top-right under the navbar, flips to the club shield on hover */}
       <CampusLogo />
-
-      {/* Paid internships badge — sits where the campus emblem used to, top-right under the navbar */}
-      <div className="fixed right-[62px] top-[100px] z-40 hidden border border-cyber-tan/50 bg-cyber-tan/5 px-3 py-2 shadow-[0_0_25px_-6px_rgba(214,180,120,0.7)] md:block">
-        <span className="font-mono text-[11px] font-bold tracking-widest text-cyber-tan uppercase">Paid Internships</span>
-      </div>
 
       {/* Site boot sequence */}
       <SiteLoader />
@@ -303,10 +309,6 @@ export default function Home() {
           </span>
         </div>
 
-        <p className="mt-1 font-mono text-sm font-bold tracking-[0.2em] text-cyber-tan uppercase md:text-base">
-          On October 14–15, 2026
-        </p>
-
         <p className="mt-2 max-w-xl font-mono text-sm leading-relaxed text-cyber-gray md:text-base">
           A national-level, 24-hour cybersecurity hackathon at REVA University — pick a track, break something, build the fix.
         </p>
@@ -336,18 +338,8 @@ export default function Home() {
         </div>
 
         <BracketFrame className="mt-2 inline-block">
-          <a
-            href="#join_node"
-            className="block px-6 py-3 font-mono text-sm font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:text-white"
-          >
-            <ScrambleText text="[ Register Now ]" />
-          </a>
+        <DevfolioButton />
         </BracketFrame>
-
-        <div className="mt-2 max-w-2xl border border-cyber-tan/50 bg-cyber-tan/5 px-4 py-3 text-left font-mono text-xs leading-relaxed text-cyber-gray shadow-[0_0_35px_-8px_rgba(214,180,120,0.6)] md:text-sm">
-          <span className="font-bold tracking-widest text-cyber-tan uppercase">Paid Internships:</span>{" "}
-          Top-performing teams may receive paid internship opportunities from participating companies, subject to their individual selection criteria and standards.
-        </div>
       </section>
 
       {/* MAIN CONTAINER */}
@@ -372,13 +364,13 @@ export default function Home() {
           >
             <div className="flex items-center gap-2">
               <span className="text-[12px] bg-cyber-tan/10 border border-cyber-tan/30 text-cyber-tan px-2 py-0.5 font-bold">TRACKS</span>
-              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">04 TRACKS // 1 PROBLEM EACH</span>
+              <span className="text-xs md:text-sm text-cyber-gray tracking-widest font-bold">04 TRACKS // 2 PROBLEMS EACH</span>
             </div>
             <h2 className="font-heading text-xl md:text-2xl tracking-tight leading-tight text-white uppercase">
               TRACKS
             </h2>
             <p className="font-mono text-xs md:text-sm leading-relaxed text-cyber-gray">
-              There are four tracks to choose from, and each one comes with one problem statement. Pick the track that fits your team before the hackathon opens.
+              There are four tracks to choose from, and each one comes with two problem statements. Pick the track that fits your team before the hackathon opens.
             </p>
             <p className="font-mono text-[11px] md:text-xs font-bold tracking-wide text-cyber-tan">
               // Problem statements will be announced 1 week before the hackathon.
@@ -654,18 +646,6 @@ export default function Home() {
 
         <CreatorsSection />
 
-        <section className="crosshair-corner relative flex flex-col items-center gap-4 border border-cyber-blue/10 bg-cyber-dark/30 backdrop-blur-md p-6 text-center md:p-8">
-          <p className="font-mono text-[13px] tracking-widest text-cyber-gray">
-            Want the full story behind Hackurity and the club running it?
-          </p>
-          <Link
-            href="/about-us"
-            className="border border-cyber-tan/50 bg-cyber-tan/10 px-5 py-2.5 font-mono text-[13px] font-bold tracking-widest text-cyber-tan uppercase transition-colors hover:bg-cyber-tan/20"
-          >
-            About Us ↗
-          </Link>
-        </section>
-
       </main>
 
       {/* FOOTER */}
@@ -685,12 +665,14 @@ export default function Home() {
               </span>
             </span>
             <span className="text-[13px] text-cyber-tan/40">© 2026 REVA Cybersecurity Club. CSE Dept.</span>
-            <a
-              href="mailto:contact@revacyberclub.tech"
-              className="whitespace-nowrap font-mono text-[13px] tracking-widest text-cyber-blue uppercase transition-colors hover:text-cyber-tan"
-            >
-              contact@revacyberclub.tech ↗
-            </a>
+          </div>
+
+          {/* Quick diagnostic outputs */}
+          <div className="flex items-center gap-6 font-mono text-[12px] text-cyber-blue/60">
+            <div>PING: 14MS</div>
+            <div>FPS: 60.0</div>
+            <div>MEM: 44.82MB</div>
+            <div>STATION: NODE_HACKURITY_045</div>
           </div>
         </div>
       </footer>
@@ -826,5 +808,8 @@ export default function Home() {
       )}
      </HackurityLenis>
     </div>
+    <script defer async src="https://apply.devfolio.co/v2/sdk.js"></script>
+  </body>
   );
 }
+

@@ -6,13 +6,11 @@ const DEVFOLIO_SDK_ID = "devfolio-apply-sdk";
 
 export default function DevfolioButton() {
   useEffect(() => {
-    // Prevent the SDK from being loaded multiple times.
     if (document.getElementById(DEVFOLIO_SDK_ID)) {
       return;
     }
 
     const script = document.createElement("script");
-
     script.id = DEVFOLIO_SDK_ID;
     script.src = "https://apply.devfolio.co/v2/sdk.js";
     script.async = true;

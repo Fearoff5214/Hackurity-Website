@@ -5,7 +5,9 @@
   "engines": {
     "node": ">=20.9.0"
   },
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "nx dev website",
     "build": "nx build website",
@@ -13,8 +15,8 @@
     "lint": "nx lint website"
   },
   "devDependencies": {
-    "@nx/next": "^23.2.1",
-    "nx": "^23.2.1"
+    "@nx/next": "23.2.1",
+    "nx": "23.2.1"
   },
   "allowScripts": {
     "sharp@0.34.5": true,

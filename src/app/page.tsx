@@ -243,16 +243,16 @@ export default function Home() {
       setIsSubmittingRegistration(false);
     }
   };
-  React.useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://apply.devfolio.co/v2/sdk.js';
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    }
-}, []);
+//   React.useEffect(() => {
+//     const script = document.createElement('script');
+//     script.src = 'https://apply.devfolio.co/v2/sdk.js';
+//     script.async = true;
+//     script.defer = true;
+//     document.body.appendChild(script);
+//     return () => {
+//       document.body.removeChild(script);
+//     }
+// }, []);
 
   const inputClass = "w-full bg-cyber-dark border border-cyber-tan/30 px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:border-cyber-tan focus:shadow-tan transition-all placeholder:text-cyber-gray/40 rounded-none";
   const stepOneReady = Boolean(teamName.trim() && university.trim() && selectedDomain && experienceLevel);
@@ -808,7 +808,7 @@ export default function Home() {
       )}
      </HackurityLenis>
     </div>
-    <script defer async src="https://apply.devfolio.co/v2/sdk.js"></script>
+    {/* <script defer async src="https://apply.devfolio.co/v2/sdk.js"></script> */}
   </body>
   );
 }

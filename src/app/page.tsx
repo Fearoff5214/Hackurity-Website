@@ -455,18 +455,9 @@ export default function Home() {
             <p className="font-mono text-xs text-cyber-gray leading-relaxed">
               Fill in your team details, add each member, and confirm your entry. It takes about two minutes. Entry is ₹800 per team.
             </p>
-            <motion.button
-              type="button"
-              onClick={() => { resetRegistration(); setIsRegistrationOpen(true); }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              animate={{ boxShadow: ["0 0 8px rgba(210,180,140,0.35)", "0 0 28px rgba(210,180,140,0.75)", "0 0 8px rgba(99,102,241,0.4)"] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative overflow-hidden w-full md:w-fit px-6 py-3.5 border-2 border-cyber-tan/70 bg-cyber-tan/15 text-white font-mono text-xs font-bold tracking-[0.2em] text-center uppercase cursor-pointer hover:bg-cyber-tan/25 transition-colors"
-            >
-              <motion.span aria-hidden="true" className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent" animate={{ x: ["0%", "420%"] }} transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }} />
-              <span className="relative">REGISTER YOUR TEAM NOW→</span>
-            </motion.button>
+           <div className="w-full md:w-fit">
+                <DevfolioButton />
+          </div>
             <div className="text-[12px] text-cyber-tan/40 leading-normal select-none">SECURE REGISTRY: ALL DATA IS SIGNED AND ENCRYPTED IN TRANSIT.</div>
           </motion.div>
 
